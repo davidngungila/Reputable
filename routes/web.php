@@ -7,6 +7,21 @@ use App\Http\Controllers\Auth\OtpLoginController;
 use App\Http\Controllers\Admin\OrganizationController;
 use App\Http\Controllers\Admin\BranchController;
 use App\Http\Controllers\Admin\DepartmentController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\TourController;
+use App\Http\Controllers\Public\TourController as PublicTourController;
+use App\Http\Controllers\Public\BookingController as PublicBookingController;
+use App\Http\Controllers\Admin\ItineraryBuilderController;
+use App\Http\Controllers\Admin\ExpenseController;
+use App\Http\Controllers\Admin\SystemSettingsController;
+use App\Http\Controllers\Admin\UserManagementController;
+use App\Http\Controllers\Admin\RolePermissionController;
+use App\Http\Controllers\Admin\ActivityLogController;
+use App\Http\Controllers\Admin\SystemHealthController;
+use App\Http\Controllers\Admin\SystemToolsController;
+use App\Http\Controllers\Admin\EmailGatewayController;
+use App\Http\Controllers\Admin\AccountSettingsController;
+use App\Http\Controllers\Client\DashboardController as ClientDashboardController;
 
 Route::get('/', [PublicTourController::class, 'home'])->name('home');
 

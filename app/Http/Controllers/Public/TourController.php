@@ -5,16 +5,17 @@ namespace App\Http\Controllers\Public;
 use App\Http\Controllers\Controller;
 use App\Models\Tour;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class TourController extends Controller
 {
-    public function home()
+    public function home(): View
     {
         $featuredTours = Tour::where('status', 'active')->where('featured', true)->take(3)->get();
         return view('home', compact('featuredTours'));
     }
 
-    public function index(Request $request)
+    public function index(Request $request): View
     {
         $query = Tour::where('status', 'active');
 
@@ -54,7 +55,7 @@ class TourController extends Controller
         return view('tours.index', compact('tours'));
     }
 
-    public function show($id)
+    public function show($id): View
     {
         $tour = Tour::with('itineraries')->findOrFail($id);
         return view('tours.show', compact('tour'));
