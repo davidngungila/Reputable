@@ -1,6 +1,19 @@
 @extends('layouts.public')
 
 @section('content')
+<script>
+function filterByType(type) {
+    const cards = document.querySelectorAll('.tour-card');
+    cards.forEach(card => {
+        const packageType = card.dataset.packageType;
+        if (type === 'all' || packageType === type) {
+            card.style.display = 'block';
+        } else {
+            card.style.display = 'none';
+        }
+    });
+}
+</script>
 <!-- Tours Hero Section -->
 <section class="relative h-96 overflow-hidden">
     <div class="absolute inset-0">
@@ -31,15 +44,31 @@
 <section class="py-20 bg-gray-50">
     <div class="max-w-7xl mx-auto px-6">
         <div class="text-center mb-16">
-            <h2 class="text-3xl font-serif font-bold text-gray-800 mb-4">Kilimanjaro Climbing Packages</h2>
-            <p class="text-gray-600 max-w-2xl mx-auto">Conquer the Roof of Africa with our expert-guided Kilimanjaro trekking packages</p>
+            <h2 class="text-3xl font-serif font-bold text-gray-800 mb-4">Tour Packages</h2>
+            <p class="text-gray-600 max-w-2xl mx-auto">Discover our complete range of Kilimanjaro climbing, safari, and combo adventure packages</p>
+        </div>
+        
+        <!-- Package Type Filters -->
+        <div class="flex justify-center gap-4 mb-8">
+            <button onclick="filterByType('all')" class="px-6 py-2 rounded-full bg-emerald-600 text-white font-bold hover:bg-emerald-700 transition-colors">
+                All Packages
+            </button>
+            <button onclick="filterByType('kilimanjaro')" class="px-6 py-2 rounded-full bg-gray-200 text-gray-700 font-bold hover:bg-gray-300 transition-colors">
+                Kilimanjaro Climbing
+            </button>
+            <button onclick="filterByType('safari')" class="px-6 py-2 rounded-full bg-gray-200 text-gray-700 font-bold hover:bg-gray-300 transition-colors">
+                Safari Packages
+            </button>
+            <button onclick="filterByType('combo')" class="px-6 py-2 rounded-full bg-gray-200 text-gray-700 font-bold hover:bg-gray-300 transition-colors">
+                Combo Adventures
+            </button>
         </div>
         
         <!-- Tours from Database -->
         
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             @forelse ($tours as $tour)
-                <div class="group bg-white rounded-[2rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border border-slate-100">
+                <div class="group bg-white rounded-[2rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border border-slate-100 tour-card" data-package-type="{{ $tour->package_type ?? 'all' }}">
                     <div class="relative h-64 overflow-hidden">
                         @if($tour->images && is_array($tour->images) && count($tour->images) > 0)
                             <img src="{{ asset($tour->images[0]) }}" alt="{{ $tour->name }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
@@ -67,10 +96,10 @@
                                     <i class="ph-bold ph-clock text-[#1F5A3A]"></i>
                                     <span>{{ $tour->duration_days }} Days</span>
                                 </div>
-                                @if($tour->route)
+                                @if($tour->route_name)
                                     <div class="flex items-center gap-2 text-sm text-gray-700">
                                         <i class="ph-bold ph-signpost text-[#1F5A3A]"></i>
-                                        <span>{{ $tour->route }} Route</span>
+                                        <span>{{ $tour->route_name }}</span>
                                     </div>
                                 @endif
                                 @if($tour->difficulty)
