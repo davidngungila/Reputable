@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Tour;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Illuminate\Http\Response;
 
 class TourController extends Controller
 {
@@ -15,7 +16,7 @@ class TourController extends Controller
         return view('home', compact('featuredTours'));
     }
 
-    public function index(Request $request): View
+    public function index(Request $request): View|Response
     {
         $query = Tour::where('status', 'active');
 
@@ -49,7 +50,7 @@ class TourController extends Controller
         $tours = $query->paginate(6);
 
         if ($request->ajax()) {
-            return view('tours.partials.tour_grid', compact('tours'))->render();
+            return response(view('tours.partials.tour_grid', compact('tours'))->render());
         }
 
         return view('tours.index', compact('tours'));
