@@ -106,23 +106,56 @@
                         <h3 class="text-xl font-bold text-gray-800">Mount Kilimanjaro</h3>
                         <span class="bg-[#E67A2E] text-white text-xs px-3 py-1 rounded-full">Roof of Africa</span>
                     </div>
-                    <p class="text-gray-600 mb-4">Africa's highest peak at 5,895m. Conquer the summit with expert guides and proper acclimatization.</p>
+                    <p class="text-gray-600 mb-4">Africa's highest peak at 5,895m. Choose from 7 different routes with expert guides and comprehensive support.</p>
                     <div class="space-y-2">
                         <div class="flex items-center gap-2 text-sm text-gray-700">
                             <i class="ph-bold ph-mountains text-[#1F5A3A]"></i>
                             <span>5,895 meters</span>
                         </div>
                         <div class="flex items-center gap-2 text-sm text-gray-700">
-                            <i class="ph-bold ph-users text-[#1F5A3A]"></i>
-                            <span>7 routes</span>
+                            <i class="ph-bold ph-signpost text-[#1F5A3A]"></i>
+                            <span>7 Routes Available</span>
                         </div>
                         <div class="flex items-center gap-2 text-sm text-gray-700">
-                            <i class="ph-bold ph-backpack text-[#1F5A3A]"></i>
-                            <span>Expert guides</span>
+                            <i class="ph-bold ph-users text-[#1F5A3A]"></i>
+                            <span>Expert Guides & Porters</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-sm text-gray-700">
+                            <i class="ph-bold ph-shield-check text-[#1F5A3A]"></i>
+                            <span>All-Inclusive Packages</span>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <h4 class="font-semibold text-gray-800 mb-2">Available Routes:</h4>
+                        <div class="grid grid-cols-2 gap-2 text-sm">
+                            <div class="flex items-center gap-1">
+                                <span class="w-2 h-2 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center text-xs font-semibold">M</span>
+                                <span class="text-gray-600">Marangu (Coca-Cola Route)</span>
+                            </div>
+                            <div class="flex items-center gap-1">
+                                <span class="w-2 h-2 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-xs font-semibold">M</span>
+                                <span class="text-gray-600">Machame (Whiskey Route)</span>
+                            </div>
+                            <div class="flex items-center gap-1">
+                                <span class="w-2 h-2 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center text-xs font-semibold">L</span>
+                                <span class="text-gray-600">Lemosho Route</span>
+                            </div>
+                            <div class="flex items-center gap-1">
+                                <span class="w-2 h-2 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center text-xs font-semibold">N</span>
+                                <span class="text-gray-600">Northern Circuit</span>
+                            </div>
+                            <div class="flex items-center gap-1">
+                                <span class="w-2 h-2 bg-red-100 text-red-600 rounded-full flex items-center justify-center text-xs font-semibold">U</span>
+                                <span class="text-gray-600">Umbwe Route</span>
+                            </div>
+                            <div class="flex items-center gap-1">
+                                <span class="w-2 h-2 bg-teal-100 text-teal-600 rounded-full flex items-center justify-center text-xs font-semibold">R</span>
+                                <span class="text-gray-600">Rongai Route</span>
+                            </div>
                         </div>
                     </div>
                     <a href="/tours" class="inline-flex items-center gap-2 text-[#1F5A3A] font-semibold hover:text-[#E67A2E] transition-colors">
-                        Explore Kilimanjaro
+                        Explore Kilimanjaro Routes
                         <i class="ph ph-arrow-right"></i>
                     </a>
                 </div>
@@ -157,6 +190,192 @@
                         Explore Zanzibar
                         <i class="ph ph-arrow-right"></i>
                     </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Kilimanjaro Packages Section -->
+<section class="py-20 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl font-serif font-bold text-gray-800 mb-4">Kilimanjaro Climbing Packages</h2>
+            <p class="text-gray-600 max-w-2xl mx-auto">All-inclusive packages with expert guides, quality equipment, and comprehensive support</p>
+        </div>
+        
+        <!-- Package Inclusions -->
+        <div class="bg-white rounded-2xl shadow-lg p-8 mb-12">
+            <h3 class="text-xl font-bold text-gray-800 mb-6">All Kilimanjaro Packages Include:</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="flex items-start gap-3">
+                    <i class="ph-bold ph-check-circle text-emerald-600 text-xl mt-1"></i>
+                    <div>
+                        <h4 class="font-semibold text-gray-800">All Fees & Taxes</h4>
+                        <p class="text-sm text-gray-600">National Park fees, conservation fees, and all applicable taxes</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-3">
+                    <i class="ph-bold ph-check-circle text-emerald-600 text-xl mt-1"></i>
+                    <div>
+                        <h4 class="font-semibold text-gray-800">Expert Guides</h4>
+                        <p class="text-sm text-gray-600">Certified English-speaking mountain guides at KINAPA ratios</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-3">
+                    <i class="ph-bold ph-check-circle text-emerald-600 text-xl mt-1"></i>
+                    <div>
+                        <h4 class="font-semibold text-gray-800">Porter Support</h4>
+                        <p class="text-sm text-gray-600">Luggage porters (15kg Kili, 12kg Meru) and specialist tent crew</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-3">
+                    <i class="ph-bold ph-check-circle text-emerald-600 text-xl mt-1"></i>
+                    <div>
+                        <h4 class="font-semibold text-gray-800">All Meals</h4>
+                        <p class="text-sm text-gray-600">Complete meal service with utensils and dining equipment</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-3">
+                    <i class="ph-bold ph-check-circle text-emerald-600 text-xl mt-1"></i>
+                    <div>
+                        <h4 class="font-semibold text-gray-800">Transfers</h4>
+                        <p class="text-sm text-gray-600">Airport transfers and gate transfers included</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-3">
+                    <i class="ph-bold ph-check-circle text-emerald-600 text-xl mt-1"></i>
+                    <div>
+                        <h4 class="font-semibold text-gray-800">Safety Equipment</h4>
+                        <p class="text-sm text-gray-600">Emergency oxygen, first aid kit, and safety protocols</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Route Highlights -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+            <!-- Marangu Route -->
+            <div class="bg-white rounded-2xl shadow-lg p-6">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center">
+                        <i class="ph-bold ph-signpost text-emerald-600 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800">Marangu Route</h3>
+                </div>
+                <p class="text-gray-600 mb-4">The "Coca-Cola Route" - Only route with mountain huts. Perfect for first-time climbers.</p>
+                <div class="space-y-2">
+                    <div class="flex items-center gap-2 text-sm">
+                        <i class="ph-bold ph-clock text-gray-400"></i>
+                        <span class="font-semibold">5-7 Days</span>
+                    </div>
+                    <div class="flex items-center gap-2 text-sm">
+                        <i class="ph-bold ph-trend-up text-gray-400"></i>
+                        <span class="font-semibold">Moderate Difficulty</span>
+                    </div>
+                    <div class="flex items-center gap-2 text-sm">
+                        <i class="ph-bold ph-star text-gray-400"></i>
+                        <span class="font-semibold">Highest Success Rate</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Machame Route -->
+            <div class="bg-white rounded-2xl shadow-lg p-6">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                        <i class="ph-bold ph-mountains text-blue-600 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800">Machame Route</h3>
+                </div>
+                <p class="text-gray-600 mb-4">The "Whiskey Route" - Most popular scenic route with diverse landscapes.</p>
+                <div class="space-y-2">
+                    <div class="flex items-center gap-2 text-sm">
+                        <i class="ph-bold ph-clock text-gray-400"></i>
+                        <span class="font-semibold">6-8 Days</span>
+                    </div>
+                    <div class="flex items-center gap-2 text-sm">
+                        <i class="ph-bold ph-trend-up text-gray-400"></i>
+                        <span class="font-semibold">Challenging Difficulty</span>
+                    </div>
+                    <div class="flex items-center gap-2 text-sm">
+                        <i class="ph-bold ph-camera text-gray-400"></i>
+                        <span class="font-semibold">Scenic Views</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Optional Extras -->
+        <div class="bg-amber-50 rounded-2xl p-6 mb-12">
+            <h3 class="text-xl font-bold text-gray-800 mb-4">Optional Extras Available:</h3>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 text-sm">
+                <div class="flex items-center gap-2">
+                    <i class="ph-bold ph-plus-circle text-amber-600"></i>
+                    <span>Pre/Post Climb Accommodation</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <i class="ph-bold ph-plus-circle text-amber-600"></i>
+                    <span>Private Toilets</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <i class="ph-bold ph-plus-circle text-amber-600"></i>
+                    <span>Flying Doctors Insurance</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <i class="ph-bold ph-plus-circle text-amber-600"></i>
+                    <span>Personal Equipment</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <i class="ph-bold ph-plus-circle text-amber-600"></i>
+                    <span>Additional Oxygen</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <i class="ph-bold ph-plus-circle text-amber-600"></i>
+                    <span>Celebration Items</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <i class="ph-bold ph-plus-circle text-amber-600"></i>
+                    <span>Extra Guides/Porters</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <i class="ph-bold ph-plus-circle text-amber-600"></i>
+                    <span>Acclimatization Days</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- What's Not Included -->
+        <div class="bg-red-50 rounded-2xl p-6 mb-12">
+            <h3 class="text-xl font-bold text-gray-800 mb-4">Not Included:</h3>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                <div class="flex items-center gap-2">
+                    <i class="ph-bold ph-x-circle text-red-600"></i>
+                    <span>Tips & Gratuities</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <i class="ph-bold ph-x-circle text-red-600"></i>
+                    <span>Alcoholic Beverages</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <i class="ph-bold ph-x-circle text-red-600"></i>
+                    <span>International Flights</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <i class="ph-bold ph-x-circle text-red-600"></i>
+                    <span>Travel Insurance</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <i class="ph-bold ph-x-circle text-red-600"></i>
+                    <span>Visas</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <i class="ph-bold ph-x-circle text-red-600"></i>
+                    <span>Personal Items</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <i class="ph-bold ph-x-circle text-red-600"></i>
+                    <span>Day 1 Water</span>
                 </div>
             </div>
         </div>
