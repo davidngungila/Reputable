@@ -13,10 +13,6 @@ return new class extends Migration
     {
         Schema::create('wildlife_sightings', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('tour_id')->constrained()->onDelete('cascade');
-            $table->json('commonly_seen'); // Elephants, Giraffes, Zebras, Lions
-            $table->json('occasionally_seen'); // Black rhino, Cheetah, Dik-Dik
-            $table->json('rarely_seen'); // Leopard, Caracal, Serval, Wild dog
             $table->timestamps();
         });
     }

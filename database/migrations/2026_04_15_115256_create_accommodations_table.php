@@ -13,13 +13,6 @@ return new class extends Migration
     {
         Schema::create('accommodations', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('style_category'); // Mid-range lodge, Budget range lodge, Shared mountain huts, etc.
-            $table->string('location');
-            $table->string('altitude')->nullable(); // for trek accommodations
-            $table->string('website_url')->nullable();
-            $table->string('tripadvisor_link')->nullable();
-            $table->text('description')->nullable();
             $table->timestamps();
         });
     }
