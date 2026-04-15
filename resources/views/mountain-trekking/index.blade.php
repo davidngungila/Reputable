@@ -82,16 +82,27 @@
         <!-- Tours Grid -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
             @forelse ($tours as $tour)
-                <div class="bg-white rounded-2xl shadow-lg p-6 border border-gray-200">
-                    <div class="flex items-center gap-3 mb-4">
-                        <div class="bg-emerald-100 p-3 rounded-full">
-                            <i class="ph-bold ph-mountain text-emerald-600 text-xl"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-gray-900">{{ $tour->name }}</h4>
-                            <p class="text-sm text-gray-600">{{ $tour->route_name ?? 'Kilimanjaro Climb' }}</p>
-                        </div>
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-200">
+                    <div class="relative h-48 overflow-hidden">
+                        @if($tour->images && is_array($tour->images) && count($tour->images) > 0)
+                            <img src="{{ asset($tour->images[0]) }}" alt="{{ $tour->name }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        @else
+                            <img src="{{ asset('images/03.jpg') }}" alt="{{ $tour->name }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        @endif
+                        @if($tour->featured)
+                            <div class="absolute top-4 left-4 bg-[#E67A2E] text-white text-xs px-3 py-1 rounded-full">Featured</div>
+                        @endif
                     </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="bg-emerald-100 p-3 rounded-full">
+                                <i class="ph-bold ph-mountain text-emerald-600 text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900">{{ $tour->name }}</h4>
+                                <p class="text-sm text-gray-600">{{ $tour->route_name ?? 'Kilimanjaro Climb' }}</p>
+                            </div>
+                        </div>
                     <div class="space-y-3 text-sm">
                         <div class="flex items-center gap-2">
                             <i class="ph-bold ph-clock text-gray-400"></i>
