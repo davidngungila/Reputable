@@ -35,233 +35,28 @@
             <p class="text-gray-600 max-w-2xl mx-auto">Conquer the Roof of Africa with our expert-guided Kilimanjaro trekking packages</p>
         </div>
         
-        <!-- Kilimanjaro Packages Data -->
-        @php
-            $tours = [
-                // Marangu Route Packages
-                (object) [
-                    'id' => 1,
-                    'name' => '5 Day Kilimanjaro Marangu Trek',
-                    'location' => 'Mount Kilimanjaro - Marangu Route',
-                    'duration_days' => 5,
-                    'base_price' => 1850,
-                    'description' => 'Classic route with mountain huts, perfect for first-time climbers. Includes all park fees, experienced guides, and comfortable hut accommodation.',
-                    'images' => ['images/03.jpg', 'images/DSC_2338-(1).jpg'],
-                    'route' => 'Marangu',
-                    'difficulty' => 'Moderate'
-                ],
-                (object) [
-                    'id' => 2,
-                    'name' => '6 Day Kilimanjaro Marangu Trek',
-                    'location' => 'Mount Kilimanjaro - Marangu Route',
-                    'duration_days' => 6,
-                    'base_price' => 1950,
-                    'description' => 'Extended acclimatization day for better summit success. Includes Mawenzi ridge acclimatization hike.',
-                    'images' => ['images/03.jpg', 'images/DSC_2338-(1).jpg'],
-                    'route' => 'Marangu',
-                    'difficulty' => 'Moderate'
-                ],
-                (object) [
-                    'id' => 3,
-                    'name' => '7 Day Kilimanjaro Marangu Trek',
-                    'location' => 'Mount Kilimanjaro - Marangu Route',
-                    'duration_days' => 7,
-                    'base_price' => 2100,
-                    'description' => 'Maximum acclimatization with Zebra Rocks and Mawenzi Ridge hikes. Highest success rate on Marangu route.',
-                    'images' => ['images/03.jpg', 'images/DSC_2338-(1).jpg'],
-                    'route' => 'Marangu',
-                    'difficulty' => 'Moderate'
-                ],
-                // Machame Route Packages
-                (object) [
-                    'id' => 4,
-                    'name' => '6 Day Kilimanjaro Machame Trek',
-                    'location' => 'Mount Kilimanjaro - Machame Route',
-                    'duration_days' => 6,
-                    'base_price' => 2200,
-                    'description' => 'Scenic southern route with diverse landscapes. Cross Barranco Wall and summit via Stella Point.',
-                    'images' => ['images/05.jpg', 'images/07.jpg'],
-                    'route' => 'Machame',
-                    'difficulty' => 'Challenging'
-                ],
-                (object) [
-                    'id' => 5,
-                    'name' => '7 Day Kilimanjaro Machame Trek',
-                    'location' => 'Mount Kilimanjaro - Machame Route',
-                    'duration_days' => 7,
-                    'base_price' => 2350,
-                    'description' => 'Extended acclimatization with Karanga Camp. Better summit success and more comfortable pace.',
-                    'images' => ['images/05.jpg', 'images/07.jpg'],
-                    'route' => 'Machame',
-                    'difficulty' => 'Challenging'
-                ],
-                (object) [
-                    'id' => 6,
-                    'name' => '8 Day Kilimanjaro Machame Trek',
-                    'location' => 'Mount Kilimanjaro - Machame Route',
-                    'duration_days' => 8,
-                    'base_price' => 2500,
-                    'description' => 'Maximum acclimatization with Northern Circuit detour. Best for scenic views and summit success.',
-                    'images' => ['images/05.jpg', 'images/07.jpg'],
-                    'route' => 'Machame',
-                    'difficulty' => 'Challenging'
-                ],
-                // Lemosho Route Packages
-                (object) [
-                    'id' => 7,
-                    'name' => '8 Day Kilimanjaro Lemosho Trek',
-                    'location' => 'Mount Kilimanjaro - Lemosho Route',
-                    'duration_days' => 8,
-                    'base_price' => 2600,
-                    'description' => 'Remote western approach with excellent acclimatization. Beautiful Shira Plateau and diverse ecosystems.',
-                    'images' => ['images/01.jpg', 'images/02.jpg'],
-                    'route' => 'Lemosho',
-                    'difficulty' => 'Challenging'
-                ],
-                (object) [
-                    'id' => 8,
-                    'name' => '9 Day Kilimanjaro Lemosho Trek',
-                    'location' => 'Mount Kilimanjaro - Lemosho Route',
-                    'duration_days' => 9,
-                    'base_price' => 2750,
-                    'description' => 'Ultimate acclimatization with Northern Circuit. Most scenic route with highest success rate.',
-                    'images' => ['images/01.jpg', 'images/02.jpg'],
-                    'route' => 'Lemosho',
-                    'difficulty' => 'Challenging'
-                ],
-                // Northern Circuit Route
-                (object) [
-                    'id' => 9,
-                    'name' => '8 Day Kilimanjaro Northern Circuit Trek',
-                    'location' => 'Mount Kilimanjaro - Northern Circuit',
-                    'duration_days' => 8,
-                    'base_price' => 2800,
-                    'description' => 'Complete circumnavigation of Kibo. Remote wilderness with unique northern perspectives.',
-                    'images' => ['images/06.jpg', 'images/03.jpg'],
-                    'route' => 'Northern Circuit',
-                    'difficulty' => 'Very Challenging'
-                ],
-                (object) [
-                    'id' => 10,
-                    'name' => '9 Day Kilimanjaro Northern Circuit Trek',
-                    'location' => 'Mount Kilimanjaro - Northern Circuit',
-                    'duration_days' => 9,
-                    'base_price' => 2950,
-                    'description' => 'Extended Northern Circuit with Mawenzi Tarn. Ultimate Kilimanjaro wilderness experience.',
-                    'images' => ['images/06.jpg', 'images/03.jpg'],
-                    'route' => 'Northern Circuit',
-                    'difficulty' => 'Very Challenging'
-                ],
-                (object) [
-                    'id' => 11,
-                    'name' => '11 Day Kilimanjaro Northern Circuit Trek',
-                    'location' => 'Mount Kilimanjaro - Northern Circuit',
-                    'duration_days' => 11,
-                    'base_price' => 3200,
-                    'description' => 'Complete Northern Circuit with Mawenzi Tarn acclimatization. Maximum summit success and wilderness experience.',
-                    'images' => ['images/06.jpg', 'images/03.jpg'],
-                    'route' => 'Northern Circuit',
-                    'difficulty' => 'Very Challenging'
-                ],
-                // Umbwe Route
-                (object) [
-                    'id' => 12,
-                    'name' => '6 Day Kilimanjaro Umbwe Trek',
-                    'location' => 'Mount Kilimanjaro - Umbwe Route',
-                    'duration_days' => 6,
-                    'base_price' => 2400,
-                    'description' => 'Steep and direct route for experienced climbers. Most challenging and least crowded path to summit.',
-                    'images' => ['images/05.jpg', 'images/07.jpg'],
-                    'route' => 'Umbwe',
-                    'difficulty' => 'Very Challenging'
-                ],
-                (object) [
-                    'id' => 13,
-                    'name' => '7 Day Kilimanjaro Umbwe Trek',
-                    'location' => 'Mount Kilimanjaro - Umbwe Route',
-                    'duration_days' => 7,
-                    'base_price' => 2550,
-                    'description' => 'Extended Umbwe route with better acclimatization. Combines challenge with higher summit success.',
-                    'images' => ['images/05.jpg', 'images/07.jpg'],
-                    'route' => 'Umbwe',
-                    'difficulty' => 'Very Challenging'
-                ],
-                // Rongai Route
-                (object) [
-                    'id' => 14,
-                    'name' => '6 Day Kilimanjaro Rongai Trek',
-                    'location' => 'Mount Kilimanjaro - Rongai Route',
-                    'duration_days' => 6,
-                    'base_price' => 2300,
-                    'description' => 'Northern approach with dry climate. Less crowded with unique Kenyan views.',
-                    'images' => ['images/01.jpg', 'images/02.jpg'],
-                    'route' => 'Rongai',
-                    'difficulty' => 'Moderate'
-                ],
-                (object) [
-                    'id' => 15,
-                    'name' => '7 Day Kilimanjaro Rongai Trek',
-                    'location' => 'Mount Kilimanjaro - Rongai Route',
-                    'duration_days' => 7,
-                    'base_price' => 2450,
-                    'description' => 'Extended Rongai route with acclimatization day. Better summit success on northern approach.',
-                    'images' => ['images/01.jpg', 'images/02.jpg'],
-                    'route' => 'Rongai',
-                    'difficulty' => 'Moderate'
-                ],
-                // Safari Packages
-                (object) [
-                    'id' => 16,
-                    'name' => 'Classic Serengeti Safari',
-                    'location' => 'Serengeti National Park',
-                    'duration_days' => 7,
-                    'base_price' => 2500,
-                    'description' => 'Experience the Great Migration and witness millions of wildebeest crossing the plains.',
-                    'images' => ['images/01.jpg', 'images/02.jpg'],
-                    'route' => 'Safari',
-                    'difficulty' => 'Easy'
-                ],
-                (object) [
-                    'id' => 17,
-                    'name' => 'Luxury Camping Safari',
-                    'location' => 'Ngorongoro Crater',
-                    'duration_days' => 5,
-                    'base_price' => 3200,
-                    'description' => 'Premium camping under the stars with comfort and style.',
-                    'images' => ['images/05.jpg', 'images/07.jpg'],
-                    'route' => 'Safari',
-                    'difficulty' => 'Easy'
-                ],
-                (object) [
-                    'id' => 18,
-                    'name' => 'Zanzibar Beach Experience',
-                    'location' => 'Zanzibar',
-                    'duration_days' => 4,
-                    'base_price' => 1800,
-                    'description' => 'Relax on pristine beaches and explore historic Stone Town.',
-                    'images' => ['images/07.jpg', 'images/02.jpg'],
-                    'route' => 'Beach',
-                    'difficulty' => 'Easy'
-                ]
-            ];
-        @endphp
+        <!-- Tours from Database -->
         
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            @foreach ($tours as $tour)
+            @forelse ($tours as $tour)
                 <div class="group bg-white rounded-[2rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border border-slate-100">
                     <div class="relative h-64 overflow-hidden">
-                        <img src="{{ asset($tour->images[0]) }}" alt="{{ $tour->name }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        @if($tour->images && is_array($tour->images) && count($tour->images) > 0)
+                            <img src="{{ asset($tour->images[0]) }}" alt="{{ $tour->name }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        @else
+                            <img src="{{ asset('images/03.jpg') }}" alt="{{ $tour->name }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        @endif
                         <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-md p-2 rounded-full text-emerald-500 shadow-sm">
                             <i class="ph-bold ph-heart text-xl"></i>
                         </div>
+                        @if($tour->featured)
+                            <div class="absolute top-4 left-4 bg-[#E67A2E] text-white text-xs px-3 py-1 rounded-full">Featured</div>
+                        @endif
                     </div>
                     <div class="p-6">
                         <div class="flex items-center justify-between mb-4">
-                            <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-emerald-600 transition-colors line-clamp-1">{{ $tour->name }}</h3>
-                                @if ($tour->id == 1)
-                                    <span class="bg-[#E67A2E] text-white text-xs px-3 py-1 rounded-full">Most Popular</span>
-                                @endif
-                            </div>
+                            <h3 class="text-xl font-bold text-gray-900 group-hover:text-emerald-600 transition-colors line-clamp-1">{{ $tour->name }}</h3>
+                        </div>
                             <p class="text-gray-500 text-sm leading-relaxed mb-8 line-clamp-2">{{ $tour->description }}</p>
                             <div class="space-y-2">
                                 <div class="flex items-center gap-2 text-sm text-gray-700">
@@ -272,13 +67,13 @@
                                     <i class="ph-bold ph-clock text-[#1F5A3A]"></i>
                                     <span>{{ $tour->duration_days }} Days</span>
                                 </div>
-                                @if(isset($tour->route))
+                                @if($tour->route)
                                     <div class="flex items-center gap-2 text-sm text-gray-700">
                                         <i class="ph-bold ph-signpost text-[#1F5A3A]"></i>
                                         <span>{{ $tour->route }} Route</span>
                                     </div>
                                 @endif
-                                @if(isset($tour->difficulty))
+                                @if($tour->difficulty)
                                     <div class="flex items-center gap-2 text-sm text-gray-700">
                                         <i class="ph-bold ph-trend-up text-[#1F5A3A]"></i>
                                         <span>{{ $tour->difficulty }}</span>
@@ -293,15 +88,28 @@
                                 <div>
                                     <span class="text-slate-400 text-[10px] font-bold uppercase tracking-widest block mb-1">From ${{ number_format($tour->base_price) }}</span>
                                 </div>
-                                <a href="#" class="inline-flex items-center gap-2 bg-slate-900 text-white px-6 py-3 rounded-2xl font-bold hover:bg-emerald-600 transition-colors">
+                                <a href="{{ route('tours.show', $tour->id) }}" class="inline-flex items-center gap-2 bg-slate-900 text-white px-6 py-3 rounded-2xl font-bold hover:bg-emerald-600 transition-colors">
                                     Details <i class="ph ph-arrow-right"></i>
                                 </a>
                             </div>
                         </div>
                     </div>
                 </div>
-            @endforeach
+            @empty
+                <div class="col-span-full text-center py-12">
+                    <i class="ph-bold ph-backpack text-6xl text-gray-300 mb-4"></i>
+                    <h3 class="text-xl font-bold text-gray-600 mb-2">No tours available</h3>
+                    <p class="text-gray-500">Check back later for new tour packages.</p>
+                </div>
+            @endforelse
         </div>
+        
+        <!-- Pagination -->
+        @if($tours->hasPages())
+            <div class="mt-12 flex justify-center">
+                {{ $tours->links() }}
+            </div>
+        @endif
     </div>
 </section>
 
