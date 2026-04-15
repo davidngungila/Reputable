@@ -38,6 +38,8 @@ Route::get('/destinations', function () {
     return view('destinations');
 })->name('destinations');
 
+Route::get('/mountain-trekking', [PublicTourController::class, 'mountainTrekking'])->name('mountain-trekking');
+
 Route::get('/login', function () {
     return redirect()->route('simple.login');
 })->name('login');

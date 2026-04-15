@@ -132,8 +132,8 @@
                             <div>
                                 <h4 class="text-xs font-black uppercase tracking-widest text-emerald-600 mb-6">Tanzania Specialties</h4>
                                 <div class="space-y-4">
-                                    <a href="{{ route('kilimanjaro') }}" class="flex items-center gap-3 text-slate-700 text-emerald-600 font-bold group/sub transition-colors">
-                                        <i class="ph ph-mountain text-xl opacity-50 text-emerald-600"></i> Kilimanjaro Treks
+                                    <a href="{{ route('mountain-trekking') }}" class="flex items-center gap-3 text-slate-700 text-emerald-600 font-bold group/sub transition-colors">
+                                        <i class="ph ph-mountain text-xl opacity-50 text-emerald-600"></i> Mountain Trekking
                                     </a>
                                     <a href="{{ route('regions.lake-manyara') }}" class="flex items-center gap-3 text-slate-700 text-emerald-600 font-bold group/sub transition-colors">
                                         <i class="ph ph-umbrella text-xl opacity-50 text-emerald-600"></i> Zanzibar Beaches

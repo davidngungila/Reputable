@@ -56,6 +56,42 @@ class TourController extends Controller
         return view('tours.index', compact('tours'));
     }
 
+    public function mountainTrekking(Request $request): View|Response
+    {
+        $query = Tour::where('status', 'active')
+                     ->where('package_type', 'Kilimanjaro Climbing');
+
+        // Apply Duration Filter
+        if ($request->filled('duration')) {
+            if ($request->duration === '1-3 Days') {
+                $query->whereBetween('duration_days', [1, 3]);
+            } elseif ($request->duration === '4-7 Days') {
+                $query->whereBetween('duration_days', [4, 7]);
+            } elseif ($request->duration === '8+ Days') {
+                $query->where('duration_days', '>=', 8);
+            }
+        }
+
+        // Apply Sorting
+        if ($request->filled('sort')) {
+            if ($request->sort === 'Low to High') {
+                $query->orderBy('base_price', 'asc');
+            } elseif ($request->sort === 'High to Low') {
+                $query->orderBy('base_price', 'desc');
+            }
+        } else {
+            $query->orderBy('featured', 'desc');
+        }
+
+        $tours = $query->paginate(6);
+
+        if ($request->ajax()) {
+            return response(view('tours.partials.tour_grid', compact('tours'))->render());
+        }
+
+        return view('mountain-trekking.index', compact('tours'));
+    }
+
     public function show($id): View
     {
         $tour = Tour::with('itineraries')->findOrFail($id);
