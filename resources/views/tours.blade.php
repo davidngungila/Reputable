@@ -37,8 +37,11 @@
         
         <!-- Tours from Database -->
         
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            @forelse ($tours as $tour)
+        <div class="space-y-8">
+            @forelse ($tours as $index => $tour)
+                @if($index % 3 == 0)
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                @endif
                 <div class="group bg-white rounded-[2rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border border-slate-100">
                     <div class="relative h-64 overflow-hidden">
                         @if($tour->images && is_array($tour->images) && count($tour->images) > 0)
@@ -112,7 +115,10 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                    </div>
+                @if($index % 3 == 2)
+                    </div>
+                @endif
             @empty
                 <div class="col-span-full text-center py-12">
                     <i class="ph-bold ph-backpack text-6xl text-gray-300 mb-4"></i>
