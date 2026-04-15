@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\OtpLoginController;
+use App\Http\Controllers\Auth\SimpleLoginController;
 use App\Http\Controllers\Admin\OrganizationController;
 use App\Http\Controllers\Admin\BranchController;
 use App\Http\Controllers\Admin\DepartmentController;
@@ -33,9 +34,20 @@ Route::get('/contact', function () {
     return view('contact');
 })->name('contact');
 
-Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::get('/destinations', function () {
+    return view('destinations');
+})->name('destinations');
+
+Route::get('/login', function () {
+    return redirect()->route('simple.login');
+})->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+
+// Simple Login Routes
+Route::get('/admin/login', [SimpleLoginController::class, 'showLoginForm'])->name('simple.login');
+Route::post('/admin/login', [SimpleLoginController::class, 'login'])->name('simple.login');
+Route::post('/admin/logout', [SimpleLoginController::class, 'logout'])->name('simple.logout');
 
 Route::get('/login/otp', [OtpLoginController::class, 'show'])->name('login.otp');
 Route::get('/login/otp/verify-link', [OtpLoginController::class, 'verifyLink'])->name('login.otp.verify_link');
@@ -94,7 +106,9 @@ Route::prefix('client')->name('client.')->middleware(['auth'])->group(function (
 });
 
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'ensure.admin', 'activity.log'])->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard', function () {
+    return view('admin.simple-dashboard');
+})->name('dashboard');
 
     // Organization Management
     Route::resource('organizations', OrganizationController::class);

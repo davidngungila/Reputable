@@ -15,7 +15,7 @@ class EnsureAdminUser
             abort(403);
         }
 
-        if ($user->email === 'admin@lauparadise.com') {
+        if ($user->email === 'admin@reputabletours.com') {
             return $next($request);
         }
 

@@ -9,16 +9,16 @@
             <!-- Slide 1: Serengeti -->
             <div class="swiper-slide relative flex items-center">
                 <div class="absolute inset-0 z-0">
-                    <img src="https://res.cloudinary.com/dmqdm8gfk/image/upload/v1766042771/8-Days-Tanzania-holiday-Wildebeest-migration-1536x1018_gyndkw.jpg" alt="Serengeti" class="w-full h-full object-cover">
+                    <img src="{{ asset('images/01.jpg') }}" alt="Serengeti" class="w-full h-full object-cover">
                     <div class="absolute inset-0 bg-gradient-to-r from-slate-900/90 via-slate-900/40 to-transparent"></div>
                 </div>
                 <div class="relative z-10 max-w-7xl mx-auto px-6 w-full pt-20">
                     <div class="max-w-2xl translate-y-10 opacity-0 transition-all duration-1000 slide-content">
-                        <span class="inline-block px-4 py-1.5 bg-emerald-600/20 text-emerald-400 rounded-full text-xs font-bold tracking-widest uppercase mb-6 border border-emerald-600/30">Experience Excellence</span>
-                        <h1 class="text-4xl md:text-6xl lg:text-7xl font-serif text-white mb-8 leading-[1.1] md:whitespace-nowrap">Unveil the magic of <span class="text-emerald-500">Wild Africa</span></h1>
-                        <p class="text-xl text-slate-200 mb-12 leading-relaxed">Embark on a journey of a lifetime with Moshi's most trusted safari operator. Authentic, premium, and unforgettable adventures await at LAU Paradise Adventure.</p>
+                        <span class="inline-block px-4 py-1.5 bg-[#1F5A3A]/20 text-[#E67A2E] rounded-full text-xs font-bold tracking-widest uppercase mb-6 border border-[#1F5A3A]/30">Experience Excellence</span>
+                        <h1 class="text-4xl md:text-6xl lg:text-7xl font-serif text-white mb-8 leading-[1.1] md:whitespace-nowrap">Unveil the magic of <span class="text-[#E67A2E]">Wild Africa</span></h1>
+                        <p class="text-xl text-slate-200 mb-12 leading-relaxed">Embark on a journey of a lifetime with Tanzania's most trusted tour operator. Authentic, professional, and unforgettable adventures await at Reputable Tours.</p>
                         <div class="flex flex-col sm:flex-row items-center gap-4">
-                            <a href="/tours" class="w-full sm:w-auto px-10 py-4 bg-emerald-600 text-white font-bold rounded-full hover:bg-emerald-700 shadow-xl shadow-emerald-600/30 transition-all text-center">
+                            <a href="/tours" class="w-full sm:w-auto px-10 py-4 bg-[#1F5A3A] text-white font-bold rounded-full hover:bg-[#1F5A3A]/90 shadow-xl shadow-[#1F5A3A]/30 transition-all text-center">
                                 Explore Our Packages
                             </a>
                             <a href="#" class="w-full sm:w-auto px-10 py-4 bg-white/10 text-white font-bold rounded-full border border-white/20 hover:bg-white/20 transition-all text-center backdrop-blur-md flex items-center justify-center gap-2 group">
@@ -32,16 +32,16 @@
             <!-- Slide 2: Kilimanjaro -->
             <div class="swiper-slide relative flex items-center">
                 <div class="absolute inset-0 z-0">
-                    <img src="https://res.cloudinary.com/dmqdm8gfk/image/upload/v1766046350/kilimanjaro-climbing_bvcs7p.jpg" alt="Kilimanjaro" class="w-full h-full object-cover">
+                    <img src="{{ asset('images/03.jpg') }}" alt="Kilimanjaro" class="w-full h-full object-cover">
                     <div class="absolute inset-0 bg-gradient-to-r from-slate-900/90 via-slate-900/40 to-transparent"></div>
                 </div>
                 <div class="relative z-10 max-w-7xl mx-auto px-6 w-full pt-20">
                     <div class="max-w-2xl translate-y-10 opacity-0 transition-all duration-1000 slide-content">
-                        <span class="inline-block px-4 py-1.5 bg-emerald-600/20 text-emerald-400 rounded-full text-xs font-bold tracking-widest uppercase mb-6 border border-emerald-600/30">Epic Heights</span>
-                        <h1 class="text-4xl md:text-6xl lg:text-7xl font-serif text-white mb-8 leading-[1.1] md:whitespace-nowrap">Conquer the <span class="text-emerald-500">Roof of Africa</span></h1>
+                        <span class="inline-block px-4 py-1.5 bg-[#1F5A3A]/20 text-[#E67A2E] rounded-full text-xs font-bold tracking-widest uppercase mb-6 border border-[#1F5A3A]/30">Epic Heights</span>
+                        <h1 class="text-4xl md:text-6xl lg:text-7xl font-serif text-white mb-8 leading-[1.1] md:whitespace-nowrap">Conquer the <span class="text-[#E67A2E]">Roof of Africa</span></h1>
                         <p class="text-xl text-slate-200 mb-12 leading-relaxed">Experience the breathtaking views from the summit of Mount Kilimanjaro with our expert mountain guides.</p>
                         <div class="flex flex-col sm:flex-row items-center gap-4">
-                            <a href="/tours" class="w-full sm:w-auto px-10 py-4 bg-emerald-600 text-white font-bold rounded-full hover:bg-emerald-700 shadow-xl shadow-emerald-600/30 transition-all text-center">
+                            <a href="/tours" class="w-full sm:w-auto px-10 py-4 bg-[#1F5A3A] text-white font-bold rounded-full hover:bg-[#2E7A5A] shadow-xl shadow-[#1F5A3A]/30 transition-all text-center">
                                 View Trekking Routes
                             </a>
                             <a href="#" class="w-full sm:w-auto px-10 py-4 bg-white/10 text-white font-bold rounded-full border border-white/20 hover:bg-white/20 transition-all text-center backdrop-blur-md flex items-center justify-center gap-2 group">
@@ -55,16 +55,16 @@
             <!-- Slide 3: Ngorongoro -->
             <div class="swiper-slide relative flex items-center">
                 <div class="absolute inset-0 z-0">
-                    <img src="https://res.cloudinary.com/dmqdm8gfk/image/upload/v1766046228/tower-giraffes-gathered-around-bushes-open-woodlan_fsgqe3.jpg" alt="Ngorongoro" class="w-full h-full object-cover">
+                    <img src="{{ asset('images/05.jpg') }}" alt="Ngorongoro" class="w-full h-full object-cover">
                     <div class="absolute inset-0 bg-gradient-to-r from-slate-900/90 via-slate-900/40 to-transparent"></div>
                 </div>
                 <div class="relative z-10 max-w-7xl mx-auto px-6 w-full pt-20">
                     <div class="max-w-2xl translate-y-10 opacity-0 transition-all duration-1000 slide-content">
-                        <span class="inline-block px-4 py-1.5 bg-emerald-600/20 text-emerald-400 rounded-full text-xs font-bold tracking-widest uppercase mb-6 border border-emerald-600/30">Natural Wonders</span>
+                        <span class="inline-block px-4 py-1.5 bg-[#1F5A3A]/20 text-[#E67A2E] rounded-full text-xs font-bold tracking-widest uppercase mb-6 border border-[#1F5A3A]/30">Natural Wonders</span>
                         <h1 class="text-4xl md:text-6xl lg:text-7xl font-serif text-white mb-8 leading-[1.1] md:whitespace-nowrap">Visit the <span class="text-emerald-500">Garden of Eden</span></h1>
                         <p class="text-xl text-slate-200 mb-12 leading-relaxed">Explore the Ngorongoro Crater, home to the highest density of big game in Africa.</p>
                         <div class="flex flex-col sm:flex-row items-center gap-4">
-                            <a href="/tours" class="w-full sm:w-auto px-10 py-4 bg-emerald-600 text-white font-bold rounded-full hover:bg-emerald-700 shadow-xl shadow-emerald-600/30 transition-all text-center">
+                            <a href="/tours" class="w-full sm:w-auto px-10 py-4 bg-[#1F5A3A] text-white font-bold rounded-full hover:bg-[#2E7A5A] shadow-xl shadow-[#1F5A3A]/30 transition-all text-center">
                                 Discover the Crater
                             </a>
                         </div>
@@ -75,16 +75,16 @@
             <!-- Slide 4: Tarangire -->
             <div class="swiper-slide relative flex items-center">
                 <div class="absolute inset-0 z-0">
-                    <img src="https://res.cloudinary.com/dmqdm8gfk/image/upload/v1766046154/Angata-Tarangire-2-1-1536x863_amthnm.jpg" alt="Tarangire" class="w-full h-full object-cover">
+                    <img src="{{ asset('images/07.jpg') }}" alt="Tarangire" class="w-full h-full object-cover">
                     <div class="absolute inset-0 bg-gradient-to-r from-slate-900/90 via-slate-900/40 to-transparent"></div>
                 </div>
                 <div class="relative z-10 max-w-7xl mx-auto px-6 w-full pt-20">
                     <div class="max-w-2xl translate-y-10 opacity-0 transition-all duration-1000 slide-content">
-                        <span class="inline-block px-4 py-1.5 bg-emerald-600/20 text-emerald-400 rounded-full text-xs font-bold tracking-widest uppercase mb-6 border border-emerald-600/30">Land of Giants</span>
+                        <span class="inline-block px-4 py-1.5 bg-[#1F5A3A]/20 text-[#E67A2E] rounded-full text-xs font-bold tracking-widest uppercase mb-6 border border-[#1F5A3A]/30">Land of Giants</span>
                         <h1 class="text-4xl md:text-6xl lg:text-7xl font-serif text-white mb-8 leading-[1.1] md:whitespace-nowrap">Tarangire's <span class="text-emerald-500">Baobab Forests</span></h1>
                         <p class="text-xl text-slate-200 mb-12 leading-relaxed">Walk among ancient giants and massive elephant herds in one of Tanzania's most unique national parks.</p>
                         <div class="flex flex-col sm:flex-row items-center gap-4">
-                            <a href="/tours" class="w-full sm:w-auto px-10 py-4 bg-emerald-600 text-white font-bold rounded-full hover:bg-emerald-700 shadow-xl shadow-emerald-600/30 transition-all text-center">
+                            <a href="/tours" class="w-full sm:w-auto px-10 py-4 bg-[#1F5A3A] text-white font-bold rounded-full hover:bg-[#2E7A5A] shadow-xl shadow-[#1F5A3A]/30 transition-all text-center">
                                 View Tarangire Tours
                             </a>
                         </div>
@@ -95,16 +95,16 @@
             <!-- Slide 5: Culture -->
             <div class="swiper-slide relative flex items-center">
                 <div class="absolute inset-0 z-0">
-                    <img src="https://res.cloudinary.com/dmqdm8gfk/image/upload/v1766046195/hadzabe_qgukhh.jpg" alt="Hadzabe" class="w-full h-full object-cover">
+                    <img src="{{ asset('images/DSC_2338-(1).jpg') }}" alt="Hadzabe" class="w-full h-full object-cover">
                     <div class="absolute inset-0 bg-gradient-to-r from-slate-900/90 via-slate-900/40 to-transparent"></div>
                 </div>
                 <div class="relative z-10 max-w-7xl mx-auto px-6 w-full pt-20">
                     <div class="max-w-2xl translate-y-10 opacity-0 transition-all duration-1000 slide-content">
-                        <span class="inline-block px-4 py-1.5 bg-emerald-600/20 text-emerald-400 rounded-full text-xs font-bold tracking-widest uppercase mb-6 border border-emerald-600/30">Human Heritage</span>
+                        <span class="inline-block px-4 py-1.5 bg-[#1F5A3A]/20 text-[#E67A2E] rounded-full text-xs font-bold tracking-widest uppercase mb-6 border border-[#1F5A3A]/30">Human Heritage</span>
                         <h1 class="text-4xl md:text-6xl lg:text-7xl font-serif text-white mb-8 leading-[1.1] md:whitespace-nowrap">The <span class="text-emerald-500">Hadzabe Tribe</span></h1>
                         <p class="text-xl text-slate-200 mb-12 leading-relaxed">Experience an authentic encounter with one of the last true hunter-gatherer tribes on Earth.</p>
                         <div class="flex flex-col sm:flex-row items-center gap-4">
-                            <a href="/tours" class="w-full sm:w-auto px-10 py-4 bg-emerald-600 text-white font-bold rounded-full hover:bg-emerald-700 transition-all text-center">
+                            <a href="/tours" class="w-full sm:w-auto px-10 py-4 bg-[#1F5A3A] text-white font-bold rounded-full hover:bg-[#2E7A5A] transition-all text-center">
                                 Cultural Expeditions
                             </a>
                         </div>
@@ -120,11 +120,11 @@
                 </div>
                 <div class="relative z-10 max-w-7xl mx-auto px-6 w-full pt-20">
                     <div class="max-w-2xl translate-y-10 opacity-0 transition-all duration-1000 slide-content">
-                        <span class="inline-block px-4 py-1.5 bg-emerald-600/20 text-emerald-400 rounded-full text-xs font-bold tracking-widest uppercase mb-6 border border-emerald-600/30">Majestic Wildlife</span>
+                        <span class="inline-block px-4 py-1.5 bg-[#1F5A3A]/20 text-[#E67A2E] rounded-full text-xs font-bold tracking-widest uppercase mb-6 border border-[#1F5A3A]/30">Majestic Wildlife</span>
                         <h1 class="text-4xl md:text-6xl lg:text-7xl font-serif text-white mb-8 leading-[1.1] md:whitespace-nowrap">Wild <span class="text-emerald-500">Elephant Safaris</span></h1>
                         <p class="text-xl text-slate-200 mb-12 leading-relaxed">Follow the footsteps of these majestic creatures across the golden savannahs of Northern Tanzania.</p>
                         <div class="flex flex-col sm:sm:flex-row items-center gap-4">
-                            <a href="/tours" class="w-full sm:w-auto px-10 py-4 bg-emerald-600 text-white font-bold rounded-full hover:bg-emerald-700 transition-all text-center">
+                            <a href="/tours" class="w-full sm:w-auto px-10 py-4 bg-[#1F5A3A] text-white font-bold rounded-full hover:bg-[#2E7A5A] transition-all text-center">
                                 Start Your Journey
                             </a>
                         </div>
@@ -135,10 +135,10 @@
 
         <!-- Navigation -->
         <div class="absolute bottom-10 right-10 z-20 flex gap-4">
-            <button class="swiper-prev w-14 h-14 rounded-full border border-white/20 bg-white/10 text-white flex items-center justify-center hover:bg-emerald-600 hover:border-emerald-600 transition-all backdrop-blur-md">
+            <button class="swiper-prev w-14 h-14 rounded-full border border-white/20 bg-white/10 text-white flex items-center justify-center hover:bg-[#1F5A3A] hover:border-[#1F5A3A] transition-all backdrop-blur-md">
                 <i class="ph ph-caret-left text-2xl"></i>
             </button>
-            <button class="swiper-next w-14 h-14 rounded-full border border-white/20 bg-white/10 text-white flex items-center justify-center hover:bg-emerald-600 hover:border-emerald-600 transition-all backdrop-blur-md">
+            <button class="swiper-next w-14 h-14 rounded-full border border-white/20 bg-white/10 text-white flex items-center justify-center hover:bg-[#1F5A3A] hover:border-[#1F5A3A] transition-all backdrop-blur-md">
                 <i class="ph ph-caret-right text-2xl"></i>
             </button>
         </div>
@@ -209,7 +209,7 @@
                 <h2 class="text-4xl font-serif text-slate-900 mb-6 font-bold">Most Popular Safari Packages</h2>
                 <p class="text-slate-500">Carefully curated adventures that capture the very essence of the African wild. Choose your path and let us handle the rest.</p>
             </div>
-            <a href="/tours" class="text-emerald-600 font-bold flex items-center gap-2 hover:gap-3 transition-all">
+            <a href="/tours" class="text-[#E67A2E] font-bold flex items-center gap-2 hover:gap-3 transition-all">
                 View All Tours <i class="ph ph-arrow-right"></i>
             </a>
         </div>
@@ -226,19 +226,19 @@
                     </div>
                 </div>
                 <div class="p-8">
-                    <div class="flex items-center gap-2 text-emerald-500 text-sm font-bold mb-4">
+                    <div class="flex items-center gap-2 text-[#E67A2E] text-sm font-bold mb-4">
                         <i class="ph-fill ph-star"></i>
-                        <span class="text-slate-900">5.0</span>
+                        <span class="text-[#E67A2E]">5.0</span>
                         <span class="text-slate-400 font-medium">(Verified)</span>
                     </div>
-                    <h3 class="text-xl font-bold text-slate-900 mb-4 group-hover:text-emerald-600 transition-colors line-clamp-1">{{ $tour->name }}</h3>
+                    <h3 class="text-xl font-bold text-slate-900 mb-4 group-hover:text-[#E67A2E] transition-colors line-clamp-1">{{ $tour->name }}</h3>
                     <p class="text-slate-500 text-sm leading-relaxed mb-6 line-clamp-2">{{ $tour->description }}</p>
                     <div class="pt-6 border-t border-slate-100 flex items-center justify-between">
                         <div>
-                            <span class="text-slate-400 text-xs font-medium uppercase block">Starting from</span>
+                            <span class="text-[#E67A2E] text-xs font-medium uppercase block">Starting from</span>
                             <span class="text-2xl font-bold text-slate-900 leading-none">${{ number_format($tour->base_price) }}</span>
                         </div>
-                        <a href="{{ route('tours.show', $tour->id) }}" class="p-4 bg-slate-900 text-white rounded-2xl hover:bg-emerald-600 transition-colors">
+                        <a href="{{ route('tours.show', $tour->id) }}" class="p-4 bg-slate-900 text-white rounded-2xl hover:bg-[#E67A2E] transition-colors">
                             <i class="ph ph-arrow-right"></i>
                         </a>
                     </div>
@@ -262,11 +262,11 @@
     
     <div class="max-w-7xl mx-auto px-6 relative z-10">
         <div class="max-w-xl">
-            <h2 class="text-4xl font-serif text-white mb-12 font-bold">Why choose LAU Paradise Adventure?</h2>
+            <h2 class="text-4xl font-serif text-white mb-12 font-bold">Why choose Reputable Tours?</h2>
             
             <div class="space-y-12">
                 <div class="flex gap-6">
-                    <div class="w-16 h-16 rounded-2xl bg-emerald-600/20 text-emerald-500 flex-shrink-0 flex items-center justify-center text-3xl">
+                    <div class="w-16 h-16 rounded-2xl bg-[#1F5A3A]/20 text-[#E67A2E] flex-shrink-0 flex items-center justify-center text-3xl">
                         <i class="ph-bold ph-sketch-logo"></i>
                     </div>
                     <div>
@@ -276,7 +276,7 @@
                 </div>
                 
                 <div class="flex gap-6">
-                    <div class="w-16 h-16 rounded-2xl bg-emerald-600/20 text-emerald-500 flex-shrink-0 flex items-center justify-center text-3xl">
+                    <div class="w-16 h-16 rounded-2xl bg-[#1F5A3A]/20 text-[#E67A2E] flex-shrink-0 flex items-center justify-center text-3xl">
                         <i class="ph-bold ph-shield-check"></i>
                     </div>
                     <div>
@@ -286,7 +286,7 @@
                 </div>
                 
                 <div class="flex gap-6">
-                    <div class="w-16 h-16 rounded-2xl bg-emerald-600/20 text-emerald-500 flex-shrink-0 flex items-center justify-center text-3xl">
+                    <div class="w-16 h-16 rounded-2xl bg-[#1F5A3A]/20 text-[#E67A2E] flex-shrink-0 flex items-center justify-center text-3xl">
                         <i class="ph-bold ph-leaf"></i>
                     </div>
                     <div>
@@ -300,12 +300,12 @@
 </section>
 
 <!-- Call to Action -->
-<section class="py-24 bg-emerald-600">
+<section class="py-24 bg-[#1F5A3A]">
     <div class="max-w-7xl mx-auto px-6 text-center">
         <h2 class="text-4xl md:text-5xl font-serif text-white mb-8 font-bold">Ready for the Adventure of a Lifetime?</h2>
-        <p class="text-emerald-100 text-xl max-w-2xl mx-auto mb-12">Contact our safari experts today and start planning your bespoke African experience.</p>
+        <p class="text-[#E67A2E]/100 text-xl max-w-2xl mx-auto mb-12">Contact our safari experts today and start planning your bespoke African experience.</p>
         <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
-            <a href="/tours" class="px-12 py-5 bg-white text-emerald-600 font-bold rounded-full shadow-2xl hover:scale-105 transition-all">
+            <a href="/tours" class="px-12 py-5 bg-white text-[#E67A2E] font-bold rounded-full shadow-2xl hover:scale-105 transition-all">
                 Book My Safari
             </a>
             <a href="https://wa.me/255683163219" class="flex items-center gap-3 text-white font-bold hover:scale-105 transition-all text-xl">
@@ -318,7 +318,7 @@
 <section class="py-32 bg-white">
     <div class="max-w-7xl mx-auto px-6">
         <div class="text-center mb-20">
-            <span class="text-emerald-600 font-black text-xs uppercase tracking-[0.4em] mb-4 inline-block">Worldwide Recognition</span>
+            <span class="text-[#E67A2E] font-black text-xs uppercase tracking-[0.4em] mb-4 inline-block">Worldwide Recognition</span>
             <h2 class="text-4xl md:text-5xl font-serif text-slate-900 font-bold mb-6">Trusted by Adventurers</h2>
             <div class="flex items-center justify-center gap-10 opacity-60 grayscale hover:grayscale-0 transition-all duration-700">
                 <img src="https://static.tacdn.com/img2/brand_refresh_2025/logos/wordmark.svg" alt="TripAdvisor" class="h-8">
@@ -340,7 +340,7 @@
                             </div>
                             <img src="https://www.bluecorona.com/wp-content/uploads/2015/05/26-googleplusreviews.jpg" alt="Google Reviews" class="h-8 rounded-lg">
                         </div>
-                        <p class="text-slate-600 text-lg leading-relaxed mb-10 italic">"Lau Paradise provided an exceptional 8-day Serengeti safari. Our guide, Emanuel, was incredibly knowledgeable about the wildlife. Every camp was perfectly chosen. 5 stars!"</p>
+                        <p class="text-slate-600 text-lg leading-relaxed mb-10 italic">"Reputable Tours provided an exceptional 8-day Serengeti safari. Our guide was incredibly knowledgeable about wildlife. Every camp was perfectly chosen. 5 stars!"</p>
                         <div class="mt-auto flex items-center gap-4">
                             <div class="w-14 h-14 rounded-2xl bg-slate-200 overflow-hidden">
                                 <img src="https://i.pravatar.cc/150?u=sarah" alt="Sarah Jenkins" class="w-full h-full object-cover">
@@ -366,7 +366,7 @@
                             </div>
                             <img src="https://static.tacdn.com/img2/brand_refresh_2025/logos/wordmark.svg" alt="TripAdvisor" class="h-6">
                         </div>
-                        <p class="text-slate-600 text-lg leading-relaxed mb-10 italic">"The Kilimanjaro trek via Lemosho was challenging but perfectly organized by the LAU team. The equipment was top-notch and the food on the mountain was surprisingly great!"</p>
+                        <p class="text-slate-600 text-lg leading-relaxed mb-10 italic">"The Kilimanjaro trek via Lemosho was challenging but perfectly organized by Reputable Tours. The equipment was top-notch and food on the mountain was surprisingly great!"</p>
                         <div class="mt-auto flex items-center gap-4">
                             <div class="w-14 h-14 rounded-2xl bg-slate-200 overflow-hidden">
                                 <img src="https://i.pravatar.cc/150?u=marco" alt="Marco Rossi" class="w-full h-full object-cover">
@@ -392,7 +392,7 @@
                             </div>
                             <img src="https://www.bluecorona.com/wp-content/uploads/2015/05/26-googleplusreviews.jpg" alt="Google Reviews" class="h-8">
                         </div>
-                        <p class="text-slate-600 text-lg leading-relaxed mb-10 italic">"Amazing cultural experience with the Hadzabe tribe. It felt authentic and respectful. Lau Paradise really understands how to provide ethical tourism in Tanzania."</p>
+                        <p class="text-slate-600 text-lg leading-relaxed mb-10 italic">"Amazing cultural experience with Hadzabe tribe. It felt authentic and respectful. Reputable Tours really understands how to provide ethical tourism in Tanzania."</p>
                         <div class="mt-auto flex items-center gap-4">
                             <div class="w-14 h-14 rounded-2xl bg-slate-200 overflow-hidden">
                                 <img src="https://i.pravatar.cc/150?u=elena" alt="Elena Petrova" class="w-full h-full object-cover">
@@ -418,7 +418,7 @@
                             </div>
                             <img src="https://static.tacdn.com/img2/brand_refresh_2025/logos/wordmark.svg" alt="TripAdvisor" class="h-6">
                         </div>
-                        <p class="text-slate-600 text-lg leading-relaxed mb-10 italic">"The best safari operator in Moshi. Their attention to detail and safety standards are unmatched. From pickup to drop-off, everything was professional."</p>
+                        <p class="text-slate-600 text-lg leading-relaxed mb-10 italic">"The best safari operator in Tanzania. Their attention to detail and safety standards are unmatched. From pickup to drop-off, everything was professional."</p>
                         <div class="mt-auto flex items-center gap-4">
                             <div class="w-14 h-14 rounded-2xl bg-slate-200 overflow-hidden">
                                 <img src="https://i.pravatar.cc/150?u=david" alt="David Thompson" class="w-full h-full object-cover">

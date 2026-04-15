@@ -36,10 +36,10 @@
         <!-- Logo Area with Close Button for Mobile -->
         <div class="p-6 flex items-center justify-between border-b border-white/5 bg-emerald-950/50 sticky top-0 z-10">
             <div class="flex items-center gap-3">
-                <img src="{{ asset('lau-adventuress-logo.png') }}" alt="Logo" class="h-10 w-auto object-contain">
+                <img src="{{ asset('logo.png') }}" alt="Logo" class="h-10 w-auto object-contain">
                 <div class="flex flex-col">
-                    <span class="text-xl font-black tracking-tighter text-white leading-none">LAU</span>
-                    <span class="text-[9px] font-bold tracking-[0.2em] text-emerald-400 uppercase leading-none mt-1">PARADISE ADVENTURE</span>
+                    <span class="text-xl font-black tracking-tighter text-white leading-none">REPUTABLE</span>
+                    <span class="text-[9px] font-bold tracking-[0.2em] text-emerald-400 uppercase leading-none mt-1">TOURS - TANZANIAN</span>
                 </div>
             </div>
             <!-- Close Sidebar (Mobile Only) -->
@@ -71,50 +71,8 @@
                 <span class="text-sm">Dashboard Overview</span>
             </a>
 
-            {{-- 🟦 CRM & SALES SECTION --}}
-            <div class="px-4 mt-6 mb-2 text-[10px] font-black text-emerald-500 uppercase tracking-[0.2em] opacity-50">CRM & Sales</div>
-
-            {{-- Bookings --}}
-            @if(!$hasRoleMethod || $user->hasAnyRole(['System Administrator', 'Travel Consultant', 'Reservations Officer']))
-            <div x-data="{ open: window.innerWidth < 1024 || {{ request()->routeIs('admin.bookings.*') ? 'true' : 'false' }} }">
-                <button @click="open = !open" 
-                        class="w-full flex items-center justify-between px-4 py-3 text-emerald-100/70 hover:bg-emerald-800 hover:text-white transition-all rounded-xl {{ request()->routeIs('admin.bookings.*') ? 'text-white' : '' }}">
-                    <div class="flex items-center">
-                        <i class="ph-bold ph-calendar-check mr-3 text-xl"></i>
-                        <span class="text-sm">Bookings</span>
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <span class="bg-emerald-500 text-[10px] font-black px-1.5 py-0.5 rounded-md text-white">12</span>
-                        <i class="ph ph-caret-down text-xs transition-transform" :class="open ? 'rotate-180' : ''"></i>
-                    </div>
-                </button>
-                <div x-show="open" x-collapse class="pl-12 pr-4 py-2 space-y-1">
-                    <a href="{{ route('admin.bookings.index') }}" class="block text-xs py-2 {{ request()->routeIs('admin.bookings.index') ? 'text-emerald-400 font-bold' : 'text-emerald-100/50' }} hover:text-white transition-colors">All Bookings</a>
-                    <a href="{{ route('admin.bookings.pending') }}" class="block text-xs py-2 {{ request()->routeIs('admin.bookings.pending') ? 'text-emerald-400 font-bold' : 'text-emerald-100/50' }} hover:text-white transition-colors">Pending Approvals</a>
-                    <a href="{{ route('admin.bookings.confirmed') }}" class="block text-xs py-2 {{ request()->routeIs('admin.bookings.confirmed') ? 'text-emerald-400 font-bold' : 'text-emerald-100/50' }} hover:text-white transition-colors">Confirmed Trips</a>
-                    <a href="{{ route('admin.bookings.calendar') }}" class="block text-xs py-2 {{ request()->routeIs('admin.bookings.calendar') ? 'text-emerald-400 font-bold' : 'text-emerald-100/50' }} hover:text-white transition-colors">Booking Calendar</a>
-                </div>
-            </div>
-            @endif
-
-            {{-- Quotations --}}
-            @if(!$hasRoleMethod || $user->hasAnyRole(['System Administrator', 'Travel Consultant', 'Reservations Officer']))
-            <div x-data="{ open: window.innerWidth < 1024 || {{ request()->routeIs('admin.quotations.*') ? 'true' : 'false' }} }">
-                <button @click="open = !open" class="w-full flex items-center justify-between px-4 py-3 text-emerald-100/70 hover:bg-emerald-800 hover:text-white transition-all rounded-xl {{ request()->routeIs('admin.quotations.*') ? 'text-white bg-emerald-800' : '' }}">
-                    <div class="flex items-center">
-                        <i class="ph-bold ph-file-text mr-3 text-xl"></i>
-                        <span class="text-sm">Quotations</span>
-                    </div>
-                    <i class="ph ph-caret-down text-xs transition-transform" :class="open ? 'rotate-180' : ''"></i>
-                </button>
-                <div x-show="open" x-collapse class="pl-12 pr-4 py-2 space-y-1">
-                    <a href="{{ route('admin.quotations.index') }}" class="block text-xs py-2 text-emerald-100/50 hover:text-white transition-colors">All Quotations</a>
-                    <a href="{{ route('admin.quotations.create') }}" class="block text-xs py-2 text-emerald-100/50 hover:text-white transition-colors">Create New</a>
-                    <a href="{{ route('admin.quotations.accepted') }}" class="block text-xs py-2 text-emerald-100/50 hover:text-white transition-colors">Accepted</a>
-                </div>
-            </div>
-            @endif
-
+            
+            
             {{-- Customers --}}
             @if(!$hasRoleMethod || $user->hasAnyRole(['System Administrator', 'Travel Consultant', 'Reservations Officer']))
             <div x-data="{ open: window.innerWidth < 1024 || {{ request()->routeIs('admin.customers.*') ? 'true' : 'false' }} }">
@@ -147,11 +105,51 @@
                     <i class="ph ph-caret-down text-xs transition-transform" :class="open ? 'rotate-180' : ''"></i>
                 </button>
                 <div x-show="open" x-collapse class="pl-12 pr-4 py-2 space-y-1">
-                    <a href="{{ route('admin.tours.index') }}" class="block text-xs py-2 text-emerald-100/50 hover:text-white transition-colors {{ request()->routeIs('admin.tours.index') ? 'text-emerald-400 font-bold' : '' }}">All Packages</a>
+                    <a href="{{ route('admin.tours.index') }}" class="block text-xs py-2 text-emerald-100/50 hover:text-white transition-colors {{ request()->routeIs('admin.tours.index') ? 'text-emerald-400 font-bold' : '' }}">Safari Packages</a>
                     <a href="{{ route('admin.tours.create') }}" class="block text-xs py-2 text-emerald-100/50 hover:text-white transition-colors {{ request()->routeIs('admin.tours.create') ? 'text-emerald-400 font-bold' : '' }}">Add New Tour</a>
                     <a href="{{ route('admin.tours.itinerary-builder') }}" class="block text-xs py-2 text-emerald-100/50 hover:text-white transition-colors {{ request()->routeIs('admin.tours.itinerary-builder') ? 'text-emerald-400 font-bold' : '' }}">Itinerary Builder</a>
                     <a href="{{ route('admin.tours.availability-pricing') }}" class="block text-xs py-2 text-emerald-100/50 hover:text-white transition-colors {{ request()->routeIs('admin.tours.availability-pricing') ? 'text-emerald-400 font-bold' : '' }}">Availability & Pricing</a>
                     <a href="{{ route('admin.tours.destinations') }}" class="block text-xs py-2 text-emerald-100/50 hover:text-white transition-colors {{ request()->routeIs('admin.tours.destinations') ? 'text-emerald-400 font-bold' : '' }}">Destinations</a>
+                </div>
+            </div>
+            @endif
+
+            {{-- Mountain Trekking --}}
+            @if(!$hasRoleMethod || $user->hasAnyRole(['System Administrator', 'Content Manager', 'Travel Consultant']))
+            <div x-data="{ open: window.innerWidth < 1024 || {{ request()->routeIs('admin.mountain.*') ? 'true' : 'false' }} }">
+                <button @click="open = !open" 
+                        class="w-full flex items-center justify-between px-4 py-3 text-emerald-100/70 hover:bg-emerald-800 hover:text-white transition-all rounded-xl {{ request()->routeIs('admin.mountain.*') ? 'text-white' : '' }}">
+                    <div class="flex items-center">
+                        <i class="ph-bold ph-mountains mr-3 text-xl"></i>
+                        <span class="text-sm">Mountain Trekking</span>
+                    </div>
+                    <i class="ph ph-caret-down text-xs transition-transform" :class="open ? 'rotate-180' : ''"></i>
+                </button>
+                <div x-show="open" x-collapse class="pl-12 pr-4 py-2 space-y-1">
+                    <a href="#" class="block text-xs py-2 text-emerald-100/50 hover:text-white transition-colors">Kilimanjaro Routes</a>
+                    <a href="#" class="block text-xs py-2 text-emerald-100/50 hover:text-white transition-colors">Meru Climbing</a>
+                    <a href="#" class="block text-xs py-2 text-emerald-100/50 hover:text-white transition-colors">Equipment Management</a>
+                    <a href="#" class="block text-xs py-2 text-emerald-100/50 hover:text-white transition-colors">Guide Assignments</a>
+                </div>
+            </div>
+            @endif
+
+            {{-- Things to Do --}}
+            @if(!$hasRoleMethod || $user->hasAnyRole(['System Administrator', 'Content Manager', 'Travel Consultant']))
+            <div x-data="{ open: window.innerWidth < 1024 || {{ request()->routeIs('admin.activities.*') ? 'true' : 'false' }} }">
+                <button @click="open = !open" 
+                        class="w-full flex items-center justify-between px-4 py-3 text-emerald-100/70 hover:bg-emerald-800 hover:text-white transition-all rounded-xl {{ request()->routeIs('admin.activities.*') ? 'text-white' : '' }}">
+                    <div class="flex items-center">
+                        <i class="ph-bold ph-map-pin mr-3 text-xl"></i>
+                        <span class="text-sm">Things to Do</span>
+                    </div>
+                    <i class="ph ph-caret-down text-xs transition-transform" :class="open ? 'rotate-180' : ''"></i>
+                </button>
+                <div x-show="open" x-collapse class="pl-12 pr-4 py-2 space-y-1">
+                    <a href="#" class="block text-xs py-2 text-emerald-100/50 hover:text-white transition-colors">Activities Management</a>
+                    <a href="#" class="block text-xs py-2 text-emerald-100/50 hover:text-white transition-colors">Cultural Tours</a>
+                    <a href="#" class="block text-xs py-2 text-emerald-100/50 hover:text-white transition-colors">Beach Activities</a>
+                    <a href="#" class="block text-xs py-2 text-emerald-100/50 hover:text-white transition-colors">Wildlife Experiences</a>
                 </div>
             </div>
             @endif
@@ -557,7 +555,7 @@
                          x-transition:leave="transition ease-in duration-75"
                          x-transition:leave-start="opacity-100 scale-100 translate-y-0"
                          x-transition:leave-end="opacity-0 scale-95 translate-y-2"
-                         class="absolute right-0 mt-3 w-64 bg-white rounded-2xl shadow-2xl border border-slate-100 py-4 z-50 overflow-hidden">
+                         class="absolute right-0 mt-3 w-64 bg-white rounded-2xl shadow-2xl border border-slate-100 py-4 z-50">
                         
                         <div class="px-6 py-4 border-b border-slate-50 mb-2">
                             <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Signed in as</p>
