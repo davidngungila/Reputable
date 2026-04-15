@@ -85,10 +85,13 @@
                 <div class="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-200">
                     <div class="relative h-48 overflow-hidden">
                         @if($tour->images && is_array($tour->images) && count($tour->images) > 0)
-                            <img src="{{ asset($tour->images[0]) }}" alt="{{ $tour->name }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <img src="{{ asset($tour->images[0]) }}" alt="{{ $tour->name }}" class="w-full h-full object-cover">
                         @else
-                            <img src="{{ asset('images/03.jpg') }}" alt="{{ $tour->name }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <img src="{{ asset('images/03.jpg') }}" alt="{{ $tour->name }}" class="w-full h-full object-cover">
                         @endif
+                        <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-md p-2 rounded-full text-emerald-500 shadow-sm">
+                            <i class="ph-bold ph-heart text-xl"></i>
+                        </div>
                         @if($tour->featured)
                             <div class="absolute top-4 left-4 bg-[#E67A2E] text-white text-xs px-3 py-1 rounded-full">Featured</div>
                         @endif
