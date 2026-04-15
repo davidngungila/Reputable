@@ -80,7 +80,7 @@
         </div>
 
         <!-- Tours Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
             @forelse ($tours as $tour)
                 <div class="group bg-white rounded-[2rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border border-slate-100">
                     <div class="relative h-64 overflow-hidden">
