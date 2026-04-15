@@ -79,6 +79,105 @@
             </form>
         </div>
 
+        <!-- Tours Grid -->
+        <div class="space-y-8">
+            @forelse ($tours as $index => $tour)
+                @if($index % 3 == 0)
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                @endif
+                <div class="group bg-white rounded-[2rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border border-slate-100">
+                    <div class="relative h-64 overflow-hidden">
+                        @if($tour->images && is_array($tour->images) && count($tour->images) > 0)
+                            <img src="{{ asset($tour->images[0]) }}" alt="{{ $tour->name }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        @else
+                            <img src="{{ asset('images/03.jpg') }}" alt="{{ $tour->name }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        @endif
+                        <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-md p-2 rounded-full text-emerald-500 shadow-sm">
+                            <i class="ph-bold ph-heart text-xl"></i>
+                        </div>
+                        @if($tour->featured)
+                            <div class="absolute top-4 left-4 bg-[#E67A2E] text-white text-xs px-3 py-1 rounded-full">Featured</div>
+                        @endif
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-xl font-bold text-gray-900 group-hover:text-emerald-600 transition-colors line-clamp-1">{{ $tour->name }}</h3>
+                        </div>
+                            <p class="text-gray-500 text-sm leading-relaxed mb-8 line-clamp-2">{{ $tour->description }}</p>
+                            <div class="space-y-2">
+                                <div class="flex items-center gap-2 text-sm text-gray-700">
+                                    <i class="ph-bold ph-map-pin text-[#1F5A3A]"></i>
+                                    <span>{{ $tour->location }}</span>
+                                </div>
+                                <div class="flex items-center gap-2 text-sm text-gray-700">
+                                    <i class="ph-bold ph-clock text-[#1F5A3A]"></i>
+                                    <span>{{ $tour->duration_days }} Days</span>
+                                </div>
+                                @if($tour->route_name)
+                                    <div class="flex items-center gap-2 text-sm text-gray-700">
+                                        <i class="ph-bold ph-signpost text-[#1F5A3A]"></i>
+                                        <span>{{ $tour->route_name }}</span>
+                                    </div>
+                                @endif
+                                @if($tour->difficulty)
+                                    <div class="flex items-center gap-2 text-sm text-gray-700">
+                                        <i class="ph-bold ph-trend-up text-[#1F5A3A]"></i>
+                                        <span>{{ $tour->difficulty }}</span>
+                                    </div>
+                                @endif
+                                @if($tour->max_altitude)
+                                    <div class="flex items-center gap-2 text-sm text-gray-700">
+                                        <i class="ph-bold ph-mountain text-[#1F5A3A]"></i>
+                                        <span>{{ $tour->max_altitude }}m</span>
+                                    </div>
+                                @endif
+                                @if($tour->package_type)
+                                    <div class="flex items-center gap-2 text-sm text-gray-700">
+                                        <i class="ph-bold ph-backpack text-[#1F5A3A]"></i>
+                                        <span>{{ $tour->package_type }}</span>
+                                    </div>
+                                @endif
+                                @if($tour->best_season)
+                                    <div class="flex items-center gap-2 text-sm text-gray-700">
+                                        <i class="ph-bold ph-sun text-[#1F5A3A]"></i>
+                                        <span>{{ $tour->best_season }}</span>
+                                    </div>
+                                @endif
+                                <div class="flex items-center gap-2 text-sm text-gray-700">
+                                    <i class="ph-bold ph-users text-[#1F5A3A]"></i>
+                                    <span>Per Person</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <span class="text-slate-400 text-[10px] font-bold uppercase tracking-widest block mb-1">From ${{ number_format($tour->base_price) }}</span>
+                                </div>
+                                <a href="{{ route('tours.show', $tour->id) }}" class="inline-flex items-center gap-2 bg-slate-900 text-white px-6 py-3 rounded-2xl font-bold hover:bg-emerald-600 transition-colors">
+                                    Details <i class="ph ph-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @if($index % 3 == 2)
+                    </div>
+                @endif
+            @empty
+                <div class="col-span-full text-center py-12">
+                    <i class="ph-bold ph-backpack text-6xl text-gray-300 mb-4"></i>
+                    <h3 class="text-xl font-bold text-gray-600 mb-2">No Mountain Trekking Tours Available</h3>
+                    <p class="text-gray-500">Check back later for new climbing expeditions.</p>
+                </div>
+            @endforelse
+        </div>
+
+        <!-- Pagination -->
+        @if($tours->hasPages())
+            <div class="mt-12 flex justify-center">
+                {{ $tours->links() }}
+            </div>
+        @endif
+
         <!-- Route Comparison Section -->
         <div class="mt-20 bg-white rounded-2xl shadow-lg p-8 border border-gray-200">
             <h3 class="text-2xl font-serif font-bold text-gray-900 mb-8 text-center">Kilimanjaro Routes Comparison</h3>
