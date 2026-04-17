@@ -620,7 +620,7 @@
                         <div class="text-sm text-gray-600">
                             <span class="font-semibold text-emerald-600">Highlights:</span> Great Migration, Big Five, Ndutu Plains
                         </div>
-                        <a href="{{ route('serengeti') }}" class="inline-flex items-center gap-2 bg-emerald-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-emerald-700 transition-colors">
+                        <a href="{{ route('regions.serengeti') }}" class="inline-flex items-center gap-2 bg-emerald-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-emerald-700 transition-colors">
                             Explore Serengeti <i class="ph ph-arrow-right"></i>
                         </a>
                     </div>
@@ -673,7 +673,7 @@
                         <div class="text-sm text-gray-600">
                             <span class="font-semibold text-blue-600">Highlights:</span> Ngorongoro Crater, Empakaai, Highlands
                         </div>
-                        <a href="{{ route('ngorongoro') }}" class="inline-flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-blue-700 transition-colors">
+                        <a href="{{ route('regions.ngorongoro') }}" class="inline-flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-blue-700 transition-colors">
                             Explore Ngorongoro <i class="ph ph-arrow-right"></i>
                         </a>
                     </div>
@@ -779,7 +779,7 @@
                         <div class="text-sm text-gray-600">
                             <span class="font-semibold text-purple-600">Highlights:</span> Stone Town, Spice Farms, Beaches
                         </div>
-                        <a href="{{ route('zanzibar') }}" class="inline-flex items-center gap-2 bg-purple-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-purple-700 transition-colors">
+                        <a href="{{ route('regions.zanzibar') }}" class="inline-flex items-center gap-2 bg-purple-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-purple-700 transition-colors">
                             Explore Zanzibar <i class="ph ph-arrow-right"></i>
                         </a>
                     </div>
