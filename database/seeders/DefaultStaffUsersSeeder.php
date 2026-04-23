@@ -30,10 +30,14 @@ class DefaultStaffUsersSeeder extends Seeder
         ];
 
         foreach ($rows as $r) {
+            // Generate username from email (before @ symbol)
+            $username = explode('@', $r['email'])[0] ?? strtolower(str_replace(' ', '', $r['name']));
+            
             $user = User::query()->updateOrCreate(
                 ['email' => $r['email']],
                 [
                     'name' => $r['name'],
+                    'username' => $username,
                     'password' => Hash::make('lau123'),
                     'email_verified_at' => now(),
                 ]

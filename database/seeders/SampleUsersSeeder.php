@@ -105,11 +105,15 @@ class SampleUsersSeeder extends Seeder
         ];
 
         foreach ($sampleUsers as $userData) {
+            // Generate username from email (before @ symbol) or name
+            $username = explode('@', $userData['email'])[0] ?? strtolower(str_replace(' ', '', $userData['name']));
+            
             // Create or update user
             $user = User::query()->updateOrCreate(
                 ['email' => $userData['email']],
                 [
                     'name' => $userData['name'],
+                    'username' => $username,
                     'password' => Hash::make($userData['password']),
                     'email_verified_at' => now(),
                 ]
