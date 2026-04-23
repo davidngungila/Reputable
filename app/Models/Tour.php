@@ -13,7 +13,11 @@ class Tour extends Model
     protected $fillable = [
         'name', 'slug', 'description', 'location', 'duration_days', 
         'base_price', 'international_price_min', 'international_price_max',
-        'best_season',
+        'best_season', 'package_highlights', 'route', 'difficulty', 'difficulty_level',
+        'max_altitude', 'altitude_gain', 'package_type', 'route_name', 'base_location', 
+        'starting_gate', 'detailed_inclusions', 'optional_extras', 'common_wildlife',
+        'occasional_wildlife', 'rare_wildlife', 'detailed_exclusions', 'extra_activities',
+        'accommodation_id',
         'images', 'inclusions', 'exclusions',
         'package_destinations', 'target_markets',
         'interactive_features', 'addons', 'conversion_triggers',
@@ -29,6 +33,13 @@ class Tour extends Model
         'interactive_features' => 'array',
         'addons' => 'array',
         'conversion_triggers' => 'array',
+        'common_wildlife' => 'array',
+        'occasional_wildlife' => 'array',
+        'rare_wildlife' => 'array',
+        'detailed_inclusions' => 'array',
+        'optional_extras' => 'array',
+        'detailed_exclusions' => 'array',
+        'extra_activities' => 'array',
         'featured' => 'boolean',
     ];
 
