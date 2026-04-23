@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             ['email' => 'admin@lauparadise.com'],
             [
                 'name' => 'Lau Administrator',
+                'username' => 'admin',
                 'password' => \Hash::make('lau123'),
             ]
         );

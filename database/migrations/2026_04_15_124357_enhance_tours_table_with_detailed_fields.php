@@ -28,7 +28,7 @@ return new class extends Migration
             
             // Wildlife sightings for safari packages
             if (!Schema::hasColumn('tours', 'common_wildlife')) {
-                $table->json('common_wildlife')->nullable()->after('optional_extras');
+                $table->json('common_wildlife')->nullable()->after('conversion_triggers');
             }
             if (!Schema::hasColumn('tours', 'occasional_wildlife')) {
                 $table->json('occasional_wildlife')->nullable()->after('common_wildlife');
