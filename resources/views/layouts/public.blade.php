@@ -433,10 +433,10 @@
                 <h4 class="font-bold mb-6 text-emerald-500">Contact Info</h4>
                 <ul class="space-y-4 text-sm text-slate-400">
                     <li class="flex items-center gap-3">
-                        <i class="ph ph-phone text-emerald-500"></i> +255 683 163 219
+                        <i class="ph ph-phone text-emerald-500"></i> 
                     </li>
                     <li class="flex items-center gap-3">
-                        <i class="ph ph-envelope text-emerald-500"></i> lauparadiseadventure@gmail.com
+                        <i class="ph ph-envelope text-emerald-500"></i> 
                     </li>
                     <li class="flex items-center gap-3 font-bold">
                         <i class="ph ph-map-pin text-emerald-500"></i> Moshi, Tanzania
