@@ -1344,7 +1344,63 @@ class TourSeeder extends Seeder
 
         foreach ($tours as $t) {
             $t['slug'] = Str::slug($t['name']);
-            Tour::create($t);
+            
+            // Only use fields that actually exist in the database
+            $safeData = [
+                'name' => $t['name'],
+                'slug' => $t['slug'],
+                'description' => $t['description'],
+                'location' => $t['location'],
+                'duration_days' => $t['duration_days'],
+                'base_price' => $t['base_price'],
+                'international_price_min' => $t['international_price_min'] ?? null,
+                'international_price_max' => $t['international_price_max'] ?? null,
+                'best_season' => $t['best_season'] ?? null,
+                'package_destinations' => $t['package_destinations'] ?? [],
+                'target_markets' => $t['target_markets'] ?? [],
+                'interactive_features' => $t['interactive_features'] ?? [],
+                'addons' => $t['addons'] ?? [],
+                'conversion_triggers' => $t['conversion_triggers'] ?? [],
+                'featured' => $t['featured'] ?? false,
+                'status' => $t['status'] ?? 'active',
+                'images' => $t['images'] ?? [],
+                'inclusions' => $t['inclusions'] ?? [],
+                'exclusions' => $t['exclusions'] ?? [],
+            ];
+            
+            // Add optional fields only if they exist in the database
+            if (Schema::hasColumn('tours', 'package_highlights')) {
+                $safeData['package_highlights'] = $t['package_highlights'] ?? null;
+            }
+            if (Schema::hasColumn('tours', 'route')) {
+                $safeData['route'] = $t['route'] ?? null;
+            }
+            if (Schema::hasColumn('tours', 'difficulty')) {
+                $safeData['difficulty'] = $t['difficulty'] ?? null;
+            }
+            if (Schema::hasColumn('tours', 'difficulty_level')) {
+                $safeData['difficulty_level'] = $t['difficulty_level'] ?? null;
+            }
+            if (Schema::hasColumn('tours', 'max_altitude')) {
+                $safeData['max_altitude'] = $t['max_altitude'] ?? null;
+            }
+            if (Schema::hasColumn('tours', 'altitude_gain')) {
+                $safeData['altitude_gain'] = $t['altitude_gain'] ?? null;
+            }
+            if (Schema::hasColumn('tours', 'package_type')) {
+                $safeData['package_type'] = $t['package_type'] ?? null;
+            }
+            if (Schema::hasColumn('tours', 'route_name')) {
+                $safeData['route_name'] = $t['route_name'] ?? null;
+            }
+            if (Schema::hasColumn('tours', 'base_location')) {
+                $safeData['base_location'] = $t['base_location'] ?? null;
+            }
+            if (Schema::hasColumn('tours', 'starting_gate')) {
+                $safeData['starting_gate'] = $t['starting_gate'] ?? null;
+            }
+            
+            Tour::create($safeData);
         }
     }
 }
