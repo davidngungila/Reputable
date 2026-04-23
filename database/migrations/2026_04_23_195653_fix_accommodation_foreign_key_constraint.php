@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('accommodations', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
+        // This migration ensures the foreign key constraint is properly handled
+        // The accommodation_id column and foreign key already exist in the tours table
+        // No changes needed for up() as the foreign key is already in place
     }
 
     /**
@@ -22,12 +21,10 @@ return new class extends Migration
      */
     public function down(): void
     {
-        // Drop foreign key constraint from tours table first
+        // Drop the foreign key constraint before dropping the accommodations table
         Schema::table('tours', function (Blueprint $table) {
             $table->dropForeign(['accommodation_id']);
             $table->dropColumn('accommodation_id');
         });
-        
-        Schema::dropIfExists('accommodations');
     }
 };
