@@ -12,7 +12,9 @@ class AllSafariToursSeeder extends Seeder
     public function run(): void
     {
         // 6 DAYS SAFARI (TARANGIRE, NGORONGORO & SERENGETI)
-        $tour1 = Tour::create([
+        $tour1 = Tour::updateOrCreate(
+            ['slug' => '6-days-safari-tarangire-ngorongoro-serengeti'],
+            [
             'name' => '6 DAYS SAFARI (TARANGIRE, NGORONGORO & SERENGETI)',
             'slug' => '6-days-safari-tarangire-ngorongoro-serengeti',
             'description' => 'Experience the best of Tanzania\'s northern circuit in 6 days. This comprehensive safari takes you through Tarangire National Park, Ngorongoro Crater, and the vast Serengeti plains with optional hot air balloon safari.',
@@ -79,7 +81,9 @@ class AllSafariToursSeeder extends Seeder
         $this->createSixDaysSafariItinerary($tour1->id);
 
         // 9 DAYS GREAT MIGRATION SAFARI
-        $tour2 = Tour::create([
+        $tour2 = Tour::updateOrCreate(
+            ['slug' => '9-days-great-migration-safari'],
+            [
             'name' => '9 DAYS GREAT MIGRATION SAFARI',
             'slug' => '9-days-great-migration-safari',
             'description' => 'Follow the Great Migration route across Tanzania\'s most spectacular landscapes. This 9-day adventure takes you from Tarangire through Lake Manyara, Lake Natron, Ngorongoro Crater, to the vast Serengeti plains.',
@@ -152,7 +156,9 @@ class AllSafariToursSeeder extends Seeder
         $this->createNineDaysSafariItinerary($tour2->id);
 
         // 6 DAYS COMBO ADVENTURE (MERU TREKKING & SAFARI)
-        $tour3 = Tour::create([
+        $tour3 = Tour::updateOrCreate(
+            ['slug' => '6-days-combo-adventure-meru-trekking-safari'],
+            [
             'name' => '6 DAYS COMBO ADVENTURE (MERU TREKKING & SAFARI)',
             'slug' => '6-days-combo-adventure-meru-trekking-safari',
             'description' => 'Combine the thrill of climbing Mount Meru with classic Tanzania safari. This adventure includes 4-day Mount Meru trek followed by 2-day Tarangire safari experience.',
@@ -213,7 +219,9 @@ class AllSafariToursSeeder extends Seeder
         $this->createComboAdventureItinerary($tour3->id);
 
         // 6 DAYS CLASSIC SAFARI (TARANGIRE, NGORONGORO & SERENGETI)
-        $tour4 = Tour::create([
+        $tour4 = Tour::updateOrCreate(
+            ['slug' => '6-days-classic-safari-tarangire-ngorongoro-serengeti'],
+            [
             'name' => '6 DAYS CLASSIC SAFARI (TARANGIRE, NGORONGORO & SERENGETI)',
             'slug' => '6-days-classic-safari-tarangire-ngorongoro-serengeti',
             'description' => 'Classic Tanzania safari experience covering the northern circuit highlights. Enjoy game drives in Tarangire, Ngorongoro Crater descent, and Serengeti exploration with hot air balloon option.',
@@ -278,7 +286,9 @@ class AllSafariToursSeeder extends Seeder
         $this->createClassicSafariItinerary($tour4->id);
 
         // 6 DAYS EXITING SAFARI (TARANGIRE, BURUNGE, NGORONGORO & SERENGETI)
-        $tour5 = Tour::create([
+        $tour5 = Tour::updateOrCreate(
+            ['slug' => '6-days-exiting-safari-tarangire-burunge-ngorongoro-serengeti'],
+            [
             'name' => '6 DAYS EXITING SAFARI (TARANGIRE, BURUNGE, NGORONGORO & SERENGETI)',
             'slug' => '6-days-exiting-safari-tarangire-burunge-ngorongoro-serengeti',
             'description' => 'An exciting safari adventure covering Tarangire, Lake Burunge, Ngorongoro Crater and Serengeti. Experience diverse landscapes and wildlife with mid to high-range accommodation.',
@@ -346,7 +356,9 @@ class AllSafariToursSeeder extends Seeder
         $this->createExitingSafariItinerary($tour5->id);
 
         // 6 DAYS EXITING SAFARI (MATERUNI, MT KILIMANJARO, ARUSHA NP, NGORONGORO & SERENGETI)
-        $tour6 = Tour::create([
+        $tour6 = Tour::updateOrCreate(
+            ['slug' => '6-days-exiting-safari-materuni-mt-kilimanjaro-arusha-np-ngorongoro-serengeti'],
+            [
             'name' => '6 DAYS EXITING SAFARI (MATERUNI, MT KILIMANJARO, ARUSHA NP, NGORONGORO & SERENGETI)',
             'slug' => '6-days-exiting-safari-materuni-kilimanjaro-arusha-ngorongoro-serengeti',
             'description' => 'Ultimate adventure combining cultural experiences, Kilimanjaro day hike, Arusha National Park walking safari, Ngorongoro Crater, and Serengeti game drives.',
@@ -412,7 +424,9 @@ class AllSafariToursSeeder extends Seeder
         $this->createKilimanjaroAdventureItinerary($tour6->id);
 
         // 7 DAYS DRIVE IN FLY OUT SAFARI (ARUSHA, TARANGIRE, MTO WA MBU BIKING NGORONGORO & SERENGETI)
-        $tour7 = Tour::create([
+        $tour7 = Tour::updateOrCreate(
+            ['slug' => '7-days-drive-in-fly-out-safari-arusha-tarangire-mto-wa-mbu-biking-ngorongoro-serengeti'],
+            [
             'name' => '7 DAYS DRIVE IN FLY OUT SAFARI (ARUSHA, TARANGIRE, MTO WA MBU BIKING NGORONGORO & SERENGETI)',
             'slug' => '7-days-drive-in-fly-out-safari-arusha-tarangire-mto-wa-mbu-ngorongoro-serengeti',
             'description' => 'Comprehensive safari with unique experiences including Arusha National Park walking safari, Tarangire game drives, Mto wa Mbu mountain biking, Ngorongoro Crater, and Serengeti with fly-out convenience.',
@@ -484,7 +498,9 @@ class AllSafariToursSeeder extends Seeder
         $this->createDriveInFlyOutItinerary($tour7->id);
 
         // 8 DAYS UNTAMMED SAFARI
-        $tour8 = Tour::create([
+        $tour8 = Tour::updateOrCreate(
+            ['slug' => '8-days-untammed-safari'],
+            [
             'name' => '8 DAYS UNTAMMED SAFARI',
             'slug' => '8-days-untammed-safari',
             'description' => 'Experience the wild side of Tanzania with 8 days of untamed adventure. Explore Tarangire, enjoy mountain biking, discover Manyara, and immerse yourself in Serengeti and Ngorongoro.',
@@ -558,7 +574,9 @@ class AllSafariToursSeeder extends Seeder
         $this->createUntammedSafariItinerary($tour8->id);
 
         // 8 DAYS CLASSIC SAFARI (DRIVE IN – FLY OUT)
-        $tour9 = Tour::create([
+        $tour9 = Tour::updateOrCreate(
+            ['slug' => '8-days-classic-safari-drive-in-fly-out'],
+            [
             'name' => '8 DAYS CLASSIC SAFARI (DRIVE IN – FLY OUT)',
             'slug' => '8-days-classic-safari-drive-in-fly-out',
             'description' => 'Classic 8-day Tanzania safari with drive-in convenience and fly-out comfort. Experience Arusha National Park walking safari, Tarangire, Lake Manyara, Ngorongoro Crater, and extensive Serengeti exploration.',
@@ -632,7 +650,9 @@ class AllSafariToursSeeder extends Seeder
         $this->createClassicDriveInFlyOutItinerary($tour9->id);
 
         // 8 DAYS MAGICAL SAFARI (DRIVE IN – FLY OUT)
-        $tour10 = Tour::create([
+        $tour10 = Tour::updateOrCreate(
+            ['slug' => '8-days-magical-safari-drive-in-fly-out'],
+            [
             'name' => '8 DAYS MAGICAL SAFARI (DRIVE IN – FLY OUT)',
             'slug' => '8-days-magical-safari-drive-in-fly-out',
             'description' => 'Magical 8-day safari combining cultural experiences, Kilimanjaro scenic flight, Tarangire, Ngorongoro Crater, Olduvai Gorge Museum, and Serengeti with hot air balloon and fly-out convenience.',
@@ -706,7 +726,9 @@ class AllSafariToursSeeder extends Seeder
         $this->createMagicalSafariItinerary($tour10->id);
 
         // 4 DAYS SAFARI (TARANGIRE & NGORONGORO)
-        $tour11 = Tour::create([
+        $tour11 = Tour::updateOrCreate(
+            ['slug' => '4-days-safari-tarangire-ngorongoro'],
+            [
             'name' => '4 DAYS SAFARI (TARANGIRE & NGORONGORO)',
             'slug' => '4-days-safari-tarangire-ngorongoro',
             'description' => 'Perfect short safari experience focusing on Tanzania\'s highlights. Explore Tarangire National Park known for elephants and baobab trees, then descend into the spectacular Ngorongoro Crater.',
@@ -767,7 +789,9 @@ class AllSafariToursSeeder extends Seeder
         $this->createFourDaysSafariItinerary($tour11->id);
 
         // 6 DAYS CLASSIC SAFARI (MATERUNI, ARUSHA, TARANGIRE, NGORONGORO & SERENGETI)
-        $tour12 = Tour::create([
+        $tour12 = Tour::updateOrCreate(
+            ['slug' => '6-days-classic-safari-materuni-arusha-tarangire-ngorongoro-serengeti'],
+            [
             'name' => '6 DAYS CLASSIC SAFARI (MATERUNI, ARUSHA, TARANGIRE, NGORONGORO & SERENGETI)',
             'slug' => '6-days-classic-safari-materuni-arusha-tarangire-ngorongoro-serengeti',
             'description' => 'Classic safari with cultural immersion. Experience Materuni waterfalls and coffee tour, Arusha National Park, Tarangire, Ngorongoro Crater, and Serengeti with bush lunch experience.',
@@ -840,7 +864,9 @@ class AllSafariToursSeeder extends Seeder
         $this->createClassicMateruniSafariItinerary($tour12->id);
 
         // 6 DAYS CLASSIC SAFARI WITH TUK TUK
-        $tour13 = Tour::create([
+        $tour13 = Tour::updateOrCreate(
+            ['slug' => '6-days-classic-safari-with-tuk-tuk'],
+            [
             'name' => '6 DAYS CLASSIC SAFARI WITH TUK TUK',
             'slug' => '6-days-classic-safari-with-tuk-tuk',
             'description' => 'Unique classic safari experience with Tuk Tuk adventure. Explore Tarangire, enjoy leisure day with Tuk Tuk ride, discover Ngorongoro Crater, and experience extensive Serengeti game drives.',
