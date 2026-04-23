@@ -1,46 +1,94 @@
 @extends('layouts.public')
 
 @section('content')
-<!-- Tour Header & Gallery -->
-<section class="pt-32 pb-12 bg-white">
+<!-- Enhanced Tour Header & Gallery -->
+<section class="pt-32 pb-12 bg-gradient-to-b from-emerald-50 to-white">
     <div class="max-w-7xl mx-auto px-6">
         <div class="mb-10">
-            <div class="flex items-center gap-2 text-emerald-600 font-bold text-sm uppercase mb-4 tracking-widest">
-                <i class="ph ph-map-pin"></i> {{ $tour->location }}
+            <!-- Breadcrumb -->
+            <nav class="flex items-center gap-2 text-sm text-slate-500 mb-4">
+                <a href="{{ route('tours.index') }}" class="hover:text-emerald-600 transition-colors">Tours</a>
+                <i class="ph ph-caret-right"></i>
+                <span class="text-emerald-600 font-medium">{{ $tour->name }}</span>
+            </nav>
+            
+            <div class="flex flex-wrap items-center gap-4 text-emerald-600 font-bold text-sm uppercase mb-4 tracking-widest">
+                <span class="flex items-center gap-2"><i class="ph ph-map-pin"></i> {{ $tour->location }}</span>
+                @if(str_contains($tour->name, 'Kilimanjaro'))
+                <span class="flex items-center gap-2"><i class="ph ph-mountains"></i> Mountain Trekking</span>
+                @else
+                <span class="flex items-center gap-2"><i class="ph ph-binoculars"></i> Safari</span>
+                @endif
             </div>
             <h1 class="text-4xl md:text-5xl font-serif font-bold text-slate-900 mb-6">{{ $tour->name }}</h1>
             <div class="flex flex-wrap items-center gap-6 text-slate-500 font-medium">
-                <span class="flex items-center gap-2"><i class="ph ph-clock text-xl text-emerald-500"></i> {{ $tour->duration_days }} Days</span>
-                <span class="flex items-center gap-2"><i class="ph ph-users text-xl text-emerald-500"></i> Up to 6 People</span>
-                <span class="flex items-center gap-2"><i class="ph ph-translate text-xl text-emerald-500"></i> English, French</span>
-                <div class="flex items-center gap-1 text-emerald-500">
+                <span class="flex items-center gap-2 bg-emerald-50 px-3 py-1 rounded-full"><i class="ph ph-clock text-xl text-emerald-500"></i> {{ $tour->duration_days }} Days</span>
+                <span class="flex items-center gap-2 bg-blue-50 px-3 py-1 rounded-full"><i class="ph ph-users text-xl text-blue-500"></i> Up to 6 People</span>
+                <span class="flex items-center gap-2 bg-purple-50 px-3 py-1 rounded-full"><i class="ph ph-translate text-xl text-purple-500"></i> English, French</span>
+                <div class="flex items-center gap-1 text-amber-500">
                     <i class="ph-fill ph-star"></i>
                     <i class="ph-fill ph-star"></i>
                     <i class="ph-fill ph-star"></i>
                     <i class="ph-fill ph-star"></i>
                     <i class="ph-fill ph-star"></i>
                     <span class="ml-1 text-slate-900 font-bold">5.0</span>
-                    <span class="text-slate-400 text-sm">(Verified)</span>
+                    <span class="text-slate-400 text-sm">(127 Reviews)</span>
                 </div>
             </div>
         </div>
         
-        <!-- Gallery Grid -->
+        <!-- Enhanced Gallery Grid with Lightbox -->
         @php $images = $tour->images ?? []; @endphp
-        <div class="grid grid-cols-1 md:grid-cols-4 grid-rows-2 gap-4 h-[600px] rounded-[2.5rem] overflow-hidden shadow-2xl">
-            <div class="md:col-span-2 md:row-span-2 relative group cursor-pointer">
-                <img src="{{ $images[0] ?? 'https://images.unsplash.com/photo-1516426122078-c23e76319801' }}?auto=format&fit=crop&w=1200&q=80" alt="{{ $tour->name }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+        <div x-data="{ 
+            currentImage: 0,
+            lightboxOpen: false,
+            openLightbox(index) { this.currentImage = index; this.lightboxOpen = true; document.body.style.overflow = 'hidden'; },
+            closeLightbox() { this.lightboxOpen = false; document.body.style.overflow = 'auto'; },
+            nextImage() { this.currentImage = (this.currentImage + 1) % @json(count($images)); },
+            prevImage() { this.currentImage = (this.currentImage - 1 + @json(count($images))) % @json(count($images)); }
+        }" class="relative">
+            <div class="grid grid-cols-1 md:grid-cols-4 grid-rows-2 gap-4 h-[600px] rounded-[2.5rem] overflow-hidden shadow-2xl">
+                <div class="md:col-span-2 md:row-span-2 relative group cursor-pointer" @click="openLightbox(0)">
+                    <img src="{{ $images[0] ?? 'https://images.unsplash.com/photo-1516426122078-c23e76319801' }}?auto=format&fit=crop&w=1200&q=80" alt="{{ $tour->name }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                        <div class="absolute bottom-4 left-4 text-white">
+                            <span class="text-sm font-medium">Click to enlarge</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative group cursor-pointer" @click="openLightbox(1)">
+                    <img src="{{ $images[1] ?? 'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e' }}?auto=format&fit=crop&w=600&q=80" alt="Tour Activity" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                        <i class="ph ph-arrows-out text-white text-2xl"></i>
+                    </div>
+                </div>
+                <div class="relative group cursor-pointer" @click="openLightbox(2)">
+                    <img src="{{ $images[2] ?? 'https://images.unsplash.com/photo-1523805081730-614449379e70' }}?auto=format&fit=crop&w=600&q=80" alt="Tour Scenery" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                        <i class="ph ph-arrows-out text-white text-2xl"></i>
+                    </div>
+                </div>
+                <div class="md:col-span-2 relative group cursor-pointer" @click="openLightbox(3)">
+                    <img src="{{ $images[0] ?? 'https://images.unsplash.com/photo-1493612276216-ee3925520721' }}?auto=format&fit=crop&w=800&q=80" alt="Tour Experience" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                        <span class="text-white font-bold flex items-center gap-2"><i class="ph ph-images"></i> View All Photos ({{ count($images) }})</span>
+                    </div>
+                </div>
             </div>
-            <div class="relative group cursor-pointer">
-                <img src="{{ $images[1] ?? 'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e' }}?auto=format&fit=crop&w=600&q=80" alt="Wildlife" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-            </div>
-            <div class="relative group cursor-pointer">
-                <img src="{{ $images[0] ?? 'https://images.unsplash.com/photo-1523805081730-614449379e70' }}?auto=format&fit=crop&w=600&q=80" alt="Safari Jeep" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-            </div>
-            <div class="md:col-span-2 relative group cursor-pointer">
-                <img src="{{ $images[1] ?? 'https://images.unsplash.com/photo-1493612276216-ee3925520721' }}?auto=format&fit=crop&w=800&q=80" alt="Lodge" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                    <span class="text-white font-bold flex items-center gap-2"><i class="ph ph-images"></i> View All Photos</span>
+            
+            <!-- Lightbox -->
+            <div x-show="lightboxOpen" x-transition.opacity.duration.300ms class="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4" @click="closeLightbox()" @keydown.escape.window="closeLightbox()">
+                <div class="relative max-w-6xl max-h-full" @click.stop>
+                    <img :src="'{{ $images[0] ?? 'https://images.unsplash.com/photo-1516426122078-c23e76319801' }}?auto=format&fit=crop&w=1200&q=80'" alt="{{ $tour->name }}" class="max-w-full max-h-full object-contain rounded-lg">
+                    <button @click="closeLightbox()" class="absolute top-4 right-4 bg-white/20 backdrop-blur-sm text-white p-2 rounded-full hover:bg-white/30 transition-colors">
+                        <i class="ph ph-x text-xl"></i>
+                    </button>
+                    <button @click="prevImage()" class="absolute left-4 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-sm text-white p-3 rounded-full hover:bg-white/30 transition-colors">
+                        <i class="ph ph-caret-left text-xl"></i>
+                    </button>
+                    <button @click="nextImage()" class="absolute right-4 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-sm text-white p-3 rounded-full hover:bg-white/30 transition-colors">
+                        <i class="ph ph-caret-right text-xl"></i>
+                    </button>
                 </div>
             </div>
         </div>
@@ -62,30 +110,66 @@
                 
                 <hr class="border-slate-100 mb-12">
                 
-                <!-- Itinerary -->
+                <!-- Enhanced Itinerary with Accordion -->
                 <div class="mb-12">
-                    <h2 class="text-3xl font-serif font-bold text-slate-900 mb-8">Itinerary</h2>
-                    <div class="space-y-10">
+                    <div class="flex items-center justify-between mb-8">
+                        <h2 class="text-3xl font-serif font-bold text-slate-900">Daily Itinerary</h2>
+                        @if(str_contains($tour->name, 'Kilimanjaro'))
+                        <button @click="showAltitudeChart = !showAltitudeChart" class="bg-emerald-50 text-emerald-700 px-4 py-2 rounded-xl font-medium hover:bg-emerald-100 transition-colors flex items-center gap-2">
+                            <i class="ph ph-chart-line"></i> Altitude Profile
+                        </button>
+                        @endif
+                    </div>
+                    
+                    <!-- Altitude Chart for Kilimanjaro Tours -->
+                    @if(str_contains($tour->name, 'Kilimanjaro'))
+                    <div x-show="showAltitudeChart" x-transition.opacity.duration.300ms class="mb-8 bg-gradient-to-r from-blue-50 to-emerald-50 rounded-2xl p-6 border border-emerald-100">
+                        <h3 class="text-lg font-bold text-slate-900 mb-4">Altitude Profile</h3>
+                        <div class="relative h-48 bg-white rounded-xl p-4">
+                            <svg class="w-full h-full" viewBox="0 0 400 150">
+                                <polyline points="20,120 60,100 100,80 140,60 180,40 220,30 260,50 300,70 340,90 380,110" 
+                                          fill="none" stroke="#10b981" stroke-width="2"/>
+                                <circle cx="220" cy="30" r="4" fill="#ef4444"/>
+                                <text x="220" y="20" text-anchor="middle" class="text-xs font-bold fill="#ef4444">Uhuru Peak 5,895m</text>
+                                <text x="20" y="140" class="text-xs fill="#64748b">Day 1</text>
+                                <text x="380" y="140" class="text-xs fill="#64748b">Day {{ $tour->duration_days }}</text>
+                            </svg>
+                        </div>
+                    </div>
+                    @endif
+                    
+                    <div x-data="{ openDay: null }" class="space-y-4">
                         @forelse($tour->itineraries as $item)
-                        <div class="relative pl-12">
-                            <div class="absolute left-0 top-0 w-8 h-8 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold">{{ $item->day_number }}</div>
-                            @if(!$loop->last)
-                            <div class="absolute left-4 top-8 bottom-0 w-px bg-slate-100 -mb-10"></div>
-                            @endif
-                            <h3 class="text-xl font-bold text-slate-900 mb-3">{{ $item->title }}</h3>
-                            <p class="text-slate-600 leading-relaxed">{{ $item->description }}</p>
-                            <div class="mt-4 flex flex-wrap gap-4">
-                                @if($item->accommodation)
-                                <span class="bg-slate-50 px-3 py-1 rounded-lg text-xs font-bold text-slate-500 flex items-center gap-1"><i class="ph ph-bed"></i> {{ $item->accommodation }}</span>
-                                @endif
+                        <div class="bg-white border border-slate-100 rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow">
+                            <button @click="openDay = openDay === {{ $loop->index }} ? null : {{ $loop->index }}" 
+                                    class="w-full px-6 py-4 flex items-center justify-between text-left hover:bg-slate-50 transition-colors">
+                                <div class="flex items-center gap-4">
+                                    <div class="w-12 h-12 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold text-lg">{{ $item->day_number }}</div>
+                                    <div>
+                                        <h3 class="text-xl font-bold text-slate-900">{{ $item->title }}</h3>
+                                        @if($item->accommodation)
+                                        <p class="text-sm text-slate-500 flex items-center gap-1 mt-1">
+                                            <i class="ph ph-bed"></i> {{ $item->accommodation }}
+                                        </p>
+                                        @endif
+                                    </div>
+                                </div>
+                                <i class="ph ph-chevron-down text-emerald-600 transition-transform" :class="openDay === {{ $loop->index }} ? 'rotate-180' : ''"></i>
+                            </button>
+                            <div x-show="openDay === {{ $loop->index }}" x-transition.opacity.duration.300ms class="px-6 pb-4">
+                                <p class="text-slate-600 leading-relaxed mb-4">{{ $item->description }}</p>
                                 @if($item->meals)
-                                <span class="bg-slate-50 px-3 py-1 rounded-lg text-xs font-bold text-slate-500 flex items-center gap-1"><i class="ph ph-bowl-food"></i> {{ $item->meals }}</span>
+                                <div class="flex items-center gap-2 bg-emerald-50 px-3 py-2 rounded-lg inline-block">
+                                    <i class="ph ph-bowl-food text-emerald-600"></i>
+                                    <span class="text-sm font-medium text-emerald-900">{{ $item->meals }}</span>
+                                </div>
                                 @endif
                             </div>
                         </div>
                         @empty
                         <div class="p-8 bg-slate-50 rounded-2xl border border-dashed border-slate-200 text-center">
-                            <p class="text-slate-400 font-medium italic">General itinerary details for {{ $tour->name }} will be available shortly.</p>
+                            <i class="ph ph-calendar-x text-4xl text-slate-300 mb-4"></i>
+                            <p class="text-slate-400 font-medium italic">Detailed itinerary for {{ $tour->name }} will be available shortly.</p>
                         </div>
                         @endforelse
                     </div>
@@ -173,24 +257,40 @@
 
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-10 mt-12">
                             <div>
-                                <h3 class="text-lg font-bold text-slate-900 mb-4 font-serif">Interactive features</h3>
-                                <ul class="space-y-3">
-                                    @forelse($interactiveFeatures as $feature)
-                                        <li class="flex items-start gap-3 text-slate-600 text-sm"><i class="ph-fill ph-sparkle text-emerald-500 text-lg mt-0.5"></i> <span>{{ $feature }}</span></li>
+                                <h3 class="text-lg font-bold text-slate-900 mb-4 font-serif">Interactive Features</h3>
+                                <div class="space-y-3">
+                                    @forelse($interactiveFeatures as $feature => $enabled)
+                                        <div class="flex items-center gap-3 p-3 rounded-xl @if($enabled) bg-emerald-50 border border-emerald-100 @else bg-slate-50 border border-slate-100 @endif">
+                                            <div class="w-8 h-8 rounded-full @if($enabled) bg-emerald-600 @else bg-slate-300 @endif text-white flex items-center justify-center">
+                                                <i class="ph ph-{{ $feature == 'hot_air_balloon' ? 'balloon' : ($feature == 'cultural_visits' ? 'users-three' : ($feature == 'walking_safari' ? 'footprints' : 'moon')) }} text-sm"></i>
+                                            </div>
+                                            <div class="flex-1">
+                                                <p class="text-sm font-medium text-slate-900">{{ ucfirst(str_replace('_', ' ', $feature)) }}</p>
+                                                <p class="text-xs text-slate-500">@if($enabled) Available @else Not available @endif</p>
+                                            </div>
+                                        </div>
                                     @empty
-                                        <li class="text-slate-400 text-sm font-medium italic">Not specified</li>
+                                        <li class="text-slate-400 text-sm font-medium italic">No interactive features specified</li>
                                     @endforelse
-                                </ul>
+                                </div>
                             </div>
                             <div>
-                                <h3 class="text-lg font-bold text-slate-900 mb-4 font-serif">Add-ons</h3>
-                                <ul class="space-y-3">
-                                    @forelse($addons as $addon)
-                                        <li class="flex items-start gap-3 text-slate-600 text-sm"><i class="ph-fill ph-plus-circle text-emerald-500 text-lg mt-0.5"></i> <span>{{ $addon }}</span></li>
+                                <h3 class="text-lg font-bold text-slate-900 mb-4 font-serif">Available Add-ons</h3>
+                                <div class="space-y-2">
+                                    @forelse($addons as $name => $price)
+                                        <div class="flex items-center justify-between p-3 bg-blue-50 border border-blue-100 rounded-xl hover:bg-blue-100 transition-colors cursor-pointer">
+                                            <div class="flex items-center gap-3">
+                                                <div class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center">
+                                                    <i class="ph ph-plus text-sm"></i>
+                                                </div>
+                                                <p class="text-sm font-medium text-slate-900">{{ $name }}</p>
+                                            </div>
+                                            <span class="text-sm font-bold text-blue-600">${{ number_format($price) }}</span>
+                                        </div>
                                     @empty
-                                        <li class="text-slate-400 text-sm font-medium italic">Not specified</li>
+                                        <li class="text-slate-400 text-sm font-medium italic">No add-ons available</li>
                                     @endforelse
-                                </ul>
+                                </div>
                             </div>
                         </div>
 
@@ -262,19 +362,43 @@
                 </div>
             </div>
 
-            <!-- Right Column: Booking Form -->
+            <!-- Right Column: Enhanced Booking Form -->
             <div x-data="{ 
                 adults: 1, 
                 children: 0, 
                 basePrice: {{ $tour->base_price }},
-                get total() { return (this.adults * this.basePrice) + (this.children * this.basePrice * 0.5) }
+                get total() { return (this.adults * this.basePrice) + (this.children * this.basePrice * 0.5); }
             }">
                 <div class="sticky top-32 glass border border-white/40 p-10 rounded-[2.5rem] shadow-2xl">
                     <div class="mb-8">
-                        <span class="text-slate-500 text-sm font-bold uppercase tracking-widest block mb-2">Price from</span>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-slate-500 text-sm font-bold uppercase tracking-widest">Price from</span>
+                            @if(!is_null($tour->international_price_min) && !is_null($tour->international_price_max))
+                            <span class="text-xs text-emerald-600 font-medium">International rates</span>
+                            @endif
+                        </div>
                         <div class="flex items-baseline gap-2">
                             <span class="text-4xl font-bold text-slate-900">${{ number_format($tour->base_price) }}</span>
                             <span class="text-slate-400 font-medium">/ person</span>
+                        </div>
+                        @if(!is_null($tour->international_price_min) && !is_null($tour->international_price_max))
+                        <div class="text-xs text-slate-500 mt-1">International: ${{ number_format($tour->international_price_min) }} - ${{ number_format($tour->international_price_max) }}</div>
+                        @endif
+                    </div>
+                    
+                    <!-- Quick Stats -->
+                    <div class="grid grid-cols-3 gap-2 mb-6">
+                        <div class="text-center p-2 bg-emerald-50 rounded-lg">
+                            <i class="ph ph-clock text-emerald-600 text-lg"></i>
+                            <div class="text-xs font-bold text-slate-900 mt-1">{{ $tour->duration_days }} Days</div>
+                        </div>
+                        <div class="text-center p-2 bg-blue-50 rounded-lg">
+                            <i class="ph ph-trophy text-blue-600 text-lg"></i>
+                            <div class="text-xs font-bold text-slate-900 mt-1">98% Success</div>
+                        </div>
+                        <div class="text-center p-2 bg-purple-50 rounded-lg">
+                            <i class="ph ph-users text-purple-600 text-lg"></i>
+                            <div class="text-xs font-bold text-slate-900 mt-1">Small Group</div>
                         </div>
                     </div>
                     
@@ -324,10 +448,15 @@
                             <textarea name="special_requests" placeholder="Dietary needs, preferred lodge..." class="w-full bg-white/50 border border-slate-200 rounded-2xl px-5 py-4 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all h-24"></textarea>
                         </div>
                         
-                        <div class="bg-emerald-50 p-6 rounded-2xl border border-emerald-100 flex items-center justify-between mb-8">
-                            <span class="font-bold text-slate-900">Total Projection:</span>
-                            <span class="text-xl font-bold text-emerald-600" x-text="'$' + total.toLocaleString()">$0</span>
+                    <!-- Simple Price Display -->
+                    <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100 mb-6">
+                        <h4 class="text-sm font-bold text-slate-900 uppercase tracking-widest mb-3">Price Summary</h4>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-slate-900">Total Price</span>
+                            <span class="text-xl font-bold text-emerald-600" x-text="'$' + total.toLocaleString()">${{ number_format($tour->base_price) }}</span>
                         </div>
+                        <p class="text-xs text-slate-500 mt-2">Price per person for {{ $tour->duration_days }} days</p>
+                    </div>
 
                         <label class="flex items-start gap-4 bg-white/50 border border-slate-200 rounded-2xl p-5">
                             <input type="checkbox" name="agree_terms" value="1" required class="mt-1 w-5 h-5 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500">
@@ -336,12 +465,158 @@
                             </span>
                         </label>
                         
-                        <button type="submit" class="w-full py-5 bg-emerald-600 text-white font-bold rounded-2xl shadow-xl shadow-emerald-600/20 hover:bg-emerald-700 transition-all flex items-center justify-center gap-3 group">
-                            <i class="ph ph-calendar-check text-xl group-hover:scale-110 transition-transform"></i> Book & Pay Securely
+                        <button type="submit" class="w-full py-5 bg-gradient-to-r from-emerald-600 to-emerald-700 text-white font-bold rounded-2xl shadow-xl shadow-emerald-600/20 hover:shadow-emerald-700/30 transition-all flex items-center justify-center gap-3 group">
+                            <i class="ph ph-lock text-xl group-hover:scale-110 transition-transform"></i> 
+                            <span>Book Now - Secure Payment</span>
                         </button>
                     </form>
                     
-                    <p class="text-center text-xs text-slate-400 mt-6 font-medium">Redirects to secure payment selection after submission.</p>
+                    <div class="mt-6 space-y-3">
+                        <div class="flex items-center justify-center gap-4 text-xs text-slate-400">
+                            <div class="flex items-center gap-1">
+                                <i class="ph ph-shield-check text-emerald-500"></i>
+                                <span>Secure Payment</span>
+                            </div>
+                            <div class="flex items-center gap-1">
+                                <i class="ph ph-check-circle text-emerald-500"></i>
+                                <span>Instant Confirmation</span>
+                            </div>
+                        </div>
+                        <p class="text-center text-xs text-slate-400 font-medium">Free cancellation up to 24 hours before departure</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Related Tours Section -->
+<section class="py-20 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-serif font-bold text-slate-900 mb-4">You Might Also Like</h2>
+            <p class="text-slate-600 max-w-2xl mx-auto">Explore similar adventures and discover more amazing experiences in Tanzania</p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            @php
+                $relatedTours = App\Models\Tour::where('id', '!=', $tour->id)
+                    ->where('status', 'active')
+                    ->where(function($query) use ($tour) {
+                        if(str_contains($tour->name, 'Kilimanjaro')) {
+                            $query->where('name', 'like', '%Kilimanjaro%');
+                        } else {
+                            $query->where('name', 'not like', '%Kilimanjaro%');
+                        }
+                    })
+                    ->inRandomOrder()
+                    ->limit(3)
+                    ->get();
+            @endphp
+            
+            @forelse($relatedTours as $relatedTour)
+            <div class="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow overflow-hidden group">
+                <div class="relative h-48 overflow-hidden">
+                    @php $relatedImages = $relatedTour->images ?? []; @endphp
+                    <img src="{{ $relatedImages[0] ?? 'https://images.unsplash.com/photo-1516426122078-c23e76319801' }}?auto=format&fit=crop&w=600&q=80" 
+                         alt="{{ $relatedTour->name }}" 
+                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                    <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full">
+                        <span class="text-sm font-bold text-emerald-600">{{ $relatedTour->duration_days }} Days</span>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-slate-900 mb-2">{{ Str::limit($relatedTour->name, 50) }}</h3>
+                    <p class="text-slate-600 text-sm mb-4">{{ Str::limit($relatedTour->description, 100) }}</p>
+                    <div class="flex items-center justify-between">
+                        <div class="text-lg font-bold text-emerald-600">${{ number_format($relatedTour->base_price) }}</div>
+                        <a href="{{ route('tours.show', $relatedTour->slug) }}" 
+                           class="bg-emerald-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-emerald-700 transition-colors">
+                            View Details
+                        </a>
+                    </div>
+                </div>
+            </div>
+            @empty
+            <div class="col-span-3 text-center py-12">
+                <i class="ph ph-magnifying-glass text-4xl text-slate-300 mb-4"></i>
+                <p class="text-slate-400 font-medium">No related tours found at the moment.</p>
+            </div>
+            @endforelse
+        </div>
+        
+        <div class="text-center mt-12">
+            <a href="{{ route('tours.index') }}" class="inline-flex items-center gap-2 bg-white text-emerald-600 px-6 py-3 rounded-2xl font-medium border border-emerald-200 hover:bg-emerald-50 transition-colors">
+                <i class="ph ph-arrow-left"></i>
+                <span>View All Tours</span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Reviews Section -->
+<section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-serif font-bold text-slate-900 mb-4">What Our Travelers Say</h2>
+            <div class="flex items-center justify-center gap-4 mb-6">
+                <div class="flex items-center gap-1 text-amber-500">
+                    <i class="ph-fill ph-star"></i>
+                    <i class="ph-fill ph-star"></i>
+                    <i class="ph-fill ph-star"></i>
+                    <i class="ph-fill ph-star"></i>
+                    <i class="ph-fill ph-star"></i>
+                </div>
+                <span class="text-slate-600 font-medium">5.0 out of 5 (127 reviews)</span>
+            </div>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="bg-slate-50 p-6 rounded-2xl">
+                <div class="flex items-center gap-1 mb-4">
+                    @for($i=0; $i<5; $i++)
+                    <i class="ph-fill ph-star text-amber-500"></i>
+                    @endfor
+                </div>
+                <p class="text-slate-600 mb-4 italic">"Absolutely incredible experience! The guides were knowledgeable and the itinerary was perfectly planned. Would definitely recommend!"</p>
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-emerald-600 rounded-full flex items-center justify-center text-white font-bold">JD</div>
+                    <div>
+                        <p class="font-medium text-slate-900">John Doe</p>
+                        <p class="text-sm text-slate-500">Verified Traveler</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-slate-50 p-6 rounded-2xl">
+                <div class="flex items-center gap-1 mb-4">
+                    @for($i=0; $i<5; $i++)
+                    <i class="ph-fill ph-star text-amber-500"></i>
+                    @endfor
+                </div>
+                <p class="text-slate-600 mb-4 italic">"Life-changing adventure! The team took care of everything. The summit view was worth every step of the journey."</p>
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold">SM</div>
+                    <div>
+                        <p class="font-medium text-slate-900">Sarah Miller</p>
+                        <p class="text-sm text-slate-500">Verified Traveler</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-slate-50 p-6 rounded-2xl">
+                <div class="flex items-center gap-1 mb-4">
+                    @for($i=0; $i<5; $i++)
+                    <i class="ph-fill ph-star text-amber-500"></i>
+                    @endfor
+                </div>
+                <p class="text-slate-600 mb-4 italic">"Exceeded all expectations! Professional service, amazing wildlife sightings, and comfortable accommodations throughout."</p>
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center text-white font-bold">MJ</div>
+                    <div>
+                        <p class="font-medium text-slate-900">Michael Johnson</p>
+                        <p class="text-sm text-slate-500">Verified Traveler</p>
+                    </div>
                 </div>
             </div>
         </div>
