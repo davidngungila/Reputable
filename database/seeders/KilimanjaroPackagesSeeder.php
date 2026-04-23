@@ -14,7 +14,9 @@ class KilimanjaroPackagesSeeder extends Seeder
         // MARANGU ROUTE PACKAGES
         
         // 5 Day Kilimanjaro Marangu Trek
-        $tour1 = Tour::create([
+        $tour1 = Tour::updateOrCreate(
+            ['slug' => '5-day-kilimanjaro-marangu-trek'],
+            [
             'name' => '5 Day Kilimanjaro Marangu Trek',
             'slug' => '5-day-kilimanjaro-marangu-trek',
             'description' => 'The classic Marangu Route, also known as the "Coca-Cola" route, is the oldest and most established path on Mount Kilimanjaro. This 5-day itinerary offers comfortable hut accommodations and a gradual ascent, making it ideal for trekkers seeking a more traditional climbing experience.',
@@ -99,7 +101,9 @@ class KilimanjaroPackagesSeeder extends Seeder
         $this->createMarangu5DayItinerary($tour1->id);
 
         // 6 Day Kilimanjaro Marangu Trek
-        $tour2 = Tour::create([
+        $tour2 = Tour::updateOrCreate(
+            ['slug' => '6-day-kilimanjaro-marangu-trek'],
+            [
             'name' => '6 Day Kilimanjaro Marangu Trek',
             'slug' => '6-day-kilimanjaro-marangu-trek',
             'description' => 'Enhanced Marangu Route experience with an extra acclimatization day at Mawenzi ridge. This 6-day itinerary increases your summit success chances by allowing better altitude adjustment while maintaining the comfort of hut accommodations.',
@@ -184,7 +188,9 @@ class KilimanjaroPackagesSeeder extends Seeder
         $this->createMarangu6DayItinerary($tour2->id);
 
         // 7 Day Kilimanjaro Marangu Trek
-        $tour3 = Tour::create([
+        $tour3 = Tour::updateOrCreate(
+            ['slug' => '7-day-kilimanjaro-marangu-trek'],
+            [
             'name' => '7 Day Kilimanjaro Marangu Trek',
             'slug' => '7-day-kilimanjaro-marangu-trek',
             'description' => 'Ultimate Marangu Route experience with two acclimatization days. This 7-day itinerary provides maximum opportunity for altitude adjustment, making it perfect for trekkers who want the highest possible summit success while enjoying comfortable hut accommodations.',
@@ -271,7 +277,9 @@ class KilimanjaroPackagesSeeder extends Seeder
         // MACHAME ROUTE PACKAGES
         
         // 6 Day Kilimanjaro Machame Trek
-        $tour4 = Tour::create([
+        $tour4 = Tour::updateOrCreate(
+            ['slug' => '6-day-kilimanjaro-machame-trek'],
+            [
             'name' => '6 Day Kilimanjaro Machame Trek',
             'slug' => '6-day-kilimanjaro-machame-trek',
             'description' => 'The popular Machame Route, known as the "Whiskey" route, offers spectacular scenery and excellent acclimatization profile. This 6-day camping route traverses diverse ecosystems from rainforest to arctic zones, providing incredible views and high summit success rates.',
@@ -357,7 +365,9 @@ class KilimanjaroPackagesSeeder extends Seeder
         $this->createMachame6DayItinerary($tour4->id);
 
         // 7 Day Kilimanjaro Machame Trek
-        $tour5 = Tour::create([
+        $tour5 = Tour::updateOrCreate(
+            ['slug' => '7-day-kilimanjaro-machame-trek'],
+            [
             'name' => '7 Day Kilimanjaro Machame Trek',
             'slug' => '7-day-kilimanjaro-machame-trek',
             'description' => 'Enhanced Machame Route with additional acclimatization day at Karanga camp. This 7-day itinerary provides better altitude adjustment and increased summit success while maintaining the spectacular scenery and camping experience of the popular "Whiskey" route.',
@@ -443,7 +453,9 @@ class KilimanjaroPackagesSeeder extends Seeder
         $this->createMachame7DayItinerary($tour5->id);
 
         // 8 Day Kilimanjaro Machame Trek
-        $tour6 = Tour::create([
+        $tour6 = Tour::updateOrCreate(
+            ['slug' => '8-day-kilimanjaro-machame-trek'],
+            [
             'name' => '8 Day Kilimanjaro Machame Trek',
             'slug' => '8-day-kilimanjaro-machame-trek',
             'description' => 'Ultimate Machame Route experience with two acclimatization days including a northern circuit detour via Moir hut. This 8-day itinerary offers maximum acclimatization, unique northern perspectives, and the highest summit success rates on the popular "Whiskey" route.',
@@ -531,7 +543,9 @@ class KilimanjaroPackagesSeeder extends Seeder
         // LEMOSHO ROUTE PACKAGES
         
         // 8 Day Kilimanjaro Lemosho Trek
-        $tour7 = Tour::create([
+        $tour7 = Tour::updateOrCreate(
+            ['slug' => '8-day-kilimanjaro-lemosho-trek'],
+            [
             'name' => '8 Day Kilimanjaro Lemosho Trek',
             'slug' => '8-day-kilimanjaro-lemosho-trek',
             'description' => 'Beautiful Lemosho Route offering excellent acclimatization and spectacular scenery. This 8-day camping route approaches from the west, providing remote wilderness experience, diverse ecosystems, and high summit success rates with gradual altitude gain.',
@@ -617,7 +631,9 @@ class KilimanjaroPackagesSeeder extends Seeder
         $this->createLemosho8DayItinerary($tour7->id);
 
         // 9 Day Kilimanjaro Lemosho Trek
-        $tour8 = Tour::create([
+        $tour8 = Tour::updateOrCreate(
+            ['slug' => '9-day-kilimanjaro-lemosho-trek'],
+            [
             'name' => '9 Day Kilimanjaro Lemosho Trek',
             'slug' => '9-day-kilimanjaro-lemosho-trek',
             'description' => 'Ultimate Lemosho Route with extended acclimatization including northern circuit detour. This 9-day itinerary provides maximum altitude adjustment, remote wilderness experience, and the highest summit success rates while exploring diverse landscapes from the western approach.',
@@ -705,7 +721,9 @@ class KilimanjaroPackagesSeeder extends Seeder
         // NORTHERN CIRCUIT ROUTE PACKAGES
         
         // 8 Day Kilimanjaro Northern Circuit Trek
-        $tour9 = Tour::create([
+        $tour9 = Tour::updateOrCreate(
+            ['slug' => '8-day-kilimanjaro-northern-circuit-trek'],
+            [
             'name' => '8 Day Kilimanjaro Northern Circuit Trek',
             'slug' => '8-day-kilimanjaro-northern-circuit-trek',
             'description' => 'Exclusive Northern Circuit Route offering the most comprehensive Kilimanjaro experience. This 8-day itinerary circumnavigates the mountain through remote northern slopes, providing unique perspectives, excellent acclimatization, and minimal crowds with high summit success rates.',
@@ -791,7 +809,9 @@ class KilimanjaroPackagesSeeder extends Seeder
         $this->createNorthernCircuit8DayItinerary($tour9->id);
 
         // 9 Day Kilimanjaro Northern Circuit Trek
-        $tour10 = Tour::create([
+        $tour10 = Tour::updateOrCreate(
+            ['slug' => '9-day-kilimanjaro-northern-circuit-trek'],
+            [
             'name' => '9 Day Kilimanjaro Northern Circuit Trek',
             'slug' => '9-day-kilimanjaro-northern-circuit-trek',
             'description' => 'Enhanced Northern Circuit Route with additional acclimatization day. This 9-day itinerary provides extended exploration of Kilimanjaro\'s remote northern slopes, excellent altitude adjustment, and the most comprehensive mountain experience with highest summit success rates.',
@@ -877,7 +897,9 @@ class KilimanjaroPackagesSeeder extends Seeder
         $this->createNorthernCircuit9DayItinerary($tour10->id);
 
         // 10 Day Kilimanjaro Northern Circuit Trek
-        $tour11 = Tour::create([
+        $tour11 = Tour::updateOrCreate(
+            ['slug' => '10-day-kilimanjaro-northern-circuit-trek'],
+            [
             'name' => '10 Day Kilimanjaro Northern Circuit Trek',
             'slug' => '10-day-kilimanjaro-northern-circuit-trek',
             'description' => 'Ultimate Northern Circuit Route with comprehensive exploration including Mawenzi Tarn. This 10-day itinerary offers the most extensive Kilimanjaro experience with maximum acclimatization, remote wilderness, and unique perspectives of both major peaks.',
@@ -963,7 +985,9 @@ class KilimanjaroPackagesSeeder extends Seeder
         $this->createNorthernCircuit10DayItinerary($tour11->id);
 
         // 11 Day Kilimanjaro Northern Circuit Trek
-        $tour12 = Tour::create([
+        $tour12 = Tour::updateOrCreate(
+            ['slug' => '11-day-kilimanjaro-northern-circuit-trek'],
+            [
             'name' => '11 Day Kilimanjaro Northern Circuit Trek',
             'slug' => '11-day-kilimanjaro-northern-circuit-trek',
             'description' => 'Premium Northern Circuit Route with maximum acclimatization and exploration. This 11-day itinerary provides the most extensive Kilimanjaro experience including Mawenzi Tarn, extended northern exploration, and optimal altitude adjustment for ultimate summit success.',
@@ -1049,7 +1073,9 @@ class KilimanjaroPackagesSeeder extends Seeder
         $this->createNorthernCircuit11DayItinerary($tour12->id);
 
         // 12 Day Kilimanjaro Northern Circuit Trek
-        $tour13 = Tour::create([
+        $tour13 = Tour::updateOrCreate(
+            ['slug' => '12-day-kilimanjaro-northern-circuit-trek'],
+            [
             'name' => '12 Day Kilimanjaro Northern Circuit Trek',
             'slug' => '12-day-kilimanjaro-northern-circuit-trek',
             'description' => 'Ultimate Northern Circuit Route with maximum exploration and acclimatization. This 12-day premium itinerary provides the most comprehensive Kilimanjaro experience including Mawenzi Tarn, extended northern exploration, and optimal altitude adjustment for guaranteed summit success.',
