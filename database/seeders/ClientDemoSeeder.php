@@ -17,6 +17,7 @@ class ClientDemoSeeder extends Seeder
             ['email' => 'client@lauparadise.com'],
             [
                 'name' => 'Sample Client',
+                'username' => 'client',
                 'password' => Hash::make('Client@12345'),
             ]
         );
