@@ -90,9 +90,9 @@
             <div class="hidden lg:flex items-center gap-10">
                 <a href="/" class="nav-link font-bold text-emerald-600 transition-colors py-8">Home</a>
                
-                    <!-- Tours Mega Menu -->
+                    <!-- Destinations Mega Menu -->
                 <div class="relative group py-8">
-                    <a href="/tours" class="nav-link font-bold text-emerald-600 transition-colors flex items-center gap-1">
+                    <a href="{{ route('destinations') }}" class="nav-link font-bold text-emerald-600 transition-colors flex items-center gap-1">
                         Destinations <i class="ph ph-caret-down text-xs transition-transform group-hover:rotate-180"></i>
                     </a>
                     <div class="mega-menu absolute top-full -left-20 w-[600px] bg-white rounded-[2rem] shadow-2xl border border-slate-100 p-8 z-50">
@@ -240,14 +240,17 @@
                             <div>
                                 <h4 class="text-xs font-black uppercase tracking-widest text-emerald-600 mb-6">Trekking Info</h4>
                                 <div class="space-y-4">
-                                    <a href="/mountain-trekking" class="flex items-center gap-3 text-slate-700 text-emerald-600 font-bold group/sub transition-colors">
+                                    <a href="/mountain-trekking/trekking-info" class="flex items-center gap-3 text-slate-700 text-emerald-600 font-bold group/sub transition-colors">
+                                        <i class="ph ph-info text-xl opacity-50 text-emerald-600"></i> Trekking Info
+                                    </a>
+                                    <a href="/mountain-trekking/routes" class="flex items-center gap-3 text-slate-700 text-emerald-600 font-bold group/sub transition-colors">
                                         <i class="ph ph-map-pin text-xl opacity-50 text-emerald-600"></i> Trekking Routes
                                     </a>
-                                    <a href="/mountain-trekking" class="flex items-center gap-3 text-slate-700 text-emerald-600 font-bold group/sub transition-colors">
+                                    <a href="/mountain-trekking/equipment" class="flex items-center gap-3 text-slate-700 text-emerald-600 font-bold group/sub transition-colors">
                                         <i class="ph ph-backpack text-xl opacity-50 text-emerald-600"></i> Equipment Guide
                                     </a>
-                                    <a href="/mountain-trekking" class="flex items-center gap-3 text-slate-700 text-emerald-600 font-bold group/sub transition-colors">
-                                        <i class="ph ph-users text-xl opacity-50 text-emerald-600"></i> Expert Guides
+                                    <a href="/mountain-trekking/guides" class="flex items-center gap-3 text-slate-700 text-emerald-600 font-bold group/sub transition-colors">
+                                        <i class="ph ph-user text-xl opacity-50 text-emerald-600"></i> Expert Guides
                                     </a>
                                 </div>
                             </div>
@@ -255,55 +258,70 @@
                     </div>
                 </div>
                 
-                <!-- Things to Do -->
+                <!-- Things to Do - Essential Activities -->
                 <div class="relative group py-8">
                     <a href="/things-to-do" class="nav-link font-bold text-emerald-600 transition-colors flex items-center gap-1">
                         Things to Do <i class="ph ph-caret-down text-xs transition-transform group-hover:rotate-180"></i>
                     </a>
-                    <div class="mega-menu absolute top-full -left-20 w-[600px] bg-white rounded-[2rem] shadow-2xl border border-slate-100 p-8 z-50">
+                    <div class="mega-menu absolute top-full left-1/2 transform -translate-x-1/2 w-[600px] bg-white rounded-[2rem] shadow-2xl border border-slate-100 p-8 z-50">
                         <div class="grid grid-cols-2 gap-8">
                             <div>
-                                <h4 class="text-xs font-black uppercase tracking-widest text-emerald-600 mb-6">Activities</h4>
+                                <h4 class="text-xs font-black uppercase tracking-widest text-emerald-600 mb-6">Popular Activities</h4>
                                 <div class="space-y-4">
-                                    <a href="/things-to-do" class="flex items-center gap-4 group/item p-3 rounded-2xl text-emerald-600 transition-all">
+                                    <a href="/tours?activity=game-drives" class="flex items-center gap-4 group/item p-3 rounded-2xl text-emerald-600 transition-all">
                                         <div class="w-12 h-12 rounded-xl overflow-hidden">
-                                            <img src="{{ asset('images/06.jpg') }}" class="w-full h-full object-cover">
+                                            <img src="{{ asset('images/01.jpg') }}" class="w-full h-full object-cover">
                                         </div>
                                         <div>
-                                            <p class="font-bold text-slate-900 text-emerald-600">Cultural Tours</p>
-                                            <p class="text-xs text-slate-500">Local Experiences</p>
+                                            <p class="font-bold text-slate-900 text-emerald-600">Game Drives</p>
+                                            <p class="text-xs text-slate-500">Wildlife Safari</p>
                                         </div>
                                     </a>
-                                    <a href="/things-to-do" class="flex items-center gap-4 group/item p-3 rounded-2xl text-emerald-600 transition-all">
+                                    <a href="/tours?activity=beach" class="flex items-center gap-4 group/item p-3 rounded-2xl text-emerald-600 transition-all">
                                         <div class="w-12 h-12 rounded-xl overflow-hidden">
                                             <img src="{{ asset('images/07.jpg') }}" class="w-full h-full object-cover">
                                         </div>
                                         <div>
                                             <p class="font-bold text-slate-900 text-emerald-600">Beach Activities</p>
-                                            <p class="text-xs text-slate-500">Coastal Adventures</p>
+                                            <p class="text-xs text-slate-500">Zanzibar & Coast</p>
+                                        </div>
+                                    </a>
+                                    <a href="/tours?activity=balloon" class="flex items-center gap-4 group/item p-3 rounded-2xl text-emerald-600 transition-all">
+                                        <div class="w-12 h-12 rounded-xl overflow-hidden">
+                                            <img src="{{ asset('images/05.jpg') }}" class="w-full h-full object-cover">
+                                        </div>
+                                        <div>
+                                            <p class="font-bold text-slate-900 text-emerald-600">Balloon Safari</p>
+                                            <p class="text-xs text-slate-500">Aerial Adventure</p>
                                         </div>
                                     </a>
                                 </div>
                             </div>
                             <div>
-                                <h4 class="text-xs font-black uppercase tracking-widest text-emerald-600 mb-6">Experiences</h4>
+                                <h4 class="text-xs font-black uppercase tracking-widest text-emerald-600 mb-6">Experience Types</h4>
                                 <div class="space-y-4">
-                                    <a href="/things-to-do" class="flex items-center gap-3 text-slate-700 text-emerald-600 font-bold group/sub transition-colors">
-                                        <i class="ph ph-binoculars text-xl opacity-50 text-emerald-600"></i> Wildlife Viewing
+                                    <a href="/tours?activity=cultural" class="flex items-center gap-3 text-slate-700 text-emerald-600 font-bold group/sub transition-colors">
+                                        <i class="ph ph-users-three text-xl opacity-50 text-emerald-600"></i> Cultural Visits
                                     </a>
-                                    <a href="/things-to-do" class="flex items-center gap-3 text-slate-700 text-emerald-600 font-bold group/sub transition-colors">
-                                        <i class="ph ph-camera text-xl opacity-50 text-emerald-600"></i> Photography Tours
+                                    <a href="/tours?activity=bird-watching" class="flex items-center gap-3 text-slate-700 text-emerald-600 font-bold group/sub transition-colors">
+                                        <i class="ph ph-bird text-xl opacity-50 text-emerald-600"></i> Bird Watching
                                     </a>
-                                    <a href="/things-to-do" class="flex items-center gap-3 text-slate-700 text-emerald-600 font-bold group/sub transition-colors">
-                                        <i class="ph ph-compass text-xl opacity-50 text-emerald-600"></i> Adventure Sports
+                                    <a href="/tours?activity=walking" class="flex items-center gap-3 text-slate-700 text-emerald-600 font-bold group/sub transition-colors">
+                                        <i class="ph ph-walking text-xl opacity-50 text-emerald-600"></i> Walking Tours
+                                    </a>
+                                    <a href="/tours?activity=night-game" class="flex items-center gap-3 text-slate-700 text-emerald-600 font-bold group/sub transition-colors">
+                                        <i class="ph ph-moon text-xl opacity-50 text-emerald-600"></i> Night Game Drives
+                                    </a>
+                                </div>
+                                <div class="mt-8 pt-6 border-t border-slate-50">
+                                    <a href="/tours" class="text-sm font-black text-emerald-600 flex items-center gap-2 hover:gap-3 transition-all">
+                                        View All Activities <i class="ph ph-arrow-right"></i>
                                     </a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            
-                 </div>
             
             <div class="flex items-center gap-4">
               

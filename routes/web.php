@@ -38,6 +38,10 @@ Route::get('/destinations', function () {
     return view('destinations');
 })->name('destinations');
 
+Route::get('/things-to-do', function () {
+    return view('things-to-do');
+})->name('things-to-do');
+
 Route::get('/mountain-trekking', [PublicTourController::class, 'mountainTrekking'])->name('mountain-trekking');
 
 Route::get('/login', function () {
