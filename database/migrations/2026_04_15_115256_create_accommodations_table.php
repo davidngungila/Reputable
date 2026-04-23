@@ -22,11 +22,18 @@ return new class extends Migration
      */
     public function down(): void
     {
-        // Drop foreign key constraint from tours table first
-        Schema::table('tours', function (Blueprint $table) {
-            $table->dropForeign(['accommodation_id']);
-            $table->dropColumn('accommodation_id');
-        });
+        // Drop foreign key constraint from tours table first (if it exists)
+        if (Schema::hasColumn('tours', 'accommodation_id')) {
+            Schema::table('tours', function (Blueprint $table) {
+                // Try to drop foreign key only if it exists
+                try {
+                    $table->dropForeign(['accommodation_id']);
+                } catch (\Exception $e) {
+                    // Foreign key might not exist, continue
+                }
+                $table->dropColumn('accommodation_id');
+            });
+        }
         
         Schema::dropIfExists('accommodations');
     }
