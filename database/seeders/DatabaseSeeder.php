@@ -32,6 +32,9 @@ class DatabaseSeeder extends Seeder
             DefaultIntegrationsSettingsSeeder::class,
             TourSeeder::class,
             ItinerarySeeder::class,
+            SafariToursSeeder::class,
+            AllSafariToursSeeder::class,
+            KilimanjaroPackagesSeeder::class,
             ClientDemoSeeder::class,
         ]);
     }

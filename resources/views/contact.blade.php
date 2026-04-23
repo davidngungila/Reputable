@@ -28,8 +28,7 @@
 
                     <div class="grid gap-8">
                         @foreach([
-                            ['label' => 'Primary Support', 'val' => '+255 683 163 219', 'icon' => 'phone-call', 'sub' => 'WhatsApp Available 24/7'],
-                            ['label' => 'Official Email', 'val' => 'lauparadiseadventure@gmail.com', 'icon' => 'envelope-simple', 'sub' => 'Response within 4 hours'],
+                            ['label' => 'Official Email', 'val' => 'paradiseadventure@gmail.com', 'icon' => 'envelope-simple', 'sub' => 'Response within 4 hours'],
                             ['label' => 'Base Office', 'val' => 'Moshi, Tanzania', 'icon' => 'map-pin-line', 'sub' => 'Foothills of Kilimanjaro']
                         ] as $item)
                         <div class="flex items-start gap-6 group">
@@ -52,7 +51,7 @@
                         </div>
                         <h4 class="text-xl font-bold mb-4 relative z-10 font-serif">Plan with a Human, <br> Not an Algorithm.</h4>
                         <p class="text-slate-400 text-sm leading-relaxed mb-8 relative z-10">Our specialists have lived in Tanzania their entire lives. We know the secret spots that don't show up on maps.</p>
-                        <a href="https://wa.me/255683163219" class="px-6 py-3 bg-emerald-500 text-white font-black text-[10px] uppercase tracking-widest rounded-xl inline-block hover:bg-emerald-400 transition-all relative z-10">Connect Instantly</a>
+                        <a href="mailto:paradiseadventure@gmail.com" class="px-6 py-3 bg-emerald-500 text-white font-black text-[10px] uppercase tracking-widest rounded-xl inline-block hover:bg-emerald-400 transition-all relative z-10">Email Us</a>
                     </div>
                 </div>
 
