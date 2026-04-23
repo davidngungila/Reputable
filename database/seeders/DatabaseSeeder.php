@@ -31,7 +31,6 @@ class DatabaseSeeder extends Seeder
             SampleUsersSeeder::class,
             DefaultStaffUsersSeeder::class,
             DefaultIntegrationsSettingsSeeder::class,
-            UpdateTourImagesSeeder::class,
             ClientDemoSeeder::class,
         ]);
     }
