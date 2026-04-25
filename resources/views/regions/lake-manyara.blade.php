@@ -19,7 +19,7 @@
             <div class="absolute top-1/2 left-1/4 w-24 h-24 bg-white/10 rounded-full blur-2xl animate-pulse delay-500"></div>
         </div>
         
-        <div class="relative container mx-auto px-4 h-full flex items-center">
+        <div class="relative container mx-auto px-4 h-full flex items-center justify-center">
             <div class="text-white max-w-5xl text-center">
                 <!-- Premium Badge -->
                 <div class="flex items-center justify-center gap-3 mb-6 flex-wrap">
