@@ -15,7 +15,7 @@ class Tour extends Model
         'name', 'slug', 'description', 'location', 'duration_days', 
         'base_price', 'international_price_min', 'international_price_max',
         'best_season', 'package_highlights', 'route', 'difficulty', 'difficulty_level',
-        'max_altitude', 'altitude_gain', 'package_type', 'route_name', 'base_location', 
+        'max_altitude', 'altitude_gain', 'route_name', 'base_location', 
         'starting_gate', 'detailed_inclusions', 'optional_extras', 'common_wildlife',
         'occasional_wildlife', 'rare_wildlife', 'detailed_exclusions', 'extra_activities',
         'accommodation_id',

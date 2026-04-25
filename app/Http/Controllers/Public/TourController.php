@@ -59,7 +59,7 @@ class TourController extends Controller
     public function mountainTrekking(Request $request): View|Response
     {
         $query = Tour::where('status', 'active')
-                     ->where('package_type', 'Kilimanjaro Climbing');
+                     ->where('tour_type', 'mountain_trekking');
 
         // Apply Duration Filter
         if ($request->filled('duration')) {
