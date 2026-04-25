@@ -122,6 +122,11 @@ Route::prefix('client')->name('client.')->middleware(['auth'])->group(function (
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'ensure.admin', 'activity.log'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
+    // Account Settings
+    Route::get('/profile', [DashboardController::class, 'profile'])->name('profile');
+    Route::get('/settings/account', [DashboardController::class, 'accountSettings'])->name('settings.account');
+    Route::put('/settings/account', [DashboardController::class, 'updateAccountSettings'])->name('settings.account.update');
+
     // Organization Management
     Route::resource('organizations', OrganizationController::class);
     Route::get('/organizations/{organization}/dashboard', [OrganizationController::class, 'dashboard'])->name('organizations.dashboard');

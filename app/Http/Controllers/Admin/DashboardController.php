@@ -105,4 +105,60 @@ class DashboardController extends Controller
             'performanceMetrics'
         ));
     }
+
+    public function profile()
+    {
+        $user = auth()->user();
+        $recentBookings = Booking::where('customer_email', $user->email)
+            ->with('tour')
+            ->latest()
+            ->limit(5)
+            ->get();
+
+        return view('admin.profile', compact('user', 'recentBookings'));
+    }
+
+    public function accountSettings()
+    {
+        $user = auth()->user();
+        return view('admin.account-settings', compact('user'));
+    }
+
+    public function updateAccountSettings(Request $request)
+    {
+        $user = auth()->user();
+        
+        $validated = $request->validate([
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'email' => 'required|email|max:255|unique:users,email,' . $user->id,
+            'phone' => 'nullable|string|max:20',
+            'bio' => 'nullable|string|max:1000',
+            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        // Update user name
+        $user->name = $validated['first_name'] . ' ' . $validated['last_name'];
+        $user->email = $validated['email'];
+        
+        // Update profile fields if they exist in the users table
+        if (isset($validated['phone'])) {
+            $user->phone = $validated['phone'];
+        }
+        if (isset($validated['bio'])) {
+            $user->bio = $validated['bio'];
+        }
+
+        // Handle avatar upload
+        if ($request->hasFile('avatar')) {
+            $avatar = $request->file('avatar');
+            $avatarPath = $avatar->store('avatars', 'public');
+            $user->avatar = $avatarPath;
+        }
+
+        $user->save();
+
+        return redirect()->route('admin.settings.account')
+            ->with('success', 'Account settings updated successfully!');
+    }
 }
