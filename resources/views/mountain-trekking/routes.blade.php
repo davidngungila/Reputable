@@ -9,7 +9,16 @@
         <div class="absolute inset-0 bg-black/20"></div>
         <div class="relative container mx-auto px-4 pt-24 pb-16">
             <div class="text-center max-w-4xl mx-auto">
-                                
+                <!-- Premium Badge -->
+                <div class="flex items-center justify-center gap-3 mb-6 flex-wrap">
+                    <span class="px-4 py-2 bg-gradient-to-r from-emerald-800 to-orange-600 text-white rounded-full text-sm font-bold shadow-lg">
+                        <i class="ph-bold ph-map-trifold mr-2"></i>TREKKING ROUTES
+                    </span>
+                    <span class="px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-sm font-medium">
+                        6 Classic Routes
+                    </span>
+                </div>
+                
                 <!-- Enhanced Title -->
                 <h1 class="text-4xl md:text-5xl font-bold mb-6">
                     <span class="bg-gradient-to-r from-white to-emerald-300 bg-clip-text text-transparent">
@@ -23,19 +32,7 @@
                     scenery, and experiences tailored to different skill levels and preferences.
                 </p>
                 
-                <!-- Quick Navigation -->
-                <div class="flex justify-center gap-4 flex-wrap">
-                    <a href="#popular-routes" class="px-6 py-3 bg-emerald-800 text-white rounded-lg font-semibold hover:bg-emerald-900 transition-colors">
-                        <i class="ph-bold ph-star mr-2"></i>Popular Routes
-                    </a>
-                    <a href="#route-comparison" class="px-6 py-3 bg-orange-600 text-white rounded-lg font-semibold hover:bg-orange-700 transition-colors">
-                        <i class="ph-bold ph-scales mr-2"></i>Compare Routes
-                    </a>
-                    <a href="#difficulty-guide" class="px-6 py-3 bg-white/20 backdrop-blur-sm text-white rounded-lg font-semibold hover:bg-white/30 transition-all border border-white/30">
-                        <i class="ph-bold ph-chart-line mr-2"></i>Difficulty Guide
-                    </a>
-                </div>
-            </div>
+                            </div>
         </div>
     </div>
 
