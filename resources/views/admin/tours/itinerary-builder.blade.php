@@ -79,39 +79,67 @@ document.getElementById('tour-selector').addEventListener('change', function(e) 
 });
 
 function loadTourData(tourId) {
-    fetch(`/api/tours/${tourId}`)
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById('tour-name').textContent = data.name;
-            document.getElementById('tour-description').textContent = data.description;
-            document.getElementById('tour-duration').textContent = data.duration_days;
-            
-            document.getElementById('itinerary-builder').classList.remove('hidden');
-            document.getElementById('empty-state').classList.add('hidden');
-            
-            // Initialize days based on tour duration
-            initializeDays(data.duration_days);
-        })
-        .catch(error => console.error('Error loading tour:', error));
+    Promise.all([
+        fetch(`/api/tours/${tourId}`).then(response => response.json()),
+        fetch(`/admin/tours/${tourId}/itineraries`).then(response => response.json())
+    ])
+    .then(([tourData, itineraries]) => {
+        document.getElementById('tour-name').textContent = tourData.name;
+        document.getElementById('tour-description').textContent = tourData.description;
+        document.getElementById('tour-duration').textContent = tourData.duration_days;
+        
+        document.getElementById('itinerary-builder').classList.remove('hidden');
+        document.getElementById('empty-state').classList.add('hidden');
+        
+        // Initialize days based on tour duration
+        initializeDays(tourData.duration_days, itineraries);
+    })
+    .catch(error => console.error('Error loading tour:', error));
 }
 
-function initializeDays(duration) {
+function initializeDays(duration, existingItineraries = []) {
     const container = document.getElementById('days-container');
     container.innerHTML = '';
     itineraryDays = [];
 
     for (let i = 1; i <= duration; i++) {
-        addDay(i);
+        addDay(i, existingItineraries.find(it => it.day_number === i));
     }
 }
 
-function addDay(dayNumber = null) {
+function addDay(dayNumber = null, existingItinerary = null) {
     const container = document.getElementById('days-container');
     const dayNum = dayNumber || (container.children.length + 1);
     
     const dayDiv = document.createElement('div');
     dayDiv.className = 'bg-white rounded-xl shadow-sm border border-gray-100';
     dayDiv.dataset.day = dayNum;
+    
+    // Prepare activities HTML
+    let activitiesHtml = '';
+    if (existingItinerary && existingItinerary.activities && existingItinerary.activities.length > 0) {
+        existingItinerary.activities.forEach((activity, index) => {
+            activitiesHtml += `
+                <div class="flex gap-2">
+                    <input type="text" name="day_${dayNum}_activities[]" value="${activity}" placeholder="e.g., Game drive, bush breakfast"
+                           class="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm">
+                    <button type="button" onclick="this.parentElement.remove()" class="px-2 py-2 bg-red-100 text-red-700 rounded hover:bg-red-200">
+                        <i class="fas fa-times text-xs"></i>
+                    </button>
+                </div>
+            `;
+        });
+    } else {
+        activitiesHtml = `
+            <div class="flex gap-2">
+                <input type="text" name="day_${dayNum}_activities[]" placeholder="e.g., Game drive, bush breakfast"
+                       class="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm">
+                <button type="button" onclick="addActivity(${dayNum})" class="px-2 py-2 bg-emerald-100 text-emerald-700 rounded hover:bg-emerald-200">
+                    <i class="fas fa-plus text-xs"></i>
+                </button>
+            </div>
+        `;
+    }
     
     dayDiv.innerHTML = `
         <div class="p-6">
@@ -125,43 +153,40 @@ function addDay(dayNumber = null) {
             <div class="space-y-4">
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">Day Title</label>
-                    <input type="text" name="day_${dayNum}_title" placeholder="e.g., Arrival & Serengeti Transfer"
+                    <input type="text" name="day_${dayNum}_title" value="${existingItinerary ? existingItinerary.title || '' : ''}" placeholder="e.g., Arrival & Serengeti Transfer"
                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500">
                 </div>
                 
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">Description</label>
                     <textarea name="day_${dayNum}_description" rows="3" placeholder="Describe the activities and experiences for this day..."
-                              class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"></textarea>
+                              class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500">${existingItinerary ? existingItinerary.description || '' : ''}</textarea>
                 </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Main Activities</label>
                         <div id="activities_${dayNum}" class="space-y-2">
-                            <div class="flex gap-2">
-                                <input type="text" name="day_${dayNum}_activities[]" placeholder="e.g., Game drive, bush breakfast"
-                                       class="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm">
-                                <button type="button" onclick="addActivity(${dayNum})" class="px-2 py-2 bg-emerald-100 text-emerald-700 rounded hover:bg-emerald-200">
-                                    <i class="fas fa-plus text-xs"></i>
-                                </button>
-                            </div>
+                            ${activitiesHtml}
                         </div>
+                        <button type="button" onclick="addActivity(${dayNum})" class="mt-2 px-3 py-1 bg-emerald-100 text-emerald-700 rounded hover:bg-emerald-200 text-sm">
+                            <i class="fas fa-plus mr-1"></i>Add Activity
+                        </button>
                     </div>
                     
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Meals</label>
                         <div class="space-y-2">
                             <label class="flex items-center">
-                                <input type="checkbox" name="day_${dayNum}_meals[]" value="breakfast" class="mr-2">
+                                <input type="checkbox" name="day_${dayNum}_meals[]" value="breakfast" class="mr-2" ${existingItinerary && existingItinerary.meals && existingItinerary.meals.includes('breakfast') ? 'checked' : ''}>
                                 <span class="text-sm">Breakfast</span>
                             </label>
                             <label class="flex items-center">
-                                <input type="checkbox" name="day_${dayNum}_meals[]" value="lunch" class="mr-2">
+                                <input type="checkbox" name="day_${dayNum}_meals[]" value="lunch" class="mr-2" ${existingItinerary && existingItinerary.meals && existingItinerary.meals.includes('lunch') ? 'checked' : ''}>
                                 <span class="text-sm">Lunch</span>
                             </label>
                             <label class="flex items-center">
-                                <input type="checkbox" name="day_${dayNum}_meals[]" value="dinner" class="mr-2">
+                                <input type="checkbox" name="day_${dayNum}_meals[]" value="dinner" class="mr-2" ${existingItinerary && existingItinerary.meals && existingItinerary.meals.includes('dinner') ? 'checked' : ''}>
                                 <span class="text-sm">Dinner</span>
                             </label>
                         </div>
@@ -171,13 +196,13 @@ function addDay(dayNumber = null) {
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Accommodation</label>
-                        <input type="text" name="day_${dayNum}_accommodation" placeholder="e.g., Serengeti Sopa Lodge"
+                        <input type="text" name="day_${dayNum}_accommodation" value="${existingItinerary ? existingItinerary.accommodation || '' : ''}" placeholder="e.g., Serengeti Sopa Lodge"
                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500">
                     </div>
                     
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Transportation</label>
-                        <input type="text" name="day_${dayNum}_transportation" placeholder="e.g., 4x4 safari vehicle"
+                        <input type="text" name="day_${dayNum}_transportation" value="${existingItinerary ? existingItinerary.transportation || '' : ''}" placeholder="e.g., 4x4 safari vehicle"
                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500">
                     </div>
                 </div>
@@ -185,11 +210,7 @@ function addDay(dayNumber = null) {
         </div>
     `;
     
-    if (dayNumber) {
-        container.appendChild(dayDiv);
-    } else {
-        container.appendChild(dayDiv);
-    }
+    container.appendChild(dayDiv);
 }
 
 function removeDay(dayNumber) {

@@ -186,6 +186,10 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'ensure.admin', 'act
     // Tours & Packages Subpages
     Route::get('/tours/itinerary-builder', [TourController::class, 'itineraryBuilder'])->name('tours.itinerary-builder');
     Route::post('/tours/itinerary-builder', [TourController::class, 'storeItinerary'])->name('tours.itinerary-builder.store');
+    Route::get('/api/tours/{tour}', [TourController::class, 'showApi'])->name('tours.api.show');
+    Route::get('/tours/{tour}/itineraries', [TourController::class, 'itinerariesIndex'])->name('tours.itineraries.index');
+    Route::put('/itineraries/{itinerary}', [TourController::class, 'updateItinerary'])->name('itineraries.update');
+    Route::delete('/itineraries/{itinerary}', [TourController::class, 'destroyItinerary'])->name('itineraries.destroy');
     Route::get('/tours/availability-pricing', [TourController::class, 'availabilityPricing'])->name('tours.availability-pricing');
     Route::post('/tours/availability-pricing/{tour}', [TourController::class, 'updateAvailability'])->name('tours.availability-pricing.update');
     Route::get('/tours/destinations', [TourController::class, 'destinations'])->name('tours.destinations');

@@ -11,7 +11,12 @@ class Itinerary extends Model
     use HasFactory;
 
     protected $fillable = [
-        'tour_id', 'day_number', 'title', 'description', 'accommodation', 'meals'
+        'tour_id', 'day_number', 'title', 'description', 'activities', 'meals', 'accommodation', 'transportation'
+    ];
+
+    protected $casts = [
+        'activities' => 'array',
+        'meals' => 'array',
     ];
 
     public function tour(): BelongsTo

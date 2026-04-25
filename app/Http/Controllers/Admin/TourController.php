@@ -7,6 +7,7 @@ use App\Models\Tour;
 use App\Models\Destination;
 use App\Models\Equipment;
 use App\Models\Staff;
+use App\Models\Itinerary;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -171,17 +172,84 @@ class TourController extends Controller
     {
         $validated = $request->validate([
             'tour_id' => 'required|exists:tours,id',
+            'days' => 'required|array',
+            'days.*.title' => 'required|string|max:255',
+            'days.*.description' => 'required|string',
+            'days.*.activities' => 'nullable|array',
+            'days.*.meals' => 'nullable|array',
+            'days.*.accommodation' => 'nullable|string',
+            'days.*.transportation' => 'nullable|string',
+        ]);
+
+        // Delete existing itineraries for this tour
+        Itinerary::where('tour_id', $validated['tour_id'])->delete();
+
+        // Create new itineraries
+        foreach ($validated['days'] as $dayNumber => $dayData) {
+            Itinerary::create([
+                'tour_id' => $validated['tour_id'],
+                'day_number' => $dayNumber,
+                'title' => $dayData['title'],
+                'description' => $dayData['description'],
+                'activities' => $dayData['activities'] ?? [],
+                'meals' => $dayData['meals'] ?? [],
+                'accommodation' => $dayData['accommodation'] ?? null,
+                'transportation' => $dayData['transportation'] ?? null,
+            ]);
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Itinerary saved successfully!'
+        ]);
+    }
+
+    public function showApi(Tour $tour)
+    {
+        return response()->json($tour);
+    }
+
+    public function itinerariesIndex(Tour $tour)
+    {
+        $itineraries = $tour->itineraries()->orderBy('day_number')->get();
+        return response()->json([
+            'success' => true,
+            'data' => $itineraries,
+            'message' => 'Itineraries retrieved successfully'
+        ]);
+    }
+
+    public function updateItinerary(Request $request, Itinerary $itinerary)
+    {
+        $validated = $request->validate([
             'day_number' => 'required|integer|min:1',
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'activities' => 'nullable|array',
+            'activities.*' => 'string|max:255',
             'meals' => 'nullable|array',
-            'accommodation' => 'nullable|string',
-            'transportation' => 'nullable|string',
+            'meals.*' => 'string|max:255',
+            'accommodation' => 'nullable|string|max:255',
+            'transportation' => 'nullable|string|max:255',
         ]);
 
-        // Create itinerary logic here
-        return redirect()->back()->with('success', 'Itinerary added successfully.');
+        $itinerary->update($validated);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Itinerary updated successfully',
+            'data' => $itinerary->fresh()
+        ]);
+    }
+
+    public function destroyItinerary(Itinerary $itinerary)
+    {
+        $itinerary->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Itinerary deleted successfully!'
+        ]);
     }
 
     // Availability & Pricing
