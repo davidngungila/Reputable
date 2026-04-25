@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Tour extends Model
 {
@@ -21,7 +22,9 @@ class Tour extends Model
         'images', 'inclusions', 'exclusions',
         'package_destinations', 'target_markets',
         'interactive_features', 'addons', 'conversion_triggers',
-        'featured', 'status'
+        'featured', 'status',
+        // New fields for enhanced functionality
+        'tour_type', 'max_group_size', 'min_age', 'what_to_bring', 'highlights'
     ];
 
     protected $casts = [
@@ -40,7 +43,11 @@ class Tour extends Model
         'optional_extras' => 'array',
         'detailed_exclusions' => 'array',
         'extra_activities' => 'array',
+        'what_to_bring' => 'array',
+        'highlights' => 'array',
         'featured' => 'boolean',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
     ];
 
     public function itineraries(): HasMany
@@ -51,5 +58,21 @@ class Tour extends Model
     public function bookings(): HasMany
     {
         return $this->hasMany(Booking::class);
+    }
+
+    // New relationships
+    public function destinations(): BelongsToMany
+    {
+        return $this->belongsToMany(Destination::class, 'tour_destinations');
+    }
+
+    public function equipment(): BelongsToMany
+    {
+        return $this->belongsToMany(Equipment::class, 'tour_equipment');
+    }
+
+    public function recommendedGuides(): BelongsToMany
+    {
+        return $this->belongsToMany(Staff::class, 'tour_guide_recommendations');
     }
 }

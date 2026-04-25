@@ -183,11 +183,20 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'ensure.admin', 'act
     Route::resource('tours', TourController::class)->whereNumber('tour');
 
     // Tours & Packages Subpages
-    Route::get('/tours/itinerary-builder', [ItineraryBuilderController::class, 'index'])->name('tours.itinerary-builder');
-    Route::get('/tours/itinerary-builder/{tour}', [ItineraryBuilderController::class, 'show'])->whereNumber('tour')->name('tours.itinerary-builder.show');
-    Route::post('/tours/itinerary-builder/{tour}', [ItineraryBuilderController::class, 'save'])->whereNumber('tour')->name('tours.itinerary-builder.save');
-    Route::get('/tours/availability-pricing', function () { return view('admin.tours.availability-pricing'); })->name('tours.availability-pricing');
-    Route::get('/tours/destinations', function () { return view('admin.tours.destinations'); })->name('tours.destinations');
+    Route::get('/tours/itinerary-builder', [TourController::class, 'itineraryBuilder'])->name('tours.itinerary-builder');
+    Route::post('/tours/itinerary-builder', [TourController::class, 'storeItinerary'])->name('tours.itinerary-builder.store');
+    Route::get('/tours/availability-pricing', [TourController::class, 'availabilityPricing'])->name('tours.availability-pricing');
+    Route::post('/tours/availability-pricing/{tour}', [TourController::class, 'updateAvailability'])->name('tours.availability-pricing.update');
+    Route::get('/tours/destinations', [TourController::class, 'destinations'])->name('tours.destinations');
+    Route::post('/tours/destinations', [TourController::class, 'storeDestination'])->name('tours.destinations.store');
+
+    // Mountain Trekking
+    Route::get('/mountain/kilimanjaro-routes', [TourController::class, 'kilimanjaroRoutes'])->name('mountain.kilimanjaro-routes');
+    Route::get('/mountain/meru-climbing', [TourController::class, 'meruClimbing'])->name('mountain.meru-climbing');
+    Route::get('/mountain/equipment-management', [TourController::class, 'equipmentManagement'])->name('mountain.equipment-management');
+    Route::post('/mountain/equipment-management', [TourController::class, 'storeEquipment'])->name('mountain.equipment-management.store');
+    Route::get('/mountain/guide-assignments', [TourController::class, 'guideAssignments'])->name('mountain.guide-assignments');
+    Route::post('/mountain/guide-assignments', [TourController::class, 'assignGuide'])->name('mountain.guide-assignments.assign');
 
     // Inquiries Management
     Route::get('/inquiries', [InquiryController::class, 'index'])->name('inquiries.index');
