@@ -32,22 +32,7 @@
                     everything you need for a successful climbing adventure.
                 </p>
                 
-                <!-- Quick Stats -->
-                <div class="flex justify-center gap-6 mb-8 flex-wrap">
-                    <div class="bg-white/20 backdrop-blur-sm rounded-xl px-6 py-4 border border-white/30">
-                        <div class="text-2xl font-bold">7+</div>
-                        <div class="text-sm text-white/80">Routes</div>
-                    </div>
-                    <div class="bg-white/20 backdrop-blur-sm rounded-xl px-6 py-4 border border-white/30">
-                        <div class="text-2xl font-bold">5,895m</div>
-                        <div class="text-sm text-white/80">Peak Height</div>
-                    </div>
-                    <div class="bg-white/20 backdrop-blur-sm rounded-xl px-6 py-4 border border-white/30">
-                        <div class="text-2xl font-bold">15+</div>
-                        <div class="text-sm text-white/80">Expert Guides</div>
-                    </div>
-                </div>
-            </div>
+                            </div>
         </div>
     </div>
 
