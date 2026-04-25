@@ -787,7 +787,214 @@ function showMapView() {
 }
 
 function initializeMap() {
-    showNotification('Interactive map feature coming soon!', 'info');
+    const mapContainer = document.getElementById('map-view');
+    mapContainer.innerHTML = `
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-lg font-semibold text-gray-900">Interactive Destinations Map</h3>
+                <div class="flex gap-2">
+                    <button onclick="resetMapView()" class="px-3 py-1 bg-gray-100 text-gray-700 rounded-lg text-sm font-medium">
+                        <i class="ph-bold ph-arrow-counter-clockwise mr-1"></i>Reset
+                    </button>
+                    <button onclick="toggleMapFullscreen()" class="px-3 py-1 bg-blue-100 text-blue-700 rounded-lg text-sm font-medium">
+                        <i class="ph-bold ph-arrows-out mr-1"></i>Fullscreen
+                    </button>
+                </div>
+            </div>
+            <div id="map-container" class="bg-gray-50 rounded-lg h-96 relative overflow-hidden">
+                <!-- Simple Interactive Map -->
+                <div class="absolute inset-0 bg-gradient-to-br from-blue-100 to-emerald-100">
+                    <!-- Map Grid -->
+                    <div class="absolute inset-0 opacity-30">
+                        <div class="h-full w-full" style="background-image: repeating-linear-gradient(0deg, #e5e7eb 0px, transparent 1px, transparent 40px, #e5e7eb 41px), repeating-linear-gradient(90deg, #e5e7eb 0px, transparent 1px, transparent 40px, #e5e7eb 41px);"></div>
+                    </div>
+                    
+                    <!-- Tanzania Map Outline (Simplified) -->
+                    <svg class="absolute inset-0 w-full h-full" viewBox="0 0 400 500">
+                        <path d="M 200 50 L 250 80 L 280 120 L 300 180 L 320 250 L 310 320 L 280 380 L 220 420 L 180 430 L 140 400 L 100 350 L 80 280 L 90 200 L 120 140 L 160 90 Z" 
+                              fill="rgba(16, 185, 129, 0.1)" stroke="#10b981" stroke-width="2"/>
+                    </svg>
+                    
+                    <!-- Destination Markers -->
+                    <div id="map-markers" class="absolute inset-0">
+                        <!-- Markers will be added dynamically -->
+                    </div>
+                </div>
+                
+                <!-- Map Controls -->
+                <div class="absolute top-4 right-4 bg-white rounded-lg shadow-lg p-2 space-y-2">
+                    <button onclick="zoomIn()" class="w-8 h-8 bg-gray-100 hover:bg-gray-200 rounded flex items-center justify-center">
+                        <i class="ph-bold ph-plus text-gray-700"></i>
+                    </button>
+                    <button onclick="zoomOut()" class="w-8 h-8 bg-gray-100 hover:bg-gray-200 rounded flex items-center justify-center">
+                        <i class="ph-bold ph-minus text-gray-700"></i>
+                    </button>
+                </div>
+                
+                <!-- Map Legend -->
+                <div class="absolute bottom-4 left-4 bg-white rounded-lg shadow-lg p-3">
+                    <h4 class="text-sm font-semibold text-gray-900 mb-2">Destinations</h4>
+                    <div class="space-y-1">
+                        <div class="flex items-center text-xs">
+                            <div class="w-3 h-3 bg-emerald-500 rounded-full mr-2"></i>
+                            <span>Northern Tanzania</span>
+                        </div>
+                        <div class="flex items-center text-xs">
+                            <div class="w-3 h-3 bg-blue-500 rounded-full mr-2"></i>
+                            <span>Southern Tanzania</span>
+                        </div>
+                        <div class="flex items-center text-xs">
+                            <div class="w-3 h-3 bg-purple-500 rounded-full mr-2"></i>
+                            <span>Western Tanzania</span>
+                        </div>
+                        <div class="flex items-center text-xs">
+                            <div class="w-3 h-3 bg-yellow-500 rounded-full mr-2"></i>
+                            <span>Coastal Tanzania</span>
+                        </div>
+                        <div class="flex items-center text-xs">
+                            <div class="w-3 h-3 bg-pink-500 rounded-full mr-2"></i>
+                            <span>Zanzibar</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Destination Info Panel -->
+            <div id="destination-info" class="hidden mt-4 bg-gray-50 rounded-lg p-4">
+                <h4 class="font-semibold text-gray-900 mb-2" id="info-title">Destination Name</h4>
+                <p class="text-sm text-gray-600 mb-3" id="info-description">Description</p>
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-4 text-xs text-gray-500">
+                        <span id="info-tours">0 tours</span>
+                        <span id="info-status">Status</span>
+                    </div>
+                    <button onclick="viewDestinationDetails()" class="px-3 py-1 bg-emerald-600 text-white rounded text-sm">
+                        View Details
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    // Load destination markers
+    loadDestinationMarkers();
+}
+
+function loadDestinationMarkers() {
+    const markersContainer = document.getElementById('map-markers');
+    if (!markersContainer) return;
+    
+    // Get all destination data from the page
+    const destinationCards = document.querySelectorAll('.destination-card');
+    const markers = [];
+    
+    destinationCards.forEach(card => {
+        const name = card.querySelector('h3')?.textContent;
+        const location = card.querySelector('.text-gray-600')?.textContent;
+        const tours = card.dataset.tours || '0';
+        const status = card.dataset.status || 'active';
+        const region = card.dataset.region || 'northern';
+        
+        if (name && location) {
+            markers.push({ name, location, tours, status, region });
+        }
+    });
+    
+    // Clear existing markers
+    markersContainer.innerHTML = '';
+    
+    // Add markers to map (simplified positioning)
+    markers.forEach((destination, index) => {
+        const marker = document.createElement('div');
+        marker.className = 'absolute w-6 h-6 rounded-full cursor-pointer transform -translate-x-1/2 -translate-y-1/2 hover:scale-110 transition-transform';
+        
+        // Color based on region
+        const colors = {
+            'northern': 'bg-emerald-500',
+            'southern': 'bg-blue-500',
+            'western': 'bg-purple-500',
+            'coastal': 'bg-yellow-500',
+            'zanzibar': 'bg-pink-500'
+        };
+        
+        marker.className += ` ${colors[destination.region] || 'bg-gray-500'}`;
+        
+        // Position markers (simplified - in real app would use actual coordinates)
+        const positions = [
+            { top: '30%', left: '60%' }, // Serengeti area
+            { top: '40%', left: '55%' }, // Ngorongoro area
+            { top: '25%', left: '65%' }, // Kilimanjaro area
+            { top: '50%', left: '40%' }, // Central Tanzania
+            { top: '70%', left: '30%' }, // Southern Tanzania
+            { top: '60%', left: '70%' }, // Coastal area
+            { top: '80%', left: '75%' }, // Zanzibar
+        ];
+        
+        const pos = positions[index % positions.length];
+        marker.style.top = pos.top;
+        marker.style.left = pos.left;
+        
+        // Add click event
+        marker.onclick = () => showDestinationInfo(destination);
+        
+        // Add tooltip
+        marker.title = destination.name;
+        
+        markersContainer.appendChild(marker);
+    });
+}
+
+function showDestinationInfo(destination) {
+    const infoPanel = document.getElementById('destination-info');
+    const title = document.getElementById('info-title');
+    const description = document.getElementById('info-description');
+    const tours = document.getElementById('info-tours');
+    const status = document.getElementById('info-status');
+    
+    if (infoPanel && title && description && tours && status) {
+        title.textContent = destination.name;
+        description.textContent = destination.location;
+        tours.textContent = `${destination.tours} tours`;
+        status.textContent = destination.status;
+        
+        infoPanel.classList.remove('hidden');
+    }
+}
+
+function zoomIn() {
+    showNotification('Zoom in - Feature coming soon!', 'info');
+}
+
+function zoomOut() {
+    showNotification('Zoom out - Feature coming soon!', 'info');
+}
+
+function resetMapView() {
+    loadDestinationMarkers();
+    showNotification('Map view reset', 'success');
+}
+
+function toggleMapFullscreen() {
+    const mapContainer = document.getElementById('map-container');
+    if (mapContainer) {
+        mapContainer.classList.toggle('fixed');
+        mapContainer.classList.toggle('inset-0');
+        mapContainer.classList.toggle('z-50');
+        mapContainer.classList.toggle('h-screen');
+        
+        if (mapContainer.classList.contains('fixed')) {
+            // Add fullscreen styles
+            mapContainer.innerHTML += `
+                <button onclick="toggleMapFullscreen()" class="absolute top-4 right-4 z-10 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center">
+                    <i class="ph-bold ph-x text-gray-700"></i>
+                </button>
+            `;
+        }
+    }
+}
+
+function viewDestinationDetails() {
+    showNotification('View destination details - Feature coming soon!', 'info');
 }
 
 function importDestinations() {

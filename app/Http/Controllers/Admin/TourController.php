@@ -290,19 +290,42 @@ class TourController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
+            'short_description' => 'nullable|string|max:150',
             'location' => 'required|string|max:255',
+            'region' => 'nullable|string',
+            'destination_type' => 'nullable|string',
+            'famous_for' => 'nullable|string',
+            'nearest_city' => 'nullable|string',
+            'distance_from_city' => 'nullable|string',
+            'access_info' => 'nullable|string',
             'coordinates' => 'nullable|array',
             'coordinates.lat' => 'nullable|numeric',
             'coordinates.lng' => 'nullable|numeric',
-            'highlights' => 'nullable|array',
             'best_time_to_visit' => 'nullable|string',
             'weather_info' => 'nullable|string',
+            'altitude' => 'nullable|string',
+            'area_size' => 'nullable|string',
+            'established_year' => 'nullable|integer',
+            'unesco_status' => 'nullable|string',
+            'wildlife_nature' => 'nullable|string',
+            'cultural_significance' => 'nullable|string',
+            'highlights' => 'nullable|array',
             'images' => 'nullable|array',
+            'video_url' => 'nullable|url',
+            'virtual_tour_url' => 'nullable|url',
+            'additional_resources' => 'nullable|array',
+            'linked_tours' => 'nullable|array',
             'status' => 'nullable|in:active,inactive',
         ]);
 
-        Destination::create($validated);
-        return redirect()->back()->with('success', 'Destination created successfully.');
+        $destination = Destination::create($validated);
+        
+        // Link tours to destination
+        if ($request->has('linked_tours') && is_array($request->linked_tours)) {
+            $destination->tours()->attach($request->linked_tours);
+        }
+        
+        return redirect()->route('admin.tours.destinations')->with('success', 'Destination created successfully!');
     }
 
     public function editDestination(Destination $destination)
@@ -334,11 +357,17 @@ class TourController extends Controller
     {
         // Check if destination is linked to any tours
         if ($destination->tours()->count() > 0) {
-            return redirect()->back()->with('error', 'Cannot delete destination. It is linked to ' . $destination->tours()->count() . ' tours.');
+            return response()->json([
+                'success' => false,
+                'message' => 'Cannot delete destination. It is linked to ' . $destination->tours()->count() . ' tours.'
+            ]);
         }
 
         $destination->delete();
-        return redirect()->route('admin.tours.destinations')->with('success', 'Destination deleted successfully.');
+        return response()->json([
+            'success' => true,
+            'message' => 'Destination deleted successfully.'
+        ]);
     }
 
     // Mountain Trekking Specific Methods
