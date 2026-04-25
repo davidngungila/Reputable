@@ -75,7 +75,7 @@
                     <a href="{{ route('admin.settings.account') }}" class="px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors">
                         Edit Profile
                     </a>
-                    <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors">
+                    <button onclick="showPasswordModal()" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors">
                         Change Password
                     </button>
                 </div>
