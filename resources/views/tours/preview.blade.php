@@ -25,10 +25,10 @@
             <div class="absolute top-1/2 left-1/4 w-24 h-24 bg-blue-400/10 rounded-full blur-2xl animate-pulse delay-500"></div>
         </div>
         
-        <div class="relative container mx-auto px-4 h-full flex items-center">
-            <div class="text-white max-w-4xl">
+        <div class="relative container mx-auto px-4 h-full flex items-center justify-center">
+            <div class="text-white max-w-4xl text-center">
                 <!-- Premium Badge -->
-                <div class="flex items-center gap-3 mb-6">
+                <div class="flex items-center justify-center gap-3 mb-6 flex-wrap">
                     <span class="px-4 py-2 bg-gradient-to-r from-yellow-400 to-orange-500 text-black rounded-full text-sm font-bold shadow-lg">
                         <i class="ph-bold ph-crown mr-2"></i>PREMIUM TOUR
                     </span>
@@ -51,13 +51,13 @@
                 </h1>
                 
                 <!-- Location with Icon -->
-                <div class="flex items-center text-lg text-white/90 mb-6">
+                <div class="flex items-center justify-center text-lg text-white/90 mb-6">
                     <i class="ph-bold ph-map-pin text-emerald-400 mr-2 text-xl"></i>
                     <span>{{ $tour->location }}</span>
                 </div>
                 
                 <!-- Enhanced CTA Buttons -->
-                <div class="flex flex-col sm:flex-row gap-4">
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
                     <button onclick="proceedToBooking()" class="px-8 py-4 bg-gradient-to-r from-emerald-500 to-blue-600 text-white rounded-xl font-bold text-lg hover:from-emerald-600 hover:to-blue-700 transition-all transform hover:scale-105 shadow-2xl">
                         <i class="ph-bold ph-calendar-check mr-2"></i>Book This Adventure
                     </button>
