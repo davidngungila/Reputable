@@ -92,6 +92,12 @@ class TourController extends Controller
         return view('mountain-trekking.index', compact('tours'));
     }
 
+    public function preview($id): View
+    {
+        $tour = Tour::with(['itineraries', 'destinations', 'equipment', 'guides'])->findOrFail($id);
+        return view('tours.preview', compact('tour'));
+    }
+
     public function show($id): View
     {
         $tour = Tour::with('itineraries')->findOrFail($id);

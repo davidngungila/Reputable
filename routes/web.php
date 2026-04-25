@@ -104,6 +104,7 @@ Route::get('/sustainability', function() { return view('legal.sustainability'); 
 Route::post('/analytics/track', [\App\Http\Controllers\AnalyticsController::class, 'track'])->name('analytics.track');
 
 Route::get('/tours', [PublicTourController::class, 'index'])->name('tours.index');
+Route::get('/tours/preview/{id}', [PublicTourController::class, 'preview'])->name('tours.preview');
 Route::get('/tours/{id}', [PublicTourController::class, 'show'])->name('tours.show');
 Route::post('/bookings', [PublicBookingController::class, 'store'])->name('bookings.store');
 Route::get('/bookings/{id}/checkout', [PublicBookingController::class, 'checkout'])->name('bookings.checkout');
