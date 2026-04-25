@@ -12,6 +12,7 @@ class DashboardController extends Controller
 {
     public function index()
     {
+        // Enhanced statistics with growth rates
         $stats = [
             'total_bookings' => Booking::count(),
             'revenue_total' => Booking::whereIn('payment_status', ['paid', 'partially_paid'])->sum('total_price'),
@@ -23,6 +24,47 @@ class DashboardController extends Controller
             'pending_inquiries' => Inquiry::where('status', 'pending')->count(),
         ];
 
+        // Monthly booking trends for the last 12 months
+        $monthlyBookings = Booking::selectRaw('DATE_FORMAT(created_at, "%Y-%m") as month, COUNT(*) as count')
+            ->where('created_at', '>=', now()->subMonths(12))
+            ->groupBy('month')
+            ->orderBy('month')
+            ->get();
+
+        // Monthly revenue trends
+        $monthlyRevenue = Booking::selectRaw('DATE_FORMAT(created_at, "%Y-%m") as month, SUM(total_price) as revenue')
+            ->whereIn('payment_status', ['paid', 'partially_paid'])
+            ->where('created_at', '>=', now()->subMonths(12))
+            ->groupBy('month')
+            ->orderBy('month')
+            ->get();
+
+        // Tour popularity data
+        $tourPopularity = Booking::join('tours', 'bookings.tour_id', '=', 'tours.id')
+            ->selectRaw('tours.name, COUNT(bookings.id) as bookings_count, SUM(bookings.total_price) as total_revenue')
+            ->groupBy('tours.id', 'tours.name')
+            ->orderBy('bookings_count', 'desc')
+            ->limit(10)
+            ->get();
+
+        // Payment status distribution
+        $paymentDistribution = Booking::selectRaw('payment_status, COUNT(*) as count, SUM(total_price) as total')
+            ->groupBy('payment_status')
+            ->get();
+
+        // Daily booking activity for the last 30 days
+        $dailyActivity = Booking::selectRaw('DATE(created_at) as date, COUNT(*) as bookings')
+            ->where('created_at', '>=', now()->subDays(30))
+            ->groupBy('date')
+            ->orderBy('date')
+            ->get();
+
+        // Inquiry status trends
+        $inquiryTrends = Inquiry::selectRaw('status, COUNT(*) as count')
+            ->groupBy('status')
+            ->get();
+
+        // Recent activity with enhanced data
         $recentBookings = Booking::with('tour')
             ->latest()
             ->limit(8)
@@ -39,6 +81,28 @@ class DashboardController extends Controller
             ->limit(5)
             ->get();
 
-        return view('admin.dashboard', compact('stats', 'recentBookings', 'upcomingBookings', 'recentInquiries'));
+        // Performance metrics
+        $performanceMetrics = [
+            'booking_conversion_rate' => $stats['total_bookings'] > 0 ? 
+                round(($stats['confirmed_bookings'] / $stats['total_bookings']) * 100, 2) : 0,
+            'average_booking_value' => $stats['total_bookings'] > 0 ? 
+                round($stats['revenue_total'] / $stats['total_bookings'], 2) : 0,
+            'inquiry_conversion_rate' => $stats['total_inquiries'] > 0 ? 
+                round(($stats['total_bookings'] / $stats['total_inquiries']) * 100, 2) : 0,
+        ];
+
+        return view('admin.dashboard', compact(
+            'stats', 
+            'recentBookings', 
+            'upcomingBookings', 
+            'recentInquiries',
+            'monthlyBookings',
+            'monthlyRevenue',
+            'tourPopularity',
+            'paymentDistribution',
+            'dailyActivity',
+            'inquiryTrends',
+            'performanceMetrics'
+        ));
     }
 }
