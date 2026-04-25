@@ -35,13 +35,9 @@
                 </div>
                 
                 <!-- Enhanced Title -->
-                <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+                <h1 class="text-3xl md:text-4xl font-bold mb-6 leading-tight">
                     <span class="bg-gradient-to-r from-white to-emerald-200 bg-clip-text text-transparent">
-                        Tree‑Climbing Lions
-                    </span>
-                    <br>
-                    <span class="text-4xl md:text-6xl bg-gradient-to-r from-emerald-400 to-blue-400 bg-clip-text text-transparent">
-                        & Rift Valley Views
+                        Tree‑Climbing Lions & Rift Valley Views
                     </span>
                 </h1>
                 
