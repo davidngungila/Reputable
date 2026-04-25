@@ -59,4 +59,39 @@ class InquiryController extends Controller
         return redirect()->route('admin.inquiries.show', $inquiry)
             ->with('success', 'Inquiry marked as closed.');
     }
+
+    public function export()
+    {
+        $inquiries = Inquiry::latest()->get();
+        
+        $headers = [
+            'Content-Type' => 'text/csv',
+            'Content-Disposition' => 'attachment; filename=inquiries_' . date('Y-m-d') . '.csv',
+        ];
+        
+        $callback = function() use ($inquiries) {
+            $file = fopen('php://output', 'w');
+            
+            // Header
+            fputcsv($file, ['ID', 'Name', 'Email', 'Phone', 'Tour', 'Message', 'Status', 'Created At']);
+            
+            // Data
+            foreach ($inquiries as $inquiry) {
+                fputcsv($file, [
+                    $inquiry->id,
+                    $inquiry->name,
+                    $inquiry->email,
+                    $inquiry->phone,
+                    $inquiry->tour->name ?? 'N/A',
+                    $inquiry->message,
+                    $inquiry->status,
+                    $inquiry->created_at->format('Y-m-d H:i:s')
+                ]);
+            }
+            
+            fclose($file);
+        };
+        
+        return response()->stream($callback, 200, $headers);
+    }
 }

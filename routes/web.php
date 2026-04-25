@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\BranchController;
 use App\Http\Controllers\Admin\DepartmentController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\TourController;
+use App\Http\Controllers\Admin\ActivityController;
 use App\Http\Controllers\Admin\InquiryController;
 use App\Http\Controllers\Public\TourController as PublicTourController;
 use App\Http\Controllers\Public\BookingController as PublicBookingController;
@@ -215,6 +216,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'ensure.admin', 'act
     Route::delete('/inquiries/{inquiry}', [InquiryController::class, 'destroy'])->name('inquiries.destroy');
     Route::post('/inquiries/{inquiry}/respond', [InquiryController::class, 'markAsResponded'])->name('inquiries.respond');
     Route::post('/inquiries/{inquiry}/close', [InquiryController::class, 'markAsClosed'])->name('inquiries.close');
+    Route::get('/inquiries/export', [InquiryController::class, 'export'])->name('inquiries.export');
 
     // Operations
     Route::prefix('operations')->name('operations.')->group(function () {
@@ -525,9 +527,9 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'ensure.admin', 'act
     });
 
     // Account Management
-    Route::get('/profile', function() { return view('admin.profile'); })->name('profile');
-    Route::get('/settings/account', [AccountSettingsController::class, 'edit'])->name('account-settings');
-    Route::post('/settings/account', [AccountSettingsController::class, 'update'])->name('account-settings.update');
+    Route::get('/profile', function() { return view('admin.profile'); })->name('admin.profile');
+    Route::get('/settings/account', [AccountSettingsController::class, 'edit'])->name('admin.settings.account');
+    Route::post('/settings/account', [AccountSettingsController::class, 'update'])->name('admin.settings.account.update');
 });
 
 // Stripe Payments

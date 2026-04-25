@@ -47,7 +47,7 @@
                 </span>
             </div>
             <div class="space-y-1">
-                <h3 class="text-2xl font-bold text-gray-900">{{ $upcomingAssignments->count() ?? 0 }}</h3>
+                <h3 class="text-2xl font-bold text-gray-900">{{ is_countable($upcomingAssignments) ? count($upcomingAssignments) : 0 }}</h3>
                 <p class="text-sm text-gray-600">Upcoming Assignments</p>
             </div>
         </div>
