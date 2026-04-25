@@ -46,6 +46,7 @@ Route::get('/things-to-do', function () {
 })->name('things-to-do');
 
 Route::get('/mountain-trekking', [PublicTourController::class, 'mountainTrekking'])->name('mountain-trekking');
+Route::get('/mountain-trekking/trekking-info', function () { return view('mountain-trekking.trekking-info'); })->name('mountain-trekking.info');
 
 Route::get('/login', function () {
     return redirect()->route('simple.login');
