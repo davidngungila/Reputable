@@ -20,9 +20,9 @@
             <button onclick="exportDestinations()" class="px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors text-sm font-medium">
                 <i class="ph-bold ph-download mr-2"></i>Export
             </button>
-            <button onclick="showAddDestinationModal()" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium">
+            <a href="{{ route('admin.tours.destinations.create') }}" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium">
                 <i class="ph-bold ph-plus mr-2"></i>Add Destination
-            </button>
+            </a>
         </div>
     </div>
 
@@ -394,15 +394,15 @@
         <i class="fas fa-map-marked-alt text-6xl text-gray-300 mb-4"></i>
         <h3 class="text-xl font-semibold text-gray-900 mb-2">No Destinations Found</h3>
         <p class="text-gray-600 mb-6">Get started by adding your first destination</p>
-        <button onclick="showAddDestinationModal()" class="px-6 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors">
-            <i class="fas fa-plus mr-2"></i>Add Destination
-        </button>
+        <a href="{{ route('admin.tours.destinations.create') }}" class="px-6 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors inline-block">
+            <i class="ph-bold ph-plus mr-2"></i>Add Destination
+        </a>
     </div>
     @endif
 </div>
 
 <!-- Add/Edit Destination Modal -->
-<div id="destination-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+<div id="destination-modal" class="hidden fixed inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center z-50">
     <div class="bg-white rounded-xl p-6 max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
         <div class="flex items-center justify-between mb-6">
             <h3 class="text-xl font-semibold text-gray-900" id="modal-title">Add Destination</h3>

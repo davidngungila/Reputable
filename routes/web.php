@@ -193,6 +193,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'ensure.admin', 'act
     Route::get('/tours/availability-pricing', [TourController::class, 'availabilityPricing'])->name('tours.availability-pricing');
     Route::post('/tours/availability-pricing/{tour}', [TourController::class, 'updateAvailability'])->name('tours.availability-pricing.update');
     Route::get('/tours/destinations', [TourController::class, 'destinations'])->name('tours.destinations');
+    Route::get('/tours/destinations/create', [TourController::class, 'createDestination'])->name('tours.destinations.create');
     Route::post('/tours/destinations', [TourController::class, 'storeDestination'])->name('tours.destinations.store');
     Route::get('/tours/destinations/{destination}/edit', [TourController::class, 'editDestination'])->name('tours.destinations.edit');
     Route::put('/tours/destinations/{destination}', [TourController::class, 'updateDestination'])->name('tours.destinations.update');

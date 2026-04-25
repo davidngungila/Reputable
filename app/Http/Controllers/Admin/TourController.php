@@ -280,6 +280,11 @@ class TourController extends Controller
         return view('admin.tours.destinations', compact('destinations'));
     }
 
+    public function createDestination()
+    {
+        return view('admin.tours.create-destination');
+    }
+
     public function storeDestination(Request $request)
     {
         $validated = $request->validate([
