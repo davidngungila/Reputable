@@ -198,7 +198,7 @@
                             </a>
                         </div>
                         <div class="col-md-3 mb-3">
-                            <a href="{{ route('admin.bookings.index') }}" class="btn btn-success btn-block">
+                            <a href="{{ route('bookings.index') }}" class="btn btn-success btn-block">
                                 <i class="fas fa-calendar"></i> Manage Bookings
                             </a>
                         </div>
@@ -208,7 +208,7 @@
                             </a>
                         </div>
                         <div class="col-md-3 mb-3">
-                            <a href="{{ route('admin.users.index') }}" class="btn btn-warning btn-block">
+                            <a href="{{ route('admin.settings.users.index') }}" class="btn btn-warning btn-block">
                                 <i class="fas fa-users"></i> Manage Users
                             </a>
                         </div>
