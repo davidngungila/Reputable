@@ -5,7 +5,7 @@
 @section('content')
 <div class="min-h-screen bg-gradient-to-br from-gray-50 to-emerald-50">
     <!-- Hero Section -->
-    <div class="relative bg-gradient-to-r from-emerald-600 to-blue-600 text-white">
+    <div class="relative bg-gradient-to-r from-emerald-600 to-blue-600 text-white z-10">
         <div class="absolute inset-0 bg-black/20"></div>
         <div class="relative container mx-auto px-4 py-16">
             <div class="text-center max-w-3xl mx-auto">
