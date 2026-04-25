@@ -19,6 +19,17 @@ class Booking extends Model
         'deposit_amount', 'is_deposit_paid', 'balance_amount'
     ];
 
+    protected $casts = [
+        'start_date' => 'date',
+        'total_price' => 'decimal:2',
+        'deposit_amount' => 'decimal:2',
+        'balance_amount' => 'decimal:2',
+        'agent_commission' => 'decimal:2',
+        'is_deposit_paid' => 'boolean',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+    ];
+
     public function tour(): BelongsTo
     {
         return $this->belongsTo(Tour::class);
