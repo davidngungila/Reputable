@@ -1,158 +1,222 @@
 @extends('layouts.public')
 
+@section('title', 'Things to Do in Tanzania - Activities & Adventures')
+
 @section('content')
-<!-- Hero Section -->
-<section class="relative pt-48 pb-32 overflow-hidden bg-slate-900">
-    <div class="absolute inset-0 z-0">
-        <img src="https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=2000&q=80" alt="Things to Do in Tanzania" class="w-full h-full object-cover blur-sm opacity-40">
-        <div class="absolute inset-0 bg-gradient-to-b from-slate-900/60 via-slate-900 to-slate-900"></div>
-    </div>
-    <div class="max-w-7xl mx-auto px-6 relative z-10 text-center">
-        <span class="inline-block px-4 py-1.5 bg-emerald-600/20 text-emerald-400 rounded-full text-xs font-bold tracking-widest uppercase mb-6 border border-emerald-600/30">Tanzania Adventures</span>
-        <h1 class="text-5xl md:text-7xl font-serif text-white mb-8 font-bold">Things to Do in <span class="text-emerald-500">Tanzania</span></h1>
-        <p class="text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed mb-8">Discover endless adventures, from wildlife safaris and mountain trekking to beach relaxation and cultural experiences.</p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="#activities" class="inline-flex items-center gap-2 px-8 py-4 bg-emerald-600 text-white rounded-full font-bold hover:bg-emerald-700 transition-all">
-                <i class="ph-bold ph-compass"></i> Explore Activities
-            </a>
-            <a href="/tours" class="inline-flex items-center gap-2 px-8 py-4 bg-white/10 text-white rounded-full font-bold border border-white/20 hover:bg-white/20 transition-all">
-                <i class="ph-bold ph-suitcase-rolling"></i> Browse Tours
-            </a>
+<div class="min-h-screen bg-gradient-to-br from-gray-50 to-emerald-100">
+    <!-- Enhanced Hero Section -->
+    <div class="relative bg-gradient-to-r from-emerald-800 to-orange-600 text-white">
+        <div class="absolute inset-0 bg-black/20"></div>
+        <!-- Animated Background Elements -->
+        <div class="absolute inset-0">
+            <div class="absolute top-20 left-10 w-32 h-32 bg-white/10 rounded-full blur-3xl animate-pulse"></div>
+            <div class="absolute bottom-20 right-10 w-48 h-48 bg-white/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+            <div class="absolute top-1/2 left-1/4 w-24 h-24 bg-white/10 rounded-full blur-2xl animate-pulse delay-500"></div>
+        </div>
+        <div class="relative container mx-auto px-4 pt-24 pb-16">
+            <div class="text-center max-w-4xl mx-auto">
+                <!-- Premium Badge -->
+                <div class="flex items-center justify-center gap-3 mb-6 flex-wrap">
+                    <span class="px-4 py-2 bg-gradient-to-r from-emerald-800 to-orange-600 text-white rounded-full text-sm font-bold shadow-lg">
+                        <i class="ph-bold ph-compass mr-2"></i>TANZANIA ADVENTURES
+                    </span>
+                    <span class="px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-sm font-medium">
+                        Unlimited Experiences
+                    </span>
+                </div>
+                
+                <!-- Enhanced Title -->
+                <h1 class="text-4xl md:text-6xl font-bold mb-6">
+                    <span class="bg-gradient-to-r from-white to-emerald-300 bg-clip-text text-transparent">
+                        Things to Do in Tanzania
+                    </span>
+                </h1>
+                
+                <!-- Enhanced Description -->
+                <p class="text-xl text-white/90 mb-8 max-w-3xl mx-auto leading-relaxed">
+                    Discover endless adventures, from wildlife safaris and mountain trekking to beach relaxation 
+                    and cultural experiences. Your Tanzanian dream awaits.
+                </p>
+                
+                <!-- Enhanced CTA Buttons -->
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#activities" class="px-8 py-4 bg-gradient-to-r from-emerald-800 to-orange-600 text-white rounded-xl font-bold text-lg hover:from-emerald-900 hover:to-orange-700 transition-all transform hover:scale-105 shadow-2xl">
+                        <i class="ph-bold ph-compass mr-2"></i>Explore Activities
+                    </a>
+                    <a href="{{ route('tours.index') }}" class="px-8 py-4 bg-white/20 backdrop-blur-sm text-white rounded-xl font-bold text-lg hover:bg-white/30 transition-all border border-white/30">
+                        <i class="ph-bold ph-suitcase-rolling mr-2"></i>Browse Tours
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
-</section>
 
 <!-- Activities Overview Section -->
 <section id="activities" class="py-20 bg-white">
-    <div class="max-w-7xl mx-auto px-6">
+    <div class="container mx-auto px-4">
         <div class="text-center mb-16">
-            <span class="text-emerald-600 font-black text-xs uppercase tracking-[0.4em] mb-4 inline-block">Popular Activities</span>
-            <h2 class="text-4xl md:text-5xl font-serif text-slate-900 font-bold mb-6">Choose Your Adventure</h2>
-            <p class="text-slate-600 max-w-3xl mx-auto text-xl leading-relaxed">From thrilling wildlife encounters to serene beach escapes, Tanzania offers something for every type of traveler.</p>
+            <div class="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-emerald-800 to-orange-600 text-white rounded-full text-sm font-bold mb-6">
+                <i class="ph-bold ph-star mr-2"></i>Popular Activities
+            </div>
+            <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                Choose Your <span class="bg-gradient-to-r from-emerald-600 to-orange-600 bg-clip-text text-transparent">Adventure</span>
+            </h2>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                From thrilling wildlife encounters to serene beach escapes, Tanzania offers something for every type of traveler.
+            </p>
         </div>
         
         <!-- Activity Categories Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <!-- Game Drives -->
-            <div class="group bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-slate-100">
-                <div class="relative h-56 overflow-hidden">
+            <div class="group bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:scale-105 border border-gray-100">
+                <div class="relative h-64 overflow-hidden">
                     <img src="{{ asset('images/01.jpg') }}" alt="Game Drives" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                    <div class="absolute top-4 right-4 bg-emerald-600 text-white px-3 py-1 rounded-full text-xs font-bold">
-                        Most Popular
+                    <div class="absolute top-4 right-4 bg-gradient-to-r from-emerald-800 to-orange-600 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg">
+                        <i class="ph-bold ph-star mr-1"></i>Most Popular
                     </div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
                 </div>
-                <div class="p-8">
-                    <div class="flex items-center gap-2 mb-4">
-                        <i class="ph-bold ph-car text-2xl text-emerald-600"></i>
-                        <h3 class="text-2xl font-bold text-slate-900">Game Drives</h3>
+                <div class="p-6">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-br from-emerald-700 to-orange-500 rounded-xl flex items-center justify-center text-white">
+                            <i class="ph-bold ph-car text-xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900">Game Drives</h3>
                     </div>
-                    <p class="text-slate-600 mb-6 leading-relaxed">Experience the thrill of wildlife safaris in Tanzania's national parks. See the Big Five and witness the Great Migration.</p>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        Experience the thrill of wildlife safaris in Tanzania's national parks. See the Big Five and witness the Great Migration.
+                    </p>
                     <div class="flex flex-wrap gap-2 mb-6">
-                        <span class="px-3 py-1 bg-emerald-50 text-emerald-700 rounded-full text-xs font-medium">Serengeti</span>
-                        <span class="px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-xs font-medium">Ngorongoro</span>
-                        <span class="px-3 py-1 bg-orange-50 text-orange-700 rounded-full text-xs font-medium">Big Five</span>
+                        <span class="px-3 py-1 bg-emerald-100 text-emerald-700 rounded-full text-xs font-medium">Serengeti</span>
+                        <span class="px-3 py-1 bg-orange-100 text-orange-700 rounded-full text-xs font-medium">Ngorongoro</span>
+                        <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-medium">Big Five</span>
                     </div>
-                    <a href="/tours?activity=game-drives" class="inline-flex items-center gap-2 text-emerald-600 font-bold hover:text-emerald-700 transition-colors">
-                        Explore Game Drives <i class="ph ph-arrow-right"></i>
+                    <a href="{{ route('tours.index', ['activity' => 'game-drives']) }}" class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-emerald-800 to-orange-600 text-white rounded-lg font-bold hover:from-emerald-900 hover:to-orange-700 transition-all">
+                        Explore Game Drives <i class="ph-bold ph-arrow-right"></i>
                     </a>
                 </div>
             </div>
             
             <!-- Beach Activities -->
-            <div class="group bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-slate-100">
-                <div class="relative h-56 overflow-hidden">
+            <div class="group bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:scale-105 border border-gray-100">
+                <div class="relative h-64 overflow-hidden">
                     <img src="{{ asset('images/07.jpg') }}" alt="Beach Activities" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                    <div class="absolute top-4 right-4 bg-blue-600 text-white px-3 py-1 rounded-full text-xs font-bold">
-                        Relaxation
+                    <div class="absolute top-4 right-4 bg-gradient-to-r from-orange-600 to-yellow-500 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg">
+                        <i class="ph-bold ph-umbrella mr-1"></i>Relaxation
                     </div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
                 </div>
-                <div class="p-8">
-                    <div class="flex items-center gap-2 mb-4">
-                        <i class="ph-bold ph-umbrella text-2xl text-blue-600"></i>
-                        <h3 class="text-2xl font-bold text-slate-900">Beach Activities</h3>
+                <div class="p-6">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-br from-orange-600 to-yellow-500 rounded-xl flex items-center justify-center text-white">
+                            <i class="ph-bold ph-umbrella text-xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900">Beach Activities</h3>
                     </div>
-                    <p class="text-slate-600 mb-6 leading-relaxed">Relax on pristine white sand beaches, enjoy water sports, and explore the spice islands of Zanzibar and the Tanzanian coast.</p>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        Relax on pristine white sand beaches, enjoy water sports, and explore the spice islands of Zanzibar and the Tanzanian coast.
+                    </p>
                     <div class="flex flex-wrap gap-2 mb-6">
-                        <span class="px-3 py-1 bg-cyan-50 text-cyan-700 rounded-full text-xs font-medium">Zanzibar</span>
-                        <span class="px-3 py-1 bg-teal-50 text-teal-700 rounded-full text-xs font-medium">Snorkeling</span>
-                        <span class="px-3 py-1 bg-indigo-50 text-indigo-700 rounded-full text-xs font-medium">Dhow Cruises</span>
+                        <span class="px-3 py-1 bg-orange-100 text-orange-700 rounded-full text-xs font-medium">Zanzibar</span>
+                        <span class="px-3 py-1 bg-cyan-100 text-cyan-700 rounded-full text-xs font-medium">Snorkeling</span>
+                        <span class="px-3 py-1 bg-teal-100 text-teal-700 rounded-full text-xs font-medium">Dhow Cruises</span>
                     </div>
-                    <a href="/tours?activity=beach" class="inline-flex items-center gap-2 text-blue-600 font-bold hover:text-blue-700 transition-colors">
-                        Explore Beaches <i class="ph ph-arrow-right"></i>
+                    <a href="{{ route('tours.index', ['activity' => 'beach']) }}" class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-orange-600 to-yellow-600 text-white rounded-lg font-bold hover:from-orange-700 hover:to-yellow-700 transition-all">
+                        Explore Beaches <i class="ph-bold ph-arrow-right"></i>
                     </a>
                 </div>
             </div>
             
             <!-- Balloon Safari -->
-            <div class="group bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-slate-100">
-                <div class="relative h-56 overflow-hidden">
+            <div class="group bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:scale-105 border border-gray-100">
+                <div class="relative h-64 overflow-hidden">
                     <img src="{{ asset('images/05.jpg') }}" alt="Balloon Safari" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                    <div class="absolute top-4 right-4 bg-purple-600 text-white px-3 py-1 rounded-full text-xs font-bold">
-                        Luxury
+                    <div class="absolute top-4 right-4 bg-gradient-to-r from-purple-600 to-pink-500 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg">
+                        <i class="ph-bold ph-crown mr-1"></i>Luxury
                     </div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
                 </div>
-                <div class="p-8">
-                    <div class="flex items-center gap-2 mb-4">
-                        <i class="ph-bold ph-airplane text-2xl text-purple-600"></i>
-                        <h3 class="text-2xl font-bold text-slate-900">Balloon Safari</h3>
+                <div class="p-6">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-br from-purple-600 to-pink-500 rounded-xl flex items-center justify-center text-white">
+                            <i class="ph-bold ph-airplane text-xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900">Balloon Safari</h3>
                     </div>
-                    <p class="text-slate-600 mb-6 leading-relaxed">Float above the Serengeti plains at dawn for breathtaking aerial views of wildlife and landscapes from a unique perspective.</p>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        Float above the Serengeti plains at dawn for breathtaking aerial views of wildlife and landscapes from a unique perspective.
+                    </p>
                     <div class="flex flex-wrap gap-2 mb-6">
-                        <span class="px-3 py-1 bg-purple-50 text-purple-700 rounded-full text-xs font-medium">Sunrise</span>
-                        <span class="px-3 py-1 bg-pink-50 text-pink-700 rounded-full text-xs font-medium">Aerial Views</span>
-                        <span class="px-3 py-1 bg-rose-50 text-rose-700 rounded-full text-xs font-medium">Champagne</span>
+                        <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-xs font-medium">Sunrise</span>
+                        <span class="px-3 py-1 bg-pink-100 text-pink-700 rounded-full text-xs font-medium">Aerial Views</span>
+                        <span class="px-3 py-1 bg-rose-100 text-rose-700 rounded-full text-xs font-medium">Champagne</span>
                     </div>
-                    <a href="/tours?activity=balloon" class="inline-flex items-center gap-2 text-purple-600 font-bold hover:text-purple-700 transition-colors">
-                        Explore Balloon Safaris <i class="ph ph-arrow-right"></i>
+                    <a href="{{ route('tours.index', ['activity' => 'balloon']) }}" class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg font-bold hover:from-purple-700 hover:to-pink-700 transition-all">
+                        Explore Balloon Safaris <i class="ph-bold ph-arrow-right"></i>
                     </a>
                 </div>
             </div>
             
             <!-- Cultural Visits -->
-            <div class="group bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-slate-100">
-                <div class="relative h-56 overflow-hidden">
+            <div class="group bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:scale-105 border border-gray-100">
+                <div class="relative h-64 overflow-hidden">
                     <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=800&q=80" alt="Cultural Visits" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                    <div class="absolute top-4 right-4 bg-red-600 text-white px-3 py-1 rounded-full text-xs font-bold">
-                        Cultural
+                    <div class="absolute top-4 right-4 bg-gradient-to-r from-red-600 to-orange-500 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg">
+                        <i class="ph-bold ph-users-three mr-1"></i>Cultural
                     </div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
                 </div>
-                <div class="p-8">
-                    <div class="flex items-center gap-2 mb-4">
-                        <i class="ph-bold ph-users-three text-2xl text-red-600"></i>
-                        <h3 class="text-2xl font-bold text-slate-900">Cultural Visits</h3>
+                <div class="p-6">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-br from-red-600 to-orange-500 rounded-xl flex items-center justify-center text-white">
+                            <i class="ph-bold ph-users-three text-xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900">Cultural Visits</h3>
                     </div>
-                    <p class="text-slate-600 mb-6 leading-relaxed">Immerse yourself in local Maasai culture, visit traditional villages, and experience authentic Tanzanian hospitality.</p>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        Immerse yourself in local Maasai culture, visit traditional villages, and experience authentic Tanzanian hospitality.
+                    </p>
                     <div class="flex flex-wrap gap-2 mb-6">
-                        <span class="px-3 py-1 bg-red-50 text-red-700 rounded-full text-xs font-medium">Maasai</span>
-                        <span class="px-3 py-1 bg-orange-50 text-orange-700 rounded-full text-xs font-medium">Traditions</span>
-                        <span class="px-3 py-1 bg-amber-50 text-amber-700 rounded-full text-xs font-medium">Local Life</span>
+                        <span class="px-3 py-1 bg-red-100 text-red-700 rounded-full text-xs font-medium">Maasai</span>
+                        <span class="px-3 py-1 bg-orange-100 text-orange-700 rounded-full text-xs font-medium">Traditions</span>
+                        <span class="px-3 py-1 bg-amber-100 text-amber-700 rounded-full text-xs font-medium">Local Life</span>
                     </div>
-                    <a href="/tours?activity=cultural" class="inline-flex items-center gap-2 text-red-600 font-bold hover:text-red-700 transition-colors">
-                        Explore Cultural Tours <i class="ph ph-arrow-right"></i>
+                    <a href="{{ route('tours.index', ['activity' => 'cultural']) }}" class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-red-600 to-orange-600 text-white rounded-lg font-bold hover:from-red-700 hover:to-orange-700 transition-all">
+                        Explore Cultural Tours <i class="ph-bold ph-arrow-right"></i>
                     </a>
                 </div>
             </div>
             
             <!-- Bird Watching -->
-            <div class="group bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-slate-100">
-                <div class="relative h-56 overflow-hidden">
+            <div class="group bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:scale-105 border border-gray-100">
+                <div class="relative h-64 overflow-hidden">
                     <img src="https://images.unsplash.com/photo-1552728089-57bdde3a5eb1?auto=format&fit=crop&w=800&q=80" alt="Bird Watching" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                    <div class="absolute top-4 right-4 bg-green-600 text-white px-3 py-1 rounded-full text-xs font-bold">
-                        Nature
+                    <div class="absolute top-4 right-4 bg-gradient-to-r from-emerald-600 to-teal-500 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg">
+                        <i class="ph-bold ph-bird mr-1"></i>Nature
                     </div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
                 </div>
-                <div class="p-8">
-                    <div class="flex items-center gap-2 mb-4">
-                        <i class="ph-bold ph-bird text-2xl text-green-600"></i>
-                        <h3 class="text-2xl font-bold text-slate-900">Bird Watching</h3>
+                <div class="p-6">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-br from-emerald-600 to-teal-500 rounded-xl flex items-center justify-center text-white">
+                            <i class="ph-bold ph-bird text-xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900">Bird Watching</h3>
                     </div>
-                    <p class="text-slate-600 mb-6 leading-relaxed">Discover over 1,100 bird species in Tanzania's diverse habitats, from endemic forest birds to migratory waterfowl.</p>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        Discover over 1,100 bird species in Tanzania's diverse habitats, from endemic forest birds to migratory waterfowl.
+                    </p>
                     <div class="flex flex-wrap gap-2 mb-6">
-                        <span class="px-3 py-1 bg-green-50 text-green-700 rounded-full text-xs font-medium">500+ Species</span>
-                        <span class="px-3 py-1 bg-emerald-50 text-emerald-700 rounded-full text-xs font-medium">Endemics</span>
-                        <span class="px-3 py-1 bg-teal-50 text-teal-700 rounded-full text-xs font-medium">Migration</span>
+                        <span class="px-3 py-1 bg-emerald-100 text-emerald-700 rounded-full text-xs font-medium">500+ Species</span>
+                        <span class="px-3 py-1 bg-teal-100 text-teal-700 rounded-full text-xs font-medium">Endemics</span>
+                        <span class="px-3 py-1 bg-cyan-100 text-cyan-700 rounded-full text-xs font-medium">Migration</span>
                     </div>
-                    <a href="/tours?activity=bird-watching" class="inline-flex items-center gap-2 text-green-600 font-bold hover:text-green-700 transition-colors">
+                    <a href="{{ route('tours.index', ['activity' => 'bird-watching']) }}" class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-lg font-bold hover:from-emerald-700 hover:to-teal-700 transition-all">
+                        Explore Bird Watching <i class="ph-bold ph-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
                         Explore Birding <i class="ph ph-arrow-right"></i>
                     </a>
                 </div>
@@ -335,5 +399,90 @@
             </a>
         </div>
     </div>
-</section>
+
+    <!-- Why Choose Tanzania Section -->
+    <section class="py-20 bg-gradient-to-br from-gray-50 to-emerald-100">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <div class="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-emerald-800 to-orange-600 text-white rounded-full text-sm font-bold mb-6">
+                    <i class="ph-bold ph-star mr-2"></i>Why Choose Tanzania
+                </div>
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                    Unforgettable <span class="bg-gradient-to-r from-emerald-600 to-orange-600 bg-clip-text text-transparent">Adventures</span> Await
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                    Tanzania offers unparalleled diversity, from Africa's highest peak to pristine beaches and rich cultural heritage.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-gradient-to-br from-emerald-700 to-orange-500 rounded-full flex items-center justify-center text-white mx-auto mb-6">
+                        <i class="ph-bold ph-map-trifold text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Diverse Landscapes</h3>
+                    <p class="text-gray-600">
+                        From savannas to mountains, beaches to forests - Tanzania has it all
+                    </p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-gradient-to-br from-orange-600 to-red-500 rounded-full flex items-center justify-center text-white mx-auto mb-6">
+                        <i class="ph-bold ph-paw-print text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Wildlife Paradise</h3>
+                    <p class="text-gray-600">
+                        Home to the Big Five and over 1,100 bird species
+                    </p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-gradient-to-br from-purple-600 to-pink-500 rounded-full flex items-center justify-center text-white mx-auto mb-6">
+                        <i class="ph-bold ph-crown text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">World Heritage</h3>
+                    <p class="text-gray-600">
+                        UNESCO World Heritage Sites including Serengeti and Ngorongoro
+                    </p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-gradient-to-br from-emerald-600 to-teal-500 rounded-full flex items-center justify-center text-white mx-auto mb-6">
+                        <i class="ph-bold ph-users-three text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Rich Culture</h3>
+                    <p class="text-gray-600">
+                        Over 120 ethnic groups with vibrant traditions and hospitality
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-gradient-to-r from-emerald-800 to-orange-600 text-white">
+        <div class="container mx-auto px-4 text-center">
+            <div class="inline-flex items-center gap-2 px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-sm font-bold mb-6">
+                <i class="ph-bold ph-rocket mr-2"></i>Start Your Adventure
+            </div>
+            <h2 class="text-4xl md:text-5xl font-bold mb-6">
+                Ready for Your Tanzanian Dream?
+            </h2>
+            <p class="text-xl text-white/90 mb-8 max-w-3xl mx-auto leading-relaxed">
+                Let our expert guides help you create the perfect Tanzanian adventure. 
+                From wildlife safaris to beach relaxation, we'll make your dreams come true.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="{{ route('tours.index') }}" 
+                   class="px-8 py-4 bg-white text-emerald-800 rounded-xl font-bold text-lg hover:bg-gray-100 transition-all transform hover:scale-105 shadow-2xl">
+                    <i class="ph-bold ph-suitcase-rolling mr-2"></i>Browse All Tours
+                </a>
+                <a href="{{ route('inquiries.create') }}" 
+                   class="px-8 py-4 bg-white/20 backdrop-blur-sm text-white rounded-xl font-bold text-lg hover:bg-white/30 transition-all border border-white/30">
+                    <i class="ph-bold ph-chat-dots mr-2"></i>Custom Adventure
+                </a>
+            </div>
+        </div>
+    </section>
+</div>
 @endsection
