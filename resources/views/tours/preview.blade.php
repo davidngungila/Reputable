@@ -4,57 +4,125 @@
 
 @section('content')
 <div class="min-h-screen bg-gray-50">
-    <!-- Hero Section -->
-    <div class="relative h-96 bg-gradient-to-br from-emerald-600 to-blue-600 overflow-hidden">
+    <!-- Enhanced Hero Section -->
+    <div class="relative h-screen max-h-[700px] bg-gradient-to-br from-emerald-600 via-blue-600 to-purple-600 overflow-hidden">
         @if(!empty($tour->images) && count($tour->images) > 0)
-            <img src="{{ asset($tour->images[0]) }}" alt="{{ $tour->name }}" 
-                 class="absolute inset-0 w-full h-full object-cover">
-            <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+            <div class="absolute inset-0">
+                <img src="{{ asset($tour->images[0]) }}" alt="{{ $tour->name }}" 
+                     class="absolute inset-0 w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+            </div>
         @else
-            <div class="absolute inset-0 bg-gradient-to-br from-emerald-600 to-blue-600"></div>
+            <div class="absolute inset-0 bg-gradient-to-br from-emerald-600 via-blue-600 to-purple-600">
+                <div class="absolute inset-0 bg-black/20"></div>
+            </div>
         @endif
         
+        <!-- Animated Background Elements -->
+        <div class="absolute inset-0">
+            <div class="absolute top-20 left-10 w-32 h-32 bg-white/10 rounded-full blur-3xl animate-pulse"></div>
+            <div class="absolute bottom-20 right-10 w-48 h-48 bg-emerald-400/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+            <div class="absolute top-1/2 left-1/4 w-24 h-24 bg-blue-400/10 rounded-full blur-2xl animate-pulse delay-500"></div>
+        </div>
+        
         <div class="relative container mx-auto px-4 h-full flex items-center">
-            <div class="text-white max-w-3xl">
-                <div class="flex items-center gap-3 mb-4">
-                    <span class="px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-sm font-medium">
-                        {{ ucfirst($tour->package_type ?? 'Safari') }}
+            <div class="text-white max-w-4xl">
+                <!-- Premium Badge -->
+                <div class="flex items-center gap-3 mb-6">
+                    <span class="px-4 py-2 bg-gradient-to-r from-yellow-400 to-orange-500 text-black rounded-full text-sm font-bold shadow-lg">
+                        <i class="ph-bold ph-crown mr-2"></i>PREMIUM TOUR
                     </span>
                     <span class="px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-sm font-medium">
-                        {{ $tour->duration_days }} Days
+                        {{ ucfirst($tour->package_type ?? 'Safari Adventure') }}
                     </span>
-                    <span class="px-3 py-1 bg-emerald-500 rounded-full text-sm font-medium">
-                        Preview Mode
+                    <span class="px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-sm font-medium">
+                        {{ $tour->duration_days }} Amazing Days
+                    </span>
+                    <span class="px-3 py-1 bg-gradient-to-r from-emerald-500 to-blue-500 rounded-full text-sm font-medium shadow-lg">
+                        <i class="ph-bold ph-sparkle mr-1"></i>Preview Mode
                     </span>
                 </div>
-                <h1 class="text-4xl md:text-5xl font-bold mb-4">{{ $tour->name }}</h1>
-                <p class="text-xl text-white/90 mb-6">{{ $tour->location }}</p>
-                <div class="flex items-center gap-6">
-                    <div class="flex items-center">
-                        <i class="ph-bold ph-star text-yellow-400 text-xl mr-1"></i>
-                        <span class="font-semibold">4.8</span>
-                        <span class="text-white/70 ml-1">(124 reviews)</span>
+                
+                <!-- Enhanced Title -->
+                <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+                    <span class="bg-gradient-to-r from-white to-emerald-200 bg-clip-text text-transparent">
+                        {{ $tour->name }}
+                    </span>
+                </h1>
+                
+                <!-- Location with Icon -->
+                <div class="flex items-center text-xl text-white/90 mb-8">
+                    <i class="ph-bold ph-map-pin text-emerald-400 mr-3 text-2xl"></i>
+                    <span>{{ $tour->location }}</span>
+                </div>
+                
+                <!-- Enhanced Stats -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
+                    <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
+                        <div class="flex items-center mb-2">
+                            <i class="ph-bold ph-star text-yellow-400 text-2xl mr-2"></i>
+                            <span class="text-2xl font-bold">4.9</span>
+                        </div>
+                        <span class="text-sm text-white/80">Excellence Rating</span>
+                        <span class="text-xs text-white/60">(328 reviews)</span>
                     </div>
-                    <div class="flex items-center">
-                        <i class="ph-bold ph-users text-white/70 mr-2"></i>
-                        <span>Max {{ $tour->max_group_size ?? 12 }} people</span>
+                    
+                    <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
+                        <div class="flex items-center mb-2">
+                            <i class="ph-bold ph-users text-emerald-400 text-2xl mr-2"></i>
+                            <span class="text-2xl font-bold">{{ $tour->max_group_size ?? 12 }}</span>
+                        </div>
+                        <span class="text-sm text-white/80">Max Group Size</span>
+                        <span class="text-xs text-white/60">Intimate Experience</span>
                     </div>
-                    <div class="flex items-center">
-                        <i class="ph-bold ph-backpack text-white/70 mr-2"></i>
-                        <span>{{ ucfirst($tour->difficulty ?? 'moderate') }}</span>
+                    
+                    <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
+                        <div class="flex items-center mb-2">
+                            <i class="ph-bold ph-backpack text-blue-400 text-2xl mr-2"></i>
+                            <span class="text-2xl font-bold">{{ ucfirst($tour->difficulty ?? 'Moderate') }}</span>
+                        </div>
+                        <span class="text-sm text-white/80">Difficulty</span>
+                        <span class="text-xs text-white/60">Suitable for All</span>
                     </div>
+                    
+                    <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
+                        <div class="flex items-center mb-2">
+                            <i class="ph-bold ph-currency-dollar text-yellow-400 text-2xl mr-2"></i>
+                            <span class="text-2xl font-bold">${{ number_format($tour->base_price ?? 2999, 0) }}</span>
+                        </div>
+                        <span class="text-sm text-white/80">Starting Price</span>
+                        <span class="text-xs text-white/60">Per Person</span>
+                    </div>
+                </div>
+                
+                <!-- Enhanced CTA Buttons -->
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <button onclick="proceedToBooking()" class="px-8 py-4 bg-gradient-to-r from-emerald-500 to-blue-600 text-white rounded-xl font-bold text-lg hover:from-emerald-600 hover:to-blue-700 transition-all transform hover:scale-105 shadow-2xl">
+                        <i class="ph-bold ph-calendar-check mr-2"></i>Book This Adventure
+                    </button>
+                    <button onclick="scrollToSection('itinerary')" class="px-8 py-4 bg-white/20 backdrop-blur-sm text-white rounded-xl font-bold text-lg hover:bg-white/30 transition-all border border-white/30">
+                        <i class="ph-bold ph-map-trifold mr-2"></i>View Itinerary
+                    </button>
                 </div>
             </div>
         </div>
         
-        <!-- Floating Action Buttons -->
-        <div class="absolute bottom-8 right-8 flex gap-3">
-            <button onclick="shareTour()" class="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-colors">
+        <!-- Enhanced Floating Action Buttons -->
+        <div class="absolute bottom-8 right-8 flex flex-col gap-3">
+            <button onclick="shareTour()" class="w-14 h-14 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-all transform hover:scale-110 shadow-lg">
                 <i class="ph-bold ph-share-network text-xl"></i>
             </button>
-            <button onclick="favoriteTour()" class="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-colors">
+            <button onclick="favoriteTour()" class="w-14 h-14 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-all transform hover:scale-110 shadow-lg">
                 <i class="ph-bold ph-heart text-xl"></i>
             </button>
+            <button onclick="downloadBrochure()" class="w-14 h-14 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-all transform hover:scale-110 shadow-lg">
+                <i class="ph-bold ph-download text-xl"></i>
+            </button>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white/60 animate-bounce">
+            <i class="ph-bold ph-caret-double-down text-2xl"></i>
         </div>
     </div>
 
@@ -438,6 +506,44 @@ function favoriteTour() {
         icon.className = 'ph-bold ph-heart text-xl';
         showNotification('Removed from favorites', 'info');
     }
+}
+
+function downloadBrochure() {
+    // Create a simple brochure download
+    const tourData = {
+        name: '{{ $tour->name }}',
+        duration: '{{ $tour->duration_days }} days',
+        price: '${{ number_format($tour->base_price ?? 0, 0) }}',
+        location: '{{ $tour->location }}',
+        description: '{{ Str::limit($tour->description, 200) }}'
+    };
+    
+    const brochureContent = `
+TOUR BROCHURE
+================
+
+${tourData.name}
+${tourData.location}
+${tourData.duration} • Starting from ${tourData.price}
+
+${tourData.description}
+
+Book now at: ${window.location.href}
+
+© Reputable Tours - ${new Date().getFullYear()}
+    `;
+    
+    const blob = new Blob([brochureContent], { type: 'text/plain' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${tourData.name.replace(/\s+/g, '_')}_Brochure.txt`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    window.URL.revokeObjectURL(url);
+    
+    showNotification('Brochure downloaded successfully!', 'success');
 }
 
 function proceedToBooking() {
