@@ -239,6 +239,23 @@ let currentTourId = null;
 let currentViewMode = 'timeline';
 let draggedDay = null;
 
+// Initialize page - check for URL parameters
+document.addEventListener('DOMContentLoaded', function() {
+    // Check for tour_id in URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const tourIdFromUrl = urlParams.get('tour_id');
+    
+    if (tourIdFromUrl) {
+        // Auto-select the tour from URL parameter
+        const tourSelector = document.getElementById('tour-selector');
+        tourSelector.value = tourIdFromUrl;
+        
+        // Trigger the change event to load the tour
+        const event = new Event('change', { bubbles: true });
+        tourSelector.dispatchEvent(event);
+    }
+});
+
 // Tour selector change handler
 document.getElementById('tour-selector').addEventListener('change', function(e) {
     const tourId = e.target.value;
@@ -254,11 +271,30 @@ document.getElementById('tour-selector').addEventListener('change', function(e) 
 });
 
 function loadTourData(tourId) {
+    console.log('Loading tour data for tour ID:', tourId);
+    
     Promise.all([
-        fetch(`/api/tours/${tourId}`).then(response => response.json()),
-        fetch(`/admin/tours/${tourId}/itineraries`).then(response => response.json())
+        fetch(`/api/tours/${tourId}`).then(response => {
+            if (!response.ok) {
+                throw new Error(`Failed to fetch tour data: ${response.status}`);
+            }
+            return response.json();
+        }),
+        fetch(`/admin/tours/${tourId}/itineraries`).then(response => {
+            if (!response.ok) {
+                throw new Error(`Failed to fetch itineraries: ${response.status}`);
+            }
+            return response.json();
+        })
     ])
-    .then(([tourData, itineraries]) => {
+    .then(([tourData, itinerariesResponse]) => {
+        console.log('Tour data loaded:', tourData);
+        console.log('Itineraries response loaded:', itinerariesResponse);
+        
+        // Extract itineraries array from response
+        const itineraries = itinerariesResponse.data || itinerariesResponse;
+        console.log('Itineraries array:', itineraries);
+        
         // Update tour overview
         document.getElementById('tour-name').textContent = tourData.name;
         document.getElementById('tour-duration').textContent = tourData.duration_days;
@@ -273,7 +309,16 @@ function loadTourData(tourId) {
         initializeDays(tourData.duration_days, itineraries);
         updateProgress();
     })
-    .catch(error => console.error('Error loading tour:', error));
+    .catch(error => {
+        console.error('Error loading tour:', error);
+        // Show error message to user
+        showNotification('Error loading tour data: ' + error.message, 'error');
+        
+        // Reset to empty state
+        document.getElementById('itinerary-builder').classList.add('hidden');
+        document.getElementById('empty-state').classList.remove('hidden');
+        document.getElementById('tour-overview').classList.add('hidden');
+    });
 }
 
 function initializeDays(duration, existingItineraries = []) {
