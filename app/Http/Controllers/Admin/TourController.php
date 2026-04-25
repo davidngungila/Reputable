@@ -300,6 +300,42 @@ class TourController extends Controller
         return redirect()->back()->with('success', 'Destination created successfully.');
     }
 
+    public function editDestination(Destination $destination)
+    {
+        return view('admin.tours.destinations-edit', compact('destination'));
+    }
+
+    public function updateDestination(Request $request, Destination $destination)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'location' => 'required|string|max:255',
+            'coordinates' => 'nullable|array',
+            'coordinates.lat' => 'nullable|numeric',
+            'coordinates.lng' => 'nullable|numeric',
+            'highlights' => 'nullable|array',
+            'best_time_to_visit' => 'nullable|string',
+            'weather_info' => 'nullable|string',
+            'images' => 'nullable|array',
+            'status' => 'nullable|in:active,inactive',
+        ]);
+
+        $destination->update($validated);
+        return redirect()->route('admin.tours.destinations')->with('success', 'Destination updated successfully.');
+    }
+
+    public function destroyDestination(Destination $destination)
+    {
+        // Check if destination is linked to any tours
+        if ($destination->tours()->count() > 0) {
+            return redirect()->back()->with('error', 'Cannot delete destination. It is linked to ' . $destination->tours()->count() . ' tours.');
+        }
+
+        $destination->delete();
+        return redirect()->route('admin.tours.destinations')->with('success', 'Destination deleted successfully.');
+    }
+
     // Mountain Trekking Specific Methods
     public function kilimanjaroRoutes()
     {
