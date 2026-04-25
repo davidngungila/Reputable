@@ -52,22 +52,7 @@
                     Great Rift Valley escarpment views.
                 </p>
                 
-                <!-- Quick Stats -->
-                <div class="flex justify-center gap-6 mb-8 flex-wrap">
-                    <div class="bg-white/20 backdrop-blur-sm rounded-xl px-6 py-4 border border-white/30">
-                        <div class="text-2xl font-bold">325km²</div>
-                        <div class="text-sm text-white/80">Park Size</div>
-                    </div>
-                    <div class="bg-white/20 backdrop-blur-sm rounded-xl px-6 py-4 border border-white/30">
-                        <div class="text-2xl font-bold">400+</div>
-                        <div class="text-sm text-white/80">Bird Species</div>
-                    </div>
-                    <div class="bg-white/20 backdrop-blur-sm rounded-xl px-6 py-4 border border-white/30">
-                        <div class="text-2xl font-bold">1,200m</div>
-                        <div class="text-sm text-white/80">Altitude</div>
-                    </div>
-                </div>
-                
+                                
                 <!-- Enhanced CTA Buttons -->
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
                     <a href="{{ route('tours.index', ['destination' => 'Manyara']) }}" 
