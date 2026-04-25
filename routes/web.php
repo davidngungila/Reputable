@@ -198,6 +198,16 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'ensure.admin', 'act
     Route::get('/mountain/guide-assignments', [TourController::class, 'guideAssignments'])->name('mountain.guide-assignments');
     Route::post('/mountain/guide-assignments', [TourController::class, 'assignGuide'])->name('mountain.guide-assignments.assign');
 
+    // Things to Do - Activities
+    Route::resource('activities', ActivityController::class)->whereNumber('activity');
+    
+    // Things to Do Subpages
+    Route::get('/activities/view-all', [ActivityController::class, 'viewAllActivities'])->name('activities.view-all');
+    Route::get('/activities/cultural-tours', [ActivityController::class, 'culturalTours'])->name('activities.cultural-tours');
+    Route::get('/activities/beach-activities', [ActivityController::class, 'beachActivities'])->name('activities.beach-activities');
+    Route::get('/activities/wildlife-experiences', [ActivityController::class, 'wildlifeExperiences'])->name('activities.wildlife-experiences');
+    Route::get('/activities/management', [ActivityController::class, 'activitiesManagement'])->name('activities.management');
+
     // Inquiries Management
     Route::get('/inquiries', [InquiryController::class, 'index'])->name('inquiries.index');
     Route::get('/inquiries/{inquiry}', [InquiryController::class, 'show'])->name('inquiries.show');

@@ -104,10 +104,10 @@
                     <i class="ph ph-caret-down text-xs transition-transform" :class="open ? 'rotate-180' : ''"></i>
                 </button>
                 <div x-show="open" x-collapse class="pl-12 pr-4 py-2 space-y-1">
-                    <a href="#" class="block text-xs py-2 text-emerald-100/50 hover:text-white transition-colors">Kilimanjaro Routes</a>
-                    <a href="#" class="block text-xs py-2 text-emerald-100/50 hover:text-white transition-colors">Meru Climbing</a>
-                    <a href="#" class="block text-xs py-2 text-emerald-100/50 hover:text-white transition-colors">Equipment Management</a>
-                    <a href="#" class="block text-xs py-2 text-emerald-100/50 hover:text-white transition-colors">Guide Assignments</a>
+                    <a href="{{ route('admin.mountain.kilimanjaro-routes') }}" class="block text-xs py-2 text-emerald-100/50 hover:text-white transition-colors {{ request()->routeIs('admin.mountain.kilimanjaro-routes') ? 'text-emerald-400 font-bold' : '' }}">Kilimanjaro Routes</a>
+                    <a href="{{ route('admin.mountain.meru-climbing') }}" class="block text-xs py-2 text-emerald-100/50 hover:text-white transition-colors {{ request()->routeIs('admin.mountain.meru-climbing') ? 'text-emerald-400 font-bold' : '' }}">Meru Climbing</a>
+                    <a href="{{ route('admin.mountain.equipment-management') }}" class="block text-xs py-2 text-emerald-100/50 hover:text-white transition-colors {{ request()->routeIs('admin.mountain.equipment-management') ? 'text-emerald-400 font-bold' : '' }}">Equipment Management</a>
+                    <a href="{{ route('admin.mountain.guide-assignments') }}" class="block text-xs py-2 text-emerald-100/50 hover:text-white transition-colors {{ request()->routeIs('admin.mountain.guide-assignments') ? 'text-emerald-400 font-bold' : '' }}">Guide Assignments</a>
                 </div>
             </div>
             @endif
@@ -124,11 +124,11 @@
                     <i class="ph ph-caret-down text-xs transition-transform" :class="open ? 'rotate-180' : ''"></i>
                 </button>
                 <div x-show="open" x-collapse class="pl-12 pr-4 py-2 space-y-1">
-                    <a href="{{ route('things-to-do') }}" target="_blank" class="block text-xs py-2 text-emerald-100/50 hover:text-white transition-colors">View All Activities</a>
-                    <a href="#" class="block text-xs py-2 text-emerald-100/50 hover:text-white transition-colors">Activities Management</a>
-                    <a href="#" class="block text-xs py-2 text-emerald-100/50 hover:text-white transition-colors">Cultural Tours</a>
-                    <a href="#" class="block text-xs py-2 text-emerald-100/50 hover:text-white transition-colors">Beach Activities</a>
-                    <a href="#" class="block text-xs py-2 text-emerald-100/50 hover:text-white transition-colors">Wildlife Experiences</a>
+                    <a href="{{ route('admin.activities.view-all') }}" class="block text-xs py-2 text-emerald-100/50 hover:text-white transition-colors {{ request()->routeIs('admin.activities.view-all') ? 'text-emerald-400 font-bold' : '' }}">View All Activities</a>
+                    <a href="{{ route('admin.activities.management') }}" class="block text-xs py-2 text-emerald-100/50 hover:text-white transition-colors {{ request()->routeIs('admin.activities.management') ? 'text-emerald-400 font-bold' : '' }}">Activities Management</a>
+                    <a href="{{ route('admin.activities.cultural-tours') }}" class="block text-xs py-2 text-emerald-100/50 hover:text-white transition-colors {{ request()->routeIs('admin.activities.cultural-tours') ? 'text-emerald-400 font-bold' : '' }}">Cultural Tours</a>
+                    <a href="{{ route('admin.activities.beach-activities') }}" class="block text-xs py-2 text-emerald-100/50 hover:text-white transition-colors {{ request()->routeIs('admin.activities.beach-activities') ? 'text-emerald-400 font-bold' : '' }}">Beach Activities</a>
+                    <a href="{{ route('admin.activities.wildlife-experiences') }}" class="block text-xs py-2 text-emerald-100/50 hover:text-white transition-colors {{ request()->routeIs('admin.activities.wildlife-experiences') ? 'text-emerald-400 font-bold' : '' }}">Wildlife Experiences</a>
                 </div>
             </div>
             @endif
