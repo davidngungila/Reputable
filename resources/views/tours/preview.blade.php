@@ -35,8 +35,8 @@
                     <span class="px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-sm font-medium">
                         {{ ucfirst($tour->package_type ?? 'Safari Adventure') }}
                     </span>
-                    <span class="px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-sm font-medium">
-                        {{ $tour->duration_days }} Amazing Days
+                    <span class="px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-xs font-medium">
+                        {{ $tour->duration_days }} Days
                     </span>
                     <span class="px-3 py-1 bg-gradient-to-r from-emerald-500 to-blue-500 rounded-full text-sm font-medium shadow-lg">
                         <i class="ph-bold ph-sparkle mr-1"></i>Preview Mode
@@ -44,55 +44,16 @@
                 </div>
                 
                 <!-- Enhanced Title -->
-                <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+                <h1 class="text-2xl md:text-3xl font-bold mb-4 leading-tight">
                     <span class="bg-gradient-to-r from-white to-emerald-200 bg-clip-text text-transparent">
                         {{ $tour->name }}
                     </span>
                 </h1>
                 
                 <!-- Location with Icon -->
-                <div class="flex items-center text-xl text-white/90 mb-8">
-                    <i class="ph-bold ph-map-pin text-emerald-400 mr-3 text-2xl"></i>
+                <div class="flex items-center text-lg text-white/90 mb-6">
+                    <i class="ph-bold ph-map-pin text-emerald-400 mr-2 text-xl"></i>
                     <span>{{ $tour->location }}</span>
-                </div>
-                
-                <!-- Enhanced Stats -->
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
-                    <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
-                        <div class="flex items-center mb-2">
-                            <i class="ph-bold ph-star text-yellow-400 text-2xl mr-2"></i>
-                            <span class="text-2xl font-bold">4.9</span>
-                        </div>
-                        <span class="text-sm text-white/80">Excellence Rating</span>
-                        <span class="text-xs text-white/60">(328 reviews)</span>
-                    </div>
-                    
-                    <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
-                        <div class="flex items-center mb-2">
-                            <i class="ph-bold ph-users text-emerald-400 text-2xl mr-2"></i>
-                            <span class="text-2xl font-bold">{{ $tour->max_group_size ?? 12 }}</span>
-                        </div>
-                        <span class="text-sm text-white/80">Max Group Size</span>
-                        <span class="text-xs text-white/60">Intimate Experience</span>
-                    </div>
-                    
-                    <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
-                        <div class="flex items-center mb-2">
-                            <i class="ph-bold ph-backpack text-blue-400 text-2xl mr-2"></i>
-                            <span class="text-2xl font-bold">{{ ucfirst($tour->difficulty ?? 'Moderate') }}</span>
-                        </div>
-                        <span class="text-sm text-white/80">Difficulty</span>
-                        <span class="text-xs text-white/60">Suitable for All</span>
-                    </div>
-                    
-                    <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
-                        <div class="flex items-center mb-2">
-                            <i class="ph-bold ph-currency-dollar text-yellow-400 text-2xl mr-2"></i>
-                            <span class="text-2xl font-bold">${{ number_format($tour->base_price ?? 2999, 0) }}</span>
-                        </div>
-                        <span class="text-sm text-white/80">Starting Price</span>
-                        <span class="text-xs text-white/60">Per Person</span>
-                    </div>
                 </div>
                 
                 <!-- Enhanced CTA Buttons -->
