@@ -75,4 +75,9 @@ class Tour extends Model
     {
         return $this->belongsToMany(Staff::class, 'tour_guide_recommendations');
     }
+
+    public function guides(): BelongsToMany
+    {
+        return $this->belongsToMany(Staff::class, 'tour_guide_recommendations');
+    }
 }
