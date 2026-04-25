@@ -198,7 +198,7 @@
                             </a>
                         </div>
                         <div class="col-md-3 mb-3">
-                            <a href="{{ route('bookings.index') }}" class="btn btn-success btn-block">
+                            <a href="{{ route('admin.bookings.index') }}" class="btn btn-success btn-block">
                                 <i class="fas fa-calendar"></i> Manage Bookings
                             </a>
                         </div>
