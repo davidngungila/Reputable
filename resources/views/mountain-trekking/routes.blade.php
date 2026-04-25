@@ -5,13 +5,13 @@
 @section('content')
 <div class="min-h-screen bg-gradient-to-br from-gray-50 to-emerald-50">
     <!-- Enhanced Hero Section -->
-    <div class="relative bg-gradient-to-r from-emerald-600 to-blue-600 text-white">
+    <div class="relative bg-gradient-to-r from-emerald-800 to-orange-600 text-white">
         <div class="absolute inset-0 bg-black/20"></div>
         <div class="relative container mx-auto px-4 pt-24 pb-16">
             <div class="text-center max-w-4xl mx-auto">
                 <!-- Premium Badge -->
                 <div class="flex items-center justify-center gap-3 mb-6 flex-wrap">
-                    <span class="px-4 py-2 bg-gradient-to-r from-emerald-500 to-blue-600 text-white rounded-full text-sm font-bold shadow-lg">
+                    <span class="px-4 py-2 bg-gradient-to-r from-emerald-800 to-orange-600 text-white rounded-full text-sm font-bold shadow-lg">
                         <i class="ph-bold ph-map-trifold mr-2"></i>TREKKING ROUTES
                     </span>
                     <span class="px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-sm font-medium">
@@ -21,7 +21,7 @@
                 
                 <!-- Enhanced Title -->
                 <h1 class="text-4xl md:text-5xl font-bold mb-6">
-                    <span class="bg-gradient-to-r from-white to-emerald-200 bg-clip-text text-transparent">
+                    <span class="bg-gradient-to-r from-white to-emerald-300 bg-clip-text text-transparent">
                         Mountain Trekking Routes
                     </span>
                 </h1>
@@ -34,10 +34,10 @@
                 
                 <!-- Quick Navigation -->
                 <div class="flex justify-center gap-4 flex-wrap">
-                    <a href="#popular-routes" class="px-6 py-3 bg-white/20 backdrop-blur-sm text-white rounded-lg font-semibold hover:bg-white/30 transition-all border border-white/30">
+                    <a href="#popular-routes" class="px-6 py-3 bg-emerald-800 text-white rounded-lg font-semibold hover:bg-emerald-900 transition-colors">
                         <i class="ph-bold ph-star mr-2"></i>Popular Routes
                     </a>
-                    <a href="#route-comparison" class="px-6 py-3 bg-white/20 backdrop-blur-sm text-white rounded-lg font-semibold hover:bg-white/30 transition-all border border-white/30">
+                    <a href="#route-comparison" class="px-6 py-3 bg-orange-600 text-white rounded-lg font-semibold hover:bg-orange-700 transition-colors">
                         <i class="ph-bold ph-scales mr-2"></i>Compare Routes
                     </a>
                     <a href="#difficulty-guide" class="px-6 py-3 bg-white/20 backdrop-blur-sm text-white rounded-lg font-semibold hover:bg-white/30 transition-all border border-white/30">
@@ -63,12 +63,12 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Machame Route -->
                 <div class="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden hover:shadow-2xl transition-all transform hover:scale-105">
-                    <div class="h-48 bg-gradient-to-br from-emerald-400 to-blue-500 relative">
+                    <div class="h-48 bg-gradient-to-br from-emerald-700 to-orange-500 relative">
                         <div class="absolute inset-0 flex items-center justify-center">
                             <i class="ph-bold ph-mountains text-white text-6xl"></i>
                         </div>
                         <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1">
-                            <span class="text-sm font-bold text-emerald-700">Most Popular</span>
+                            <span class="text-sm font-bold text-emerald-800">Most Popular</span>
                         </div>
                         <div class="absolute bottom-4 left-4 bg-white/90 backdrop-blur-sm rounded-lg px-3 py-2">
                             <span class="text-xs font-bold text-gray-900">SUCCESS RATE: 85%</span>
@@ -103,7 +103,7 @@
                             <span class="px-2 py-1 bg-emerald-100 text-emerald-700 rounded text-xs font-medium">Good Acclimatization</span>
                             <span class="px-2 py-1 bg-emerald-100 text-emerald-700 rounded text-xs font-medium">Challenging</span>
                         </div>
-                        <button class="w-full px-4 py-3 bg-gradient-to-r from-emerald-600 to-blue-600 text-white rounded-lg font-semibold hover:from-emerald-700 hover:to-blue-700 transition-all">
+                        <button class="w-full px-4 py-3 bg-gradient-to-r from-emerald-800 to-orange-600 text-white rounded-lg font-semibold hover:from-emerald-900 hover:to-orange-700 transition-all">
                             <i class="ph-bold ph-info mr-2"></i>View Details
                         </button>
                     </div>
@@ -111,12 +111,12 @@
 
                 <!-- Marangu Route -->
                 <div class="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden hover:shadow-2xl transition-all transform hover:scale-105">
-                    <div class="h-48 bg-gradient-to-br from-blue-400 to-purple-500 relative">
+                    <div class="h-48 bg-gradient-to-br from-orange-500 to-red-500 relative">
                         <div class="absolute inset-0 flex items-center justify-center">
                             <i class="ph-bold ph-tent text-white text-6xl"></i>
                         </div>
                         <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1">
-                            <span class="text-sm font-bold text-blue-700">Classic Route</span>
+                            <span class="text-sm font-bold text-orange-800">Classic Route</span>
                         </div>
                         <div class="absolute bottom-4 left-4 bg-white/90 backdrop-blur-sm rounded-lg px-3 py-2">
                             <span class="text-xs font-bold text-gray-900">SUCCESS RATE: 75%</span>
@@ -151,7 +151,7 @@
                             <span class="px-2 py-1 bg-blue-100 text-blue-700 rounded text-xs font-medium">Beginner Friendly</span>
                             <span class="px-2 py-1 bg-blue-100 text-blue-700 rounded text-xs font-medium">Established</span>
                         </div>
-                        <button class="w-full px-4 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition-all">
+                        <button class="w-full px-4 py-3 bg-gradient-to-r from-orange-600 to-red-600 text-white rounded-lg font-semibold hover:from-orange-700 hover:to-red-700 transition-all">
                             <i class="ph-bold ph-info mr-2"></i>View Details
                         </button>
                     </div>
@@ -159,12 +159,12 @@
 
                 <!-- Lemosho Route -->
                 <div class="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden hover:shadow-2xl transition-all transform hover:scale-105">
-                    <div class="h-48 bg-gradient-to-br from-purple-400 to-pink-500 relative">
+                    <div class="h-48 bg-gradient-to-br from-emerald-600 to-orange-400 relative">
                         <div class="absolute inset-0 flex items-center justify-center">
                             <i class="ph-bold ph-compass text-white text-6xl"></i>
                         </div>
                         <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1">
-                            <span class="text-sm font-bold text-purple-700">Most Scenic</span>
+                            <span class="text-sm font-bold text-emerald-800">Most Scenic</span>
                         </div>
                         <div class="absolute bottom-4 left-4 bg-white/90 backdrop-blur-sm rounded-lg px-3 py-2">
                             <span class="text-xs font-bold text-gray-900">SUCCESS RATE: 90%</span>
@@ -199,7 +199,7 @@
                             <span class="px-2 py-1 bg-purple-100 text-purple-700 rounded text-xs font-medium">Remote</span>
                             <span class="px-2 py-1 bg-purple-100 text-purple-700 rounded text-xs font-medium">Wildlife</span>
                         </div>
-                        <button class="w-full px-4 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg font-semibold hover:from-purple-700 hover:to-pink-700 transition-all">
+                        <button class="w-full px-4 py-3 bg-gradient-to-r from-emerald-800 to-orange-600 text-white rounded-lg font-semibold hover:from-emerald-900 hover:to-orange-700 transition-all">
                             <i class="ph-bold ph-info mr-2"></i>View Details
                         </button>
                     </div>
@@ -207,12 +207,12 @@
 
                 <!-- Rongai Route -->
                 <div class="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden hover:shadow-2xl transition-all transform hover:scale-105">
-                    <div class="h-48 bg-gradient-to-br from-orange-400 to-red-500 relative">
+                    <div class="h-48 bg-gradient-to-br from-orange-600 to-yellow-500 relative">
                         <div class="absolute inset-0 flex items-center justify-center">
                             <i class="ph-bold ph-sun text-white text-6xl"></i>
                         </div>
                         <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1">
-                            <span class="text-sm font-bold text-orange-700">Dry Route</span>
+                            <span class="text-sm font-bold text-orange-800">Dry Route</span>
                         </div>
                         <div class="absolute bottom-4 left-4 bg-white/90 backdrop-blur-sm rounded-lg px-3 py-2">
                             <span class="text-xs font-bold text-gray-900">SUCCESS RATE: 80%</span>
@@ -353,7 +353,7 @@
     </section>
 
     <!-- Route Comparison Section -->
-    <section id="route-comparison" class="py-20 bg-gradient-to-br from-gray-50 to-emerald-50">
+    <section id="route-comparison" class="py-20 bg-gradient-to-br from-gray-50 to-emerald-100">
         <div class="container mx-auto px-4">
             <div class="text-center mb-16">
                 <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
@@ -367,7 +367,7 @@
             <div class="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
                 <div class="overflow-x-auto">
                     <table class="w-full">
-                        <thead class="bg-gradient-to-r from-emerald-600 to-blue-600 text-white">
+                        <thead class="bg-gradient-to-r from-emerald-800 to-orange-600 text-white">
                             <tr>
                                 <th class="px-6 py-4 text-left font-semibold">Route</th>
                                 <th class="px-6 py-4 text-center font-semibold">Duration</th>
@@ -516,7 +516,7 @@
                 <!-- Moderate -->
                 <div class="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-2xl p-8 border border-yellow-200">
                     <div class="text-center mb-6">
-                        <div class="w-20 h-20 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center text-white mx-auto mb-4">
+                        <div class="w-20 h-20 bg-gradient-to-br from-emerald-700 to-orange-500 rounded-full flex items-center justify-center text-white mx-auto mb-4">
                             <i class="ph-bold ph-walking text-3xl"></i>
                         </div>
                         <h3 class="text-2xl font-bold text-gray-900 mb-2">Moderate</h3>
@@ -547,7 +547,7 @@
                 <!-- High -->
                 <div class="bg-gradient-to-br from-orange-50 to-red-50 rounded-2xl p-8 border border-orange-200">
                     <div class="text-center mb-6">
-                        <div class="w-20 h-20 bg-gradient-to-br from-orange-400 to-red-500 rounded-full flex items-center justify-center text-white mx-auto mb-4">
+                        <div class="w-20 h-20 bg-gradient-to-br from-orange-600 to-red-500 rounded-full flex items-center justify-center text-white mx-auto mb-4">
                             <i class="ph-bold ph-hiking text-3xl"></i>
                         </div>
                         <h3 class="text-2xl font-bold text-gray-900 mb-2">High</h3>
@@ -641,7 +641,7 @@
     </section>
 
     <!-- CTA Section -->
-    <section class="py-20 bg-gradient-to-r from-emerald-600 to-blue-600 text-white">
+    <section class="py-20 bg-gradient-to-r from-emerald-800 to-orange-600 text-white">
         <div class="container mx-auto px-4 text-center">
             <h2 class="text-4xl md:text-5xl font-bold mb-6">
                 Ready to Choose Your Route?
@@ -652,7 +652,7 @@
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
                 <a href="{{ route('mountain-trekking') }}" 
-                   class="px-8 py-4 bg-white text-emerald-600 rounded-xl font-bold text-lg hover:bg-gray-100 transition-all transform hover:scale-105 shadow-2xl">
+                   class="px-8 py-4 bg-white text-emerald-800 rounded-xl font-bold text-lg hover:bg-gray-100 transition-all transform hover:scale-105 shadow-2xl">
                     <i class="ph-bold ph-mountains mr-2"></i>View All Treks
                 </a>
                 <a href="{{ route('inquiries.create') }}?tour_id=2" 
