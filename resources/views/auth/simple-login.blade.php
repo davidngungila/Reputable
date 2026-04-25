@@ -260,18 +260,7 @@
                 <p class="text-gray-600 font-medium">Administrator Portal</p>
             </div>
             
-            <!-- Credentials Information -->
-            <div class="credentials-info">
-                <h4>Sample Credentials</h4>
-                <div class="credential-item">
-                    <i class="ph-bold ph-user"></i>
-                    <span>Username: <strong class="text-emerald-600">admin@reputabletours.com</strong></span>
-                </div>
-                <div class="credential-item">
-                    <i class="ph-bold ph-lock"></i>
-                    <span>Password: <strong class="text-emerald-600">reputable2024</strong></span>
-                </div>
-            </div>
+           
             
             <!-- Login Form -->
             <form action="{{ route('simple.login') }}" method="POST" @submit="loading = true" class="space-y-2">

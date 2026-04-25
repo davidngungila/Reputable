@@ -68,40 +68,61 @@
                                 <p class="text-slate-400 font-medium text-sm tracking-tight">Our team will respond with a tailored quote within 24 hours.</p>
                             </div>
 
-                            <form class="space-y-8">
+                            @if(session('success'))
+                                <div class="mb-8 p-6 bg-emerald-50 border border-emerald-200 rounded-2xl">
+                                    <div class="flex items-center gap-4">
+                                        <i class="ph ph-check-circle text-emerald-600 text-2xl"></i>
+                                        <p class="text-emerald-800 font-bold">{{ session('success') }}</p>
+                                    </div>
+                                </div>
+                            @endif
+
+                            <form action="{{ route('inquiries.store') }}" method="POST" class="space-y-8">
+                                @csrf
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                                     <div class="space-y-3">
                                         <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest px-1">Full Name</label>
-                                        <input type="text" placeholder="Johnathan Doe" class="w-full bg-slate-50 border border-slate-100 rounded-2xl px-6 py-4 font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all placeholder:text-slate-300">
+                                        <input type="text" name="name" placeholder="Johnathan Doe" value="{{ old('name') }}" class="w-full bg-slate-50 border border-slate-100 rounded-2xl px-6 py-4 font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all placeholder:text-slate-300 @error('name') border-red-500 @enderror" required>
+                                        @error('name')
+                                            <p class="text-red-500 text-xs font-bold mt-1">{{ $message }}</p>
+                                        @enderror
                                     </div>
                                     <div class="space-y-3">
                                         <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest px-1">Email Connection</label>
-                                        <input type="email" placeholder="john@example.com" class="w-full bg-slate-50 border border-slate-100 rounded-2xl px-6 py-4 font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all placeholder:text-slate-300">
+                                        <input type="email" name="email" placeholder="john@example.com" value="{{ old('email') }}" class="w-full bg-slate-50 border border-slate-100 rounded-2xl px-6 py-4 font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all placeholder:text-slate-300 @error('email') border-red-500 @enderror" required>
+                                        @error('email')
+                                            <p class="text-red-500 text-xs font-bold mt-1">{{ $message }}</p>
+                                        @enderror
                                     </div>
                                 </div>
 
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                                     <div class="space-y-3">
-                                        <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest px-1">Trip Type</label>
-                                        <select class="w-full bg-slate-50 border border-slate-100 rounded-2xl px-6 py-4 font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all">
-                                            <option>Family Safari</option>
-                                            <option>Luxury Honeymoon</option>
-                                            <option>Kilimanjaro Trek</option>
-                                            <option>Custom Wildlife Tour</option>
+                                        <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest px-1">Interested Tour</label>
+                                        <select name="tour_id" class="w-full bg-slate-50 border border-slate-100 rounded-2xl px-6 py-4 font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all">
+                                            <option value="">Select a tour (optional)</option>
+                                            @foreach(App\Models\Tour::where('status', 'active')->get() as $tour)
+                                                <option value="{{ $tour->id }}" {{ old('tour_id') == $tour->id ? 'selected' : '' }}>
+                                                    {{ $tour->name }} - {{ $tour->duration_days }} days
+                                                </option>
+                                            @endforeach
                                         </select>
                                     </div>
                                     <div class="space-y-3">
-                                        <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest px-1">Travel Duration</label>
+                                        <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest px-1">Phone Number</label>
                                         <div class="relative">
-                                            <input type="text" placeholder="e.g. 10 Days" class="w-full bg-slate-50 border border-slate-100 rounded-2xl px-6 py-4 font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all placeholder:text-slate-300">
-                                            <span class="absolute right-6 top-1/2 -translate-y-1/2 text-slate-300"><i class="ph ph-calendar-blank"></i></span>
+                                            <input type="tel" name="phone" placeholder="+1 555 0123" value="{{ old('phone') }}" class="w-full bg-slate-50 border border-slate-100 rounded-2xl px-6 py-4 font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all placeholder:text-slate-300">
+                                            <span class="absolute right-6 top-1/2 -translate-y-1/2 text-slate-300"><i class="ph ph-phone"></i></span>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="space-y-3">
                                     <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest px-1">Personal Requests & Dreams</label>
-                                    <textarea rows="5" placeholder="Tell us about the animals you want to see or specific lodges you've heard about..." class="w-full bg-slate-50 border border-slate-100 rounded-2xl px-6 py-4 font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all placeholder:text-slate-300"></textarea>
+                                    <textarea name="message" rows="5" placeholder="Tell us about the animals you want to see or specific lodges you've heard about..." class="w-full bg-slate-50 border border-slate-100 rounded-2xl px-6 py-4 font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all placeholder:text-slate-300 @error('message') border-red-500 @enderror" required>{{ old('message') }}</textarea>
+                                    @error('message')
+                                        <p class="text-red-500 text-xs font-bold mt-1">{{ $message }}</p>
+                                    @enderror
                                 </div>
 
                                 <button type="submit" class="w-full py-6 bg-emerald-600 text-white font-black text-xs uppercase tracking-[0.3em] rounded-2xl shadow-2xl shadow-emerald-600/20 hover:bg-emerald-700 hover:scale-[1.02] transition-all duration-300">

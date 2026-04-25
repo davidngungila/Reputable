@@ -10,8 +10,10 @@ use App\Http\Controllers\Admin\BranchController;
 use App\Http\Controllers\Admin\DepartmentController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\TourController;
+use App\Http\Controllers\Admin\InquiryController;
 use App\Http\Controllers\Public\TourController as PublicTourController;
 use App\Http\Controllers\Public\BookingController as PublicBookingController;
+use App\Http\Controllers\Public\InquiryController as PublicInquiryController;
 use App\Http\Controllers\Admin\ItineraryBuilderController;
 use App\Http\Controllers\Admin\ExpenseController;
 use App\Http\Controllers\Admin\SystemSettingsController;
@@ -107,14 +109,16 @@ Route::get('/bookings/{id}/checkout', [PublicBookingController::class, 'checkout
 Route::get('/bookings/{id}/invoice', [PublicBookingController::class, 'downloadInvoice'])->name('bookings.invoice');
 Route::get('/bookings/{id}/invoice/preview', [PublicBookingController::class, 'previewInvoice'])->name('bookings.invoice.preview');
 
+// Public Inquiry Routes
+Route::get('/contact/inquiry', [PublicInquiryController::class, 'create'])->name('inquiries.create');
+Route::post('/contact/inquiry', [PublicInquiryController::class, 'store'])->name('inquiries.store');
+
 Route::prefix('client')->name('client.')->middleware(['auth'])->group(function () {
     Route::get('/dashboard', [ClientDashboardController::class, 'index'])->name('dashboard');
 });
 
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'ensure.admin', 'activity.log'])->group(function () {
-    Route::get('/dashboard', function () {
-    return view('admin.simple-dashboard');
-})->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     // Organization Management
     Route::resource('organizations', OrganizationController::class);
@@ -184,6 +188,14 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'ensure.admin', 'act
     Route::post('/tours/itinerary-builder/{tour}', [ItineraryBuilderController::class, 'save'])->whereNumber('tour')->name('tours.itinerary-builder.save');
     Route::get('/tours/availability-pricing', function () { return view('admin.tours.availability-pricing'); })->name('tours.availability-pricing');
     Route::get('/tours/destinations', function () { return view('admin.tours.destinations'); })->name('tours.destinations');
+
+    // Inquiries Management
+    Route::get('/inquiries', [InquiryController::class, 'index'])->name('inquiries.index');
+    Route::get('/inquiries/{inquiry}', [InquiryController::class, 'show'])->name('inquiries.show');
+    Route::put('/inquiries/{inquiry}', [InquiryController::class, 'update'])->name('inquiries.update');
+    Route::delete('/inquiries/{inquiry}', [InquiryController::class, 'destroy'])->name('inquiries.destroy');
+    Route::post('/inquiries/{inquiry}/respond', [InquiryController::class, 'markAsResponded'])->name('inquiries.respond');
+    Route::post('/inquiries/{inquiry}/close', [InquiryController::class, 'markAsClosed'])->name('inquiries.close');
 
     // Operations
     Route::prefix('operations')->name('operations.')->group(function () {

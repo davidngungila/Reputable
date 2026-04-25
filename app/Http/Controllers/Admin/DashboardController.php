@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Booking;
 use App\Models\Tour;
+use App\Models\Inquiry;
 
 class DashboardController extends Controller
 {
@@ -18,6 +19,8 @@ class DashboardController extends Controller
             'active_packages' => Tour::where('status', 'active')->count(),
             'pending_bookings' => Booking::where('status', 'pending')->count(),
             'confirmed_bookings' => Booking::where('status', 'confirmed')->count(),
+            'total_inquiries' => Inquiry::count(),
+            'pending_inquiries' => Inquiry::where('status', 'pending')->count(),
         ];
 
         $recentBookings = Booking::with('tour')
@@ -31,6 +34,11 @@ class DashboardController extends Controller
             ->limit(6)
             ->get();
 
-        return view('admin.dashboard', compact('stats', 'recentBookings', 'upcomingBookings'));
+        $recentInquiries = Inquiry::with('tour')
+            ->latest()
+            ->limit(5)
+            ->get();
+
+        return view('admin.dashboard', compact('stats', 'recentBookings', 'upcomingBookings', 'recentInquiries'));
     }
 }
