@@ -274,7 +274,7 @@ function loadTourData(tourId) {
     console.log('Loading tour data for tour ID:', tourId);
     
     Promise.all([
-        fetch(`/api/tours/${tourId}`).then(response => {
+        fetch(`/admin/api/tours/${tourId}`).then(response => {
             if (!response.ok) {
                 throw new Error(`Failed to fetch tour data: ${response.status}`);
             }
