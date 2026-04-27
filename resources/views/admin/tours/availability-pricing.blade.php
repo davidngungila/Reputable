@@ -1,14 +1,14 @@
 @extends('layouts.admin')
 
-@section('title', 'Advanced Availability & Pricing Management')
+@section('title', 'Advanced Pricing Management')
 
 @section('content')
 <div class="p-6 bg-gray-50 min-h-screen">
     <!-- Header with Statistics -->
     <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-8">
         <div>
-            <h1 class="text-3xl font-bold text-gray-900 mb-2">Advanced Availability & Pricing</h1>
-            <p class="text-gray-600">Comprehensive tour availability and pricing management system</p>
+            <h1 class="text-3xl font-bold text-gray-900 mb-2">Advanced Pricing</h1>
+            <p class="text-gray-600">Comprehensive tour pricing management system</p>
         </div>
         <div class="flex gap-3 mt-4 lg:mt-0">
             <button onclick="exportPricing()" class="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors text-sm font-medium">
