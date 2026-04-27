@@ -325,7 +325,7 @@
             
             <div class="flex items-center gap-4">
                 <!-- Mobile Toggle -->
-                <button @click="mobileMenuOpen = true" class="lg:hidden w-12 h-12 bg-slate-50 text-slate-900 rounded-2xl flex items-center justify-center hover:bg-emerald-600 hover:text-white transition-all relative z-50">
+                <button @click="mobileMenuOpen = true" class="block lg:hidden w-12 h-12 bg-slate-50 text-slate-900 rounded-2xl flex items-center justify-center hover:bg-emerald-600 hover:text-white transition-all relative z-50">
                     <i class="ph ph-list text-2xl"></i>
                 </button>
               
