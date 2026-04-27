@@ -31,6 +31,7 @@ class DatabaseSeeder extends Seeder
             SampleUsersSeeder::class,
             DefaultStaffUsersSeeder::class,
             DefaultIntegrationsSettingsSeeder::class,
+            DestinationsSeeder::class,
             TourSeeder::class,
             ItinerarySeeder::class,
             ClientDemoSeeder::class,
