@@ -451,13 +451,18 @@
                 <h4 class="font-bold mb-6 text-emerald-500">Contact Info</h4>
                 <ul class="space-y-4 text-sm text-slate-400">
                     <li class="flex items-center gap-3">
-                        <i class="ph ph-phone text-emerald-500"></i> 
+                        <i class="ph ph-whatsapp-logo text-emerald-500"></i> 
+                        <a href="https://wa.me/255675255523" target="_blank" class="hover:text-white transition-colors">+255 675 255 523</a>
                     </li>
                     <li class="flex items-center gap-3">
                         <i class="ph ph-envelope text-emerald-500"></i> 
+                        <a href="mailto:paradiseadventure@gmail.com" class="hover:text-white transition-colors">paradiseadventure@gmail.com</a>
                     </li>
                     <li class="flex items-center gap-3 font-bold">
-                        <i class="ph ph-map-pin text-emerald-500"></i> Moshi, Tanzania
+                        <i class="ph ph-map-pin text-emerald-500"></i> NSSF Commercial Complex, Moshi
+                    </li>
+                    <li class="flex items-center gap-3 text-xs">
+                        <i class="ph ph-envelope text-emerald-500"></i> P.O Box 25212, Tanzania
                     </li>
                 </ul>
             </div>
@@ -485,7 +490,7 @@
     </footer>
 
     <!-- WhatsApp Floating Button -->
-    <a href="https://wa.me/255683163219" target="_blank" class="fixed bottom-8 right-8 z-50 w-16 h-16 bg-green-500 text-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 hover:bg-green-600 transition-all">
+    <a href="https://wa.me/255675255523" target="_blank" class="fixed bottom-8 right-8 z-50 w-16 h-16 bg-green-500 text-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 hover:bg-green-600 transition-all">
         <i class="ph ph-whatsapp-logo text-3xl"></i>
     </a>
 

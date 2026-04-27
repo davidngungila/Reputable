@@ -29,7 +29,8 @@
                     <div class="grid gap-8">
                         @foreach([
                             ['label' => 'Official Email', 'val' => 'paradiseadventure@gmail.com', 'icon' => 'envelope-simple', 'sub' => 'Response within 4 hours'],
-                            ['label' => 'Base Office', 'val' => 'Moshi, Tanzania', 'icon' => 'map-pin-line', 'sub' => 'Foothills of Kilimanjaro']
+                            ['label' => 'WhatsApp', 'val' => '+255 675 255 523', 'icon' => 'whatsapp-logo', 'sub' => 'Instant Response Available'],
+                            ['label' => 'Base Office', 'val' => 'NSSF Commercial Complex, Moshi', 'icon' => 'map-pin-line', 'sub' => 'P.O Box 25212, Tanzania']
                         ] as $item)
                         <div class="flex items-start gap-6 group">
                             <div class="w-14 h-14 rounded-2xl bg-slate-50 text-slate-400 flex items-center justify-center text-2xl group-hover:bg-emerald-600 group-hover:text-white group-hover:shadow-xl group-hover:shadow-emerald-500/20 transition-all duration-500">
@@ -37,7 +38,13 @@
                             </div>
                             <div>
                                 <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">{{ $item['label'] }}</p>
-                                <h4 class="text-lg font-black text-slate-900 mb-1">{{ $item['val'] }}</h4>
+                                @if($item['label'] === 'WhatsApp')
+                                    <h4 class="text-lg font-black text-slate-900 mb-1">
+                                        <a href="https://wa.me/255675255523" target="_blank" class="hover:text-emerald-600 transition-colors">{{ $item['val'] }}</a>
+                                    </h4>
+                                @else
+                                    <h4 class="text-lg font-black text-slate-900 mb-1">{{ $item['val'] }}</h4>
+                                @endif
                                 <p class="text-xs font-bold text-slate-400">{{ $item['sub'] }}</p>
                             </div>
                         </div>
@@ -149,9 +156,9 @@
         <!-- Interactive Overlay -->
         <div class="absolute inset-x-6 top-10 flex justify-between items-start pointer-events-none">
             <div class="bg-white/90 backdrop-blur-xl p-8 rounded-[2rem] shadow-2xl border border-white/50 pointer-events-auto max-w-sm transition-all duration-500 group-hover:translate-x-2">
-                <h4 class="text-2xl font-black text-slate-900 mb-1">Moshi, Tanzania</h4>
-                <p class="text-emerald-600 font-bold text-sm mb-4">Visit our base camp</p>
-                <p class="text-slate-500 text-xs leading-relaxed mb-6">Located at the foothills of Mount Kilimanjaro, our headquarters is the starting point for all our epic adventures.</p>
+                <h4 class="text-2xl font-black text-slate-900 mb-1">NSSF Commercial Complex</h4>
+                <p class="text-emerald-600 font-bold text-sm mb-4">Moshi, Tanzania</p>
+                <p class="text-slate-500 text-xs leading-relaxed mb-6">P.O Box 25212, Moshi-Tanzania. Located at the foothills of Mount Kilimanjaro, our headquarters is the starting point for all our epic adventures.</p>
                 <a href="https://maps.app.goo.gl/moshi-tanzania" target="_blank" class="inline-flex items-center gap-2 text-slate-900 font-black text-[10px] uppercase tracking-widest hover:text-emerald-600 transition-colors">
                     <i class="ph ph-map-trifold text-lg"></i>
                     View Moshi Map

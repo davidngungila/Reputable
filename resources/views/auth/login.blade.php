@@ -181,7 +181,7 @@
             <div class="absolute inset-0 w-16 h-16 rounded-full border-t-2 border-emerald-500 animate-spin"></div>
         </div>
 
-        <h1 class="text-2xl font-serif text-white mb-2 tracking-tight">LAU Paradise Adventure</h1>
+        <h1 class="text-2xl font-serif text-white mb-2 tracking-tight">Adventure</h1>
         <p class="text-emerald-500 font-bold text-[10px] uppercase tracking-[0.4em] mb-6">Authentic Safaris & Expeditions</p>
 
         <div class="progress-line mb-6">
