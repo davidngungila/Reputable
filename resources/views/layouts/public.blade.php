@@ -324,15 +324,14 @@
                 </div>
             
             <div class="flex items-center gap-4">
+                <!-- Mobile Toggle -->
+                <button @click="mobileMenuOpen = true" class="lg:hidden w-12 h-12 bg-slate-50 text-slate-900 rounded-2xl flex items-center justify-center hover:bg-emerald-600 hover:text-white transition-all relative z-50">
+                    <i class="ph ph-list text-2xl"></i>
+                </button>
               
                 <a href="/tours" class="hidden md:inline-flex items-center gap-2 text-sm font-semibold text-white bg-emerald-600 px-6 py-2.5 rounded-full hover:bg-emerald-700 shadow-lg shadow-emerald-600/20 transition-all">
                     Book Now
                 </a>
-                
-                <!-- Mobile Toggle -->
-                <button @click="mobileMenuOpen = true" class="lg:hidden w-12 h-12 bg-slate-50 text-slate-900 rounded-2xl flex items-center justify-center hover:bg-emerald-600 hover:text-white transition-all">
-                    <i class="ph ph-list text-2xl"></i>
-                </button>
             </div>
         </div>
         <div class="nav-border-animate"></div>
