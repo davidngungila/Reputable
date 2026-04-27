@@ -35,6 +35,9 @@ class DatabaseSeeder extends Seeder
             TourSeeder::class,
             ItinerarySeeder::class,
             ClientDemoSeeder::class,
+            KilimanjaroRoutesSeeder::class,
+            MeruClimbingSeeder::class,
+            EquipmentManagementSeeder::class,
         ]);
     }
 }

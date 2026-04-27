@@ -42,6 +42,14 @@ Route::get('/destinations', function () {
     return view('destinations', compact('destinations'));
 })->name('destinations');
 
+Route::get('/destinations/{id}', function ($id) {
+    $destination = \App\Models\Destination::find($id);
+    if (!$destination) {
+        abort(404);
+    }
+    return view('destination-detail', compact('destination'));
+})->name('destinations.show');
+
 Route::get('/things-to-do', function () {
     return view('things-to-do');
 })->name('things-to-do');
