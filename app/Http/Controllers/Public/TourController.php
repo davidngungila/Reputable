@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Public;
 
 use App\Http\Controllers\Controller;
 use App\Models\Tour;
+use App\Models\Destination;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Http\Response;
@@ -13,7 +14,8 @@ class TourController extends Controller
     public function home(): View
     {
         $featuredTours = Tour::where('status', 'active')->where('featured', true)->take(3)->get();
-        return view('home', compact('featuredTours'));
+        $destinations = Destination::where('status', 'active')->latest()->take(4)->get();
+        return view('home', compact('featuredTours', 'destinations'));
     }
 
     public function index(Request $request): View|Response

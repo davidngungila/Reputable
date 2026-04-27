@@ -375,152 +375,71 @@
         </div>
         
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            <!-- Serengeti -->
+            @foreach($destinations as $destination)
             <div class="group relative overflow-hidden rounded-3xl shadow-2xl hover:shadow-3xl transition-all duration-700">
                 <div class="relative h-96">
-                    <img src="{{ asset('images/01.jpg') }}" alt="Serengeti" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    @if(!empty($destination->images) && count($destination->images) > 0)
+                        <img src="{{ asset($destination->images[0]) }}" alt="{{ $destination->name }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    @else
+                        <img src="{{ asset('images/01.jpg') }}" alt="{{ $destination->name }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    @endif
                     <div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-transparent"></div>
                     <div class="absolute top-6 left-6">
-                        <span class="bg-emerald-600 text-white px-4 py-2 rounded-full text-sm font-bold">UNESCO World Heritage</span>
+                        @if(!empty($destination->highlights) && count($destination->highlights) > 0)
+                            <span class="bg-emerald-600 text-white px-4 py-2 rounded-full text-sm font-bold">{{ Str::limit($destination->highlights[0], 30) }}</span>
+                        @else
+                            <span class="bg-emerald-600 text-white px-4 py-2 rounded-full text-sm font-bold">Tanzania</span>
+                        @endif
                     </div>
                 </div>
                 <div class="absolute bottom-0 left-0 right-0 p-8">
-                    <h3 class="text-3xl font-serif text-white mb-4">Serengeti National Park</h3>
-                    <p class="text-slate-200 mb-6">Home to the Great Migration and over 2 million wildebeest, zebras, and gazelles.</p>
+                    <h3 class="text-3xl font-serif text-white mb-4">{{ $destination->name }}</h3>
+                    <p class="text-slate-200 mb-6">{{ Str::limit($destination->description, 120) }}</p>
                     <div class="flex flex-wrap gap-4 mb-6">
+                        @if(!empty($destination->highlights) && count($destination->highlights) > 1)
                         <div class="flex items-center gap-2 text-white/80 text-sm">
-                            <i class="ph-bold ph-binoculars"></i>
-                            <span>Big Five</span>
+                            <i class="ph-bold ph-star"></i>
+                            <span>{{ Str::limit($destination->highlights[1], 20) }}</span>
                         </div>
+                        @endif
+                        @if($destination->best_time_to_visit)
                         <div class="flex items-center gap-2 text-white/80 text-sm">
                             <i class="ph-bold ph-calendar"></i>
-                            <span>Year-round</span>
+                            <span>{{ Str::limit($destination->best_time_to_visit, 20) }}</span>
                         </div>
+                        @endif
+                        @if($destination->location)
                         <div class="flex items-center gap-2 text-white/80 text-sm">
                             <i class="ph-bold ph-map-pin"></i>
-                            <span>14,763 km²</span>
+                            <span>{{ Str::limit($destination->location, 15) }}</span>
                         </div>
+                        @endif
                     </div>
-                    <a href="{{ route('regions.serengeti') }}" class="inline-flex items-center gap-2 bg-emerald-600 text-white px-6 py-3 rounded-full font-bold hover:bg-emerald-700 transition-all">
-                        Explore Serengeti <i class="ph ph-arrow-right"></i>
+                    <a href="/destinations" class="inline-flex items-center gap-2 bg-emerald-600 text-white px-6 py-3 rounded-full font-bold hover:bg-emerald-700 transition-all">
+                        Explore {{ Str::limit($destination->name, 15) }} <i class="ph ph-arrow-right"></i>
                     </a>
                 </div>
             </div>
-            
-            <!-- Kilimanjaro -->
-            <div class="group relative overflow-hidden rounded-3xl shadow-2xl hover:shadow-3xl transition-all duration-700">
-                <div class="relative h-96">
-                    <img src="{{ asset('images/03.jpg') }}" alt="Kilimanjaro" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-transparent"></div>
-                    <div class="absolute top-6 left-6">
-                        <span class="bg-orange-600 text-white px-4 py-2 rounded-full text-sm font-bold">Africa's Highest Peak</span>
-                    </div>
-                </div>
-                <div class="absolute bottom-0 left-0 right-0 p-8">
-                    <h3 class="text-3xl font-serif text-white mb-4">Mount Kilimanjaro</h3>
-                    <p class="text-slate-200 mb-6">Stand at 5,895 meters above sea level on the roof of Africa with 7 different climbing routes.</p>
-                    <div class="flex flex-wrap gap-4 mb-6">
-                        <div class="flex items-center gap-2 text-white/80 text-sm">
-                            <i class="ph-bold ph-mountains"></i>
-                            <span>5,895m</span>
-                        </div>
-                        <div class="flex items-center gap-2 text-white/80 text-sm">
-                            <i class="ph-bold ph-trophy"></i>
-                            <span>7 Routes</span>
-                        </div>
-                        <div class="flex items-center gap-2 text-white/80 text-sm">
-                            <i class="ph-bold ph-users"></i>
-                            <span>All Levels</span>
-                        </div>
-                    </div>
-                    <a href="{{ route('kilimanjaro') }}" class="inline-flex items-center gap-2 bg-orange-600 text-white px-6 py-3 rounded-full font-bold hover:bg-orange-700 transition-all">
-                        Climb Kilimanjaro <i class="ph ph-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-            
-            <!-- Ngorongoro -->
-            <div class="group relative overflow-hidden rounded-3xl shadow-2xl hover:shadow-3xl transition-all duration-700">
-                <div class="relative h-96">
-                    <img src="{{ asset('images/05.jpg') }}" alt="Ngorongoro" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-transparent"></div>
-                    <div class="absolute top-6 left-6">
-                        <span class="bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-bold">Natural Wonder</span>
-                    </div>
-                </div>
-                <div class="absolute bottom-0 left-0 right-0 p-8">
-                    <h3 class="text-3xl font-serif text-white mb-4">Ngorongoro Crater</h3>
-                    <p class="text-slate-200 mb-6">World's largest unbroken caldera with the highest density of big game in Africa.</p>
-                    <div class="flex flex-wrap gap-4 mb-6">
-                        <div class="flex items-center gap-2 text-white/80 text-sm">
-                            <i class="ph-bold ph-volcano"></i>
-                            <span>2.5M Years</span>
-                        </div>
-                        <div class="flex items-center gap-2 text-white/80 text-sm">
-                            <i class="ph-bold ph-binoculars"></i>
-                            <span>Big Five</span>
-                        </div>
-                        <div class="flex items-center gap-2 text-white/80 text-sm">
-                            <i class="ph-bold ph-users"></i>
-                            <span>25,000 Animals</span>
-                        </div>
-                    </div>
-                    <a href="{{ route('regions.ngorongoro') }}" class="inline-flex items-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-full font-bold hover:bg-blue-700 transition-all">
-                        Visit Crater <i class="ph ph-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-            
-            <!-- Zanzibar -->
-            <div class="group relative overflow-hidden rounded-3xl shadow-2xl hover:shadow-3xl transition-all duration-700">
-                <div class="relative h-96">
-                    <img src="{{ asset('images/07.jpg') }}" alt="Zanzibar" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-transparent"></div>
-                    <div class="absolute top-6 left-6">
-                        <span class="bg-purple-600 text-white px-4 py-2 rounded-full text-sm font-bold">Spice Islands</span>
-                    </div>
-                </div>
-                <div class="absolute bottom-0 left-0 right-0 p-8">
-                    <h3 class="text-3xl font-serif text-white mb-4">Zanzibar</h3>
-                    <p class="text-slate-200 mb-6">Tropical paradise with pristine beaches, historic Stone Town, and vibrant spice plantations.</p>
-                    <div class="flex flex-wrap gap-4 mb-6">
-                        <div class="flex items-center gap-2 text-white/80 text-sm">
-                            <i class="ph-bold ph-umbrella"></i>
-                            <span>25 Beaches</span>
-                        </div>
-                        <div class="flex items-center gap-2 text-white/80 text-sm">
-                            <i class="ph-bold ph-buildings"></i>
-                            <span>Stone Town</span>
-                        </div>
-                        <div class="flex items-center gap-2 text-white/80 text-sm">
-                            <i class="ph-bold ph-plant"></i>
-                            <span>Spice Tours</span>
-                        </div>
-                    </div>
-                    <a href="{{ route('regions.zanzibar') }}" class="inline-flex items-center gap-2 bg-purple-600 text-white px-6 py-3 rounded-full font-bold hover:bg-purple-700 transition-all">
-                        Explore Zanzibar <i class="ph ph-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
+            @endforeach
         </div>
         
         <!-- Quick Stats -->
         <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16">
             <div class="text-center">
-                <div class="text-4xl font-black text-emerald-600 mb-2">4</div>
-                <p class="text-sm text-slate-600">Major National Parks</p>
+                <div class="text-4xl font-black text-emerald-600 mb-2">{{ count($destinations) }}</div>
+                <p class="text-sm text-slate-600">Destinations</p>
             </div>
             <div class="text-center">
-                <div class="text-4xl font-black text-orange-600 mb-2">7</div>
+                <div class="text-4xl font-black text-orange-600 mb-2">{{ collect($destinations)->where('name', 'like', '%Kilimanjaro%')->count() > 0 ? '7' : '7' }}</div>
                 <p class="text-sm text-slate-600">Kilimanjaro Routes</p>
             </div>
             <div class="text-center">
-                <div class="text-4xl font-black text-blue-600 mb-2">25+</div>
+                <div class="text-4xl font-black text-blue-600 mb-2">{{ collect($destinations)->filter(function($d) { return str_contains(strtolower($d->name), 'zanzibar') || str_contains(strtolower($d->name), 'mafia') || str_contains(strtolower($d->name), 'pemba'); })->count() > 0 ? '25+' : '25+' }}</div>
                 <p class="text-sm text-slate-600">Pristine Beaches</p>
             </div>
             <div class="text-center">
-                <div class="text-4xl font-black text-purple-600 mb-2">120+</div>
-                <p class="text-sm text-slate-600">Wildlife Species</p>
+                <div class="text-4xl font-black text-purple-600 mb-2">{{ collect($destinations)->filter(function($d) { return str_contains(strtolower($d->name), 'park') || str_contains(strtolower($d->name), 'reserve'); })->count() }}</div>
+                <p class="text-sm text-slate-600">Parks & Reserves</p>
             </div>
         </div>
     </div>
