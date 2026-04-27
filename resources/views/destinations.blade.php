@@ -62,286 +62,67 @@
             <div id="destination-grid-container">
     <!-- Destinations Grid -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-                <!-- Serengeti National Park -->
-                <div class="group bg-white rounded-[2rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border border-slate-100">
+        @foreach($destinations as $destination)
+        <div class="group bg-white rounded-[2rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border border-slate-100">
             <div class="relative h-64 overflow-hidden">
-                                <img src="{{ asset('images/01.jpg') }}" alt="Serengeti National Park" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                @if(!empty($destination->images) && count($destination->images) > 0)
+                    <img src="{{ asset($destination->images[0]) }}" alt="{{ $destination->name }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                @else
+                    <img src="{{ asset('images/01.jpg') }}" alt="{{ $destination->name }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                @endif
                 <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-md p-2 rounded-full text-emerald-500 shadow-sm">
                     <i class="ph-bold ph-heart text-xl"></i>
                 </div>
             </div>
             <div class="p-8">
                 <div class="flex items-center gap-3 text-xs font-bold text-emerald-600 uppercase tracking-widest mb-4">
-                    <span class="flex items-center gap-1"><i class="ph ph-map-pin"></i> Northern Circuit</span>
+                    <span class="flex items-center gap-1"><i class="ph ph-map-pin"></i> {{ $destination->location }}</span>
+                    @if(!empty($destination->highlights) && count($destination->highlights) > 0)
                     <span class="w-1 h-1 bg-slate-300 rounded-full"></span>
-                    <span class="flex items-center gap-1"><i class="ph ph-star"></i> UNESCO World Heritage</span>
+                    <span class="flex items-center gap-1"><i class="ph ph-star"></i> {{ $destination->highlights[0] }}</span>
+                    @endif
                 </div>
-                <h3 class="text-xl font-bold text-slate-900 mb-4 group-hover:text-emerald-600 transition-colors">Serengeti National Park</h3>
-                <p class="text-slate-500 text-sm leading-relaxed mb-8">Home to the Great Migration and Africa's Big Five. Witness millions of wildebeest crossing the endless plains in nature's greatest spectacle.</p>
+                <h3 class="text-xl font-bold text-slate-900 mb-4 group-hover:text-emerald-600 transition-colors">{{ $destination->name }}</h3>
+                <p class="text-slate-500 text-sm leading-relaxed mb-8">{{ Str::limit($destination->description, 150) }}</p>
                 
                 <div class="grid grid-cols-2 gap-4 mb-6">
+                    @if(!empty($destination->highlights) && count($destination->highlights) > 1)
                     <div class="bg-emerald-50 rounded-xl p-3 border border-emerald-100">
                         <div class="flex items-center gap-2 text-emerald-700 mb-1">
+                            <i class="ph-bold ph-star"></i>
+                            <span class="font-bold text-sm">Highlight</span>
+                        </div>
+                        <p class="text-emerald-900 font-black text-sm">{{ Str::limit($destination->highlights[1], 20) }}</p>
+                    </div>
+                    @endif
+                    @if(!empty($destination->highlights) && count($destination->highlights) > 2)
+                    <div class="bg-blue-50 rounded-xl p-3 border border-blue-100">
+                        <div class="flex items-center gap-2 text-blue-700 mb-1">
                             <i class="ph-bold ph-map-pin"></i>
-                            <span class="font-bold text-sm">Area</span>
+                            <span class="font-bold text-sm">Feature</span>
                         </div>
-                        <p class="text-emerald-900 font-black text-lg">14,763 km²</p>
+                        <p class="text-blue-900 font-black text-sm">{{ Str::limit($destination->highlights[2], 20) }}</p>
                     </div>
-                    <div class="bg-blue-50 rounded-xl p-3 border border-blue-100">
-                        <div class="flex items-center gap-2 text-blue-700 mb-1">
-                            <i class="ph-bold ph-users"></i>
-                            <span class="font-bold text-sm">Wildlife</span>
-                        </div>
-                        <p class="text-blue-900 font-black text-lg">2M+ Animals</p>
-                    </div>
+                    @endif
                 </div>
                 
                 <div class="flex items-center justify-between">
                     <div>
                         <span class="text-slate-400 text-[10px] font-bold uppercase tracking-widest block mb-1">Best Time</span>
-                        <span class="text-lg font-bold text-slate-900">Year-round</span>
+                        <span class="text-lg font-bold text-slate-900">{{ Str::limit($destination->best_time_to_visit ?? 'Year-round', 15) }}</span>
                     </div>
-                    <a href="{{ route('regions.serengeti') }}" class="inline-flex items-center gap-2 bg-slate-900 text-white px-6 py-3 rounded-2xl font-bold hover:bg-emerald-600 transition-colors">
+                    <a href="/tours" class="inline-flex items-center gap-2 bg-slate-900 text-white px-6 py-3 rounded-2xl font-bold hover:bg-emerald-600 transition-colors">
                         Explore <i class="ph ph-arrow-right"></i>
                     </a>
                 </div>
             </div>
         </div>
-        
-        <!-- Ngorongoro Crater -->
-                <div class="group bg-white rounded-[2rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border border-slate-100">
-            <div class="relative h-64 overflow-hidden">
-                                <img src="{{ asset('images/05.jpg') }}" alt="Ngorongoro Crater" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-md p-2 rounded-full text-emerald-500 shadow-sm">
-                    <i class="ph-bold ph-heart text-xl"></i>
-                </div>
-            </div>
-            <div class="p-8">
-                <div class="flex items-center gap-3 text-xs font-bold text-emerald-600 uppercase tracking-widest mb-4">
-                    <span class="flex items-center gap-1"><i class="ph ph-map-pin"></i> Northern Circuit</span>
-                    <span class="w-1 h-1 bg-slate-300 rounded-full"></span>
-                    <span class="flex items-center gap-1"><i class="ph ph-volcano"></i> Natural Wonder</span>
-                </div>
-                <h3 class="text-xl font-bold text-slate-900 mb-4 group-hover:text-emerald-600 transition-colors">Ngorongoro Crater</h3>
-                <p class="text-slate-500 text-sm leading-relaxed mb-8">The world's largest unbroken caldera with the highest density of big game. A natural wonder formed 2.5 million years ago by volcanic collapse.</p>
-                
-                <div class="grid grid-cols-2 gap-4 mb-6">
-                    <div class="bg-orange-50 rounded-xl p-3 border border-orange-100">
-                        <div class="flex items-center gap-2 text-orange-700 mb-1">
-                            <i class="ph-bold ph-volcano"></i>
-                            <span class="font-bold text-sm">Age</span>
-                        </div>
-                        <p class="text-orange-900 font-black text-lg">2.5M Years</p>
-                    </div>
-                    <div class="bg-blue-50 rounded-xl p-3 border border-blue-100">
-                        <div class="flex items-center gap-2 text-blue-700 mb-1">
-                            <i class="ph-bold ph-users"></i>
-                            <span class="font-bold text-sm">Wildlife</span>
-                        </div>
-                        <p class="text-blue-900 font-black text-lg">25K+ Animals</p>
-                    </div>
-                </div>
-                
-                <div class="flex items-center justify-between">
-                    <div>
-                        <span class="text-slate-400 text-[10px] font-bold uppercase tracking-widest block mb-1">Depth</span>
-                        <span class="text-lg font-bold text-slate-900">610m Deep</span>
-                    </div>
-                    <a href="{{ route('regions.ngorongoro') }}" class="inline-flex items-center gap-2 bg-slate-900 text-white px-6 py-3 rounded-2xl font-bold hover:bg-emerald-600 transition-colors">
-                        Explore <i class="ph ph-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Mount Kilimanjaro -->
-                <div class="group bg-white rounded-[2rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border border-slate-100">
-            <div class="relative h-64 overflow-hidden">
-                                <img src="{{ asset('images/03.jpg') }}" alt="Mount Kilimanjaro" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-md p-2 rounded-full text-emerald-500 shadow-sm">
-                    <i class="ph-bold ph-heart text-xl"></i>
-                </div>
-            </div>
-            <div class="p-8">
-                <div class="flex items-center gap-3 text-xs font-bold text-emerald-600 uppercase tracking-widest mb-4">
-                    <span class="flex items-center gap-1"><i class="ph ph-map-pin"></i> Northern Circuit</span>
-                    <span class="w-1 h-1 bg-slate-300 rounded-full"></span>
-                    <span class="flex items-center gap-1"><i class="ph ph-mountains"></i> Roof of Africa</span>
-                </div>
-                <h3 class="text-xl font-bold text-slate-900 mb-4 group-hover:text-emerald-600 transition-colors">Mount Kilimanjaro</h3>
-                <p class="text-slate-500 text-sm leading-relaxed mb-8">Africa's highest peak at 5,895 meters. Choose from 7 different climbing routes with expert guides and comprehensive support for your summit success.</p>
-                
-                <div class="grid grid-cols-2 gap-4 mb-6">
-                    <div class="bg-emerald-50 rounded-xl p-3 border border-emerald-100">
-                        <div class="flex items-center gap-2 text-emerald-700 mb-1">
-                            <i class="ph-bold ph-mountains"></i>
-                            <span class="font-bold text-sm">Height</span>
-                        </div>
-                        <p class="text-emerald-900 font-black text-lg">5,895m</p>
-                    </div>
-                    <div class="bg-blue-50 rounded-xl p-3 border border-blue-100">
-                        <div class="flex items-center gap-2 text-blue-700 mb-1">
-                            <i class="ph-bold ph-signpost"></i>
-                            <span class="font-bold text-sm">Routes</span>
-                        </div>
-                        <p class="text-blue-900 font-black text-lg">7 Available</p>
-                    </div>
-                </div>
-                
-                <div class="flex items-center justify-between">
-                    <div>
-                        <span class="text-slate-400 text-[10px] font-bold uppercase tracking-widest block mb-1">Success Rate</span>
-                        <span class="text-lg font-bold text-slate-900">95%</span>
-                    </div>
-                    <a href="{{ route('kilimanjaro') }}" class="inline-flex items-center gap-2 bg-slate-900 text-white px-6 py-3 rounded-2xl font-bold hover:bg-emerald-600 transition-colors">
-                        Explore <i class="ph ph-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Zanzibar Archipelago -->
-                <div class="group bg-white rounded-[2rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border border-slate-100">
-            <div class="relative h-64 overflow-hidden">
-                                <img src="{{ asset('images/07.jpg') }}" alt="Zanzibar" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-md p-2 rounded-full text-emerald-500 shadow-sm">
-                    <i class="ph-bold ph-heart text-xl"></i>
-                </div>
-            </div>
-            <div class="p-8">
-                <div class="flex items-center gap-3 text-xs font-bold text-emerald-600 uppercase tracking-widest mb-4">
-                    <span class="flex items-center gap-1"><i class="ph ph-map-pin"></i> Coastal Islands</span>
-                    <span class="w-1 h-1 bg-slate-300 rounded-full"></span>
-                    <span class="flex items-center gap-1"><i class="ph ph-umbrella"></i> Paradise</span>
-                </div>
-                <h3 class="text-xl font-bold text-slate-900 mb-4 group-hover:text-emerald-600 transition-colors">Zanzibar Archipelago</h3>
-                <p class="text-slate-500 text-sm leading-relaxed mb-8">Tanzania's semi-autonomous archipelago with pristine white sand beaches, historic Stone Town, and aromatic spice plantations awaiting your discovery.</p>
-                
-                <div class="grid grid-cols-2 gap-4 mb-6">
-                    <div class="bg-purple-50 rounded-xl p-3 border border-purple-100">
-                        <div class="flex items-center gap-2 text-purple-700 mb-1">
-                            <i class="ph-bold ph-umbrella"></i>
-                            <span class="font-bold text-sm">Beaches</span>
-                        </div>
-                        <p class="text-purple-900 font-black text-lg">25+ Pristine</p>
-                    </div>
-                    <div class="bg-blue-50 rounded-xl p-3 border border-blue-100">
-                        <div class="flex items-center gap-2 text-blue-700 mb-1">
-                            <i class="ph-bold ph-sun"></i>
-                            <span class="font-bold text-sm">Temperature</span>
-                        </div>
-                        <p class="text-blue-900 font-black text-lg">28°C Avg</p>
-                    </div>
-                </div>
-                
-                <div class="flex items-center justify-between">
-                    <div>
-                        <span class="text-slate-400 text-[10px] font-bold uppercase tracking-widest block mb-1">Islands</span>
-                        <span class="text-lg font-bold text-slate-900">2 Main</span>
-                    </div>
-                    <a href="{{ route('regions.zanzibar') }}" class="inline-flex items-center gap-2 bg-slate-900 text-white px-6 py-3 rounded-2xl font-bold hover:bg-emerald-600 transition-colors">
-                        Explore <i class="ph ph-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Tarangire National Park -->
-                <div class="group bg-white rounded-[2rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border border-slate-100">
-            <div class="relative h-64 overflow-hidden">
-                                <img src="{{ asset('images/04.jpg') }}" alt="Tarangire National Park" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-md p-2 rounded-full text-emerald-500 shadow-sm">
-                    <i class="ph-bold ph-heart text-xl"></i>
-                </div>
-            </div>
-            <div class="p-8">
-                <div class="flex items-center gap-3 text-xs font-bold text-emerald-600 uppercase tracking-widest mb-4">
-                    <span class="flex items-center gap-1"><i class="ph ph-map-pin"></i> Northern Circuit</span>
-                    <span class="w-1 h-1 bg-slate-300 rounded-full"></span>
-                    <span class="flex items-center gap-1"><i class="ph ph-tree"></i> Elephant Paradise</span>
-                </div>
-                <h3 class="text-xl font-bold text-slate-900 mb-4 group-hover:text-emerald-600 transition-colors">Tarangire National Park</h3>
-                <p class="text-slate-500 text-sm leading-relaxed mb-8">Famous for its large elephant herds and spectacular baobab trees. A hidden gem with fewer crowds and incredible wildlife concentrations.</p>
-                
-                <div class="grid grid-cols-2 gap-4 mb-6">
-                    <div class="bg-orange-50 rounded-xl p-3 border border-orange-100">
-                        <div class="flex items-center gap-2 text-orange-700 mb-1">
-                            <i class="ph-bold ph-tree"></i>
-                            <span class="font-bold text-sm">Area</span>
-                        </div>
-                        <p class="text-orange-900 font-black text-lg">2,850 km²</p>
-                    </div>
-                    <div class="bg-purple-50 rounded-xl p-3 border border-purple-100">
-                        <div class="flex items-center gap-2 text-purple-700 mb-1">
-                            <i class="ph-bold ph-elephant"></i>
-                            <span class="font-bold text-sm">Elephants</span>
-                        </div>
-                        <p class="text-purple-900 font-black text-lg">300+ Herds</p>
-                    </div>
-                </div>
-                
-                <div class="flex items-center justify-between">
-                    <div>
-                        <span class="text-slate-400 text-[10px] font-bold uppercase tracking-widest block mb-1">Best Time</span>
-                        <span class="text-lg font-bold text-slate-900">Dry Season</span>
-                    </div>
-                    <a href="{{ route('regions.tarangire') }}" class="inline-flex items-center gap-2 bg-slate-900 text-white px-6 py-3 rounded-2xl font-bold hover:bg-emerald-600 transition-colors">
-                        Explore <i class="ph ph-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Lake Manyara National Park -->
-                <div class="group bg-white rounded-[2rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border border-slate-100">
-            <div class="relative h-64 overflow-hidden">
-                                <img src="{{ asset('images/06.jpg') }}" alt="Lake Manyara National Park" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-md p-2 rounded-full text-emerald-500 shadow-sm">
-                    <i class="ph-bold ph-heart text-xl"></i>
-                </div>
-            </div>
-            <div class="p-8">
-                <div class="flex items-center gap-3 text-xs font-bold text-emerald-600 uppercase tracking-widest mb-4">
-                    <span class="flex items-center gap-1"><i class="ph ph-map-pin"></i> Northern Circuit</span>
-                    <span class="w-1 h-1 bg-slate-300 rounded-full"></span>
-                    <span class="flex items-center gap-1"><i class="ph-bold ph-bird"></i> Bird Paradise</span>
-                </div>
-                <h3 class="text-xl font-bold text-slate-900 mb-4 group-hover:text-emerald-600 transition-colors">Lake Manyara National Park</h3>
-                <p class="text-slate-500 text-sm leading-relaxed mb-8">Alkaline lake famous for tree-climbing lions and diverse birdlife. Compact park offering incredible wildlife viewing in a stunning setting.</p>
-                
-                <div class="grid grid-cols-2 gap-4 mb-6">
-                    <div class="bg-blue-50 rounded-xl p-3 border border-blue-100">
-                        <div class="flex items-center gap-2 text-blue-700 mb-1">
-                            <i class="ph-bold ph-water"></i>
-                            <span class="font-bold text-sm">Lake Area</span>
-                        </div>
-                        <p class="text-blue-900 font-black text-lg">230 km²</p>
-                    </div>
-                    <div class="bg-purple-50 rounded-xl p-3 border border-purple-100">
-                        <div class="flex items-center gap-2 text-purple-700 mb-1">
-                            <i class="ph-bold ph-bird"></i>
-                            <span class="font-bold text-sm">Bird Species</span>
-                        </div>
-                        <p class="text-purple-900 font-black text-lg">400+ Types</p>
-                    </div>
-                </div>
-                
-                <div class="flex items-center justify-between">
-                    <div>
-                        <span class="text-slate-400 text-[10px] font-bold uppercase tracking-widest block mb-1">Specialty</span>
-                        <span class="text-lg font-bold text-slate-900">Tree Lions</span>
-                    </div>
-                    <a href="{{ route('regions.lake-manyara') }}" class="inline-flex items-center gap-2 bg-slate-900 text-white px-6 py-3 rounded-2xl font-bold hover:bg-emerald-600 transition-colors">
-                        Explore <i class="ph ph-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
+        @endforeach
             </div>
     
     <!-- Results Count -->
     <div class="mt-8 text-center text-slate-500 text-sm">
-        Showing <span class="text-slate-900 font-bold font-serif">6</span> incredible destinations
+        Showing <span class="text-slate-900 font-bold font-serif">{{ count($destinations) }}</span> incredible destinations
     </div>
 </div>
         </div>

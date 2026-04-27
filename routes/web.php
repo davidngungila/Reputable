@@ -38,7 +38,8 @@ Route::get('/contact', function () {
 })->name('contact');
 
 Route::get('/destinations', function () {
-    return view('destinations');
+    $destinations = \App\Models\Destination::where('status', 'active')->latest()->get();
+    return view('destinations', compact('destinations'));
 })->name('destinations');
 
 Route::get('/things-to-do', function () {
