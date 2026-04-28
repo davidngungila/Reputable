@@ -229,12 +229,12 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'ensure.admin', 'act
 
     // Inquiries Management
     Route::get('/inquiries', [InquiryController::class, 'index'])->name('inquiries.index');
+    Route::get('/inquiries/export', [InquiryController::class, 'export'])->name('inquiries.export');
     Route::get('/inquiries/{inquiry}', [InquiryController::class, 'show'])->name('inquiries.show');
     Route::put('/inquiries/{inquiry}', [InquiryController::class, 'update'])->name('inquiries.update');
     Route::delete('/inquiries/{inquiry}', [InquiryController::class, 'destroy'])->name('inquiries.destroy');
     Route::post('/inquiries/{inquiry}/respond', [InquiryController::class, 'markAsResponded'])->name('inquiries.respond');
     Route::post('/inquiries/{inquiry}/close', [InquiryController::class, 'markAsClosed'])->name('inquiries.close');
-    Route::get('/inquiries/export', [InquiryController::class, 'export'])->name('inquiries.export');
 
     // Operations
     Route::prefix('operations')->name('operations.')->group(function () {
