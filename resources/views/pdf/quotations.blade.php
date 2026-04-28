@@ -55,7 +55,7 @@
     </table>
 
     <div class="footer">
-        This document is system-generated. For support: lauparadiseadventure@gmail.com
+        This document is system-generated. For support: info@reputabletours.com
     </div>
 </body>
 </html>

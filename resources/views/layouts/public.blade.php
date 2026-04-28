@@ -455,7 +455,7 @@
                     </li>
                     <li class="flex items-center gap-3">
                         <i class="ph ph-envelope text-emerald-500"></i> 
-                        <a href="mailto:raphaeleliac@gmail.com" class="hover:text-white transition-colors">raphaeleliac@gmail.com</a>
+                        <a href="mailto:info@reputabletours.com" class="hover:text-white transition-colors">info@reputabletours.com</a>
                     </li>
                     <li class="flex items-center gap-3 font-bold">
                         <i class="ph ph-map-pin text-emerald-500"></i> NSSF Commercial Complex, Moshi
