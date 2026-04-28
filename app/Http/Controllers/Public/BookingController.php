@@ -15,6 +15,13 @@ use Illuminate\Support\Facades\Log;
 
 class BookingController extends Controller
 {
+    public function create(Request $request)
+    {
+        $tourId = $request->query('tour_id');
+        $tour = Tour::findOrFail($tourId);
+        return view('public.bookings.create', compact('tour'));
+    }
+
     public function store(Request $request)
     {
         $validated = $request->validate([
