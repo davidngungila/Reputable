@@ -133,7 +133,7 @@ class BookingController extends Controller
         $booking = Booking::findOrFail($id);
         $booking->update(['status' => 'confirmed']);
 
-        return redirect()->route('bookings.checkout', ['id' => $booking->id])
+        return redirect()->route('home')
             ->with('success', 'Your booking request has been submitted successfully! Our team will contact you shortly.');
     }
 }

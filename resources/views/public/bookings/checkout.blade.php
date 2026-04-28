@@ -113,7 +113,13 @@
 <script>
     // Show success popup if booking was just confirmed
     @if(session('success'))
-    alert('{{ session('success') }}');
+    Swal.fire({
+        icon: 'success',
+        title: 'Booking Submitted!',
+        text: '{{ session('success') }}',
+        confirmButtonColor: '#10b981',
+        confirmButtonText: 'OK'
+    });
     @endif
 </script>
 @endsection
