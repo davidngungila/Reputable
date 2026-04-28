@@ -243,7 +243,7 @@
                     <i class="fas fa-users text-orange-600 text-2xl mb-2 group-hover:scale-110 transition-transform"></i>
                     <span class="text-sm font-medium text-gray-900">Manage Users</span>
                 </a>
-                <a href="{{ route('admin.destinations.index') }}" class="flex flex-col items-center justify-center p-4 bg-teal-50 rounded-lg hover:bg-teal-100 transition-colors group">
+                <a href="{{ route('admin.tours.destinations') }}" class="flex flex-col items-center justify-center p-4 bg-teal-50 rounded-lg hover:bg-teal-100 transition-colors group">
                     <i class="fas fa-map-pin text-teal-600 text-2xl mb-2 group-hover:scale-110 transition-transform"></i>
                     <span class="text-sm font-medium text-gray-900">Manage Destinations</span>
                 </a>
