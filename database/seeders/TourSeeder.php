@@ -546,10 +546,10 @@ class TourSeeder extends Seeder
                 $safeData['route'] = $t['route'] ?? null;
             }
             if (Schema::hasColumn('tours', 'difficulty')) {
-                $safeData['difficulty'] = $t['difficulty'] ?? null;
+                $safeData['difficulty'] = $t['difficulty'] ?? 'easy';
             }
             if (Schema::hasColumn('tours', 'difficulty_level')) {
-                $safeData['difficulty_level'] = $t['difficulty_level'] ?? null;
+                $safeData['difficulty_level'] = $t['difficulty_level'] ?? 'easy';
             }
             if (Schema::hasColumn('tours', 'max_altitude')) {
                 $safeData['max_altitude'] = $t['max_altitude'] ?? null;
@@ -568,6 +568,15 @@ class TourSeeder extends Seeder
             }
             if (Schema::hasColumn('tours', 'starting_gate')) {
                 $safeData['starting_gate'] = $t['starting_gate'] ?? null;
+            }
+            if (Schema::hasColumn('tours', 'tour_type')) {
+                $safeData['tour_type'] = $t['tour_type'] ?? 'safari';
+            }
+            if (Schema::hasColumn('tours', 'max_group_size')) {
+                $safeData['max_group_size'] = $t['max_group_size'] ?? 20;
+            }
+            if (Schema::hasColumn('tours', 'min_age')) {
+                $safeData['min_age'] = $t['min_age'] ?? 0;
             }
             
             Tour::create($safeData);

@@ -115,6 +115,7 @@ Route::get('/tours/{id}', function($id) {
 Route::get('/bookings/create', [PublicBookingController::class, 'create'])->name('bookings.create');
 Route::post('/bookings', [PublicBookingController::class, 'store'])->name('bookings.store');
 Route::get('/bookings/{id}/checkout', [PublicBookingController::class, 'checkout'])->name('bookings.checkout');
+Route::post('/bookings/{id}/confirm', [PublicBookingController::class, 'confirm'])->name('bookings.confirm');
 Route::get('/bookings/{id}/invoice', [PublicBookingController::class, 'downloadInvoice'])->name('bookings.invoice');
 Route::get('/bookings/{id}/invoice/preview', [PublicBookingController::class, 'previewInvoice'])->name('bookings.invoice.preview');
 

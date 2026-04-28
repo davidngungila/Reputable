@@ -98,12 +98,22 @@
             <div class="bg-emerald-600 rounded-[2.5rem] p-10 text-white text-center">
                 <h4 class="text-xl font-bold mb-4">Ready to Confirm?</h4>
                 <p class="text-emerald-100 text-sm leading-relaxed mb-6 opacity-80">Your booking request will be submitted to our team. We will contact you shortly to confirm availability and provide payment instructions.</p>
-                <a href="/" class="inline-flex items-center gap-3 px-10 py-5 bg-white text-emerald-700 font-black text-xs uppercase tracking-widest rounded-2xl hover:bg-emerald-50 transition-all">
-                    <i class="ph ph-check-circle text-xl"></i>
-                    Submit Booking Request
-                </a>
+                <form action="{{ route('bookings.confirm', $booking->id) }}" method="POST">
+                    @csrf
+                    <button type="submit" class="inline-flex items-center gap-3 px-10 py-5 bg-white text-emerald-700 font-black text-xs uppercase tracking-widest rounded-2xl hover:bg-emerald-50 transition-all">
+                        <i class="ph ph-check-circle text-xl"></i>
+                        Submit Booking Request
+                    </button>
+                </form>
             </div>
         </div>
     </div>
 </section>
+
+<script>
+    // Show success popup if booking was just confirmed
+    @if(session('success'))
+    alert('{{ session('success') }}');
+    @endif
+</script>
 @endsection

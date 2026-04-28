@@ -127,4 +127,13 @@ class BookingController extends Controller
 
         return $pdf->stream('Safari_Invoice_BK' . str_pad($booking->id, 5, '0', STR_PAD_LEFT) . '.pdf');
     }
+
+    public function confirm($id)
+    {
+        $booking = Booking::findOrFail($id);
+        $booking->update(['status' => 'confirmed']);
+
+        return redirect()->route('bookings.checkout', ['id' => $booking->id])
+            ->with('success', 'Your booking request has been submitted successfully! Our team will contact you shortly.');
+    }
 }

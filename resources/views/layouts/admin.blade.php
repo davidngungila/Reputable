@@ -106,8 +106,6 @@
                 <div x-show="open" x-collapse class="pl-12 pr-4 py-2 space-y-1">
                     <a href="{{ route('admin.mountain.kilimanjaro-routes') }}" class="block text-xs py-2 text-emerald-100/50 hover:text-white transition-colors {{ request()->routeIs('admin.mountain.kilimanjaro-routes') ? 'text-emerald-400 font-bold' : '' }}">Kilimanjaro Routes</a>
                     <a href="{{ route('admin.mountain.meru-climbing') }}" class="block text-xs py-2 text-emerald-100/50 hover:text-white transition-colors {{ request()->routeIs('admin.mountain.meru-climbing') ? 'text-emerald-400 font-bold' : '' }}">Meru Climbing</a>
-                    <a href="{{ route('admin.mountain.equipment-management') }}" class="block text-xs py-2 text-emerald-100/50 hover:text-white transition-colors {{ request()->routeIs('admin.mountain.equipment-management') ? 'text-emerald-400 font-bold' : '' }}">Equipment Management</a>
-                    <a href="{{ route('admin.mountain.guide-assignments') }}" class="block text-xs py-2 text-emerald-100/50 hover:text-white transition-colors {{ request()->routeIs('admin.mountain.guide-assignments') ? 'text-emerald-400 font-bold' : '' }}">Guide Assignments</a>
                 </div>
             </div>
             @endif
