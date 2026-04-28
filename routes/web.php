@@ -57,8 +57,6 @@ Route::get('/things-to-do', function () {
 Route::get('/mountain-trekking', [PublicTourController::class, 'mountainTrekking'])->name('mountain-trekking');
 Route::get('/mountain-trekking/trekking-info', function () { return view('mountain-trekking.trekking-info'); })->name('mountain-trekking.info');
 Route::get('/mountain-trekking/routes', function () { return view('mountain-trekking.routes'); })->name('mountain-trekking.routes');
-Route::get('/mountain-trekking/equipment', function () { return view('mountain-trekking.equipment'); })->name('mountain-trekking.equipment');
-Route::get('/mountain-trekking/guides', function () { return view('mountain-trekking.guides'); })->name('mountain-trekking.guides');
 
 Route::get('/login', function () {
     return redirect()->route('simple.login');
@@ -217,10 +215,6 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'ensure.admin', 'act
     // Mountain Trekking
     Route::get('/mountain/kilimanjaro-routes', [TourController::class, 'kilimanjaroRoutes'])->name('mountain.kilimanjaro-routes');
     Route::get('/mountain/meru-climbing', [TourController::class, 'meruClimbing'])->name('mountain.meru-climbing');
-    Route::get('/mountain/equipment-management', [TourController::class, 'equipmentManagement'])->name('mountain.equipment-management');
-    Route::post('/mountain/equipment-management', [TourController::class, 'storeEquipment'])->name('mountain.equipment-management.store');
-    Route::get('/mountain/guide-assignments', [TourController::class, 'guideAssignments'])->name('mountain.guide-assignments');
-    Route::post('/mountain/guide-assignments', [TourController::class, 'assignGuide'])->name('mountain.guide-assignments.assign');
 
     // Things to Do - Activities
     Route::resource('activities', ActivityController::class)->whereNumber('activity');
