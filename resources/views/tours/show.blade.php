@@ -461,7 +461,7 @@
                         <label class="flex items-start gap-4 bg-white/50 border border-slate-200 rounded-2xl p-5">
                             <input type="checkbox" name="agree_terms" value="1" required class="mt-1 w-5 h-5 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500">
                             <span class="text-sm font-bold text-slate-700 leading-relaxed">
-                                I agree to the <a href="{{ route('terms') }}" target="_blank" class="text-emerald-700 underline">Terms</a> and <a href="{{ route('refund') }}" target="_blank" class="text-emerald-700 underline">Cancellation Policy</a>.
+                                I agree to the booking terms and conditions.
                             </span>
                         </label>
                         

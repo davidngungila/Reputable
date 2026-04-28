@@ -106,13 +106,6 @@ Route::get('/group-departures', function () {
     return view('group-departures');
 })->name('group-departures');
 
-// Legal & Policies
-Route::get('/terms', function () { return view('legal.terms'); })->name('terms');
-Route::get('/privacy', function () { return view('legal.privacy'); })->name('privacy');
-Route::get('/cookies', function() { return view('legal.cookies'); })->name('cookies');
-Route::get('/refund', function() { return view('legal.refund'); })->name('refund');
-Route::get('/editorial', function() { return view('legal.editorial'); })->name('editorial');
-Route::get('/sustainability', function() { return view('legal.sustainability'); })->name('sustainability');
 
 Route::post('/analytics/track', [\App\Http\Controllers\AnalyticsController::class, 'track'])->name('analytics.track');
 

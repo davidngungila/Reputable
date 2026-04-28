@@ -146,63 +146,6 @@
 
                 <hr class="border-slate-200 my-12">
 
-                <h2 class="text-3xl font-serif font-black text-slate-900 mb-6">PRIVACY POLICY</h2>
-                <p class="text-slate-600 leading-relaxed mb-6">
-                    At Reputable Tours, we understand that your privacy is important, and we are fully committed to protecting your personal information. When you interact with us—whether through our website, email, or during your travel planning—we want you to feel confident that your data is handled with care, respect, and transparency.
-                </p>
-                <p class="text-slate-600 leading-relaxed mb-6">
-                    When you contact us, make an inquiry, or book a tour, we may collect certain personal details such as your name, email address, phone number, and travel preferences. In some cases, we may also collect additional information necessary to organize your trip, such as passport details or payment information.
-                </p>
-                <p class="text-slate-600 leading-relaxed mb-8">
-                    The information we collect is primarily used to deliver and improve our services. This includes organizing your safari or travel experience, communicating with you about your booking, responding to your questions, and providing important updates related to your trip.
-                </p>
-
-                <hr class="border-slate-200 my-12">
-
-                <h2 class="text-3xl font-serif font-black text-slate-900 mb-6">BOOKING TERMS AND CONDITIONS</h2>
-                
-                <h3 class="text-xl font-serif font-bold text-slate-900 mb-3">1. Our Contract</h3>
-                <p class="text-slate-600 leading-relaxed mb-6">
-                    All bookings are made with licensed operators in Tanzania, Kenya, or Uganda, trading as Reputable Tours. By confirming a booking with us, you acknowledge that you have read, understood, and agreed to these Booking Terms and Conditions.
-                </p>
-
-                <h3 class="text-xl font-serif font-bold text-slate-900 mb-3">2. Validity</h3>
-                <p class="text-slate-600 leading-relaxed mb-6">
-                    A booking is only considered valid once we have issued an official booking confirmation. Payment alone does not confirm your reservation.
-                </p>
-
-                <h3 class="text-xl font-serif font-bold text-slate-900 mb-3">3. Deposit Requirement</h3>
-                <p class="text-slate-600 leading-relaxed mb-6">
-                    To secure your reservation, a deposit is required. Please note that deposit amounts may vary depending on the specific tour or travel package selected.
-                </p>
-
-                <h3 class="text-xl font-serif font-bold text-slate-900 mb-3">4. Acceptance of Booking and Final Payments</h3>
-                <p class="text-slate-600 leading-relaxed mb-6">
-                    Once we accept your booking, we will send a confirmation via email, at which point a contract between you and us is established. The remaining balance must be paid before your departure date.
-                </p>
-
-                <h3 class="text-xl font-serif font-bold text-slate-900 mb-3">5. Prices and Surcharges</h3>
-                <p class="text-slate-600 leading-relaxed mb-6">
-                    Our tour prices are subject to seasonal and market-based variations. Once a quote is issued, the price will be secured only if the required deposit is paid before the quote expires.
-                </p>
-
-                <h3 class="text-xl font-serif font-bold text-slate-900 mb-3">6. Your Details</h3>
-                <p class="text-slate-600 leading-relaxed mb-6">
-                    To complete your booking, you must provide accurate personal information, including your full name as shown on your passport, date of birth, nationality, passport details, and any relevant medical conditions.
-                </p>
-
-                <h3 class="text-xl font-serif font-bold text-slate-900 mb-3">7. Health Requirements</h3>
-                <p class="text-slate-600 leading-relaxed mb-6">
-                    We are not medical professionals, and it is your responsibility to ensure that you are physically fit to participate in the trip. You should seek professional medical advice regarding vaccinations, health precautions, and travel requirements.
-                </p>
-
-                <h3 class="text-xl font-serif font-bold text-slate-900 mb-3">8. Travel Insurance</h3>
-                <p class="text-slate-600 leading-relaxed mb-8">
-                    We strongly recommend that all travellers obtain comprehensive travel insurance at the time of booking. Your policy should include coverage for medical expenses, personal accidents, emergency evacuation, and repatriation, with a recommended minimum coverage of USD 200,000.
-                </p>
-
-                <hr class="border-slate-200 my-12">
-
                 <h2 class="text-3xl font-serif font-black text-slate-900 mb-6">PASSPORTS AND VISAS FOR TANZANIA</h2>
                 <p class="text-slate-600 leading-relaxed mb-6">
                     All travellers visiting Tanzania are required to have a valid passport and, in most cases, a visa. Your passport must be valid for at least six months beyond your planned date of departure from Tanzania.
