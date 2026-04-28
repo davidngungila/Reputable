@@ -63,7 +63,7 @@
     <!-- Destinations Grid -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
         @foreach($destinations as $destination)
-        <div class="group bg-white rounded-[2rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border border-slate-100">
+        <a href="{{ route('destinations.show', $destination->id) }}" class="group bg-white rounded-[2rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border border-slate-100 block">
             <div class="relative h-64 overflow-hidden">
                 @if(!empty($destination->images) && count($destination->images) > 0)
                     <img src="{{ asset($destination->images[0]) }}" alt="{{ $destination->name }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
@@ -111,12 +111,12 @@
                         <span class="text-slate-400 text-[10px] font-bold uppercase tracking-widest block mb-1">Best Time</span>
                         <span class="text-lg font-bold text-slate-900">{{ Str::limit($destination->best_time_to_visit ?? 'Year-round', 15) }}</span>
                     </div>
-                    <a href="/tours" class="inline-flex items-center gap-2 bg-slate-900 text-white px-6 py-3 rounded-2xl font-bold hover:bg-emerald-600 transition-colors">
+                    <span class="inline-flex items-center gap-2 bg-slate-900 text-white px-6 py-3 rounded-2xl font-bold hover:bg-emerald-600 transition-colors">
                         Explore <i class="ph ph-arrow-right"></i>
-                    </a>
+                    </span>
                 </div>
             </div>
-        </div>
+        </a>
         @endforeach
             </div>
     
