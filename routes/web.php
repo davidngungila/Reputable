@@ -554,16 +554,3 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'ensure.admin', 'act
     Route::get('/settings/account', [AccountSettingsController::class, 'edit'])->name('admin.settings.account');
     Route::post('/settings/account', [AccountSettingsController::class, 'update'])->name('admin.settings.account.update');
 });
-
-// Stripe Payments
-Route::get('/checkout/{id}', [App\Http\Controllers\PaymentController::class, 'checkout'])->name('checkout');
-Route::post('/create-payment-intent', [App\Http\Controllers\PaymentController::class, 'createPaymentIntent'])->name('payment.intent');
-Route::get('/payment/success', [App\Http\Controllers\PaymentController::class, 'success'])->name('payment.success');
-
-// Flutterwave Payments
-Route::get('/pay-with-flutterwave/{id}', [App\Http\Controllers\FlutterwaveController::class, 'initialize'])->name('flutterwave.pay');
-Route::get('/flutterwave/get-link/{id}', [App\Http\Controllers\FlutterwaveController::class, 'getLink'])->name('flutterwave.get-link');
-Route::get('/flutterwave/callback', [App\Http\Controllers\FlutterwaveController::class, 'callback'])->name('flutterwave.callback');
-
-// Stripe Webhook
-Route::post('/stripe/webhook', [App\Http\Controllers\WebhookController::class, 'handle']);
