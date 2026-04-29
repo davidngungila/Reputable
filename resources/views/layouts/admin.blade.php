@@ -134,7 +134,7 @@
             {{-- Inquiries Management --}}
             @if(!$hasRoleMethod || $user->hasAnyRole(['System Administrator', 'Content Manager', 'Travel Consultant']))
             <div x-data="{ open: window.innerWidth < 1024 || {{ request()->routeIs('admin.inquiries.*') ? 'true' : 'false' }} }">
-                <button @click="open = !open" 
+                <button @click="open = !open"
                         class="w-full flex items-center justify-between px-4 py-3 text-emerald-100/70 hover:bg-emerald-800 hover:text-white transition-all rounded-xl {{ request()->routeIs('admin.inquiries.*') ? 'text-white' : '' }}">
                     <div class="flex items-center">
                         <i class="ph-bold ph-envelope-simple mr-3 text-xl"></i>
@@ -149,7 +149,26 @@
             </div>
             @endif
 
-            
+            {{-- Media Management (Cloudinary) --}}
+            @if(!$hasRoleMethod || $user->hasAnyRole(['System Administrator', 'Content Manager', 'Travel Consultant']))
+            <div x-data="{ open: window.innerWidth < 1024 || {{ request()->routeIs('admin.cloudinary.*') ? 'true' : 'false' }} }">
+                <button @click="open = !open"
+                        class="w-full flex items-center justify-between px-4 py-3 text-emerald-100/70 hover:bg-emerald-800 hover:text-white transition-all rounded-xl {{ request()->routeIs('admin.cloudinary.*') ? 'text-white' : '' }}">
+                    <div class="flex items-center">
+                        <i class="ph-bold ph-cloud-arrow-up mr-3 text-xl"></i>
+                        <span class="text-sm">Media Management</span>
+                    </div>
+                    <i class="ph ph-caret-down text-xs transition-transform" :class="open ? 'rotate-180' : ''"></i>
+                </button>
+                <div x-show="open" x-collapse class="pl-12 pr-4 py-2 space-y-1">
+                    <a href="{{ route('admin.cloudinary.index') }}" class="block text-xs py-2 text-emerald-100/50 hover:text-white transition-colors {{ request()->routeIs('admin.cloudinary.index') ? 'text-emerald-400 font-bold' : '' }}">Media Library</a>
+                    <a href="{{ route('admin.cloudinary.upload') }}" class="block text-xs py-2 text-emerald-100/50 hover:text-white transition-colors {{ request()->routeIs('admin.cloudinary.upload') ? 'text-emerald-400 font-bold' : '' }}">Upload Files</a>
+                    <a href="{{ route('admin.cloudinary.folders') }}" class="block text-xs py-2 text-emerald-100/50 hover:text-white transition-colors {{ request()->routeIs('admin.cloudinary.folders') ? 'text-emerald-400 font-bold' : '' }}">Manage Folders</a>
+                </div>
+            </div>
+            @endif
+
+
             @endif
         </div>
         

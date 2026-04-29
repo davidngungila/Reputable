@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\TourController;
 use App\Http\Controllers\Admin\ActivityController;
 use App\Http\Controllers\Admin\InquiryController;
+use App\Http\Controllers\Admin\CloudinaryController;
 use App\Http\Controllers\Public\TourController as PublicTourController;
 use App\Http\Controllers\Public\BookingController as PublicBookingController;
 use App\Http\Controllers\Public\InquiryController as PublicInquiryController;
@@ -235,6 +236,16 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'ensure.admin', 'act
     Route::delete('/inquiries/{inquiry}', [InquiryController::class, 'destroy'])->name('inquiries.destroy');
     Route::post('/inquiries/{inquiry}/respond', [InquiryController::class, 'markAsResponded'])->name('inquiries.respond');
     Route::post('/inquiries/{inquiry}/close', [InquiryController::class, 'markAsClosed'])->name('inquiries.close');
+
+    // Media Management (Cloudinary)
+    Route::prefix('cloudinary')->name('cloudinary.')->group(function () {
+        Route::get('/', [CloudinaryController::class, 'index'])->name('index');
+        Route::get('/upload', [CloudinaryController::class, 'upload'])->name('upload');
+        Route::post('/upload', [CloudinaryController::class, 'store'])->name('store');
+        Route::get('/folders', [CloudinaryController::class, 'folders'])->name('folders');
+        Route::post('/folders', [CloudinaryController::class, 'createFolder'])->name('create-folder');
+        Route::delete('/{publicId}', [CloudinaryController::class, 'destroy'])->name('destroy');
+    });
 
     // Operations
     Route::prefix('operations')->name('operations.')->group(function () {
