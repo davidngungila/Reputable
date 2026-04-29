@@ -16,11 +16,13 @@ class CloudinaryController extends Controller
                 ->maxResults(50)
                 ->execute()
                 ->getResources();
-
-            return view('admin.cloudinary.index', compact('resources'));
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Failed to load media library: ' . $e->getMessage());
+            // Return empty array if Cloudinary fails, but still show the page
+            $resources = [];
+            session()->flash('warning', 'Could not load media from Cloudinary: ' . $e->getMessage());
         }
+
+        return view('admin.cloudinary.index', compact('resources'));
     }
 
     public function upload()
@@ -58,11 +60,13 @@ class CloudinaryController extends Controller
         try {
             // Get all folders from Cloudinary
             $folders = Cloudinary::admin()->folders()->getFolders();
-
-            return view('admin.cloudinary.folders', compact('folders'));
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Failed to load folders: ' . $e->getMessage());
+            // Return empty array if Cloudinary fails, but still show the page
+            $folders = [];
+            session()->flash('warning', 'Could not load folders from Cloudinary: ' . $e->getMessage());
         }
+
+        return view('admin.cloudinary.folders', compact('folders'));
     }
 
     public function analytics()
@@ -80,11 +84,18 @@ class CloudinaryController extends Controller
                 'image_count' => count(array_filter($resources, fn($r) => $r['resource_type'] == 'image')),
                 'video_count' => count(array_filter($resources, fn($r) => $r['resource_type'] == 'video')),
             ];
-
-            return view('admin.cloudinary.analytics', compact('stats'));
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Failed to load analytics: ' . $e->getMessage());
+            // Return empty stats if Cloudinary fails, but still show the page
+            $stats = [
+                'total_files' => 0,
+                'total_bytes' => 0,
+                'image_count' => 0,
+                'video_count' => 0,
+            ];
+            session()->flash('warning', 'Could not load analytics from Cloudinary: ' . $e->getMessage());
         }
+
+        return view('admin.cloudinary.analytics', compact('stats'));
     }
 
     public function createFolder(Request $request)
