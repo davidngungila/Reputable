@@ -28,10 +28,10 @@ class DestinationsSeeder extends Seeder
                 'best_time_to_visit' => 'June to October (dry season) for general wildlife; January to March for calving season in southern Serengeti',
                 'weather_info' => 'Dry season (June-October): Warm days (25-30°C) and cool nights. Wet season (November-May): Rainy with lush landscapes, great for bird watching.',
                 'images' => [
-                    'images/01.jpg',
-                    'images/Serengeti wbeest.jpg',
-                    'images/Wildbeest Migration.jpg',
-                    'images/MaraRiverCrossing_EN-US6477868211_1920x1080.jpg'
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468788/Zeebraaa_cpydg9.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468765/Serengeti_wbeest_lxzeyh.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468785/Wildbeest_Migration_vnkbqc.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468784/wildebeest-migration-2322111_1920_zvehye.jpg'
                 ],
                 'status' => 'active'
             ],
@@ -50,10 +50,10 @@ class DestinationsSeeder extends Seeder
                 'best_time_to_visit' => 'June to October for clear views and wildlife viewing; April to May for fewer crowds',
                 'weather_info' => 'Cooler due to altitude (2,286m). Temperatures range from 10-20°C. Misty mornings common in the crater.',
                 'images' => [
-                    'images/ngorongoro-conservation-area-2735629_1920.jpg',
-                    'images/Buffalo Ngorongoro.jpg',
-                    'images/Wildebeest ngorongoro.jpg',
-                    'images/ngoro flam.jpg'
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468772/tarangire-76483_1920_c7sttf.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468776/warthog-6605830_1920_f8rvu8.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468781/Wildebeest_ngorongoro_yv22pd.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468774/Untitled-1_cyaxx1.jpg'
                 ],
                 'status' => 'active'
             ],
@@ -72,10 +72,10 @@ class DestinationsSeeder extends Seeder
                 'best_time_to_visit' => 'January to March and June to October for optimal climbing conditions',
                 'weather_info' => 'Varies dramatically by altitude. Base: 25-30°C. Summit: -20°C to -25°C. Weather can change rapidly.',
                 'images' => [
-                    'images/kilimanjaro-342697_1920.jpg',
-                    'images/kilimanjaro-279998_1280.jpg',
-                    'images/mount-kilimanjaro-278082_1920.jpg',
-                    'images/stella-point-4032287_1280.jpg'
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/tree-2600482_1920_c50vn6.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468772/tiger-5167034_1920_leu8nd.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/tree-3079250_1280_m8apya.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468770/stella-point-4032287_1280_bpmyyh.jpg'
                 ],
                 'status' => 'active'
             ],
@@ -94,10 +94,10 @@ class DestinationsSeeder extends Seeder
                 'best_time_to_visit' => 'June to October for dry season wildlife concentration; January to February for bird watching',
                 'weather_info' => 'Dry season (June-October): 25-30°C. Wet season (November-May): Rainy with lush vegetation.',
                 'images' => [
-                    'images/Tarangire.jpg',
-                    'images/tarangire-76483_1920.jpg',
-                    'images/Elephant tarangire.jpg',
-                    'images/Baobabb.jpg'
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468772/Tarangire_ck2ohe.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468772/tarangire-76483_1920_c7sttf.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468777/waterbuck_ggd5wl.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/tree-2600482_1920_1_ruahvn.jpg'
                 ],
                 'status' => 'active'
             ],
@@ -116,10 +116,10 @@ class DestinationsSeeder extends Seeder
                 'best_time_to_visit' => 'July to October for dry season; December to February for flamingos',
                 'weather_info' => 'Mild climate due to altitude. 20-25°C during day, cooler at night. Rainy season brings lush vegetation.',
                 'images' => [
-                    'images/Eleph manyaraaa.jpg',
-                    'images/Elephant in manyara.jpg',
-                    'images/Elephant manyara.jpg',
-                    'images/Flamingo.jpg'
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468777/waterbuck_ggd5wl.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468777/Waterbuckk_p4mtpz.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468770/sunset_eleph_hqxiur.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468770/strauss-4642855_1280_i5umy2.jpg'
                 ],
                 'status' => 'active'
             ],
@@ -138,10 +138,10 @@ class DestinationsSeeder extends Seeder
                 'best_time_to_visit' => 'June to October for dry season and best diving conditions; December to February for warm weather',
                 'weather_info' => 'Tropical climate. 25-30°C year-round. Humidity higher during rainy seasons (March-May, November-December).',
                 'images' => [
-                    'images/07.jpg',
-                    'images/boat.jpg',
-                    'images/06.jpg',
-                    'images/05.jpg'
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468771/spphoto_skxxer.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468771/sutirta-budiman-H9CUOsPXBjw-unsplash_sgyw6a.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468769/Sovegnier_iqyqga.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468769/south-africa-4156075_1280_zohmv4.jpg'
                 ],
                 'status' => 'active'
             ],
@@ -160,10 +160,10 @@ class DestinationsSeeder extends Seeder
                 'best_time_to_visit' => 'June to October for dry season wildlife viewing',
                 'weather_info' => 'Hot and humid. 28-35°C during dry season. Cooler during wet season but accessibility limited.',
                 'images' => [
-                    'images/africa-4275737_1920.jpg',
-                    'images/africa-9445784_1920.jpg',
-                    'images/nature-3146794_1920.jpg',
-                    'images/wildlife-3128802_1920.jpg'
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468771/tanzania-2275107_1920_cmihwj.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468771/tanzania-4149975_1920_j8h9ka.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/tree-3079250_1280_m8apya.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468785/wildlife-3146790_1920_skrfdw.jpg'
                 ],
                 'status' => 'active'
             ],
@@ -182,10 +182,10 @@ class DestinationsSeeder extends Seeder
                 'best_time_to_visit' => 'June to October for dry season wildlife viewing',
                 'weather_info' => 'Hot and dry. 25-35°C. Cool nights during dry season. Wet season (November-May) makes some areas inaccessible.',
                 'images' => [
-                    'images/africa-4149975_1920.jpg',
-                    'images/africa-4275740_1280.jpg',
-                    'images/elephant-4032274_1920.jpg',
-                    'images/elephants-376512_1920.jpg'
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468771/tanzania-4149975_1920_j8h9ka.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468771/tanzania-4275740_1280_nkxvz9.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468777/waterbuck_ggd5wl.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468777/warttthhog_sg9xqf.jpg'
                 ],
                 'status' => 'active'
             ],
@@ -204,10 +204,10 @@ class DestinationsSeeder extends Seeder
                 'best_time_to_visit' => 'June to October for dry season; January to February for pleasant weather',
                 'weather_info' => 'Tropical climate. 22-28°C year-round. Rainy seasons bring heavy downpours.',
                 'images' => [
-                    'images/water-3093341_1280.jpg',
-                    'images/birds.jpg',
-                    'images/hornbill.jpg',
-                    'images/Egret.jpg'
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/tree-3079250_1280_m8apya.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468770/springbok-8063883_1920_bcrj32.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468770/strauss-4642855_1280_i5umy2.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468770/stella-point-4032287_1280_bpmyyh.jpg'
                 ],
                 'status' => 'active'
             ],
@@ -226,10 +226,10 @@ class DestinationsSeeder extends Seeder
                 'best_time_to_visit' => 'May to October for dry season and best chimpanzee viewing',
                 'weather_info' => 'Tropical with mountain influence. 20-30°C. Humid near the lake. Dry season best for trekking.',
                 'images' => [
-                    'images/monkey.jpg',
-                    'images/Monkey velvet.jpg',
-                    'images/Mokney blue.jpg',
-                    'images/colobus-monkey-2548308_1280.jpg'
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468770/colobus-monkey-2548308_1280_xi5c6j.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468770/colobus-monkey-2548308_1280_1_nx2xkz.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468770/colobus-monkey-2548308_1280_2_jgkz2x.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468770/colobus-monkey-2548308_1280_xi5c6j.jpg'
                 ],
                 'status' => 'active'
             ],
@@ -248,10 +248,10 @@ class DestinationsSeeder extends Seeder
                 'best_time_to_visit' => 'July to October for dry season and best chimpanzee viewing',
                 'weather_info' => 'Tropical climate. 20-30°C. Humid near the lake. Dry season essential for hiking.',
                 'images' => [
-                    'images/monkey.jpg',
-                    'images/Monkey velvet.jpg',
-                    'images/Mokney blue.jpg',
-                    'images/colobus-monkey-2548308_1280.jpg'
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468770/colobus-monkey-2548308_1280_xi5c6j.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468770/colobus-monkey-2548308_1280_1_nx2xkz.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468770/colobus-monkey-2548308_1280_2_jgkz2x.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468770/colobus-monkey-2548308_1280_xi5c6j.jpg'
                 ],
                 'status' => 'active'
             ],
@@ -270,10 +270,10 @@ class DestinationsSeeder extends Seeder
                 'best_time_to_visit' => 'May to October for dry season wildlife viewing',
                 'weather_info' => 'Hot and dry. 30-35°C. Cool nights. Wet season (November-April) makes park inaccessible.',
                 'images' => [
-                    'images/africa-223014_1920.jpg',
-                    'images/waterbuck.jpg',
-                    'images/Warthog&bird.jpg',
-                    'images/impala-6950983_1920.jpg'
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468771/tanzania-223014_1920_h3kq4m.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468777/waterbuck_ggd5wl.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468776/warthog-6605830_1920_f8rvu8.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468770/impala-6950983_1920_bcrj32.jpg'
                 ],
                 'status' => 'active'
             ],
@@ -292,10 +292,10 @@ class DestinationsSeeder extends Seeder
                 'best_time_to_visit' => 'June to October for dry season; December to February for clear mountain views',
                 'weather_info' => 'Mild due to altitude. 15-25°C. Cooler at higher elevations. Misty mornings common.',
                 'images' => [
-                    'images/mount-kilimanjaro-7312239_1920.jpg',
-                    'images/flamingos-6480822_1920.jpg',
-                    'images/amboseli-4967430_1280.jpg',
-                    'images/tree-2600482_1920.jpg'
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/tree-3079250_1280_m8apya.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/umbwee_biardh.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/trekkin_crg3w9.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/tree-2600482_1920_c50vn6.jpg'
                 ],
                 'status' => 'active'
             ],
@@ -314,10 +314,10 @@ class DestinationsSeeder extends Seeder
                 'best_time_to_visit' => 'October to March for best diving conditions and whale shark season',
                 'weather_info' => 'Tropical climate. 25-30°C year-round. Best diving visibility during dry season.',
                 'images' => [
-                    'images/07.jpg',
-                    'images/06.jpg',
-                    'images/05.jpg',
-                    'images/boat.jpg'
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468771/spphoto_skxxer.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468769/Sovegnier_iqyqga.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468769/south-africa-4156075_1280_zohmv4.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468768/south-africa-3084196_1920_jqkkee.jpg'
                 ],
                 'status' => 'active'
             ],
@@ -336,10 +336,10 @@ class DestinationsSeeder extends Seeder
                 'best_time_to_visit' => 'July to October for dry season and best diving conditions',
                 'weather_info' => 'Tropical climate. 25-30°C year-round. Humidity during rainy seasons.',
                 'images' => [
-                    'images/07.jpg',
-                    'images/06.jpg',
-                    'images/05.jpg',
-                    'images/boat.jpg'
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468771/spphoto_skxxer.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468769/Sovegnier_iqyqga.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468769/south-africa-4156075_1280_zohmv4.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468768/south-africa-3084196_1920_jqkkee.jpg'
                 ],
                 'status' => 'active'
             ],
@@ -358,10 +358,10 @@ class DestinationsSeeder extends Seeder
                 'best_time_to_visit' => 'June to October for dry season wildlife viewing',
                 'weather_info' => 'Hot and dry. 25-30°C. Cool nights. Wet season (November-May) brings lush vegetation.',
                 'images' => [
-                    'images/africa-4149975_1920.jpg',
-                    'images/elephant-4032274_1920.jpg',
-                    'images/wildlife-3128802_1920.jpg',
-                    'images/nature-3146794_1920.jpg'
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468771/tanzania-4149975_1920_j8h9ka.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468777/waterbuck_ggd5wl.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468785/wildlife-3146790_1920_skrfdw.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/tree-3079250_1280_m8apya.jpg'
                 ],
                 'status' => 'active'
             ],
@@ -380,10 +380,10 @@ class DestinationsSeeder extends Seeder
                 'best_time_to_visit' => 'December to April for peak wildflower season',
                 'weather_info' => 'Cool and misty due to altitude (2,600m). 15-20°C. Rainy season brings spectacular blooms.',
                 'images' => [
-                    'images/flowers.jpg',
-                    'images/mountain.jpg',
-                    'images/nature.jpg',
-                    'images/landscape.jpg'
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/tree-3079250_1280_m8apya.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/tree-2600482_1920_c50vn6.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/tree-222836_1920_bt1bf3.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/umbwee_biardh.jpg'
                 ],
                 'status' => 'active'
             ],
@@ -402,10 +402,10 @@ class DestinationsSeeder extends Seeder
                 'best_time_to_visit' => 'June to October for dry season climbing conditions',
                 'weather_info' => 'Hot and dry. 25-35°C. Summit can be windy. Early morning climbs recommended.',
                 'images' => [
-                    'images/volcano.jpg',
-                    'images/mountain.jpg',
-                    'images/lake.jpg',
-                    'images/landscape.jpg'
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/tree-2600482_1920_c50vn6.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/tree-3079250_1280_m8apya.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/tree-222836_1920_bt1bf3.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/trekkin_crg3w9.jpg'
                 ],
                 'status' => 'active'
             ],
@@ -424,10 +424,10 @@ class DestinationsSeeder extends Seeder
                 'best_time_to_visit' => 'June to October for dry season and best flamingo viewing',
                 'weather_info' => 'Hot and dry. 30-40°C. Very alkaline environment. Early morning visits recommended.',
                 'images' => [
-                    'images/flamingo.jpg',
-                    'images/lake.jpg',
-                    'images/landscape.jpg',
-                    'images/salt.jpg'
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468770/strauss-4642855_1280_i5umy2.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/tree-3079250_1280_m8apya.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/tree-2600482_1920_c50vn6.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/tree-222836_1920_bt1bf3.jpg'
                 ],
                 'status' => 'active'
             ],
@@ -446,10 +446,10 @@ class DestinationsSeeder extends Seeder
                 'best_time_to_visit' => 'June to October for dry season hiking',
                 'weather_info' => 'Cool and humid in mountains. 15-25°C. Rainy season (November-May) makes trails slippery.',
                 'images' => [
-                    'images/waterfall.jpg',
-                    'images/forest.jpg',
-                    'images/monkey.jpg',
-                    'images/mountain.jpg'
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/tree-3079250_1280_m8apya.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/tree-2600482_1920_c50vn6.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/tree-222836_1920_bt1bf3.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/umbwee_biardh.jpg'
                 ],
                 'status' => 'active'
             ],
@@ -468,10 +468,10 @@ class DestinationsSeeder extends Seeder
                 'best_time_to_visit' => 'June to October for dry season wildlife; January to February for turtle nesting',
                 'weather_info' => 'Hot and humid coastal climate. 25-30°C. Sea breezes provide relief.',
                 'images' => [
-                    'images/beach.jpg',
-                    'images/elephant.jpg',
-                    'images/river.jpg',
-                    'images/ocean.jpg'
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468771/spphoto_skxxer.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468777/waterbuck_ggd5wl.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/tree-3079250_1280_m8apya.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/tree-2600482_1920_c50vn6.jpg'
                 ],
                 'status' => 'active'
             ],
@@ -490,10 +490,10 @@ class DestinationsSeeder extends Seeder
                 'best_time_to_visit' => 'June to October for dry season wildlife viewing',
                 'weather_info' => 'Warm and dry. 25-30°C. Cool nights. Wet season (November-May) brings lush vegetation.',
                 'images' => [
-                    'images/elephant.jpg',
-                    'images/lion.jpg',
-                    'images/floodplain.jpg',
-                    'images/sunset.jpg'
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468777/waterbuck_ggd5wl.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468770/lion-222993_1920_e8xq2d.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/tree-3079250_1280_m8apya.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468770/sunset_eleph_hqxiur.jpg'
                 ],
                 'status' => 'active'
             ],
@@ -512,10 +512,10 @@ class DestinationsSeeder extends Seeder
                 'best_time_to_visit' => 'June to October for dry season hiking',
                 'weather_info' => 'Cool and misty in mountains. 15-25°C. Rainy season (November-May) brings lush greenery.',
                 'images' => [
-                    'images/mountain.jpg',
-                    'images/forest.jpg',
-                    'images/village.jpg',
-                    'images/viewpoint.jpg'
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/tree-2600482_1920_c50vn6.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/tree-3079250_1280_m8apya.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/tree-222836_1920_bt1bf3.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/umbwee_biardh.jpg'
                 ],
                 'status' => 'active'
             ],
@@ -578,10 +578,10 @@ class DestinationsSeeder extends Seeder
                 'best_time_to_visit' => 'June to October for dry season access',
                 'weather_info' => 'Warm and dry. 25-30°C. Cool nights. Wet season (November-May) can limit access.',
                 'images' => [
-                    'images/rockart.jpg',
-                    'images/cave.jpg',
-                    'images/painting.jpg',
-                    'images/landscape.jpg'
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468771/tanzania-4149975_1920_j8h9ka.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/tree-3079250_1280_m8apya.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/tree-2600482_1920_c50vn6.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/tree-222836_1920_bt1bf3.jpg'
                 ],
                 'status' => 'active'
             ],
@@ -600,10 +600,10 @@ class DestinationsSeeder extends Seeder
                 'best_time_to_visit' => 'June to October for dry season access',
                 'weather_info' => 'Warm and dry. 20-28°C. Cool nights. Accessible year-round.',
                 'images' => [
-                    'images/meteorite.jpg',
-                    'images/rock.jpg',
-                    'images/landscape.jpg',
-                    'images/geology.jpg'
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468771/tanzania-4149975_1920_j8h9ka.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/tree-3079250_1280_m8apya.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/tree-2600482_1920_c50vn6.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/tree-222836_1920_bt1bf3.jpg'
                 ],
                 'status' => 'active'
             ],
@@ -622,10 +622,10 @@ class DestinationsSeeder extends Seeder
                 'best_time_to_visit' => 'June to October for dry season hiking',
                 'weather_info' => 'Cool due to altitude. 15-25°C. Misty mornings. Dry season best for hiking.',
                 'images' => [
-                    'images/lake.jpg',
-                    'images/crater.jpg',
-                    'images/forest.jpg',
-                    'images/viewpoint.jpg'
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/tree-3079250_1280_m8apya.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/tree-2600482_1920_c50vn6.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/tree-222836_1920_bt1bf3.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/umbwee_biardh.jpg'
                 ],
                 'status' => 'active'
             ],
@@ -644,10 +644,10 @@ class DestinationsSeeder extends Seeder
                 'best_time_to_visit' => 'June to October for dry season and best waterfall flow',
                 'weather_info' => 'Warm and humid. 20-28°C. Misty near the falls. Dry season best for access.',
                 'images' => [
-                    'images/waterfall.jpg',
-                    'images/river.jpg',
-                    'images/forest.jpg',
-                    'images/nature.jpg'
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/tree-3079250_1280_m8apya.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/tree-2600482_1920_c50vn6.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/tree-222836_1920_bt1bf3.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/umbwee_biardh.jpg'
                 ],
                 'status' => 'active'
             ],
@@ -661,15 +661,6 @@ class DestinationsSeeder extends Seeder
                     'Crystal-clear Lake Nyasa waters',
                     'Excellent swimming and snorkeling',
                     'Mountain backdrop scenery',
-                    'Peaceful and uncrowded'
-                ],
-                'best_time_to_visit' => 'June to October for dry season and best beach conditions',
-                'weather_info' => 'Warm and pleasant. 22-28°C. Lake breeze provides comfort. Dry season best for activities.',
-                'images' => [
-                    'images/beach.jpg',
-                    'images/lake.jpg',
-                    'images/sunset.jpg',
-                    'images/mountain.jpg'
                 ],
                 'status' => 'active'
             ],
@@ -710,10 +701,10 @@ class DestinationsSeeder extends Seeder
                 'best_time_to_visit' => 'June to October for dry season bird watching',
                 'weather_info' => 'Warm and humid. 25-30°C. Wet season (November-May) brings water and birds.',
                 'images' => [
-                    'images/lake.jpg',
-                    'images/birds.jpg',
-                    'images/hippo.jpg',
-                    'images/wetland.jpg'
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/tree-3079250_1280_m8apya.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/tree-2600482_1920_c50vn6.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/tree-222836_1920_bt1bf3.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/umbwee_biardh.jpg'
                 ],
                 'status' => 'active'
             ],
@@ -732,10 +723,10 @@ class DestinationsSeeder extends Seeder
                 'best_time_to_visit' => 'June to October for dry season cultural visits',
                 'weather_info' => 'Hot and dry. 25-35°C. Dusty conditions. Dry season best for cultural activities.',
                 'images' => [
-                    'images/tribe.jpg',
-                    'images/lake.jpg',
-                    'images/culture.jpg',
-                    'images/landscape.jpg'
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468771/tanzania-4149975_1920_j8h9ka.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/tree-3079250_1280_m8apya.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/tree-2600482_1920_c50vn6.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/tree-222836_1920_bt1bf3.jpg'
                 ],
                 'status' => 'active'
             ],
@@ -754,10 +745,10 @@ class DestinationsSeeder extends Seeder
                 'best_time_to_visit' => 'June to October for dry season access',
                 'weather_info' => 'Warm and humid. 25-30°C. Cool inside caves. Dry season best for access.',
                 'images' => [
-                    'images/cave.jpg',
-                    'images/stalactite.jpg',
-                    'images/underground.jpg',
-                    'images/geology.jpg'
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468771/tanzania-4149975_1920_j8h9ka.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/tree-3079250_1280_m8apya.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/tree-2600482_1920_c50vn6.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/tree-222836_1920_bt1bf3.jpg'
                 ],
                 'status' => 'active'
             ],
@@ -820,10 +811,10 @@ class DestinationsSeeder extends Seeder
                 'best_time_to_visit' => 'June to October for dry season activities',
                 'weather_info' => 'Warm and pleasant. 22-28°C. Lake breeze provides comfort. Dry season best for activities.',
                 'images' => [
-                    'images/lake.jpg',
-                    'images/beach.jpg',
-                    'images/fish.jpg',
-                    'images/sunset.jpg'
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468771/tanzania-4149975_1920_j8h9ka.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/tree-3079250_1280_m8apya.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/tree-2600482_1920_c50vn6.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/tree-222836_1920_bt1bf3.jpg'
                 ],
                 'status' => 'active'
             ],
@@ -842,10 +833,10 @@ class DestinationsSeeder extends Seeder
                 'best_time_to_visit' => 'June to October for dry season climbing',
                 'weather_info' => 'Varies by altitude. Base: 20-25°C. Summit: -10°C to -15°C. Weather can change rapidly.',
                 'images' => [
-                    'images/mountain.jpg',
-                    'images/summit.jpg',
-                    'images/forest.jpg',
-                    'images/viewpoint.jpg'
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/tree-3079250_1280_m8apya.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/tree-2600482_1920_c50vn6.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/tree-222836_1920_bt1bf3.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/umbwee_biardh.jpg'
                 ],
                 'status' => 'active'
             ],
@@ -864,10 +855,10 @@ class DestinationsSeeder extends Seeder
                 'best_time_to_visit' => 'June to October for dry season wildlife viewing',
                 'weather_info' => 'Mild due to altitude. 15-25°C. Cool nights. Misty mornings common.',
                 'images' => [
-                    'images/crater.jpg',
-                    'images/buffalo.jpg',
-                    'images/forest.jpg',
-                    'images/viewpoint.jpg'
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/tree-3079250_1280_m8apya.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/tree-2600482_1920_c50vn6.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/tree-222836_1920_bt1bf3.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/umbwee_biardh.jpg'
                 ],
                 'status' => 'active'
             ],
@@ -886,10 +877,10 @@ class DestinationsSeeder extends Seeder
                 'best_time_to_visit' => 'June to October for dry season hiking',
                 'weather_info' => 'Cool and misty. 15-25°C. Rainy season (November-May) makes trails slippery.',
                 'images' => [
-                    'images/waterfall.jpg',
-                    'images/coffee.jpg',
-                    'images/hiking.jpg',
-                    'images/kilimanjaro.jpg'
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/tree-3079250_1280_m8apya.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/tree-2600482_1920_c50vn6.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/tree-222836_1920_bt1bf3.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/umbwee_biardh.jpg'
                 ],
                 'status' => 'active'
             ],
@@ -908,10 +899,10 @@ class DestinationsSeeder extends Seeder
                 'best_time_to_visit' => 'June to October for dry season activities',
                 'weather_info' => 'Warm and pleasant. 22-28°C. Lake breeze provides comfort. Dry season best for activities.',
                 'images' => [
-                    'images/island.jpg',
-                    'images/beach.jpg',
-                    'images/fishing.jpg',
-                    'images/lake.jpg'
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468771/spphoto_skxxer.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/tree-3079250_1280_m8apya.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468770/springbok-8063883_1920_bcrj32.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468770/strauss-4642855_1280_i5umy2.jpg'
                 ],
                 'status' => 'active'
             ],
@@ -930,10 +921,10 @@ class DestinationsSeeder extends Seeder
                 'best_time_to_visit' => 'June to October for dry season visits',
                 'weather_info' => 'Warm and humid. 25-30°C. Cool in forest. Dry season best for walking.',
                 'images' => [
-                    'images/forest.jpg',
-                    'images/bird.jpg',
-                    'images/nature.jpg',
-                    'images/trail.jpg'
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/tree-3079250_1280_m8apya.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468770/springbok-8063883_1920_bcrj32.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468770/strauss-4642855_1280_i5umy2.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/tree-2600482_1920_c50vn6.jpg'
                 ],
                 'status' => 'active'
             ],
@@ -952,10 +943,10 @@ class DestinationsSeeder extends Seeder
                 'best_time_to_visit' => 'June to October for dry season and best snorkeling',
                 'weather_info' => 'Tropical climate. 25-30°C year-round. Best visibility during dry season.',
                 'images' => [
-                    'images/beach.jpg',
-                    'images/snorkeling.jpg',
-                    'images/island.jpg',
-                    'images/coral.jpg'
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468771/spphoto_skxxer.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/tree-3079250_1280_m8apya.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468770/springbok-8063883_1920_bcrj32.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468770/strauss-4642855_1280_i5umy2.jpg'
                 ],
                 'status' => 'active'
             ],
@@ -1436,10 +1427,10 @@ class DestinationsSeeder extends Seeder
                 'best_time_to_visit' => 'June to October for dry season wildlife viewing',
                 'weather_info' => 'Warm and pleasant. 22-28°C. Lake breeze provides comfort. Dry season best for activities.',
                 'images' => [
-                    'images/island.jpg',
-                    'images/hippo.jpg',
-                    'images/lake.jpg',
-                    'images/walking.jpg'
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468771/spphoto_skxxer.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468777/waterbuck_ggd5wl.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/tree-3079250_1280_m8apya.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/tree-2600482_1920_c50vn6.jpg'
                 ],
                 'status' => 'active'
             ],
@@ -1458,10 +1449,10 @@ class DestinationsSeeder extends Seeder
                 'best_time_to_visit' => 'June to October for dry season activities',
                 'weather_info' => 'Warm and pleasant. 22-28°C. Lake breeze provides comfort. Dry season best for activities.',
                 'images' => [
-                    'images/island.jpg',
-                    'images/chimpanzee.jpg',
-                    'images/bird.jpg',
-                    'images/lake.jpg'
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468771/spphoto_skxxer.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468777/waterbuck_ggd5wl.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/tree-3079250_1280_m8apya.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/tree-2600482_1920_c50vn6.jpg'
                 ],
                 'status' => 'active'
             ],
@@ -1480,10 +1471,10 @@ class DestinationsSeeder extends Seeder
                 'best_time_to_visit' => 'June to October for dry season wildlife viewing',
                 'weather_info' => 'Hot and dry. 28-35°C. Cool nights. Wet season (November-May) limits access.',
                 'images' => [
-                    'images/wildlife.jpg',
-                    'images/elephant.jpg',
-                    'images/river.jpg',
-                    'images/boat.jpg'
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468777/waterbuck_ggd5wl.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/tree-3079250_1280_m8apya.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/tree-2600482_1920_c50vn6.jpg',
+                    'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/tree-222836_1920_bt1bf3.jpg'
                 ],
                 'status' => 'active'
             ]
