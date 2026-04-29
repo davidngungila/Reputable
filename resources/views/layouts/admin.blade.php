@@ -164,6 +164,7 @@
                     <a href="{{ route('admin.cloudinary.index') }}" class="block text-xs py-2 text-emerald-100/50 hover:text-white transition-colors {{ request()->routeIs('admin.cloudinary.index') ? 'text-emerald-400 font-bold' : '' }}">Media Library</a>
                     <a href="{{ route('admin.cloudinary.upload') }}" class="block text-xs py-2 text-emerald-100/50 hover:text-white transition-colors {{ request()->routeIs('admin.cloudinary.upload') ? 'text-emerald-400 font-bold' : '' }}">Upload Files</a>
                     <a href="{{ route('admin.cloudinary.folders') }}" class="block text-xs py-2 text-emerald-100/50 hover:text-white transition-colors {{ request()->routeIs('admin.cloudinary.folders') ? 'text-emerald-400 font-bold' : '' }}">Manage Folders</a>
+                    <a href="{{ route('admin.cloudinary.analytics') }}" class="block text-xs py-2 text-emerald-100/50 hover:text-white transition-colors {{ request()->routeIs('admin.cloudinary.analytics') ? 'text-emerald-400 font-bold' : '' }}">Analytics</a>
                 </div>
             </div>
             @endif

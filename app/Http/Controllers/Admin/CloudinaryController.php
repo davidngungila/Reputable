@@ -65,6 +65,28 @@ class CloudinaryController extends Controller
         }
     }
 
+    public function analytics()
+    {
+        try {
+            // Get all resources for analytics
+            $resources = Cloudinary::search()
+                ->maxResults(500)
+                ->execute()
+                ->getResources();
+
+            $stats = [
+                'total_files' => count($resources),
+                'total_bytes' => array_sum(array_column($resources, 'bytes')),
+                'image_count' => count(array_filter($resources, fn($r) => $r['resource_type'] == 'image')),
+                'video_count' => count(array_filter($resources, fn($r) => $r['resource_type'] == 'video')),
+            ];
+
+            return view('admin.cloudinary.analytics', compact('stats'));
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Failed to load analytics: ' . $e->getMessage());
+        }
+    }
+
     public function createFolder(Request $request)
     {
         $request->validate([

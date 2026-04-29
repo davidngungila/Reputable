@@ -11,6 +11,9 @@
             <p class="text-gray-600">Organize your media files with folders</p>
         </div>
         <div class="flex gap-3 mt-4 lg:mt-0">
+            <a href="{{ route('admin.cloudinary.analytics') }}" class="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors text-sm font-medium">
+                <i class="fas fa-chart-bar mr-2"></i>Analytics
+            </a>
             <a href="{{ route('admin.cloudinary.index') }}" class="px-4 py-2 bg-white border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors text-sm font-medium">
                 <i class="fas fa-arrow-left mr-2"></i>Back to Library
             </a>
@@ -31,23 +34,77 @@
         </form>
     </div>
 
+    <!-- Folder Stats -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+        <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+            <div class="flex items-center gap-4">
+                <div class="p-3 bg-emerald-100 rounded-lg">
+                    <i class="fas fa-folder text-emerald-600 text-xl"></i>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-bold text-gray-900">{{ isset($folders) ? count($folders) : 0 }}</h3>
+                    <p class="text-sm text-gray-600">Total Folders</p>
+                </div>
+            </div>
+        </div>
+        <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+            <div class="flex items-center gap-4">
+                <div class="p-3 bg-blue-100 rounded-lg">
+                    <i class="fas fa-file text-blue-600 text-xl"></i>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-bold text-gray-900">--</h3>
+                    <p class="text-sm text-gray-600">Total Files</p>
+                </div>
+            </div>
+        </div>
+        <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+            <div class="flex items-center gap-4">
+                <div class="p-3 bg-purple-100 rounded-lg">
+                    <i class="fas fa-hdd text-purple-600 text-xl"></i>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-bold text-gray-900">-- MB</h3>
+                    <p class="text-sm text-gray-600">Storage Used</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Folders List -->
     <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
-        <h2 class="text-lg font-semibold text-gray-900 mb-4">Existing Folders</h2>
+        <div class="flex items-center justify-between mb-6">
+            <h2 class="text-lg font-semibold text-gray-900">Existing Folders</h2>
+            <div class="flex gap-2">
+                <button class="px-3 py-1 text-xs bg-emerald-100 text-emerald-700 rounded-lg font-medium">Grid View</button>
+                <button class="px-3 py-1 text-xs text-gray-600 hover:bg-gray-100 rounded-lg">List View</button>
+            </div>
+        </div>
         @if(isset($folders) && count($folders) > 0)
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 @foreach($folders as $folder)
-                <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg border border-gray-200 hover:border-emerald-500 transition-colors">
-                    <div class="flex items-center gap-3">
-                        <i class="fas fa-folder text-2xl text-emerald-600"></i>
-                        <div>
-                            <p class="font-medium text-gray-900">{{ $folder['path'] }}</p>
+                <div class="group relative bg-gray-50 rounded-lg border border-gray-200 hover:border-emerald-500 hover:shadow-lg transition-all p-4">
+                    <div class="flex items-center gap-3 mb-3">
+                        <i class="fas fa-folder text-3xl text-emerald-600"></i>
+                        <div class="flex-1 min-w-0">
+                            <p class="font-medium text-gray-900 truncate" title="{{ $folder['path'] }}">{{ $folder['path'] }}</p>
                             <p class="text-xs text-gray-500">{{ $folder['name'] }}</p>
                         </div>
                     </div>
-                    <div class="flex gap-2">
-                        <button class="p-2 text-gray-400 hover:text-emerald-600 transition-colors" title="View Contents">
-                            <i class="fas fa-eye"></i>
+                    <div class="flex items-center justify-between text-xs text-gray-500">
+                        <span><i class="fas fa-file mr-1"></i>-- files</span>
+                        <span><i class="fas fa-hdd mr-1"></i>-- MB</span>
+                    </div>
+                    <!-- Actions -->
+                    <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 rounded-lg">
+                        <button class="p-2 bg-white rounded-full hover:bg-gray-100 transition-colors" title="View Contents">
+                            <i class="fas fa-eye text-gray-700"></i>
+                        </button>
+                        <button class="p-2 bg-white rounded-full hover:bg-gray-100 transition-colors" title="Rename">
+                            <i class="fas fa-edit text-gray-700"></i>
+                        </button>
+                        <button class="p-2 bg-red-500 rounded-full hover:bg-red-600 transition-colors" title="Delete">
+                            <i class="fas fa-trash text-white"></i>
                         </button>
                     </div>
                 </div>
@@ -72,6 +129,7 @@
             <li>• Example: reputable-tours/tours/serengeti</li>
             <li>• Folders help organize media by category or tour</li>
             <li>• Folder names are case-sensitive</li>
+            <li>• Hover over folders to see quick actions</li>
         </ul>
     </div>
 </div>
