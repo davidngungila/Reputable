@@ -41,8 +41,13 @@ function runTest() {
     resultsDiv.innerHTML = '';
     resultsDiv.appendChild(loadingDiv);
 
-    fetch('{{ route('admin.cloudinary.test') }}')
-        .then(response => response.json())
+    fetch('{{ route('admin.cloudinary.test-api') }}')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
         .then(data => {
             loadingDiv.style.display = 'none';
             displayResults(data);

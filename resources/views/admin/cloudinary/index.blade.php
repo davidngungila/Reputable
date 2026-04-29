@@ -2,6 +2,11 @@
 
 @section('title', 'Media Library')
 
+@section('head')
+<meta name="csrf-token" content="{{ csrf_token() }}">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+@endsection
+
 @section('content')
 <div class="p-6 bg-gray-50 min-h-screen">
     <!-- Header -->
@@ -11,14 +16,82 @@
             <p class="text-gray-600">Manage all your media files stored in Cloudinary</p>
         </div>
         <div class="flex gap-3 mt-4 lg:mt-0">
-            <a href="{{ route('admin.cloudinary.upload') }}" class="px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors text-sm font-medium">
-                <i class="fas fa-upload mr-2"></i>Upload New
+            <a href="{{ $upload_url ?? route('admin.cloudinary.upload') }}" class="px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors text-sm font-medium">
+                <i class="fas fa-upload mr-2"></i>Upload Files
             </a>
-            <a href="{{ route('admin.cloudinary.folders') }}" class="px-4 py-2 bg-white border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors text-sm font-medium">
+            <a href="{{ $folders_url ?? route('admin.cloudinary.folders') }}" class="px-4 py-2 bg-white border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors text-sm font-medium">
                 <i class="fas fa-folder mr-2"></i>Manage Folders
+            </a>
+            <a href="{{ $analytics_url ?? route('admin.cloudinary.analytics') }}" class="px-4 py-2 bg-white border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors text-sm font-medium">
+                <i class="fas fa-chart-bar mr-2"></i>Analytics
             </a>
         </div>
     </div>
+
+    <!-- Analytics Overview -->
+    @if(isset($stats))
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-sm text-gray-600">Total Files</p>
+                    <p class="text-2xl font-bold text-gray-900">{{ $stats['total_files'] ?? 0 }}</p>
+                </div>
+                <div class="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center">
+                    <i class="fas fa-file text-emerald-600"></i>
+                </div>
+            </div>
+        </div>
+        
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-sm text-gray-600">Images</p>
+                    <p class="text-2xl font-bold text-gray-900">{{ $stats['image_count'] ?? 0 }}</p>
+                </div>
+                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                    <i class="fas fa-image text-blue-600"></i>
+                </div>
+            </div>
+        </div>
+        
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-sm text-gray-600">Videos</p>
+                    <p class="text-2xl font-bold text-gray-900">{{ $stats['video_count'] ?? 0 }}</p>
+                </div>
+                <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
+                    <i class="fas fa-video text-purple-600"></i>
+                </div>
+            </div>
+        </div>
+        
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-sm text-gray-600">Folders</p>
+                    <p class="text-2xl font-bold text-gray-900">{{ $stats['folder_count'] ?? 0 }}</p>
+                </div>
+                <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center">
+                    <i class="fas fa-folder text-orange-600"></i>
+                </div>
+            </div>
+        </div>
+        
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-sm text-gray-600">Storage Used</p>
+                    <p class="text-2xl font-bold text-gray-900">{{ number_format(($stats['total_bytes'] ?? 0) / 1024 / 1024, 2) }} MB</p>
+                </div>
+                <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center">
+                    <i class="fas fa-database text-red-600"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endif
 
     <!-- Advanced Filters & Search -->
     <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 mb-6">
@@ -75,6 +148,9 @@
             <span id="selected-count">0 selected</span>
         </div>
         <div class="flex gap-2">
+            <button onclick="bulkCopyLinks()" class="px-4 py-2 bg-blue-500 hover:bg-blue-600 rounded-lg text-sm font-medium text-white">
+                <i class="fas fa-link mr-2"></i>Copy Links
+            </button>
             <button onclick="bulkDelete()" class="px-4 py-2 bg-red-500 hover:bg-red-600 rounded-lg text-sm font-medium">
                 <i class="fas fa-trash mr-2"></i>Delete Selected
             </button>
@@ -96,23 +172,18 @@
         <div id="media-container" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
             @if(isset($resources) && count($resources) > 0)
                 @foreach($resources as $resource)
-                @php
-                    $publicId = $resource['public_id'] ?? 'unknown';
-                    $secureUrl = $resource['secure_url'] ?? '';
-                    $resourceType = $resource['resource_type'] ?? 'unknown';
-                    $bytes = $resource['bytes'] ?? 0;
-                @endphp
                 <div class="media-item group relative bg-gray-50 rounded-lg overflow-hidden border border-gray-200 hover:shadow-lg transition-all" 
-                     data-type="{{ $resourceType }}" 
-                     data-name="{{ basename($publicId) }}"
-                     data-size="{{ $bytes }}"
-                     data-date="{{ $resource['created_at'] ?? '' }}">
+                     data-type="{{ $resource['type'] ?? 'unknown' }}" 
+                     data-name="{{ $resource['name'] ?? 'unknown' }}"
+                     data-size="{{ $resource['size'] ?? '0 B' }}"
+                     data-date="{{ $resource['created_at'] ?? '' }}"
+                     data-url="{{ $resource['url'] ?? '' }}">
                     <input type="checkbox" class="media-checkbox absolute top-2 left-2 z-20 w-5 h-5 rounded hidden" 
-                           value="{{ $publicId }}" onchange="updateSelectedCount()">
+                           value="{{ $resource['id'] ?? '' }}" onchange="updateSelectedCount()">
                     
-                    @if($resourceType == 'image' && !empty($secureUrl))
-                        <img src="{{ $secureUrl }}" alt="{{ $publicId }}" class="w-full h-40 object-cover" loading="lazy">
-                    @elseif($resourceType == 'video')
+                    @if($resource['type'] == 'image' && !empty($resource['url']))
+                        <img src="{{ $resource['thumbnail'] }}" alt="{{ $resource['name'] }}" class="w-full h-40 object-cover" loading="lazy">
+                    @elseif($resource['type'] == 'video')
                         <div class="w-full h-40 bg-gray-200 flex items-center justify-center">
                             <i class="fas fa-video text-4xl text-gray-400"></i>
                         </div>
@@ -123,33 +194,33 @@
                     @endif
                     
                     <div class="p-3">
-                        <p class="text-xs text-gray-500 truncate" title="{{ $publicId }}">
-                            {{ basename($publicId) }}
+                        <p class="text-xs text-gray-500 truncate" title="{{ $resource['name'] }}">
+                            {{ $resource['name'] }}
                         </p>
                         <p class="text-[10px] text-gray-400 mt-1">
-                            {{ $resourceType }} • {{ number_format($bytes / 1024, 2) }} KB
+                            {{ $resource['type'] ?? 'unknown' }} • {{ $resource['size'] ?? '0 B' }}
                         </p>
                     </div>
 
                     <!-- Actions -->
                     <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 z-10">
-                        <button onclick="showFileDetails('{{ $publicId }}', '{{ $secureUrl }}', '{{ $resourceType }}', {{ $bytes }})" class="p-2 bg-white rounded-full hover:bg-gray-100 transition-colors" title="Details">
+                        <button onclick="showFileDetails('{{ $resource['id'] }}', '{{ $resource['url'] }}', '{{ $resource['type'] }}', '{{ $resource['size'] }}')" class="p-2 bg-white rounded-full hover:bg-gray-100 transition-colors" title="Details">
                             <i class="fas fa-info-circle text-gray-700"></i>
                         </button>
-                        @if(!empty($secureUrl))
-                        <a href="{{ $secureUrl }}" target="_blank" class="p-2 bg-white rounded-full hover:bg-gray-100 transition-colors" title="View">
+                        @if(!empty($resource['url']))
+                        <a href="{{ $resource['url'] }}" target="_blank" class="p-2 bg-white rounded-full hover:bg-gray-100 transition-colors" title="View">
                             <i class="fas fa-eye text-gray-700"></i>
                         </a>
                         @endif
-                        @if(!empty($secureUrl))
-                        <button onclick="copyToClipboard('{{ $secureUrl }}')" class="p-2 bg-white rounded-full hover:bg-gray-100 transition-colors" title="Copy URL">
+                        @if(!empty($resource['url']))
+                        <button onclick="copyToClipboard('{{ $resource['url'] }}')" class="p-2 bg-white rounded-full hover:bg-gray-100 transition-colors" title="Copy URL">
                             <i class="fas fa-copy text-gray-700"></i>
                         </button>
                         @endif
-                        <button onclick="transformImage('{{ $publicId }}')" class="p-2 bg-blue-500 rounded-full hover:bg-blue-600 transition-colors" title="Transform">
+                        <button onclick="transformImage('{{ $resource['id'] }}')" class="p-2 bg-blue-500 rounded-full hover:bg-blue-600 transition-colors" title="Transform">
                             <i class="fas fa-magic text-white"></i>
                         </button>
-                        <form action="{{ route('admin.cloudinary.destroy', $publicId) }}" method="POST" class="inline">
+                        <form action="{{ route('admin.cloudinary.destroy', $resource['id']) }}" method="POST" class="inline">
                             @csrf
                             @method('DELETE')
                             <button type="submit" onclick="return confirm('Are you sure you want to delete this file?')" class="p-2 bg-red-500 rounded-full hover:bg-red-600 transition-colors" title="Delete">
@@ -164,7 +235,7 @@
                     <i class="fas fa-cloud-upload-alt text-6xl text-gray-300 mb-4"></i>
                     <h3 class="text-lg font-medium text-gray-900 mb-2">No Media Files</h3>
                     <p class="text-gray-500 mb-4">Upload your first media file to get started</p>
-                    <a href="{{ route('admin.cloudinary.upload') }}" class="px-6 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors text-sm font-medium">
+                    <a href="{{ $upload_url ?? route('admin.cloudinary.upload') }}" class="px-6 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors text-sm font-medium">
                         Upload Files
                     </a>
                 </div>
@@ -328,7 +399,10 @@ function bulkDelete() {
 
 function bulkDownload() {
     selectedFiles.forEach(publicId => {
-        window.open(`https://res.cloudinary.com/image/upload/${publicId}`, '_blank');
+        // Try to get the URL from the media item data
+        const mediaItem = document.querySelector(`[value="${publicId}"]`).closest('.media-item');
+        const url = mediaItem.querySelector('img')?.src || `https://res.cloudinary.com/image/upload/${publicId}`;
+        window.open(url, '_blank');
     });
 }
 
@@ -377,6 +451,96 @@ function closeModal() {
     modal.classList.add('hidden');
     modal.classList.remove('flex');
 }
+
+// Bulk Copy Links Function
+function bulkCopyLinks() {
+    const selectedItems = document.querySelectorAll('.media-checkbox:checked');
+    
+    if (selectedItems.length === 0) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'No Files Selected',
+            text: 'Please select at least one file to copy links.',
+            confirmButtonColor: '#3b82f6'
+        });
+        return;
+    }
+    
+    const urls = [];
+    selectedItems.forEach(checkbox => {
+        const mediaItem = checkbox.closest('.media-item');
+        const url = mediaItem.dataset.url;
+        if (url) {
+            urls.push(url);
+        }
+    });
+    
+    if (urls.length === 0) {
+        Swal.fire({
+            icon: 'error',
+            title: 'No URLs Found',
+            text: 'Selected files do not have valid URLs.',
+            confirmButtonColor: '#ef4444'
+        });
+        return;
+    }
+    
+    // Copy all URLs to clipboard
+    const urlsText = urls.join('\n');
+    
+    // Create temporary textarea for copying
+    const textarea = document.createElement('textarea');
+    textarea.value = urlsText;
+    textarea.style.position = 'fixed';
+    textarea.style.opacity = '0';
+    document.body.appendChild(textarea);
+    textarea.select();
+    
+    try {
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+        
+        // Show success message
+        Swal.fire({
+            icon: 'success',
+            title: 'Links Copied!',
+            text: `Successfully copied ${urls.length} file link(s) to clipboard.`,
+            confirmButtonColor: '#10b981',
+            timer: 3000,
+            timerProgressBar: true
+        });
+    } catch (err) {
+        document.body.removeChild(textarea);
+        
+        // Fallback: show URLs in modal
+        Swal.fire({
+            icon: 'info',
+            title: 'Copy Links Manually',
+            html: `<div class="text-left"><p class="mb-2">Please copy these links manually:</p><textarea class="w-full h-32 p-2 border rounded" readonly>${urlsText}</textarea></div>`,
+            confirmButtonColor: '#3b82f6',
+            confirmButtonText: 'Close'
+        });
+    }
+}
+
+// Fix modal closing behavior when clicking outside
+document.addEventListener('DOMContentLoaded', function() {
+    const modal = document.getElementById('file-details-modal');
+    
+    // Close modal when clicking outside the modal content
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            closeModal();
+        }
+    });
+    
+    // Close modal with Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeModal();
+        }
+    });
+});
 
 // Image Transformation
 function transformImage(publicId) {

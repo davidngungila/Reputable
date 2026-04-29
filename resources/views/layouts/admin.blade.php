@@ -54,10 +54,14 @@
             @php
                 $user = auth()->user();
                 // Check if role methods exist, fallback if not
-                $hasRoleMethod = method_exists($user, 'hasAnyRole') && $user && $user->roles()->exists();
-                $isAdmin = $hasRoleMethod ? $user->hasAnyRole(['System Administrator']) : true; // Default true to show menu when roles not configured
+                $hasRoleMethod = $user && method_exists($user, 'hasAnyRole');
+                $hasRoles = $user && method_exists($user, 'roles') && $user->roles()->exists();
+                $isAdmin = $hasRoleMethod && $hasRoles ? $user->hasAnyRole(['System Administrator']) : true; // Default true to show menu when roles not configured
                 $navRoleView = session('nav_role_view');
-                $canNavRoleView = $hasRoleMethod && $user && $user->hasAnyRole(['System Administrator']);
+                $canNavRoleView = $hasRoleMethod && $hasRoles && $user->hasAnyRole(['System Administrator']);
+                
+                // Always show all menu items for admin users when roles are not configured
+                $showAllMenus = !$hasRoleMethod || !$hasRoles || $isAdmin;
             @endphp
 
             @if($canNavRoleView && $navRoleView)
@@ -72,7 +76,7 @@
             </a>
 
             {{-- Tours & Packages --}}
-            @if(!$hasRoleMethod || $user->hasAnyRole(['System Administrator', 'Content Manager', 'Travel Consultant']))
+            @if($showAllMenus)
             <div x-data="{ open: window.innerWidth < 1024 || {{ request()->routeIs('admin.tours.*') ? 'true' : 'false' }} }">
                 <button @click="open = !open" 
                         class="w-full flex items-center justify-between px-4 py-3 text-emerald-100/70 hover:bg-emerald-800 hover:text-white transition-all rounded-xl {{ request()->routeIs('admin.tours.*') ? 'text-white' : '' }}">
@@ -93,7 +97,7 @@
             @endif
 
             {{-- Mountain Trekking --}}
-            @if(!$hasRoleMethod || $user->hasAnyRole(['System Administrator', 'Content Manager', 'Travel Consultant']))
+            @if($showAllMenus)
             <div x-data="{ open: window.innerWidth < 1024 || {{ request()->routeIs('admin.mountain.*') ? 'true' : 'false' }} }">
                 <button @click="open = !open" 
                         class="w-full flex items-center justify-between px-4 py-3 text-emerald-100/70 hover:bg-emerald-800 hover:text-white transition-all rounded-xl {{ request()->routeIs('admin.mountain.*') ? 'text-white' : '' }}">
@@ -111,7 +115,7 @@
             @endif
 
             {{-- Things to Do --}}
-            @if(!$hasRoleMethod || $user->hasAnyRole(['System Administrator', 'Content Manager', 'Travel Consultant']))
+            @if($showAllMenus)
             <div x-data="{ open: window.innerWidth < 1024 || {{ request()->routeIs('admin.activities.*') ? 'true' : 'false' }} }">
                 <button @click="open = !open" 
                         class="w-full flex items-center justify-between px-4 py-3 text-emerald-100/70 hover:bg-emerald-800 hover:text-white transition-all rounded-xl {{ request()->routeIs('admin.activities.*') ? 'text-white' : '' }}">
@@ -132,7 +136,7 @@
             @endif
 
             {{-- Inquiries Management --}}
-            @if(!$hasRoleMethod || $user->hasAnyRole(['System Administrator', 'Content Manager', 'Travel Consultant']))
+            @if($showAllMenus)
             <div x-data="{ open: window.innerWidth < 1024 || {{ request()->routeIs('admin.inquiries.*') ? 'true' : 'false' }} }">
                 <button @click="open = !open"
                         class="w-full flex items-center justify-between px-4 py-3 text-emerald-100/70 hover:bg-emerald-800 hover:text-white transition-all rounded-xl {{ request()->routeIs('admin.inquiries.*') ? 'text-white' : '' }}">
@@ -150,7 +154,7 @@
             @endif
 
             {{-- Media Management (Cloudinary) --}}
-            @if(!$hasRoleMethod || $user->hasAnyRole(['System Administrator', 'Content Manager', 'Travel Consultant']))
+            @if($showAllMenus)
             <div x-data="{ open: window.innerWidth < 1024 || {{ request()->routeIs('admin.cloudinary.*') ? 'true' : 'false' }} }">
                 <button @click="open = !open"
                         class="w-full flex items-center justify-between px-4 py-3 text-emerald-100/70 hover:bg-emerald-800 hover:text-white transition-all rounded-xl {{ request()->routeIs('admin.cloudinary.*') ? 'text-white' : '' }}">
@@ -272,11 +276,11 @@
                             <img src="{{ $avatarUrl }}" alt="Avatar" class="w-10 h-10 rounded-lg object-cover shadow-lg shadow-emerald-500/20 group-hover:scale-105 transition-transform" />
                         @else
                             <div class="w-10 h-10 rounded-lg bg-emerald-500 flex items-center justify-center text-white font-black shadow-lg shadow-emerald-500/20 group-hover:scale-105 transition-transform">
-                                {{ substr(Auth::user()->name, 0, 1) }}
+                                {{ Auth::user() ? substr(Auth::user()->name, 0, 1) : 'A' }}
                             </div>
                         @endif
                         <div class="text-left hidden sm:block">
-                            <p class="text-xs font-black text-slate-900 leading-tight">{{ Auth::user()->name }}</p>
+                            <p class="text-xs font-black text-slate-900 leading-tight">{{ Auth::user() ? Auth::user()->name : 'Admin User' }}</p>
                             <p class="text-[10px] text-emerald-600 font-bold uppercase tracking-wider leading-tight mt-0.5">Administrator</p>
                         </div>
                         <i class="ph ph-caret-down text-xs text-slate-400 transition-transform hidden sm:block" :class="open ? 'rotate-180' : ''"></i>
@@ -294,7 +298,7 @@
                         
                         <div class="px-6 py-4 border-b border-slate-50 mb-2">
                             <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Signed in as</p>
-                            <p class="text-sm font-black text-slate-900 truncate">{{ Auth::user()->name }}</p>
+                            <p class="text-sm font-black text-slate-900 truncate">{{ Auth::user() ? Auth::user()->name : 'Admin User' }}</p>
                         </div>
 
                         <a href="{{ route('admin.admin.profile') }}" class="flex items-center gap-3 px-6 py-3 text-sm font-bold text-slate-600 hover:bg-slate-50 hover:text-emerald-600 transition-all">

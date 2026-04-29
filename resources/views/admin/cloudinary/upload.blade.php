@@ -2,6 +2,10 @@
 
 @section('title', 'Upload Files')
 
+@section('head')
+<meta name="csrf-token" content="{{ csrf_token() }}">
+@endsection
+
 @section('content')
 <div class="p-6 bg-gray-50 min-h-screen">
     <!-- Header -->
@@ -27,7 +31,7 @@
                 <div class="mb-6">
                     <label class="block text-sm font-medium text-gray-700 mb-2">Select Files</label>
                     <div id="drop-zone" class="border-2 border-dashed border-gray-300 rounded-lg p-12 text-center hover:border-emerald-500 transition-colors cursor-pointer bg-gray-50 hover:bg-emerald-50">
-                        <input type="file" name="file" id="file" class="hidden" required accept="image/*,video/*" multiple>
+                        <input type="file" name="files[]" id="files" class="hidden" required accept="image/*,video/*" multiple>
                         <div id="upload-prompt">
                             <i class="fas fa-cloud-upload-alt text-6xl text-gray-400 mb-4"></i>
                             <p class="text-gray-600 mb-2 text-lg">Drag and drop files here</p>
@@ -38,9 +42,11 @@
                             <div id="preview-list" class="space-y-2"></div>
                         </div>
                     </div>
-                    @error('file')
-                        <p class="text-red-500 text-sm mt-2">{{ $message }}</p>
-                    @enderror
+                    @if(isset($errors) && $errors->has('files.*'))
+                        @foreach($errors->get('files.*') as $message)
+                            <p class="text-red-500 text-sm mt-2">{{ $message }}</p>
+                        @endforeach
+                    @endif
                 </div>
 
                 <!-- Upload Options -->
@@ -141,9 +147,12 @@
     </div>
 </div>
 
+<!-- SweetAlert2 for beautiful popups -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <script>
 const dropZone = document.getElementById('drop-zone');
-const fileInput = document.getElementById('file');
+const fileInput = document.getElementById('files');
 const uploadPrompt = document.getElementById('upload-prompt');
 const filePreview = document.getElementById('file-preview');
 const previewList = document.getElementById('preview-list');
@@ -171,8 +180,16 @@ dropZone.addEventListener('drop', (e) => {
     
     const files = e.dataTransfer.files;
     if (files.length > 0) {
-        fileInput.files = files;
-        handleFiles(files);
+        // Create a new FileList with existing files plus new files
+        const existingFiles = Array.from(fileInput.files || []);
+        const allFiles = [...existingFiles, ...files];
+        
+        // Set the combined files
+        const dataTransfer = new DataTransfer();
+        allFiles.forEach(file => dataTransfer.items.add(file));
+        fileInput.files = dataTransfer.files;
+        
+        handleFiles(allFiles);
     }
 });
 
@@ -228,20 +245,104 @@ uploadForm.addEventListener('submit', (e) => {
     submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Uploading...';
     uploadProgress.classList.remove('hidden');
     
-    // Simulate progress
-    let progress = 0;
-    const interval = setInterval(() => {
-        progress += Math.random() * 15;
-        if (progress >= 100) {
-            progress = 100;
-            clearInterval(interval);
-        }
-        progressBar.style.width = progress + '%';
-        progressPercent.textContent = Math.round(progress) + '%';
-    }, 200);
+    // Create FormData for file upload
+    const formData = new FormData(uploadForm);
     
-    // Submit form
-    uploadForm.submit();
+    // Submit via fetch for better progress handling
+    fetch(uploadForm.action, {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Complete progress
+        progressBar.style.width = '100%';
+        progressPercent.textContent = '100%';
+        
+        if (data.success) {
+            // Show success popup
+            Swal.fire({
+                icon: 'success',
+                title: 'Upload Successful!',
+                text: data.message || 'Files uploaded successfully!',
+                confirmButtonColor: '#10b981',
+                confirmButtonText: 'View Files',
+                showCancelButton: true,
+                cancelButtonText: 'Upload More',
+                cancelButtonColor: '#6b7280'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Redirect to media library
+                    window.location.href = '/admin/cloudinary';
+                } else {
+                    // Reset form for more uploads
+                    resetUploadForm();
+                }
+            });
+        } else {
+            // Show error popup
+            Swal.fire({
+                icon: 'error',
+                title: 'Upload Failed',
+                text: data.message || 'Something went wrong during upload.',
+                confirmButtonColor: '#ef4444'
+            });
+        }
+    })
+    .catch(error => {
+        console.error('Upload error:', error);
+        
+        // Show error popup
+        Swal.fire({
+            icon: 'error',
+            title: 'Upload Failed',
+            text: 'Network error occurred. Please try again.',
+            confirmButtonColor: '#ef4444'
+        });
+    })
+    .finally(() => {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<i class="fas fa-upload mr-2"></i>Upload Files';
+    });
+});
+
+function resetUploadForm() {
+    uploadForm.reset();
+    uploadPrompt.classList.remove('hidden');
+    filePreview.classList.add('hidden');
+    previewList.innerHTML = '';
+    uploadProgress.classList.add('hidden');
+    progressBar.style.width = '0%';
+    progressPercent.textContent = '0%';
+}
+
+// Check for success messages from server and show SweetAlert
+document.addEventListener('DOMContentLoaded', function() {
+    // Check for success messages in session
+    @if(session()->has('success'))
+        Swal.fire({
+            icon: 'success',
+            title: 'Upload Successful!',
+            text: "{{ session('success') }}",
+            confirmButtonColor: '#10b981',
+            confirmButtonText: 'Great!',
+            timer: 5000,
+            timerProgressBar: true
+        });
+    @endif
+    
+    // Check for error messages in session
+    @if(session()->has('error'))
+        Swal.fire({
+            icon: 'error',
+            title: 'Upload Failed',
+            text: "{{ session('error') }}",
+            confirmButtonColor: '#ef4444'
+        });
+    @endif
 });
 </script>
 @endsection
