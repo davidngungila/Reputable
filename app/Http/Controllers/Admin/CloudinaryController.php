@@ -11,15 +11,25 @@ class CloudinaryController extends Controller
     public function index()
     {
         try {
-            // Get all resources from Cloudinary - increase limit to show more images
-            $resources = Cloudinary::search()
-                ->maxResults(500)
-                ->execute()
-                ->getResources();
+            // Try using admin API to list all resources
+            $result = Cloudinary::admin()->assets([
+                'max_results' => 500,
+                'resource_type' => 'image',
+            ]);
+            
+            $resources = $result['resources'] ?? [];
+            
+            // Debug: Log the resources count
+            \Log::info('Cloudinary resources count: ' . count($resources));
+            
+            if (empty($resources)) {
+                session()->flash('info', 'No media files found in Cloudinary. Try uploading some files first.');
+            }
         } catch (\Exception $e) {
             // Return empty array if Cloudinary fails, but still show the page
             $resources = [];
-            session()->flash('warning', 'Could not load media from Cloudinary: ' . $e->getMessage());
+            session()->flash('error', 'Could not load media from Cloudinary: ' . $e->getMessage());
+            \Log::error('Cloudinary error: ' . $e->getMessage());
         }
 
         return view('admin.cloudinary.index', compact('resources'));
@@ -72,17 +82,19 @@ class CloudinaryController extends Controller
     public function analytics()
     {
         try {
-            // Get all resources for analytics
-            $resources = Cloudinary::search()
-                ->maxResults(500)
-                ->execute()
-                ->getResources();
+            // Get all resources for analytics using admin API
+            $result = Cloudinary::admin()->assets([
+                'max_results' => 500,
+                'resource_type' => 'all',
+            ]);
+            
+            $resources = $result['resources'] ?? [];
 
             $stats = [
                 'total_files' => count($resources),
                 'total_bytes' => array_sum(array_column($resources, 'bytes')),
-                'image_count' => count(array_filter($resources, fn($r) => $r['resource_type'] == 'image')),
-                'video_count' => count(array_filter($resources, fn($r) => $r['resource_type'] == 'video')),
+                'image_count' => count(array_filter($resources, fn($r) => ($r['resource_type'] ?? '') == 'image')),
+                'video_count' => count(array_filter($resources, fn($r) => ($r['resource_type'] ?? '') == 'video')),
             ];
         } catch (\Exception $e) {
             // Return empty stats if Cloudinary fails, but still show the page
