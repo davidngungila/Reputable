@@ -11,13 +11,21 @@ class CloudinaryController extends Controller
     public function index()
     {
         try {
-            // Try using admin API to list all resources
-            $result = Cloudinary::admin()->assets([
-                'max_results' => 500,
-                'resource_type' => 'image',
-            ]);
+            // Try using search API to list all resources
+            $result = Cloudinary::search()
+                ->expression('resource_type:image')
+                ->maxResults(500)
+                ->execute();
             
-            $resources = $result['resources'] ?? [];
+            // Handle different response structures
+            if (is_array($result) && isset($result['resources'])) {
+                $resources = $result['resources'];
+            } elseif (is_object($result) && method_exists($result, 'getResources')) {
+                $resources = $result->getResources();
+            } else {
+                $resources = [];
+                \Log::warning('Cloudinary returned unexpected structure: ' . json_encode($result));
+            }
             
             // Debug: Log the resources count
             \Log::info('Cloudinary resources count: ' . count($resources));
@@ -82,13 +90,19 @@ class CloudinaryController extends Controller
     public function analytics()
     {
         try {
-            // Get all resources for analytics using admin API
-            $result = Cloudinary::admin()->assets([
-                'max_results' => 500,
-                'resource_type' => 'all',
-            ]);
+            // Get all resources for analytics using search API
+            $result = Cloudinary::search()
+                ->maxResults(500)
+                ->execute();
             
-            $resources = $result['resources'] ?? [];
+            // Handle different response structures
+            if (is_array($result) && isset($result['resources'])) {
+                $resources = $result['resources'];
+            } elseif (is_object($result) && method_exists($result, 'getResources')) {
+                $resources = $result->getResources();
+            } else {
+                $resources = [];
+            }
 
             $stats = [
                 'total_files' => count($resources),

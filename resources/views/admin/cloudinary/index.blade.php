@@ -96,17 +96,23 @@
         <div id="media-container" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
             @if(isset($resources) && count($resources) > 0)
                 @foreach($resources as $resource)
+                @php
+                    $publicId = $resource['public_id'] ?? 'unknown';
+                    $secureUrl = $resource['secure_url'] ?? '';
+                    $resourceType = $resource['resource_type'] ?? 'unknown';
+                    $bytes = $resource['bytes'] ?? 0;
+                @endphp
                 <div class="media-item group relative bg-gray-50 rounded-lg overflow-hidden border border-gray-200 hover:shadow-lg transition-all" 
-                     data-type="{{ $resource['resource_type'] }}" 
-                     data-name="{{ basename($resource['public_id']) }}"
-                     data-size="{{ $resource['bytes'] }}"
+                     data-type="{{ $resourceType }}" 
+                     data-name="{{ basename($publicId) }}"
+                     data-size="{{ $bytes }}"
                      data-date="{{ $resource['created_at'] ?? '' }}">
                     <input type="checkbox" class="media-checkbox absolute top-2 left-2 z-20 w-5 h-5 rounded hidden" 
-                           value="{{ $resource['public_id'] }}" onchange="updateSelectedCount()">
+                           value="{{ $publicId }}" onchange="updateSelectedCount()">
                     
-                    @if($resource['resource_type'] == 'image')
-                        <img src="{{ $resource['secure_url'] }}" alt="{{ $resource['public_id'] }}" class="w-full h-40 object-cover" loading="lazy">
-                    @elseif($resource['resource_type'] == 'video')
+                    @if($resourceType == 'image' && !empty($secureUrl))
+                        <img src="{{ $secureUrl }}" alt="{{ $publicId }}" class="w-full h-40 object-cover" loading="lazy">
+                    @elseif($resourceType == 'video')
                         <div class="w-full h-40 bg-gray-200 flex items-center justify-center">
                             <i class="fas fa-video text-4xl text-gray-400"></i>
                         </div>
@@ -117,29 +123,33 @@
                     @endif
                     
                     <div class="p-3">
-                        <p class="text-xs text-gray-500 truncate" title="{{ $resource['public_id'] }}">
-                            {{ basename($resource['public_id']) }}
+                        <p class="text-xs text-gray-500 truncate" title="{{ $publicId }}">
+                            {{ basename($publicId) }}
                         </p>
                         <p class="text-[10px] text-gray-400 mt-1">
-                            {{ $resource['resource_type'] }} • {{ number_format($resource['bytes'] / 1024, 2) }} KB
+                            {{ $resourceType }} • {{ number_format($bytes / 1024, 2) }} KB
                         </p>
                     </div>
 
                     <!-- Actions -->
                     <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 z-10">
-                        <button onclick="showFileDetails('{{ $resource['public_id'] }}', '{{ $resource['secure_url'] }}', '{{ $resource['resource_type'] }}', {{ $resource['bytes'] }})" class="p-2 bg-white rounded-full hover:bg-gray-100 transition-colors" title="Details">
+                        <button onclick="showFileDetails('{{ $publicId }}', '{{ $secureUrl }}', '{{ $resourceType }}', {{ $bytes }})" class="p-2 bg-white rounded-full hover:bg-gray-100 transition-colors" title="Details">
                             <i class="fas fa-info-circle text-gray-700"></i>
                         </button>
-                        <a href="{{ $resource['secure_url'] }}" target="_blank" class="p-2 bg-white rounded-full hover:bg-gray-100 transition-colors" title="View">
+                        @if(!empty($secureUrl))
+                        <a href="{{ $secureUrl }}" target="_blank" class="p-2 bg-white rounded-full hover:bg-gray-100 transition-colors" title="View">
                             <i class="fas fa-eye text-gray-700"></i>
                         </a>
-                        <button onclick="copyToClipboard('{{ $resource['secure_url'] }}')" class="p-2 bg-white rounded-full hover:bg-gray-100 transition-colors" title="Copy URL">
+                        @endif
+                        @if(!empty($secureUrl))
+                        <button onclick="copyToClipboard('{{ $secureUrl }}')" class="p-2 bg-white rounded-full hover:bg-gray-100 transition-colors" title="Copy URL">
                             <i class="fas fa-copy text-gray-700"></i>
                         </button>
-                        <button onclick="transformImage('{{ $resource['public_id'] }}')" class="p-2 bg-blue-500 rounded-full hover:bg-blue-600 transition-colors" title="Transform">
+                        @endif
+                        <button onclick="transformImage('{{ $publicId }}')" class="p-2 bg-blue-500 rounded-full hover:bg-blue-600 transition-colors" title="Transform">
                             <i class="fas fa-magic text-white"></i>
                         </button>
-                        <form action="{{ route('admin.cloudinary.destroy', $resource['public_id']) }}" method="POST" class="inline">
+                        <form action="{{ route('admin.cloudinary.destroy', $publicId) }}" method="POST" class="inline">
                             @csrf
                             @method('DELETE')
                             <button type="submit" onclick="return confirm('Are you sure you want to delete this file?')" class="p-2 bg-red-500 rounded-full hover:bg-red-600 transition-colors" title="Delete">
