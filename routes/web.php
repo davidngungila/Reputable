@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\TourController;
 use App\Http\Controllers\Admin\ActivityController;
 use App\Http\Controllers\Admin\InquiryController;
 use App\Http\Controllers\Admin\CloudinaryController;
+use App\Http\Controllers\Admin\HeroSlideController;
 use App\Http\Controllers\Public\TourController as PublicTourController;
 use App\Http\Controllers\Public\BookingController as PublicBookingController;
 use App\Http\Controllers\Public\InquiryController as PublicInquiryController;
@@ -27,6 +28,7 @@ use App\Http\Controllers\Admin\SystemToolsController;
 use App\Http\Controllers\Admin\EmailGatewayController;
 use App\Http\Controllers\Admin\AccountSettingsController;
 use App\Http\Controllers\Client\DashboardController as ClientDashboardController;
+use App\Http\Controllers\MountainController;
 
 Route::get('/', [PublicTourController::class, 'home'])->name('home');
 
@@ -58,6 +60,14 @@ Route::get('/things-to-do', function () {
 Route::get('/mountain-trekking', [PublicTourController::class, 'mountainTrekking'])->name('mountain-trekking');
 Route::get('/mountain-trekking/trekking-info', function () { return view('mountain-trekking.trekking-info'); })->name('mountain-trekking.info');
 Route::get('/mountain-trekking/routes', function () { return view('mountain-trekking.routes'); })->name('mountain-trekking.routes');
+
+// Mountain Trekking Pages
+Route::get('/mountains', [MountainController::class, 'index'])->name('mountains.index');
+Route::get('/mountains/{slug}', [MountainController::class, 'show'])->name('mountains.show');
+Route::get('/mountains/{slug}/trekking-info', [MountainController::class, 'trekkingInfo'])->name('mountains.trekking-info');
+Route::get('/mountains/{slug}/routes', [MountainController::class, 'routes'])->name('mountains.routes');
+Route::get('/mountains/{slug}/equipment', [MountainController::class, 'equipmentGuide'])->name('mountains.equipment');
+Route::get('/mountains/{slug}/guides', [MountainController::class, 'expertGuides'])->name('mountains.guides');
 
 Route::get('/login', function () {
     return redirect()->route('simple.login');
@@ -215,8 +225,16 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'ensure.admin', 'act
     Route::delete('/tours/destinations/{destination}', [TourController::class, 'destroyDestination'])->name('tours.destinations.destroy');
 
     // Mountain Trekking
-    Route::get('/mountain/kilimanjaro-routes', [TourController::class, 'kilimanjaroRoutes'])->name('mountain.kilimanjaro-routes');
-    Route::get('/mountain/meru-climbing', [TourController::class, 'meruClimbing'])->name('mountain.meru-climbing');
+    Route::get('/mountain/kilimanjaro-routes', [MountainController::class, 'adminKilimanjaroRoutes'])->name('mountain.kilimanjaro-routes');
+    Route::get('/mountain/meru-climbing', [MountainController::class, 'adminMeruClimbing'])->name('mountain.meru-climbing');
+    
+    // Mountains Management
+    Route::prefix('mountains')->name('mountains.')->group(function () {
+        Route::get('/', [MountainController::class, 'adminIndex'])->name('admin.index');
+        Route::get('/{slug}', [MountainController::class, 'adminShow'])->name('admin.show');
+        Route::get('/{id}/edit', [MountainController::class, 'edit'])->name('edit');
+        Route::put('/{id}', [MountainController::class, 'update'])->name('update');
+    });
 
     // Things to Do - Activities
     Route::resource('activities', ActivityController::class)->whereNumber('activity');
@@ -248,6 +266,18 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'ensure.admin', 'act
         Route::get('/test', [CloudinaryController::class, 'test'])->name('test');
         Route::get('/test-api', [CloudinaryController::class, 'testApi'])->name('test-api');
         Route::delete('/{publicId}', [CloudinaryController::class, 'destroy'])->name('destroy');
+    });
+
+    // Hero Slides Management
+    Route::prefix('hero-slides')->name('hero-slides.')->group(function () {
+        Route::get('/', [HeroSlideController::class, 'index'])->name('index');
+        Route::get('/create', [HeroSlideController::class, 'create'])->name('create');
+        Route::post('/', [HeroSlideController::class, 'store'])->name('store');
+        Route::get('/{id}/edit', [HeroSlideController::class, 'edit'])->name('edit');
+        Route::put('/{id}', [HeroSlideController::class, 'update'])->name('update');
+        Route::delete('/{id}', [HeroSlideController::class, 'destroy'])->name('destroy');
+        Route::post('/{id}/toggle-status', [HeroSlideController::class, 'toggleStatus'])->name('toggle-status');
+        Route::post('/reorder', [HeroSlideController::class, 'reorder'])->name('reorder');
     });
 
     // Operations
