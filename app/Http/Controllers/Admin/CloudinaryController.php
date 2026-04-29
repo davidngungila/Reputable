@@ -154,6 +154,11 @@ class CloudinaryController extends Controller
 
     public function test()
     {
+        return view('admin.cloudinary.test');
+    }
+
+    public function testApi()
+    {
         $results = [];
 
         // Test 1: Check Cloudinary configuration

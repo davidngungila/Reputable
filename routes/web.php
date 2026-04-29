@@ -246,6 +246,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'ensure.admin', 'act
         Route::post('/folders', [CloudinaryController::class, 'createFolder'])->name('create-folder');
         Route::get('/analytics', [CloudinaryController::class, 'analytics'])->name('analytics');
         Route::get('/test', [CloudinaryController::class, 'test'])->name('test');
+        Route::get('/test-api', [CloudinaryController::class, 'testApi'])->name('test-api');
         Route::delete('/{publicId}', [CloudinaryController::class, 'destroy'])->name('destroy');
     });
 
