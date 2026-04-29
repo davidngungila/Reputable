@@ -151,4 +151,107 @@ class CloudinaryController extends Controller
             return redirect()->back()->with('error', 'Failed to delete file: ' . $e->getMessage());
         }
     }
+
+    public function test()
+    {
+        $results = [];
+
+        // Test 1: Check Cloudinary configuration
+        try {
+            $config = [
+                'cloud_name' => config('cloudinary.cloud_name'),
+                'api_key' => config('cloudinary.api_key'),
+                'api_secret' => config('cloudinary.api_secret') ? '***' : 'missing',
+                'url' => config('cloudinary.url') ? '***' : 'missing',
+            ];
+            $results['config'] = ['status' => 'success', 'data' => $config];
+        } catch (\Exception $e) {
+            $results['config'] = ['status' => 'error', 'message' => $e->getMessage()];
+        }
+
+        // Test 2: Try search API
+        try {
+            $searchResult = Cloudinary::search()
+                ->maxResults(5)
+                ->execute();
+            
+            $results['search_api'] = [
+                'status' => 'success',
+                'type' => gettype($searchResult),
+                'has_resources' => is_array($searchResult) ? isset($searchResult['resources']) : (is_object($searchResult) ? method_exists($searchResult, 'getResources') : false),
+                'data' => is_array($searchResult) ? array_keys($searchResult) : 'object'
+            ];
+        } catch (\Exception $e) {
+            $results['search_api'] = ['status' => 'error', 'message' => $e->getMessage()];
+        }
+
+        // Test 3: Try admin assets API
+        try {
+            $adminResult = Cloudinary::admin()->assets([
+                'max_results' => 5,
+                'resource_type' => 'image',
+            ]);
+            
+            $results['admin_api'] = [
+                'status' => 'success',
+                'type' => gettype($adminResult),
+                'has_resources' => is_array($adminResult) ? isset($adminResult['resources']) : false,
+                'data' => is_array($adminResult) ? array_keys($adminResult) : 'object'
+            ];
+        } catch (\Exception $e) {
+            $results['admin_api'] = ['status' => 'error', 'message' => $e->getMessage()];
+        }
+
+        // Test 4: Try admin folders API
+        try {
+            $foldersResult = Cloudinary::admin()->folders()->getFolders();
+            
+            $results['folders_api'] = [
+                'status' => 'success',
+                'type' => gettype($foldersResult),
+                'count' => is_array($foldersResult) ? count($foldersResult) : 0,
+            ];
+        } catch (\Exception $e) {
+            $results['folders_api'] = ['status' => 'error', 'message' => $e->getMessage()];
+        }
+
+        // Test 5: Try to get actual resources with detailed output
+        try {
+            $result = Cloudinary::search()
+                ->expression('resource_type:image')
+                ->maxResults(3)
+                ->execute();
+            
+            if (is_array($result) && isset($result['resources'])) {
+                $resources = $result['resources'];
+                $results['actual_resources'] = [
+                    'status' => 'success',
+                    'count' => count($resources),
+                    'sample' => count($resources) > 0 ? [
+                        'public_id' => $resources[0]['public_id'] ?? 'N/A',
+                        'secure_url' => $resources[0]['secure_url'] ?? 'N/A',
+                        'resource_type' => $resources[0]['resource_type'] ?? 'N/A',
+                        'bytes' => $resources[0]['bytes'] ?? 'N/A',
+                    ] : 'no resources'
+                ];
+            } elseif (is_object($result) && method_exists($result, 'getResources')) {
+                $resources = $result->getResources();
+                $results['actual_resources'] = [
+                    'status' => 'success',
+                    'count' => count($resources),
+                    'method' => 'object with getResources()'
+                ];
+            } else {
+                $results['actual_resources'] = [
+                    'status' => 'error',
+                    'message' => 'Unexpected response structure',
+                    'type' => gettype($result)
+                ];
+            }
+        } catch (\Exception $e) {
+            $results['actual_resources'] = ['status' => 'error', 'message' => $e->getMessage()];
+        }
+
+        return response()->json($results, 200, [], JSON_PRETTY_PRINT);
+    }
 }
