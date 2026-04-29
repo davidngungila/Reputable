@@ -86,6 +86,13 @@
 
     <!-- Media Grid -->
     <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+        <!-- Results Count -->
+        @if(isset($resources) && count($resources) > 0)
+        <div class="mb-4 text-sm text-gray-600">
+            Showing {{ count($resources) }} media files
+        </div>
+        @endif
+
         <div id="media-container" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
             @if(isset($resources) && count($resources) > 0)
                 @foreach($resources as $resource)
@@ -98,7 +105,7 @@
                            value="{{ $resource['public_id'] }}" onchange="updateSelectedCount()">
                     
                     @if($resource['resource_type'] == 'image')
-                        <img src="{{ $resource['secure_url'] }}" alt="{{ $resource['public_id'] }}" class="w-full h-40 object-cover">
+                        <img src="{{ $resource['secure_url'] }}" alt="{{ $resource['public_id'] }}" class="w-full h-40 object-cover" loading="lazy">
                     @elseif($resource['resource_type'] == 'video')
                         <div class="w-full h-40 bg-gray-200 flex items-center justify-center">
                             <i class="fas fa-video text-4xl text-gray-400"></i>

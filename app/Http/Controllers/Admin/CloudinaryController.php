@@ -11,9 +11,9 @@ class CloudinaryController extends Controller
     public function index()
     {
         try {
-            // Get all resources from Cloudinary
+            // Get all resources from Cloudinary - increase limit to show more images
             $resources = Cloudinary::search()
-                ->maxResults(50)
+                ->maxResults(500)
                 ->execute()
                 ->getResources();
         } catch (\Exception $e) {
