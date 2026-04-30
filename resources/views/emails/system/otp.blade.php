@@ -1,39 +1,100 @@
-@extends('emails.layout', [
-    'title' => $subject ?? 'OTP Verification',
-    'heading' => $heading ?? 'Login Verification Code',
-    'subheading' => $subheading ?? null,
-    'brand_name' => $brand_name ?? 'LAU Paradise Adventure',
-    'brand_tagline' => $brand_tagline ?? 'PARADISE ADVENTURE',
-    'logo_url' => $logo_url ?? null,
-    'website_url' => $website_url ?? null,
-    'support_email' => $support_email ?? null,
-    'support_phone' => $support_phone ?? null,
-    'support_whatsapp' => $support_whatsapp ?? null,
-    'footer_note' => $footer_note ?? 'If you did not attempt to login, please secure your account immediately.'
-])
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ $title ?? "OTP - Reputable Tours" }}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { margin: 0; padding: 0; background-color: #f0f4f8; font-family: "Poppins", sans-serif; color: #333; line-height: 1.6; }
+        .email-container { max-width: 600px; margin: 30px auto; background: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08); border: 1px solid #e2e8f0; }
+        .header { background: #006400; padding: 30px 25px; text-align: center; color: white; }
+        .header .title { font-size: 26px; font-weight: 700; margin-bottom: 5px; }
+        .header .sub-title { font-size: 14px; opacity: 0.9; }
+        .content { padding: 30px 25px; }
+        .greeting { font-size: 18px; font-weight: 600; color: #2d3748; margin-bottom: 15px; }
+        
+        .card { background-color: #f7fafc; border: 1px solid #edf2f7; border-radius: 8px; padding: 20px; margin-bottom: 25px; border-left: 5px solid #006400; }
+        .card-header { display: flex; align-items: center; margin-bottom: 15px; }
+        .card-header .icon { font-size: 24px; margin-right: 12px; color: #4CAF50; }
+        .card-header h4 { margin: 0; font-size: 16px; font-weight: 600; color: #2d3748; }
 
-@section('content')
-    <div style="font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:22px;color:#0f172a;">
-        <div style="margin-bottom:14px;">
-            Your one-time login code is:
+        .button-container { text-align: center; margin: 30px 0; }
+        .download-button { display: inline-block; padding: 12px 25px; background-color: #438a5e; color: white !important; font-weight: 600; border-radius: 6px; text-decoration: none; transition: background-color 0.3s ease; }
+        .download-button:hover { background-color: #2e7d32; }
+        
+        .special-section { background-color: #fff8e1; border-left: 5px solid #FFC107; padding: 25px; border-radius: 8px; margin: 25px 0; }
+        .special-section h4 { margin-top: 0; font-size: 18px; display: flex; align-items: center; color: #c09e4f; font-weight: 600; }
+        .special-section .icon { font-size: 24px; margin-right: 10px; color: #c09e4f; }
+        .special-section p { margin: 10px 0; font-size: 14px; }
+        
+        .invest-button { display: inline-block; padding: 12px 25px; background-color: #006400; color: white !important; font-weight: 600; border-radius: 6px; text-decoration: none; transition: background-color 0.3s ease; margin-top: 15px; }
+        .invest-button:hover { background-color: #2e7d32; }
+
+        .signature { margin-top: 40px; font-size: 14px; color: #4a5568; }
+        .footer { background-color: #006400; color: white; text-align: center; padding: 15px; font-size: 12px; letter-spacing: 0.5px; opacity: 0.8; }
+        
+        .detail-item { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 14px; }
+        .detail-label { color: #6b7280; font-weight: 500; }
+        .detail-value { color: #1f2937; font-weight: 600; }
+        
+        @media (max-width: 600px) {
+            .email-container { margin: 10px; border-radius: 8px; }
+            .header { padding: 20px; }
+            .content { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <div class="header">
+            <div class="title">Reputable Tours</div>
+            <div class="sub-title">NSSF Commercial Complex, Moshi - Your Gateway to Tanzanian Adventures</div>
         </div>
+        <div class="content">
+            <p class="greeting">Dear {{ $name ?? "Mteja" }},</p>
+            <p style="font-size: 14px; color: #4a5568;">{{ $message ?? "We are sending this message from Reputable Tours for " . $templateName . "." }}</p>
 
-        <div style="font-family:Arial,Helvetica,sans-serif;font-size:28px;line-height:32px;font-weight:900;letter-spacing:0.25em;color:#064e3b;background-color:#ecfdf5;border:1px solid #a7f3d0;border-radius:14px;padding:14px 16px;text-align:center;">
-            {{ $otp ?? '' }}
-        </div>
-
-        <div style="margin-top:14px;color:#334155;font-weight:700;">
-            This code expires in {{ (int)($expires_minutes ?? 10) }} minutes.
-        </div>
-
-        @if(!empty($email))
-            <div style="margin-top:10px;color:#64748b;">
-                Requested for: <span style="font-weight:800;color:#0f172a;">{{ $email }}</span>
+            <div class="card">
+                <div class="card-header">
+                    <span class="icon">📧</span>
+                    <h4>{{ $title ?? $templateName }}</h4>
+                </div>
+                <p style="font-size: 14px; color: #4a5568;">This is a system email from Reputable Tours inayotumia muundo wa FeedTan CMG.</p>
+                
+                @isset($content)
+                <div style="margin-top: 15px;">
+                    {!! $content !!}
+                </div>
+                @endisset
+                
+                @isset($actionUrl)
+                <div class="button-container">
+                    <a href="{{ $actionUrl }}" class="invest-button">{{ $actionText ?? "Endelea" }}</a>
+                </div>
+                @endisset
             </div>
-        @endif
 
-        <div style="margin-top:16px;color:#94a3b8;font-size:12px;">
-            Do not share this code with anyone.
+            <div class="special-section">
+                <h4><span class="icon">💡</span> Important Information</h4>
+                <p>Barua pepe hii imetumwa kiotomatiki kutoka kwa mfumo wa Reputable Tours. If this is an error, please ignore this email.</p>
+            </div>
+
+            <div class="savings-tips" style="margin-top: 25px; background-color: #f7fafc; padding: 15px; border-left: 5px solid #38a169; border-radius: 10px;">
+                <h4 style="color: #2f855a; margin-bottom: 10px;">🌍 About Reputable Tours</h4>
+                <p style="font-size: 14px; color: #4a5568;">We are committed to providing excellent tourism services in Tanzania, ensuring you get an unforgettable experience.</p>
+            </div>
+            
+            <p style="font-size: 14px; color: #4a5568;">Thank you kwa kuwa sehemu ya familia ya Reputable Tours!</p>
+
+            <div class="signature">
+                <p>Thank you,<br><strong>Reputable Tours Team</strong></p>
+                <p style="font-weight: 600; color: #006400;">Let's Explore Together! 🌍</p>
+            </div>
+        </div>
+        <div class="footer">
+            Reputable Tours Email System V1.1.0.2026 - FeedTan CMG Design | Sent on {{ now()->format('M d, Y \a\t g:i A') }}
         </div>
     </div>
-@endsection
+</body>
+</html>

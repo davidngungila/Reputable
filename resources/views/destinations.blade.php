@@ -11,6 +11,15 @@
     <div class="relative z-10 max-w-7xl mx-auto px-6 text-center">
         <h1 class="text-5xl md:text-6xl font-serif text-white mb-6 font-bold">Discover Tanzania's Destinations</h1>
         <p class="text-slate-300 max-w-2xl mx-auto">Explore Tanzania's most spectacular destinations, from the endless plains of Serengeti to the pristine beaches of Zanzibar.</p>
+        @if(request()->has('region'))
+        <div class="mt-4 inline-flex items-center gap-2 bg-emerald-600/20 text-emerald-400 px-4 py-2 rounded-full text-sm">
+            <i class="ph ph-funnel"></i>
+            <span>Filtered by: {{ request()->region }}</span>
+            <a href="{{ route('destinations') }}" class="ml-2 hover:text-white">
+                <i class="ph ph-x"></i>
+            </a>
+        </div>
+        @endif
     </div>
 </section>
 
@@ -22,11 +31,10 @@
             <div class="flex flex-wrap items-center gap-4">
                 <div class="relative">
                     <select id="filter-region" class="appearance-none bg-white border border-slate-200 rounded-2xl px-6 py-3 pr-12 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all">
-                        <option value="All">Region: All</option>
-                        <option value="Northern">Northern Circuit</option>
-                        <option value="Southern">Southern Circuit</option>
-                        <option value="Western">Western Circuit</option>
-                        <option value="Coastal">Coastal & Islands</option>
+                        <option value="">Region: All</option>
+                        @foreach($regions as $region)
+                        <option value="{{ $region }}" {{ request()->region == $region ? 'selected' : '' }}>{{ $region }}</option>
+                        @endforeach
                     </select>
                     <i class="ph ph-caret-down absolute right-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
                 </div>
@@ -139,25 +147,25 @@
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const regionFilter = document.getElementById('filter-region');
-    const activityFilter = document.getElementById('filter-activity');
-    const difficultyFilter = document.getElementById('filter-difficulty');
-    const gridWrapper = document.getElementById('destination-grid-wrapper');
-    const loader = document.getElementById('filter-loader');
 
-    function filterDestinations() {
-        gridWrapper.classList.add('loading');
-        loader.classList.remove('hidden');
-
-        // Simulate filtering (in real app, this would be an AJAX call)
-        setTimeout(() => {
-            gridWrapper.classList.remove('loading');
-            loader.classList.add('hidden');
-        }, 500);
+    function handleRegionFilter() {
+        const selectedRegion = regionFilter.value;
+        const currentUrl = new URL(window.location);
+        
+        if (selectedRegion) {
+            currentUrl.searchParams.set('region', selectedRegion);
+        } else {
+            currentUrl.searchParams.delete('region');
+        }
+        
+        // Remove other filter params for now
+        currentUrl.searchParams.delete('activity');
+        currentUrl.searchParams.delete('difficulty');
+        
+        window.location.href = currentUrl.toString();
     }
 
-    [regionFilter, activityFilter, difficultyFilter].forEach(filter => {
-        filter.addEventListener('change', filterDestinations);
-    });
+    regionFilter.addEventListener('change', handleRegionFilter);
 });
 </script>
 

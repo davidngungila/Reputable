@@ -1,5 +1,54 @@
 @extends('layouts.public')
 
+@push('styles')
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+@endpush
+
+@push('scripts')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Show success popup if success message exists
+    @if(session('success'))
+    Swal.fire({
+        title: 'Thank You!',
+        text: 'Thank you for your inquiry! We have received your message and will get back to you within 24 hours.',
+        icon: 'success',
+        confirmButtonColor: '#10b981',
+        confirmButtonText: 'Great!',
+        showClass: {
+            popup: 'animate__animated animate__fadeInDown'
+        },
+        hideClass: {
+            popup: 'animate__animated animate__fadeOutUp'
+        }
+    });
+    @endif
+    
+    // Handle form submission with loading state
+    const form = document.querySelector('form[action="{{ route('inquiries.store') }}"]');
+    if (form) {
+        form.addEventListener('submit', function(e) {
+            const submitButton = form.querySelector('button[type="submit"]');
+            const originalText = submitButton.textContent;
+            
+            // Show loading state
+            submitButton.disabled = true;
+            submitButton.innerHTML = '<i class="ph ph-spinner-gap animate-spin mr-2"></i>Sending...';
+            submitButton.classList.add('opacity-75', 'cursor-not-allowed');
+            
+            // Reset after 5 seconds as fallback
+            setTimeout(() => {
+                submitButton.disabled = false;
+                submitButton.textContent = originalText;
+                submitButton.classList.remove('opacity-75', 'cursor-not-allowed');
+            }, 5000);
+        });
+    }
+});
+</script>
+@endpush
+
 @section('content')
 <div class="pt-24">
     <!-- Hero Section -->

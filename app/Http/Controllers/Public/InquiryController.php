@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Public;
 use App\Http\Controllers\Controller;
 use App\Models\Inquiry;
 use App\Models\Tour;
+use App\Services\NotificationService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class InquiryController extends Controller
 {
@@ -38,7 +40,47 @@ class InquiryController extends Controller
             'status' => 'pending',
         ]);
 
+        // Send emails to admin addresses
+        try {
+            $notificationService = new NotificationService();
+            
+            // Send to customer
+            $customerSubject = 'Inquiry Received - Reputable Tours';
+            $customerHtml = view('emails.customer.inquiry-received', [
+                'inquiry' => $inquiry,
+                'title' => $customerSubject,
+                'heading' => 'Thank You for Your Inquiry!',
+                'subheading' => 'We have received your message and will respond within 24 hours.',
+                'website_url' => config('app.url'),
+                'support_email' => 'info@reputabletours.com',
+            ])->render();
+            
+            $notificationService->sendEmail($inquiry->email, $customerSubject, $customerHtml);
+            
+            // Send to admin emails
+            $adminSubject = 'New Inquiry Alert - ' . $inquiry->name;
+            $adminHtml = view('emails.admin.new-inquiry', [
+                'inquiry' => $inquiry,
+                'title' => $adminSubject,
+                'heading' => 'New Customer Inquiry Received',
+                'subheading' => 'A new inquiry has been submitted by ' . $inquiry->name,
+                'website_url' => config('app.url'),
+                'admin_url' => route('admin.inquiries.show', $inquiry->id),
+            ])->render();
+            
+            $adminEmails = ['raphaeleliac@gmail.com', 'davidngungila@gmail.com', 'info@reputabletours.com'];
+            foreach ($adminEmails as $adminEmail) {
+                $notificationService->sendEmail($adminEmail, $adminSubject, $adminHtml);
+            }
+            
+        } catch (\Throwable $e) {
+            Log::warning('Inquiry email notification failed', [
+                'inquiry_id' => $inquiry->id,
+                'error' => $e->getMessage(),
+            ]);
+        }
+
         return redirect()->back()
-            ->with('success', 'Thank you for your inquiry! We will get back to you within 24 hours.');
+            ->with('success', 'Thank you for your inquiry! We have received your message and will get back to you within 24 hours.');
     }
 }

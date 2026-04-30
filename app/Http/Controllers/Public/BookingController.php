@@ -52,6 +52,7 @@ class BookingController extends Controller
                 $user = User::query()->create([
                     'name' => $validated['customer_name'],
                     'email' => $validated['customer_email'],
+                    'username' => strtolower(str_replace(' ', '', $validated['customer_name'])) . '_' . time(),
                     'password' => Hash::make($defaultPassword),
                 ]);
 
@@ -132,6 +133,23 @@ class BookingController extends Controller
     {
         $booking = Booking::findOrFail($id);
         $booking->update(['status' => 'confirmed']);
+
+        // Send booking confirmation emails
+        try {
+            (new BookingNotificationService())->sendBookingCreated(
+                $booking,
+                [
+                    'account_created' => false,
+                    'account_email' => $booking->customer_email,
+                    'account_password' => null,
+                ]
+            );
+        } catch (\Throwable $e) {
+            Log::warning('Booking confirmation notification failed', [
+                'booking_id' => $booking->id,
+                'error' => $e->getMessage(),
+            ]);
+        }
 
         return redirect()->route('home')
             ->with('success', 'Your booking request has been submitted successfully! Our team will contact you shortly.');

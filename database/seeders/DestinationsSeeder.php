@@ -17,6 +17,7 @@ class DestinationsSeeder extends Seeder
                 'name' => 'Serengeti National Park',
                 'description' => 'The Serengeti National Park is a vast grassland ecosystem in northern Tanzania, renowned for hosting the annual Great Migration of over 1.5 million wildebeest and hundreds of thousands of zebras and gazelles. This UNESCO World Heritage Site offers unparalleled wildlife viewing opportunities, including the Big Five, and spans 14,763 square kilometers of endless savanna.',
                 'location' => 'Northern Tanzania, near the Kenya border',
+                'region' => 'Northern Circuit',
                 'coordinates' => ['latitude' => -2.1540, 'longitude' => 34.6857],
                 'highlights' => [
                     'Great Migration of wildebeest and zebras',
@@ -39,6 +40,7 @@ class DestinationsSeeder extends Seeder
                 'name' => 'Ngorongoro Conservation Area',
                 'description' => 'The Ngorongoro Conservation Area is a UNESCO World Heritage Site featuring the world\'s largest unbroken volcanic caldera. This natural wonder spans 8,292 square kilometers and hosts an incredible density of wildlife, including the rare black rhino. The area is unique in that it allows human habitation alongside wildlife conservation.',
                 'location' => 'Northern Tanzania, Arusha Region',
+                'region' => 'Northern Circuit',
                 'coordinates' => ['latitude' => -3.1863, 'longitude' => 35.5619],
                 'highlights' => [
                     'World\'s largest volcanic caldera',
@@ -61,6 +63,7 @@ class DestinationsSeeder extends Seeder
                 'name' => 'Mount Kilimanjaro',
                 'description' => 'Mount Kilimanjaro is Africa\'s highest peak at 5,895 meters (19,341 feet) and the world\'s tallest free-standing mountain. This iconic destination offers climbers the opportunity to ascend through five distinct climate zones, from tropical rainforest to arctic summit. The mountain is a dormant volcano with three volcanic cones: Kibo, Mawenzi, and Shira.',
                 'location' => 'Northern Tanzania, near the Kenya border',
+                'region' => 'Northern Circuit',
                 'coordinates' => ['latitude' => -3.0674, 'longitude' => 37.3556],
                 'highlights' => [
                     'Africa\'s highest peak (5,895m)',
@@ -127,6 +130,7 @@ class DestinationsSeeder extends Seeder
                 'name' => 'Zanzibar Archipelago',
                 'description' => 'The Zanzibar Archipelago is a tropical paradise consisting of several islands, with Unguja (the main island) and Pemba being the most visited. Known as the "Spice Islands," Zanzibar offers pristine white sand beaches, crystal-clear turquoise waters, historic Stone Town, and rich Swahili culture. It\'s the perfect destination for beach relaxation and cultural exploration.',
                 'location' => 'Indian Ocean, off the coast of Tanzania',
+                'region' => 'Zanzibar Island',
                 'coordinates' => ['latitude' => -6.1659, 'longitude' => 39.2026],
                 'highlights' => [
                     'Pristine white sand beaches',

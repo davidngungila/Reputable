@@ -8,7 +8,7 @@
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h1 class="h3 mb-0">Kilimanjaro Routes Management</h1>
         <div>
-            <a href="{{ route('mountains.admin.show', 'kilimanjaro') }}" class="btn btn-outline-primary">
+            <a href="{{ route('admin.mountains.admin.show', 'kilimanjaro') }}" class="btn btn-outline-primary">
                 <i class="fas fa-arrow-left me-2"></i>Back to Kilimanjaro
             </a>
         </div>

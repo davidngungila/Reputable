@@ -92,7 +92,7 @@
                         <span class="px-3 py-1 bg-orange-100 text-orange-700 rounded-full text-xs font-medium">Ngorongoro</span>
                         <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-medium">Big Five</span>
                     </div>
-                    <a href="{{ route('tours.index', ['activity' => 'game-drives']) }}" class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-emerald-800 to-orange-600 text-white rounded-lg font-bold hover:from-emerald-900 hover:to-orange-700 transition-all">
+                    <a href="/activity/game-drives" class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-emerald-800 to-orange-600 text-white rounded-lg font-bold hover:from-emerald-900 hover:to-orange-700 transition-all">
                         Explore Game Drives <i class="ph-bold ph-arrow-right"></i>
                     </a>
                 </div>
@@ -122,7 +122,7 @@
                         <span class="px-3 py-1 bg-cyan-100 text-cyan-700 rounded-full text-xs font-medium">Snorkeling</span>
                         <span class="px-3 py-1 bg-teal-100 text-teal-700 rounded-full text-xs font-medium">Dhow Cruises</span>
                     </div>
-                    <a href="{{ route('tours.index', ['activity' => 'beach']) }}" class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-orange-600 to-yellow-600 text-white rounded-lg font-bold hover:from-orange-700 hover:to-yellow-700 transition-all">
+                    <a href="{{ route('activities.beach-activities') }}" class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-orange-600 to-yellow-600 text-white rounded-lg font-bold hover:from-orange-700 hover:to-yellow-700 transition-all">
                         Explore Beaches <i class="ph-bold ph-arrow-right"></i>
                     </a>
                 </div>
@@ -152,7 +152,7 @@
                         <span class="px-3 py-1 bg-pink-100 text-pink-700 rounded-full text-xs font-medium">Aerial Views</span>
                         <span class="px-3 py-1 bg-rose-100 text-rose-700 rounded-full text-xs font-medium">Champagne</span>
                     </div>
-                    <a href="{{ route('tours.index', ['activity' => 'balloon']) }}" class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg font-bold hover:from-purple-700 hover:to-pink-700 transition-all">
+                    <a href="{{ route('activities.balloon-safari') }}" class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg font-bold hover:from-purple-700 hover:to-pink-700 transition-all">
                         Explore Balloon Safaris <i class="ph-bold ph-arrow-right"></i>
                     </a>
                 </div>
@@ -182,7 +182,7 @@
                         <span class="px-3 py-1 bg-orange-100 text-orange-700 rounded-full text-xs font-medium">Traditions</span>
                         <span class="px-3 py-1 bg-amber-100 text-amber-700 rounded-full text-xs font-medium">Local Life</span>
                     </div>
-                    <a href="{{ route('tours.index', ['activity' => 'cultural']) }}" class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-red-600 to-orange-600 text-white rounded-lg font-bold hover:from-red-700 hover:to-orange-700 transition-all">
+                    <a href="{{ route('activities.cultural-visits') }}" class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-red-600 to-orange-600 text-white rounded-lg font-bold hover:from-red-700 hover:to-orange-700 transition-all">
                         Explore Cultural Tours <i class="ph-bold ph-arrow-right"></i>
                     </a>
                 </div>
@@ -241,7 +241,7 @@
                         <span class="px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-xs font-medium">Hiking</span>
                         <span class="px-3 py-1 bg-purple-50 text-purple-700 rounded-full text-xs font-medium">Trekking</span>
                     </div>
-                    <a href="/tours?activity=walking" class="inline-flex items-center gap-2 text-indigo-600 font-bold hover:text-indigo-700 transition-colors">
+                    <a href="/activity/walking" class="inline-flex items-center gap-2 text-indigo-600 font-bold hover:text-indigo-700 transition-colors">
                         Explore Walking Tours <i class="ph ph-arrow-right"></i>
                     </a>
                 </div>

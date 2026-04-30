@@ -96,56 +96,83 @@
                     <a href="{{ route('destinations') }}" class="nav-link font-bold text-emerald-600 transition-colors flex items-center gap-1">
                         Destinations <i class="ph ph-caret-down text-xs transition-transform group-hover:rotate-180"></i>
                     </a>
-                    <div class="mega-menu absolute top-full -left-20 w-[600px] bg-white rounded-[2rem] shadow-2xl border border-slate-100 p-8 z-50">
-                        <div class="grid grid-cols-2 gap-8">
+                    <div class="mega-menu absolute top-full -left-20 w-[700px] bg-white rounded-[2rem] shadow-2xl border border-slate-100 p-8 z-50">
+                        <div class="grid grid-cols-3 gap-8">
                             <div>
-                                <h4 class="text-xs font-black uppercase tracking-widest text-emerald-600 mb-6">Popular Regions</h4>
-                                <div class="space-y-4">
-                                    <a href="{{ route('regions.serengeti') }}" class="flex items-center gap-4 group/item p-3 rounded-2xl text-emerald-600 transition-all">
-                                        <div class="w-12 h-12 rounded-xl overflow-hidden">
-                                            <img src="https://images.unsplash.com/photo-1516426122078-c23e76319801?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" class="w-full h-full object-cover">
-                                        </div>
+                                <h4 class="text-xs font-black uppercase tracking-widest text-emerald-600 mb-6">Mainland Circuits</h4>
+                                <div class="space-y-3">
+                                    <a href="{{ route('destinations') }}?region=Northern+Circuit" class="flex items-center gap-3 group/item p-3 rounded-xl text-emerald-600 hover:bg-emerald-50 transition-all">
+                                        <i class="ph ph-compass text-xl opacity-50 text-emerald-600"></i>
                                         <div>
-                                            <p class="font-bold text-slate-900 text-emerald-600">Serengeti NP</p>
-                                            <p class="text-xs text-slate-500">The Great Migration</p>
+                                            <p class="font-bold text-slate-900">Northern Circuit</p>
+                                            <p class="text-xs text-slate-500">Serengeti, Ngorongoro, Kilimanjaro</p>
                                         </div>
                                     </a>
-                                    <a href="{{ route('regions.ngorongoro') }}" class="flex items-center gap-4 group/item p-3 rounded-2xl text-emerald-600 transition-all">
-                                        <div class="w-12 h-12 rounded-xl overflow-hidden">
-                                            <img src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" class="w-full h-full object-cover">
-                                        </div>
+                                    <a href="{{ route('destinations') }}?region=Southern+Circuit" class="flex items-center gap-3 group/item p-3 rounded-xl text-emerald-600 hover:bg-emerald-50 transition-all">
+                                        <i class="ph ph-compass text-xl opacity-50 text-emerald-600"></i>
                                         <div>
-                                            <p class="font-bold text-slate-900 text-emerald-600">Ngorongoro</p>
-                                            <p class="text-xs text-slate-500">UNESCO World Heritage</p>
+                                            <p class="font-bold text-slate-900">Southern Circuit</p>
+                                            <p class="text-xs text-slate-500">Selous, Ruaha, Mikumi</p>
                                         </div>
                                     </a>
-                                    <a href="{{ route('regions.zanzibar') }}" class="flex items-center gap-4 group/item p-3 rounded-2xl text-emerald-600 transition-all">
-                                        <div class="w-12 h-12 rounded-xl overflow-hidden">
-                                            <img src="https://images.unsplash.com/photo-1493612276216-ee3925520721?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" class="w-full h-full object-cover">
-                                        </div>
+                                    <a href="{{ route('destinations') }}?region=Eastern+Circuit" class="flex items-center gap-3 group/item p-3 rounded-xl text-emerald-600 hover:bg-emerald-50 transition-all">
+                                        <i class="ph ph-compass text-xl opacity-50 text-emerald-600"></i>
                                         <div>
-                                            <p class="font-bold text-slate-900 text-emerald-600">Zanzibar</p>
-                                            <p class="text-xs text-slate-500">Beaches & Culture</p>
+                                            <p class="font-bold text-slate-900">Eastern Circuit</p>
+                                            <p class="text-xs text-slate-500">Udzungwa, Uluguru Mountains</p>
+                                        </div>
+                                    </a>
+                                    <a href="{{ route('destinations') }}?region=Western+Circuit" class="flex items-center gap-3 group/item p-3 rounded-xl text-emerald-600 hover:bg-emerald-50 transition-all">
+                                        <i class="ph ph-compass text-xl opacity-50 text-emerald-600"></i>
+                                        <div>
+                                            <p class="font-bold text-slate-900">Western Circuit</p>
+                                            <p class="text-xs text-slate-500">Gombe, Mahale Mountains</p>
                                         </div>
                                     </a>
                                 </div>
                             </div>
                             <div>
-                                <h4 class="text-xs font-black uppercase tracking-widest text-emerald-600 mb-6">Tanzania Specialties</h4>
-                                <div class="space-y-4">
-                                    <a href="{{ route('mountain-trekking') }}" class="flex items-center gap-3 text-slate-700 text-emerald-600 font-bold group/sub transition-colors">
+                                <h4 class="text-xs font-black uppercase tracking-widest text-emerald-600 mb-6">Ocean Islands</h4>
+                                <div class="space-y-3">
+                                    <a href="{{ route('destinations') }}?region=Ocean+Islands" class="flex items-center gap-3 group/item p-3 rounded-xl text-emerald-600 hover:bg-emerald-50 transition-all">
+                                        <i class="ph ph-island text-xl opacity-50 text-emerald-600"></i>
+                                        <div>
+                                            <p class="font-bold text-slate-900">Ocean Islands</p>
+                                            <p class="text-xs text-slate-500">Pemba, Mafia, Other Islands</p>
+                                        </div>
+                                    </a>
+                                    <a href="{{ route('destinations') }}?region=Mafia+Island" class="flex items-center gap-3 group/item p-3 rounded-xl text-emerald-600 hover:bg-emerald-50 transition-all">
+                                        <i class="ph ph-island text-xl opacity-50 text-emerald-600"></i>
+                                        <div>
+                                            <p class="font-bold text-slate-900">Mafia Island</p>
+                                            <p class="text-xs text-slate-500">Marine Parks & Diving</p>
+                                        </div>
+                                    </a>
+                                    <a href="{{ route('destinations') }}?region=Zanzibar+Island" class="flex items-center gap-3 group/item p-3 rounded-xl text-emerald-600 hover:bg-emerald-50 transition-all">
+                                        <i class="ph ph-island text-xl opacity-50 text-emerald-600"></i>
+                                        <div>
+                                            <p class="font-bold text-slate-900">Zanzibar Island</p>
+                                            <p class="text-xs text-slate-500">Stone Town & Beaches</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="text-xs font-black uppercase tracking-widest text-emerald-600 mb-6">Browse Options</h4>
+                                <div class="space-y-3">
+                                    <a href="{{ route('destinations') }}" class="flex items-center gap-3 text-slate-700 text-emerald-600 font-bold group/sub transition-colors">
+                                        <i class="ph ph-map-pin text-xl opacity-50 text-emerald-600"></i> All Destinations
+                                    </a>
+                                    <a href="{{ route('destinations') }}?sort=region" class="flex items-center gap-3 text-slate-700 text-emerald-600 font-bold group/sub transition-colors">
+                                        <i class="ph ph-funnel text-xl opacity-50 text-emerald-600"></i> Sort by Region
+                                    </a>
+                                    <a href="{{ route('mountains.index') }}" class="flex items-center gap-3 text-slate-700 text-emerald-600 font-bold group/sub transition-colors">
                                         <i class="ph ph-mountain text-xl opacity-50 text-emerald-600"></i> Mountain Trekking
-                                    </a>
-                                    <a href="{{ route('regions.lake-manyara') }}" class="flex items-center gap-3 text-slate-700 text-emerald-600 font-bold group/sub transition-colors">
-                                        <i class="ph ph-umbrella text-xl opacity-50 text-emerald-600"></i> Zanzibar Beaches
-                                    </a>
-                                    <a href="{{ route('regions.ruaha') }}" class="flex items-center gap-3 text-slate-700 text-emerald-600 font-bold group/sub transition-colors">
-                                        <i class="ph ph-bird text-xl opacity-50 text-emerald-600"></i> Bird Watching Tours
                                     </a>
                                 </div>
                                 <div class="mt-8 pt-6 border-t border-slate-50">
                                     <a href="/tours" class="text-sm font-black text-emerald-600 flex items-center gap-2 hover:gap-3 transition-all">
-                                        View All Packages <i class="ph ph-arrow-right"></i>
+                                        View All Tours <i class="ph ph-arrow-right"></i>
                                     </a>
                                 </div>
                             </div>
@@ -269,7 +296,7 @@
                             <div>
                                 <h4 class="text-xs font-black uppercase tracking-widest text-emerald-600 mb-6">Popular Activities</h4>
                                 <div class="space-y-4">
-                                    <a href="/tours?activity=game-drives" class="flex items-center gap-4 group/item p-3 rounded-2xl text-emerald-600 transition-all">
+                                    <a href="/activity/game-drives" class="flex items-center gap-4 group/item p-3 rounded-2xl text-emerald-600 transition-all">
                                         <div class="w-12 h-12 rounded-xl overflow-hidden">
                                             <img src="{{ asset('images/01.jpg') }}" class="w-full h-full object-cover">
                                         </div>
@@ -278,7 +305,7 @@
                                             <p class="text-xs text-slate-500">Wildlife Safari</p>
                                         </div>
                                     </a>
-                                    <a href="/tours?activity=beach" class="flex items-center gap-4 group/item p-3 rounded-2xl text-emerald-600 transition-all">
+                                    <a href="/activity/beach" class="flex items-center gap-4 group/item p-3 rounded-2xl text-emerald-600 transition-all">
                                         <div class="w-12 h-12 rounded-xl overflow-hidden">
                                             <img src="{{ asset('images/07.jpg') }}" class="w-full h-full object-cover">
                                         </div>
@@ -287,7 +314,7 @@
                                             <p class="text-xs text-slate-500">Zanzibar & Coast</p>
                                         </div>
                                     </a>
-                                    <a href="/tours?activity=balloon" class="flex items-center gap-4 group/item p-3 rounded-2xl text-emerald-600 transition-all">
+                                    <a href="/activity/balloon" class="flex items-center gap-4 group/item p-3 rounded-2xl text-emerald-600 transition-all">
                                         <div class="w-12 h-12 rounded-xl overflow-hidden">
                                             <img src="{{ asset('images/05.jpg') }}" class="w-full h-full object-cover">
                                         </div>
@@ -301,16 +328,16 @@
                             <div>
                                 <h4 class="text-xs font-black uppercase tracking-widest text-emerald-600 mb-6">Experience Types</h4>
                                 <div class="space-y-4">
-                                    <a href="/tours?activity=cultural" class="flex items-center gap-3 text-slate-700 text-emerald-600 font-bold group/sub transition-colors">
+                                    <a href="/activity/cultural" class="flex items-center gap-3 text-slate-700 text-emerald-600 font-bold group/sub transition-colors">
                                         <i class="ph ph-users-three text-xl opacity-50 text-emerald-600"></i> Cultural Visits
                                     </a>
-                                    <a href="/tours?activity=bird-watching" class="flex items-center gap-3 text-slate-700 text-emerald-600 font-bold group/sub transition-colors">
+                                    <a href="/activity/bird-watching" class="flex items-center gap-3 text-slate-700 text-emerald-600 font-bold group/sub transition-colors">
                                         <i class="ph ph-bird text-xl opacity-50 text-emerald-600"></i> Bird Watching
                                     </a>
-                                    <a href="/tours?activity=walking" class="flex items-center gap-3 text-slate-700 text-emerald-600 font-bold group/sub transition-colors">
+                                    <a href="/activity/walking" class="flex items-center gap-3 text-slate-700 text-emerald-600 font-bold group/sub transition-colors">
                                         <i class="ph ph-walking text-xl opacity-50 text-emerald-600"></i> Walking Tours
                                     </a>
-                                    <a href="/tours?activity=night-game" class="flex items-center gap-3 text-slate-700 text-emerald-600 font-bold group/sub transition-colors">
+                                    <a href="/activity/night-game" class="flex items-center gap-3 text-slate-700 text-emerald-600 font-bold group/sub transition-colors">
                                         <i class="ph ph-moon text-xl opacity-50 text-emerald-600"></i> Night Game Drives
                                     </a>
                                 </div>

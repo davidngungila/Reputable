@@ -160,6 +160,9 @@ class BookingController extends Controller
             'payment_status' => 'required|in:unpaid,partially_paid,paid',
         ]);
 
+        $oldStatus = $booking->status;
+        $oldPaymentStatus = $booking->payment_status;
+        
         $booking->update([
             'customer_name' => $validated['customer_name'],
             'customer_email' => $validated['customer_email'],
@@ -173,6 +176,24 @@ class BookingController extends Controller
             'status' => $validated['status'],
             'payment_status' => $validated['payment_status'],
         ]);
+
+        // Send email notifications for status changes
+        try {
+            if ($oldStatus !== $validated['status']) {
+                if ($validated['status'] === 'confirmed') {
+                    (new BookingNotificationService())->sendBookingCreated($booking);
+                }
+            }
+            
+            if ($oldPaymentStatus !== $validated['payment_status'] && $validated['payment_status'] === 'paid') {
+                (new BookingNotificationService())->sendPaymentReceived($booking);
+            }
+        } catch (\Throwable $e) {
+            Log::warning('Admin booking update notification failed', [
+                'booking_id' => $booking->id,
+                'error' => $e->getMessage(),
+            ]);
+        }
 
         return redirect()->route('admin.bookings.show', $booking->id)->with('success', 'Booking updated successfully');
     }

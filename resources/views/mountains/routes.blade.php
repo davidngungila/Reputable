@@ -77,6 +77,30 @@
                     </div>
                     @endif
 
+                    <!-- Available Packages for this Route -->
+                    @if($tours->where('route', $route['name'])->count() > 0)
+                    <div class="mb-6">
+                        <h4 class="font-semibold mb-3 text-emerald-600">Available Packages for {{ $route['name'] }}</h4>
+                        <div class="space-y-3">
+                            @foreach($tours->where('route', $route['name']) as $tour)
+                            <div class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+                                <div class="flex justify-between items-start mb-2">
+                                    <h5 class="font-semibold text-emerald-800">{{ $tour->name }}</h5>
+                                    <span class="text-emerald-700 font-bold">${{ number_format($tour->base_price, 2) }}</span>
+                                </div>
+                                <p class="text-sm text-emerald-700 mb-3">{{ Str::limit($tour->description, 100) }}</p>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-xs text-emerald-600 bg-emerald-100 px-2 py-1 rounded">{{ $tour->duration_days }} days</span>
+                                    <a href="/tours/{{ $tour->id }}" class="text-emerald-600 hover:text-emerald-700 text-sm font-semibold">
+                                        View Package →
+                                    </a>
+                                </div>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+                    @endif
+
                     <div class="flex gap-3">
                         <button class="flex-1 bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition" onclick="showRouteDetails('{{ $route['name'] }}')">
                             View Details

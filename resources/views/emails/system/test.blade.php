@@ -1,48 +1,100 @@
-@extends('emails.layout', [
-    'title' => $subject ?? 'Email Test',
-    'heading' => $heading ?? ($subject ?? 'Email Test'),
-    'subheading' => $subheading ?? null,
-    'brand_name' => $brand_name ?? 'LAU Paradise Adventure',
-    'brand_tagline' => $brand_tagline ?? 'PARADISE ADVENTURE',
-    'logo_url' => $logo_url ?? null,
-    'website_url' => $website_url ?? null,
-    'support_email' => $support_email ?? null,
-    'support_phone' => $support_phone ?? null,
-    'support_whatsapp' => $support_whatsapp ?? null,
-    'footer_note' => $footer_note ?? 'If you did not request this email, you can safely ignore it.'
-])
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ $title ?? "Test - Reputable Tours" }}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { margin: 0; padding: 0; background-color: #f0f4f8; font-family: "Poppins", sans-serif; color: #333; line-height: 1.6; }
+        .email-container { max-width: 600px; margin: 30px auto; background: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08); border: 1px solid #e2e8f0; }
+        .header { background: #006400; padding: 30px 25px; text-align: center; color: white; }
+        .header .title { font-size: 26px; font-weight: 700; margin-bottom: 5px; }
+        .header .sub-title { font-size: 14px; opacity: 0.9; }
+        .content { padding: 30px 25px; }
+        .greeting { font-size: 18px; font-weight: 600; color: #2d3748; margin-bottom: 15px; }
+        
+        .card { background-color: #f7fafc; border: 1px solid #edf2f7; border-radius: 8px; padding: 20px; margin-bottom: 25px; border-left: 5px solid #006400; }
+        .card-header { display: flex; align-items: center; margin-bottom: 15px; }
+        .card-header .icon { font-size: 24px; margin-right: 12px; color: #4CAF50; }
+        .card-header h4 { margin: 0; font-size: 16px; font-weight: 600; color: #2d3748; }
 
-@section('content')
-    <div style="font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:22px;color:#0f172a;">
-        <div style="margin-bottom:14px;">
-            {!! $body_html ?? '' !!}
+        .button-container { text-align: center; margin: 30px 0; }
+        .download-button { display: inline-block; padding: 12px 25px; background-color: #438a5e; color: white !important; font-weight: 600; border-radius: 6px; text-decoration: none; transition: background-color 0.3s ease; }
+        .download-button:hover { background-color: #2e7d32; }
+        
+        .special-section { background-color: #fff8e1; border-left: 5px solid #FFC107; padding: 25px; border-radius: 8px; margin: 25px 0; }
+        .special-section h4 { margin-top: 0; font-size: 18px; display: flex; align-items: center; color: #c09e4f; font-weight: 600; }
+        .special-section .icon { font-size: 24px; margin-right: 10px; color: #c09e4f; }
+        .special-section p { margin: 10px 0; font-size: 14px; }
+        
+        .invest-button { display: inline-block; padding: 12px 25px; background-color: #006400; color: white !important; font-weight: 600; border-radius: 6px; text-decoration: none; transition: background-color 0.3s ease; margin-top: 15px; }
+        .invest-button:hover { background-color: #2e7d32; }
+
+        .signature { margin-top: 40px; font-size: 14px; color: #4a5568; }
+        .footer { background-color: #006400; color: white; text-align: center; padding: 15px; font-size: 12px; letter-spacing: 0.5px; opacity: 0.8; }
+        
+        .detail-item { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 14px; }
+        .detail-label { color: #6b7280; font-weight: 500; }
+        .detail-value { color: #1f2937; font-weight: 600; }
+        
+        @media (max-width: 600px) {
+            .email-container { margin: 10px; border-radius: 8px; }
+            .header { padding: 20px; }
+            .content { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <div class="header">
+            <div class="title">Reputable Tours</div>
+            <div class="sub-title">NSSF Commercial Complex, Moshi - Your Gateway to Tanzanian Adventures</div>
         </div>
+        <div class="content">
+            <p class="greeting">Dear {{ $name ?? "Mteja" }},</p>
+            <p style="font-size: 14px; color: #4a5568;">{{ $message ?? "We are sending this message from Reputable Tours for " . $templateName . "." }}</p>
 
-        @if(!empty($details) && is_array($details))
-            <div style="margin-top:18px;margin-bottom:8px;font-size:12px;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:#64748b;">
-                Details
+            <div class="card">
+                <div class="card-header">
+                    <span class="icon">📧</span>
+                    <h4>{{ $title ?? $templateName }}</h4>
+                </div>
+                <p style="font-size: 14px; color: #4a5568;">This is a system email from Reputable Tours inayotumia muundo wa FeedTan CMG.</p>
+                
+                @isset($content)
+                <div style="margin-top: 15px;">
+                    {!! $content !!}
+                </div>
+                @endisset
+                
+                @isset($actionUrl)
+                <div class="button-container">
+                    <a href="{{ $actionUrl }}" class="invest-button">{{ $actionText ?? "Endelea" }}</a>
+                </div>
+                @endisset
             </div>
 
-            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="width:100%;border-collapse:separate;border-spacing:0;overflow:hidden;border-radius:14px;border:1px solid #e5e7eb;">
-                @foreach($details as $label => $value)
-                    <tr>
-                        <td style="padding:12px 14px;background-color:#f8fafc;border-bottom:1px solid #e5e7eb;width:35%;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:18px;font-weight:800;color:#0f172a;">
-                            {{ $label }}
-                        </td>
-                        <td style="padding:12px 14px;background-color:#ffffff;border-bottom:1px solid #e5e7eb;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:18px;font-weight:700;color:#334155;">
-                            {{ is_scalar($value) ? $value : json_encode($value) }}
-                        </td>
-                    </tr>
-                @endforeach
-            </table>
-        @endif
-
-        @if(!empty($cta_url) && !empty($cta_label))
-            <div style="margin-top:20px;">
-                <a href="{{ $cta_url }}" style="display:inline-block;background-color:#10b981;color:#ffffff;text-decoration:none;padding:12px 16px;border-radius:12px;font-weight:800;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;">
-                    {{ $cta_label }}
-                </a>
+            <div class="special-section">
+                <h4><span class="icon">💡</span> Important Information</h4>
+                <p>Barua pepe hii imetumwa kiotomatiki kutoka kwa mfumo wa Reputable Tours. If this is an error, please ignore this email.</p>
             </div>
-        @endif
+
+            <div class="savings-tips" style="margin-top: 25px; background-color: #f7fafc; padding: 15px; border-left: 5px solid #38a169; border-radius: 10px;">
+                <h4 style="color: #2f855a; margin-bottom: 10px;">🌍 About Reputable Tours</h4>
+                <p style="font-size: 14px; color: #4a5568;">We are committed to providing excellent tourism services in Tanzania, ensuring you get an unforgettable experience.</p>
+            </div>
+            
+            <p style="font-size: 14px; color: #4a5568;">Thank you kwa kuwa sehemu ya familia ya Reputable Tours!</p>
+
+            <div class="signature">
+                <p>Thank you,<br><strong>Reputable Tours Team</strong></p>
+                <p style="font-weight: 600; color: #006400;">Let's Explore Together! 🌍</p>
+            </div>
+        </div>
+        <div class="footer">
+            Reputable Tours Email System V1.1.0.2026 - FeedTan CMG Design | Sent on {{ now()->format('M d, Y \a\t g:i A') }}
+        </div>
     </div>
-@endsection
+</body>
+</html>

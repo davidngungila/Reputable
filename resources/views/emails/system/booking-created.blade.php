@@ -1,111 +1,100 @@
-@extends('emails.layout')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ $title ?? "Booking Created - Reputable Tours" }}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { margin: 0; padding: 0; background-color: #f0f4f8; font-family: "Poppins", sans-serif; color: #333; line-height: 1.6; }
+        .email-container { max-width: 600px; margin: 30px auto; background: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08); border: 1px solid #e2e8f0; }
+        .header { background: #006400; padding: 30px 25px; text-align: center; color: white; }
+        .header .title { font-size: 26px; font-weight: 700; margin-bottom: 5px; }
+        .header .sub-title { font-size: 14px; opacity: 0.9; }
+        .content { padding: 30px 25px; }
+        .greeting { font-size: 18px; font-weight: 600; color: #2d3748; margin-bottom: 15px; }
+        
+        .card { background-color: #f7fafc; border: 1px solid #edf2f7; border-radius: 8px; padding: 20px; margin-bottom: 25px; border-left: 5px solid #006400; }
+        .card-header { display: flex; align-items: center; margin-bottom: 15px; }
+        .card-header .icon { font-size: 24px; margin-right: 12px; color: #4CAF50; }
+        .card-header h4 { margin: 0; font-size: 16px; font-weight: 600; color: #2d3748; }
 
-@section('content')
-    <div style="font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:20px;color:#334155;">
-        <p style="margin:0 0 12px 0;">Hello {{ $booking->customer_name ?? 'Guest' }},</p>
-        <p style="margin:0 0 12px 0;">We have received your booking request. Your invoice is attached for your records.</p>
+        .button-container { text-align: center; margin: 30px 0; }
+        .download-button { display: inline-block; padding: 12px 25px; background-color: #438a5e; color: white !important; font-weight: 600; border-radius: 6px; text-decoration: none; transition: background-color 0.3s ease; }
+        .download-button:hover { background-color: #2e7d32; }
+        
+        .special-section { background-color: #fff8e1; border-left: 5px solid #FFC107; padding: 25px; border-radius: 8px; margin: 25px 0; }
+        .special-section h4 { margin-top: 0; font-size: 18px; display: flex; align-items: center; color: #c09e4f; font-weight: 600; }
+        .special-section .icon { font-size: 24px; margin-right: 10px; color: #c09e4f; }
+        .special-section p { margin: 10px 0; font-size: 14px; }
+        
+        .invest-button { display: inline-block; padding: 12px 25px; background-color: #006400; color: white !important; font-weight: 600; border-radius: 6px; text-decoration: none; transition: background-color 0.3s ease; margin-top: 15px; }
+        .invest-button:hover { background-color: #2e7d32; }
 
-        <div style="margin-top:14px;padding:14px 16px;background-color:#f8fafc;border:1px solid #e5e7eb;border-radius:14px;">
-            <div style="font-size:12px;line-height:16px;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:#64748b;">Booking Details</div>
-            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin-top:10px;">
-                <tr>
-                    <td style="padding:6px 0;color:#64748b;font-weight:700;font-size:13px;">Booking</td>
-                    <td align="right" style="padding:6px 0;color:#0f172a;font-weight:800;font-size:13px;">BK-{{ str_pad((int) $booking->id, 5, '0', STR_PAD_LEFT) }}</td>
-                </tr>
-                <tr>
-                    <td style="padding:6px 0;color:#64748b;font-weight:700;font-size:13px;">Tour</td>
-                    <td align="right" style="padding:6px 0;color:#0f172a;font-weight:800;font-size:13px;">{{ $booking->tour->name ?? 'Custom Safari' }}</td>
-                </tr>
-                <tr>
-                    <td style="padding:6px 0;color:#64748b;font-weight:700;font-size:13px;">Travel Date</td>
-                    <td align="right" style="padding:6px 0;color:#0f172a;font-weight:800;font-size:13px;">{{ $booking->start_date ?? 'TBD' }}</td>
-                </tr>
-                <tr>
-                    <td style="padding:6px 0;color:#64748b;font-weight:700;font-size:13px;">Total</td>
-                    <td align="right" style="padding:6px 0;color:#065f46;font-weight:900;font-size:13px;">${{ number_format((float) $booking->total_price, 2) }}</td>
-                </tr>
-            </table>
+        .signature { margin-top: 40px; font-size: 14px; color: #4a5568; }
+        .footer { background-color: #006400; color: white; text-align: center; padding: 15px; font-size: 12px; letter-spacing: 0.5px; opacity: 0.8; }
+        
+        .detail-item { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 14px; }
+        .detail-label { color: #6b7280; font-weight: 500; }
+        .detail-value { color: #1f2937; font-weight: 600; }
+        
+        @media (max-width: 600px) {
+            .email-container { margin: 10px; border-radius: 8px; }
+            .header { padding: 20px; }
+            .content { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <div class="header">
+            <div class="title">Reputable Tours</div>
+            <div class="sub-title">NSSF Commercial Complex, Moshi - Your Gateway to Tanzanian Adventures</div>
         </div>
+        <div class="content">
+            <p class="greeting">Dear {{ $name ?? "Mteja" }},</p>
+            <p style="font-size: 14px; color: #4a5568;">{{ $message ?? "We are sending this message from Reputable Tours for booking confirmation." }}</p>
 
-        @if(!empty($account_created))
-            <div style="margin-top:16px;padding:14px 16px;background-color:#ecfdf5;border:1px solid #a7f3d0;border-radius:14px;">
-                <div style="font-size:12px;line-height:16px;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:#047857;">Account Access</div>
-
-                <div style="margin-top:10px;font-size:13px;line-height:18px;color:#064e3b;">
-                    We created an account for you so you can view your booking and payment status any time.
+            <div class="card">
+                <div class="card-header">
+                    <span class="icon">📧</span>
+                    <h4>{{ $title ?? "Booking Confirmation" }}</h4>
                 </div>
-
-                <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin-top:10px;">
-                    <tr>
-                        <td style="padding:6px 0;color:#065f46;font-weight:800;font-size:13px;">Email</td>
-                        <td align="right" style="padding:6px 0;color:#064e3b;font-weight:900;font-size:13px;">{{ $account_email ?? ($booking->customer_email ?? '') }}</td>
-                    </tr>
-                    <tr>
-                        <td style="padding:6px 0;color:#065f46;font-weight:800;font-size:13px;">Password</td>
-                        <td align="right" style="padding:6px 0;color:#064e3b;font-weight:900;font-size:13px;">{{ $account_password ?? 'WelcomeTZ' }}</td>
-                    </tr>
-                </table>
-
-                @if(!empty($login_url))
-                    <div style="margin-top:12px;">
-                        <a href="{{ $login_url }}" style="display:inline-block;background:#064e3b;color:#ffffff;text-decoration:none;font-weight:900;letter-spacing:0.10em;text-transform:uppercase;font-size:11px;padding:10px 14px;border-radius:12px;">
-                            Login
-                        </a>
-                    </div>
-                @endif
-
-                <div style="margin-top:12px;font-size:12px;line-height:18px;color:#047857;">
-                    For security, please change this password after your first login.
+                <p style="font-size: 14px; color: #4a5568;">This is a system email from Reputable Tours inayotumia muundo wa FeedTan CMG.</p>
+                
+                @isset($content)
+                <div style="margin-top: 15px;">
+                    {!! $content !!}
                 </div>
-            </div>
-        @endif
-
-        @if(!empty($payment_url))
-            <div style="margin-top:16px;">
-                <a href="{{ $payment_url }}" style="display:inline-block;background:#10b981;color:#ffffff;text-decoration:none;font-weight:900;letter-spacing:0.12em;text-transform:uppercase;font-size:12px;padding:12px 16px;border-radius:14px;">
-                    Pay Now
-                </a>
-            </div>
-        @endif
-
-        <div style="margin-top:16px;padding:14px 16px;background-color:#ffffff;border:1px solid #e5e7eb;border-radius:14px;">
-            <div style="font-size:12px;line-height:16px;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:#64748b;">Payment Methods</div>
-
-            <div style="margin-top:10px;font-size:13px;line-height:18px;color:#475569;">
-                Choose one of the secure payment options below:
+                @endisset
+                
+                @isset($actionUrl)
+                <div class="button-container">
+                    <a href="{{ $actionUrl }}" class="invest-button">{{ $actionText ?? "Endelea" }}</a>
+                </div>
+                @endisset
             </div>
 
-            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin-top:12px;">
-                <tr>
-                    <td style="padding:10px 0;">
-                        @if(!empty($stripe_payment_url))
-                            <a href="{{ $stripe_payment_url }}" style="display:inline-block;background:#0f172a;color:#ffffff;text-decoration:none;font-weight:900;letter-spacing:0.10em;text-transform:uppercase;font-size:11px;padding:10px 14px;border-radius:12px;">
-                                Pay by Card (Stripe)
-                            </a>
-                        @else
-                            <span style="font-weight:800;color:#0f172a;">Pay by Card (Stripe)</span>
-                        @endif
-                    </td>
-                </tr>
-                <tr>
-                    <td style="padding:10px 0;">
-                        @if(!empty($flutterwave_payment_url))
-                            <a href="{{ $flutterwave_payment_url }}" style="display:inline-block;background:#065f46;color:#ffffff;text-decoration:none;font-weight:900;letter-spacing:0.10em;text-transform:uppercase;font-size:11px;padding:10px 14px;border-radius:12px;">
-                                Pay by Mobile Money / Bank (Flutterwave)
-                            </a>
-                        @else
-                            <span style="font-weight:800;color:#0f172a;">Pay by Mobile Money / Bank (Flutterwave)</span>
-                        @endif
-                    </td>
-                </tr>
-            </table>
+            <div class="special-section">
+                <h4><span class="icon">💡</span> Important Information</h4>
+                <p>Barua pepe hii imetumwa kiotomatiki kutoka kwa mfumo wa Reputable Tours. If this is an error, please ignore this email.</p>
+            </div>
 
-            <div style="margin-top:12px;padding-top:12px;border-top:1px solid #e5e7eb;font-size:13px;line-height:18px;color:#475569;">
-                <strong style="color:#0f172a;">Bank Transfer:</strong>
-                If you prefer bank transfer, reply to this email and we will share account details and confirm your payment.
+            <div class="savings-tips" style="margin-top: 25px; background-color: #f7fafc; padding: 15px; border-left: 5px solid #38a169; border-radius: 10px;">
+                <h4 style="color: #2f855a; margin-bottom: 10px;">🌍 About Reputable Tours</h4>
+                <p style="font-size: 14px; color: #4a5568;">We are committed to providing excellent tourism services in Tanzania, ensuring you get an unforgettable experience.</p>
+            </div>
+            
+            <p style="font-size: 14px; color: #4a5568;">Thank you kwa kuwa sehemu ya familia ya Reputable Tours!</p>
+
+            <div class="signature">
+                <p>Thank you,<br><strong>Reputable Tours Team</strong></p>
+                <p style="font-weight: 600; color: #006400;">Let's Explore Together! 🌍</p>
             </div>
         </div>
-
-        <p style="margin:14px 0 0 0;">If you need help, reply to this email and our team will assist you.</p>
+        <div class="footer">
+            Reputable Tours Email System V1.1.0.2026 - FeedTan CMG Design | Sent on {{ now()->format('M d, Y \a\t g:i A') }}
+        </div>
     </div>
-@endsection
+</body>
+</html>

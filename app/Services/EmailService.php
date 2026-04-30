@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Log;
 
 class EmailService
 {
-    protected array $config = [];
+    public array $config = [];
     protected ?string $lastError = null;
 
     public function __construct()

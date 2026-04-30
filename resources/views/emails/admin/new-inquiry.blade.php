@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ $title }}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { margin: 0; padding: 0; background-color: #f0f4f8; font-family: 'Poppins', sans-serif; color: #333; line-height: 1.6; }
+        .email-container { max-width: 600px; margin: 30px auto; background: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08); border: 1px solid #e2e8f0; }
+        .header { background: #006400; padding: 30px 25px; text-align: center; color: white; }
+        .header .title { font-size: 26px; font-weight: 700; margin-bottom: 5px; }
+        .header .sub-title { font-size: 14px; opacity: 0.9; }
+        .content { padding: 30px 25px; }
+        .greeting { font-size: 18px; font-weight: 600; color: #2d3748; margin-bottom: 15px; }
+        
+        .card { background-color: #f7fafc; border: 1px solid #edf2f7; border-radius: 8px; padding: 20px; margin-bottom: 25px; }
+        .card-header { display: flex; align-items: center; margin-bottom: 15px; }
+        .card-header .icon { font-size: 24px; margin-right: 12px; color: #4CAF50; }
+        .card-header h4 { margin: 0; font-size: 16px; font-weight: 600; color: #2d3748; }
+
+        .button-container { text-align: center; margin: 30px 0; }
+        .download-button { display: inline-block; padding: 12px 25px; background-color: #438a5e; color: white !important; font-weight: 600; border-radius: 6px; text-decoration: none; transition: background-color 0.3s ease; }
+        .download-button:hover { background-color: #2e7d32; }
+        
+        .special-section { background-color: #fff8e1; border-left: 5px solid #FFC107; padding: 25px; border-radius: 8px; margin: 25px 0; }
+        .special-section h4 { margin-top: 0; font-size: 18px; display: flex; align-items: center; color: #c09e4f; font-weight: 600; }
+        .special-section .icon { font-size: 24px; margin-right: 10px; color: #c09e4f; }
+        .special-section p { margin: 10px 0; font-size: 14px; }
+        
+        .invest-button { display: inline-block; padding: 12px 25px; background-color: #006400; color: white !important; font-weight: 600; border-radius: 6px; text-decoration: none; transition: background-color 0.3s ease; margin-top: 15px; }
+        .invest-button:hover { background-color: #2e7d32; }
+
+        .signature { margin-top: 40px; font-size: 14px; color: #4a5568; }
+        .footer { background-color: #006400; color: white; text-align: center; padding: 15px; font-size: 12px; letter-spacing: 0.5px; opacity: 0.8; }
+        
+        .header img {
+            width: 120px;
+            height: auto;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        
+        .header p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 40px 30px;
+        }
+        
+        .inquiry-card {
+            background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+            border-left: 4px solid #ef4444;
+            padding: 25px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        
+        .inquiry-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .inquiry-number {
+            font-size: 24px;
+            font-weight: 700;
+            color: #ef4444;
+        }
+        
+        .inquiry-status {
+            background-color: #ef4444;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .inquiry-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+        
+        .detail-group {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+        }
+        
+        .detail-group h3 {
+            font-size: 14px;
+            font-weight: 600;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+        }
+        
+        .detail-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        
+        .detail-label {
+            color: #6b7280;
+            font-weight: 500;
+        }
+        
+        .detail-value {
+            color: #1f2937;
+            font-weight: 600;
+        }
+        
+        .message-preview {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+            margin-top: 20px;
+        }
+        
+        .message-preview h3 {
+            font-size: 14px;
+            font-weight: 600;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+        }
+        
+        .message-text {
+            color: #4b5563;
+            font-size: 14px;
+            line-height: 1.6;
+            background: #f9fafb;
+            padding: 15px;
+            border-radius: 6px;
+            border-left: 3px solid #ef4444;
+        }
+        
+        .priority-indicator {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .priority-indicator h4 {
+            color: #92400e;
+            font-size: 14px;
+            font-weight: 600;
+            margin: 0;
+        }
+        
+        .cta-section {
+            text-align: center;
+            margin: 30px 0;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 4px 6px rgba(239, 68, 68, 0.3);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(239, 68, 68, 0.4);
+        }
+        
+        .footer {
+            background-color: #f8f9fa;
+            padding: 30px;
+            text-align: center;
+            border-top: 1px solid #e5e7eb;
+        }
+        
+        .footer p {
+            font-size: 14px;
+            color: #6b7280;
+            margin-bottom: 8px;
+        }
+        
+        .footer a {
+            color: #ef4444;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 600px) {
+            .email-container {
+                margin: 10px;
+                border-radius: 8px;
+            }
+            
+            .header {
+                padding: 30px 20px;
+            }
+            
+            .content {
+                padding: 30px 20px;
+            }
+            
+            .inquiry-details {
+                grid-template-columns: 1fr;
+            }
+            
+            .inquiry-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <!-- Header -->
+        <div class="header">
+            <div class="title">Reputable Tours</div>
+            <div class="sub-title">NSSF Commercial Complex, Moshi - Your Gateway to Tanzanian Adventures</div>
+        </div>
+        <div class="content">
+            <p class="greeting">Dear Admin,</p>
+            <p style="font-size: 14px; color: #4a5568;">You have received a new customer inquiry kuhusu safari zetu. Full details are below.</p>
+
+            <div class="card">
+                <div class="card-header">
+                    <span class="icon">📧</span>
+                    <h4>New Customer Inquiry - INQ-{{ str_pad((int) $inquiry->id, 5, '0', STR_PAD_LEFT) }}</h4>
+                </div>
+                
+                <!-- Customer Information -->
+                <div class="detail-group" style="margin-bottom: 20px;">
+                    <h3 style="color: #006400; margin-bottom: 10px;">Customer Information</h3>
+                    <div class="detail-item">
+                        <span class="detail-label">Name:</span>
+                        <span class="detail-value">{{ $inquiry->name }}</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Email:</span>
+                        <span class="detail-value">{{ $inquiry->email }}</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Phone:</span>
+                        <span class="detail-value">{{ $inquiry->phone }}</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Nationality:</span>
+                        <span class="detail-value">{{ $inquiry->nationality }}</span>
+                    </div>
+                </div>
+                
+                <!-- Inquiry Details -->
+                <div class="detail-group" style="margin-bottom: 20px;">
+                    <h3 style="color: #006400; margin-bottom: 10px;">Inquiry Details</h3>
+                    <div class="detail-item">
+                        <span class="detail-label">Interested in:</span>
+                        <span class="detail-value">{{ $inquiry->tour_interest }}</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Travel Date:</span>
+                        <span class="detail-value">{{ $inquiry->travel_date }}</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Duration:</span>
+                        <span class="detail-value">{{ $inquiry->duration }}</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Group Size:</span>
+                        <span class="detail-value">{{ $inquiry->group_size }}</span>
+                    </div>
+                </div>
+                
+                <!-- Message -->
+                <div class="message-section" style="margin-bottom: 20px;">
+                    <h3 style="color: #006400; margin-bottom: 10px;">Customer Message</h3>
+                    <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #006400;">
+                        <p style="font-size: 14px; color: #4a5568; margin: 0;">{{ $inquiry->message }}</p>
+                    </div>
+                </div>
+                
+                <div class="button-container">
+                    <a href="{{ $admin_url }}" class="invest-button">View Full Details</a>
+                    <a href="mailto:{{ $inquiry->email }}" class="download-button" style="margin-left: 10px;">Reply to Customer</a>
+                </div>
+            </div>
+
+            <div class="savings-tips" style="margin-top: 25px; background-color: #f7fafc; padding: 15px; border-left: 5px solid #38a169; border-radius: 10px;">
+                <h4 style="color: #2f855a; margin-bottom: 10px;">💡 Response Tips</h4>
+                <ul style="font-size: 14px; color: #4a5568; line-height: 1.6; margin-left: 20px;">
+                    <li>Respond to customer within 24 hours</li>
+                    <li>Provide complete details about the tour they're interested in</li>
+                    <li>Suggest options suitable for their budget</li>
+                    <li>Ask questions to understand the customer well</li>
+                </ul>
+            </div>
+            
+            <!-- CTA Section -->
+            <div class="cta-section">
+                <p style="margin-bottom: 20px; color: #6b7280; font-size: 16px;">
+                    View and respond to this inquiry in the admin panel
+                </p>
+                <a href="{{ $admin_url }}" class="cta-button">
+                    View Inquiry Details
+                </a>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <p>This is an automated notification from Reputable Tours</p>
+            <p>For technical support, contact the development team</p>
+            <p style="font-size: 12px; color: #9ca3af;">
+                Reputable Tours Inquiry System V1.1.0.2026 | Inquiry received on {{ is_object($inquiry->created_at) && method_exists($inquiry->created_at, 'format') ? $inquiry->created_at->format('M d, Y \a\t g:i A') : $inquiry->created_at }} | Reference: INQ-{{ str_pad((int) $inquiry->id, 5, '0', STR_PAD_LEFT) }}
+            </p>
+        </div>
+    </div>
+</body>
+</html>

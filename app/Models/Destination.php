@@ -14,6 +14,7 @@ class Destination extends Model
         'name',
         'description',
         'location',
+        'region',
         'coordinates',
         'highlights',
         'best_time_to_visit',
@@ -33,5 +34,15 @@ class Destination extends Model
     public function tours(): BelongsToMany
     {
         return $this->belongsToMany(Tour::class, 'tour_destinations');
+    }
+
+    public function scopeByRegion($query, $region)
+    {
+        return $query->where('region', $region);
+    }
+
+    public function scopeActive($query)
+    {
+        return $query->where('status', 'active');
     }
 }

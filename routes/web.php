@@ -14,6 +14,10 @@ use App\Http\Controllers\Admin\ActivityController;
 use App\Http\Controllers\Admin\InquiryController;
 use App\Http\Controllers\Admin\CloudinaryController;
 use App\Http\Controllers\Admin\HeroSlideController;
+use App\Http\Controllers\Admin\MountainTrekkingRouteController;
+use App\Http\Controllers\Admin\TrekkingInfoController;
+use App\Http\Controllers\Admin\TrekkingEquipmentController;
+use App\Http\Controllers\Admin\TrekkingGuideController;
 use App\Http\Controllers\Public\TourController as PublicTourController;
 use App\Http\Controllers\Public\BookingController as PublicBookingController;
 use App\Http\Controllers\Public\InquiryController as PublicInquiryController;
@@ -40,9 +44,29 @@ Route::get('/contact', function () {
     return view('contact');
 })->name('contact');
 
-Route::get('/destinations', function () {
-    $destinations = \App\Models\Destination::where('status', 'active')->latest()->get();
-    return view('destinations', compact('destinations'));
+Route::get('/destinations', function (\Illuminate\Http\Request $request) {
+    $query = \App\Models\Destination::where('status', 'active');
+    
+    // Filter by region if specified
+    if ($request->filled('region')) {
+        $query->byRegion($request->region);
+    }
+    
+    // Sort by region if requested
+    if ($request->sort === 'region') {
+        $destinations = $query->orderBy('region')->orderBy('name')->get();
+    } else {
+        $destinations = $query->latest()->get();
+    }
+    
+    // Get available regions for filter dropdown
+    $regions = \App\Models\Destination::where('status', 'active')
+        ->whereNotNull('region')
+        ->distinct()
+        ->pluck('region')
+        ->sort();
+    
+    return view('destinations', compact('destinations', 'regions'));
 })->name('destinations');
 
 Route::get('/destinations/{id}', function ($id) {
@@ -53,9 +77,99 @@ Route::get('/destinations/{id}', function ($id) {
     return view('destination-detail', compact('destination'));
 })->name('destinations.show');
 
+// Circuit-based destination routes
+Route::get('/destinations/northern-circuit', function () {
+    $destinations = \App\Models\Destination::byRegion('Northern Circuit')->active()->get();
+    return view('circuits.northern-circuit', compact('destinations'));
+})->name('circuits.northern');
+
+Route::get('/destinations/southern-circuit', function () {
+    $destinations = \App\Models\Destination::byRegion('Southern Circuit')->active()->get();
+    return view('circuits.southern-circuit', compact('destinations'));
+})->name('circuits.southern');
+
+Route::get('/destinations/eastern-circuit', function () {
+    $destinations = \App\Models\Destination::byRegion('Eastern Circuit')->active()->get();
+    return view('circuits.eastern-circuit', compact('destinations'));
+})->name('circuits.eastern');
+
+Route::get('/destinations/western-circuit', function () {
+    $destinations = \App\Models\Destination::byRegion('Western Circuit')->active()->get();
+    return view('circuits.western-circuit', compact('destinations'));
+})->name('circuits.western');
+
+Route::get('/destinations/ocean-islands', function () {
+    $destinations = \App\Models\Destination::byRegion('Ocean Islands')->active()->get();
+    return view('circuits.ocean-islands', compact('destinations'));
+})->name('circuits.ocean-islands');
+
+Route::get('/destinations/mafia-island', function () {
+    $destinations = \App\Models\Destination::byRegion('Mafia Island')->active()->get();
+    return view('circuits.mafia-island', compact('destinations'));
+})->name('circuits.mafia-island');
+
+Route::get('/destinations/zanzibar-island', function () {
+    $destinations = \App\Models\Destination::byRegion('Zanzibar Island')->active()->get();
+    return view('circuits.zanzibar-island', compact('destinations'));
+})->name('circuits.zanzibar-island');
+
 Route::get('/things-to-do', function () {
     return view('things-to-do');
 })->name('things-to-do');
+
+// Activity detail routes
+Route::get('/activities/wildlife-safari', function () {
+    return view('activities.wildlife-safari');
+})->name('activities.wildlife-safari');
+
+Route::get('/activities/mountain-trekking', function () {
+    return view('activities.mountain-trekking');
+})->name('activities.mountain-trekking');
+
+Route::get('/activities/beach-activities', function () {
+    return view('activities.beach-activities');
+})->name('activities.beach-activities');
+
+Route::get('/activities/balloon-safari', function () {
+    return view('activities.balloon-safari');
+})->name('activities.balloon-safari');
+
+Route::get('/activities/cultural-visits', function () {
+    return view('activities.cultural-visits');
+})->name('activities.cultural-visits');
+
+// Activity Pages (matching navigation URLs)
+Route::get('/activity/game-drives', function () {
+    return view('activities.game-drives');
+})->name('activity.game-drives');
+
+Route::get('/activity/wildlife-safari', function () {
+    return view('activities.wildlife-safari');
+})->name('activity.wildlife-safari');
+
+Route::get('/activity/beach', function () {
+    return view('activities.beach-activities');
+})->name('activity.beach');
+
+Route::get('/activity/balloon', function () {
+    return view('activities.balloon-safari');
+})->name('activity.balloon');
+
+Route::get('/activity/cultural', function () {
+    return view('activities.cultural-visits');
+})->name('activity.cultural');
+
+Route::get('/activity/bird-watching', function () {
+    return view('activities.bird-watching');
+})->name('activity.bird-watching');
+
+Route::get('/activity/walking', function () {
+    return view('activities.walking-tours');
+})->name('activity.walking');
+
+Route::get('/activity/night-game', function () {
+    return view('activities.night-game-drives');
+})->name('activity.night-game');
 
 Route::get('/mountain-trekking', [PublicTourController::class, 'mountainTrekking'])->name('mountain-trekking');
 Route::get('/mountain-trekking/trekking-info', function () { return view('mountain-trekking.trekking-info'); })->name('mountain-trekking.info');
@@ -279,6 +393,62 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'ensure.admin', 'act
         Route::post('/{id}/toggle-status', [HeroSlideController::class, 'toggleStatus'])->name('toggle-status');
         Route::post('/reorder', [HeroSlideController::class, 'reorder'])->name('reorder');
     });
+
+    // Mountain Trekking Management
+    Route::prefix('mountain-trekking-routes')->name('mountain-trekking-routes.')->group(function () {
+        Route::get('/', [MountainTrekkingRouteController::class, 'index'])->name('index');
+        Route::get('/create', [MountainTrekkingRouteController::class, 'create'])->name('create');
+        Route::post('/', [MountainTrekkingRouteController::class, 'store'])->name('store');
+        Route::get('/{mountainTrekkingRoute}', [MountainTrekkingRouteController::class, 'show'])->name('show');
+        Route::get('/{mountainTrekkingRoute}/edit', [MountainTrekkingRouteController::class, 'edit'])->name('edit');
+        Route::put('/{mountainTrekkingRoute}', [MountainTrekkingRouteController::class, 'update'])->name('update');
+        Route::delete('/{mountainTrekkingRoute}', [MountainTrekkingRouteController::class, 'destroy'])->name('destroy');
+        Route::post('/{mountainTrekkingRoute}/toggle-status', [MountainTrekkingRouteController::class, 'toggleStatus'])->name('toggle-status');
+        Route::post('/bulk-action', [MountainTrekkingRouteController::class, 'bulkAction'])->name('bulk-action');
+        Route::post('/reorder', [MountainTrekkingRouteController::class, 'reorder'])->name('reorder');
+    });
+
+    Route::prefix('trekking-info')->name('trekking-info.')->group(function () {
+        Route::get('/', [TrekkingInfoController::class, 'index'])->name('index');
+        Route::get('/create', [TrekkingInfoController::class, 'create'])->name('create');
+        Route::post('/', [TrekkingInfoController::class, 'store'])->name('store');
+        Route::get('/{trekkingInfo}', [TrekkingInfoController::class, 'show'])->name('show');
+        Route::get('/{trekkingInfo}/edit', [TrekkingInfoController::class, 'edit'])->name('edit');
+        Route::put('/{trekkingInfo}', [TrekkingInfoController::class, 'update'])->name('update');
+        Route::delete('/{trekkingInfo}', [TrekkingInfoController::class, 'destroy'])->name('destroy');
+        Route::post('/{trekkingInfo}/toggle-status', [TrekkingInfoController::class, 'toggleStatus'])->name('toggle-status');
+        Route::post('/bulk-action', [TrekkingInfoController::class, 'bulkAction'])->name('bulk-action');
+    });
+
+    Route::prefix('trekking-equipment')->name('trekking-equipment.')->group(function () {
+        Route::get('/', [TrekkingEquipmentController::class, 'index'])->name('index');
+        Route::get('/create', [TrekkingEquipmentController::class, 'create'])->name('create');
+        Route::post('/', [TrekkingEquipmentController::class, 'store'])->name('store');
+        Route::get('/{trekkingEquipment}', [TrekkingEquipmentController::class, 'show'])->name('show');
+        Route::get('/{trekkingEquipment}/edit', [TrekkingEquipmentController::class, 'edit'])->name('edit');
+        Route::put('/{trekkingEquipment}', [TrekkingEquipmentController::class, 'update'])->name('update');
+        Route::delete('/{trekkingEquipment}', [TrekkingEquipmentController::class, 'destroy'])->name('destroy');
+        Route::post('/{trekkingEquipment}/toggle-status', [TrekkingEquipmentController::class, 'toggleStatus'])->name('toggle-status');
+        Route::post('/bulk-action', [TrekkingEquipmentController::class, 'bulkAction'])->name('bulk-action');
+    });
+
+    Route::prefix('trekking-guides')->name('trekking-guides.')->group(function () {
+        Route::get('/', [TrekkingGuideController::class, 'index'])->name('index');
+        Route::get('/create', [TrekkingGuideController::class, 'create'])->name('create');
+        Route::post('/', [TrekkingGuideController::class, 'store'])->name('store');
+        Route::get('/{trekkingGuide}', [TrekkingGuideController::class, 'show'])->name('show');
+        Route::get('/{trekkingGuide}/edit', [TrekkingGuideController::class, 'edit'])->name('edit');
+        Route::put('/{trekkingGuide}', [TrekkingGuideController::class, 'update'])->name('update');
+        Route::delete('/{trekkingGuide}', [TrekkingGuideController::class, 'destroy'])->name('destroy');
+        Route::post('/{trekkingGuide}/toggle-status', [TrekkingGuideController::class, 'toggleStatus'])->name('toggle-status');
+        Route::post('/{trekkingGuide}/toggle-availability', [TrekkingGuideController::class, 'toggleAvailability'])->name('toggle-availability');
+        Route::post('/bulk-action', [TrekkingGuideController::class, 'bulkAction'])->name('bulk-action');
+    });
+
+    // Mountain Trekking Admin Routes (matching requested URLs)
+    Route::get('/mountain-trekking/trekking-info', [TrekkingInfoController::class, 'index'])->name('admin.mountain-trekking.trekking-info');
+    Route::get('/mountain-trekking/routes', [MountainTrekkingRouteController::class, 'index'])->name('admin.mountain-trekking.routes');
+    Route::get('/mountain-trekking/guides', [TrekkingGuideController::class, 'index'])->name('admin.mountain-trekking.guides');
 
     // Operations
     Route::prefix('operations')->name('operations.')->group(function () {

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Public;
 use App\Http\Controllers\Controller;
 use App\Models\Tour;
 use App\Models\Destination;
+use App\Models\HeroSlide;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Http\Response;
@@ -15,7 +16,8 @@ class TourController extends Controller
     {
         $featuredTours = Tour::where('status', 'active')->where('featured', true)->take(3)->get();
         $destinations = Destination::where('status', 'active')->latest()->take(4)->get();
-        return view('home', compact('featuredTours', 'destinations'));
+        $heroSlides = HeroSlide::active()->byPosition('home')->ordered()->get();
+        return view('home', compact('featuredTours', 'destinations', 'heroSlides'));
     }
 
     public function index(Request $request): View|Response

@@ -3,6 +3,54 @@
 @section('title', $mountain->name . ' - Mountain Trekking')
 
 @section('content')
+@if($heroSlides->count() > 0)
+<!-- Hero Slider -->
+<section class="relative h-96 overflow-hidden">
+    <!-- Swiper -->
+    <div class="swiper mountainHeroSwiper h-full w-full">
+        <div class="swiper-wrapper">
+            @foreach($heroSlides as $slide)
+            <div class="swiper-slide relative flex items-center">
+                <div class="absolute inset-0 z-0">
+                    <img src="{{ $slide->image_url }}" alt="{{ $slide->title }}" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-r from-slate-900/90 via-slate-900/40 to-transparent"></div>
+                </div>
+                <div class="relative z-10 max-w-7xl mx-auto px-6 w-full pt-12">
+                    <div class="max-w-2xl translate-y-10 opacity-0 transition-all duration-1000 slide-content">
+                        <span class="inline-block px-4 py-1.5 bg-[#1F5A3A]/20 text-[#E67A2E] rounded-full text-xs font-bold tracking-widest uppercase mb-4 border border-[#1F5A3A]/30">Mountain Adventure</span>
+                        <h1 class="text-3xl md:text-5xl font-serif text-white mb-6 leading-[1.1]">{!! $slide->title !!}</h1>
+                        @if($slide->subtitle)
+                        <p class="text-lg text-slate-200 mb-8 leading-relaxed">{{ $slide->subtitle }}</p>
+                        @endif
+                        @if($slide->button_text && $slide->button_url)
+                        <div class="flex flex-col sm:flex-row items-center gap-4">
+                            <a href="{{ $slide->button_url }}" class="w-full sm:w-auto px-8 py-3 bg-[#1F5A3A] text-white font-bold rounded-full hover:bg-[#1F5A3A]/90 shadow-xl shadow-[#1F5A3A]/30 transition-all text-center">
+                                {{ $slide->button_text }}
+                            </a>
+                        </div>
+                        @endif
+                    </div>
+                </div>
+            </div>
+            @endforeach
+        </div>
+
+        <!-- Navigation -->
+        <div class="absolute bottom-6 right-6 z-20 flex gap-3">
+            <button class="swiper-prev w-12 h-12 rounded-full border border-white/20 bg-white/10 text-white flex items-center justify-center hover:bg-[#1F5A3A] hover:border-[#1F5A3A] transition-all backdrop-blur-md">
+                <i class="ph ph-caret-left text-xl"></i>
+            </button>
+            <button class="swiper-next w-12 h-12 rounded-full border border-white/20 bg-white/10 text-white flex items-center justify-center hover:bg-[#1F5A3A] hover:border-[#1F5A3A] transition-all backdrop-blur-md">
+                <i class="ph ph-caret-right text-xl"></i>
+            </button>
+        </div>
+
+        <!-- Pagination -->
+        <div class="swiper-pagination !bottom-6 !left-6 !text-left !w-auto"></div>
+    </div>
+</section>
+@endif
+
 <!-- Hero Section -->
 <section class="relative h-96 bg-cover bg-center" style="background-image: url('{{ !empty($mountain->images) ? $mountain->images[0] : 'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/tree-2600482_1920_c50vn6.jpg' }}');">
     <div class="absolute inset-0 bg-black bg-opacity-50"></div>
@@ -133,4 +181,61 @@
         </div>
     </div>
 </section>
+
+@if($heroSlides->count() > 0)
+<style>
+    .swiper-pagination-bullet { width: 10px; height: 10px; background: rgba(255,255,255,0.3); opacity: 1; }
+    .swiper-pagination-bullet-active { background: #10b981; width: 24px; border-radius: 5px; }
+    .swiper-slide-active .slide-content { transform: translateY(0); opacity: 1; }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const mountainSwiper = new Swiper('.mountainHeroSwiper', {
+            loop: true,
+            speed: 1000,
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-next',
+                prevEl: '.swiper-prev',
+            },
+            effect: 'fade',
+            fadeEffect: {
+                crossFade: true
+            }
+        });
+
+        // Animate slide content on slide change
+        mountainSwiper.on('slideChange', function () {
+            const activeSlide = mountainSwiper.slides[mountainSwiper.activeIndex];
+            const content = activeSlide.querySelector('.slide-content');
+            if (content) {
+                content.style.transform = 'translateY(10px)';
+                content.style.opacity = '0';
+                setTimeout(() => {
+                    content.style.transform = 'translateY(0)';
+                    content.style.opacity = '1';
+                }, 100);
+            }
+        });
+
+        // Initial animation for first slide
+        const firstSlide = mountainSwiper.slides[mountainSwiper.activeIndex];
+        const firstContent = firstSlide.querySelector('.slide-content');
+        if (firstContent) {
+            setTimeout(() => {
+                firstContent.style.transform = 'translateY(0)';
+                firstContent.style.opacity = '1';
+            }, 500);
+        }
+    });
+</script>
+@endif
 @endsection

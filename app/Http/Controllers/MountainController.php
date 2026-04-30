@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Mountain;
+use App\Models\HeroSlide;
 
 class MountainController extends Controller
 {
@@ -11,13 +12,15 @@ class MountainController extends Controller
     public function index()
     {
         $mountains = Mountain::where('status', 'active')->get();
-        return view('mountains.index', compact('mountains'));
+        $heroSlides = HeroSlide::active()->byPosition('mountains')->ordered()->get();
+        return view('mountains.index', compact('mountains', 'heroSlides'));
     }
 
     public function show($slug)
     {
         $mountain = Mountain::where('slug', $slug)->where('status', 'active')->firstOrFail();
-        return view('mountains.show', compact('mountain'));
+        $heroSlides = HeroSlide::active()->byPosition('mountains')->ordered()->get();
+        return view('mountains.show', compact('mountain', 'heroSlides'));
     }
 
     public function trekkingInfo($slug)
@@ -29,7 +32,11 @@ class MountainController extends Controller
     public function routes($slug)
     {
         $mountain = Mountain::where('slug', $slug)->where('status', 'active')->firstOrFail();
-        return view('mountains.routes', compact('mountain'));
+        $tours = Tour::where('status', 'active')
+            ->where('tour_type', 'mountain_trekking')
+            ->where('location', 'like', '%' . $mountain->name . '%')
+            ->get();
+        return view('mountains.routes', compact('mountain', 'tours'));
     }
 
     public function equipmentGuide($slug)

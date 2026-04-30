@@ -32,8 +32,8 @@ class BookingNotificationService
             'support_phone' => null,
             'support_whatsapp' => null,
             'payment_url' => route('bookings.checkout', ['id' => $booking->id]),
-            'stripe_payment_url' => route('checkout', ['id' => $booking->id]),
-            'flutterwave_payment_url' => route('flutterwave.pay', ['id' => $booking->id]),
+            'stripe_payment_url' => route('bookings.checkout', ['id' => $booking->id]),
+            'flutterwave_payment_url' => route('bookings.checkout', ['id' => $booking->id]),
             'account_created' => $accountCreated,
             'account_email' => $accountEmail,
             'account_password' => $accountPassword,
@@ -47,12 +47,31 @@ class BookingNotificationService
 
         $notification = new NotificationService();
 
+        // Send to customer
         if ($toEmail) {
             $notification->sendEmail($toEmail, $subject, $html, $invoicePath, basename($invoicePath));
         }
 
+        // Send to admin emails
+        $adminSubject = 'New Booking Alert: BK-' . str_pad((int) $booking->id, 5, '0', STR_PAD_LEFT) . ' - ' . $booking->customer_name;
+        $adminHtml = view('emails.admin.new-booking', [
+            'booking' => $booking,
+            'title' => $adminSubject,
+            'heading' => 'New Booking Received',
+            'subheading' => 'A new booking has been made by ' . $booking->customer_name,
+            'logo_url' => url('lau-adventuress-logo.png'),
+            'website_url' => config('app.url'),
+            'support_email' => config('mail.from.address'),
+            'admin_url' => route('admin.bookings.show', $booking->id),
+        ])->render();
+
+        $adminEmails = ['raphaeleliac@gmail.com', 'davidngungila@gmail.com', 'info@reputabletours.com'];
+        foreach ($adminEmails as $adminEmail) {
+            $notification->sendEmail($adminEmail, $adminSubject, $adminHtml, $invoicePath, basename($invoicePath));
+        }
+
         if ($toPhone) {
-            $sms = "LAU Paradise Adventure: We received your booking BK-" . str_pad((int) $booking->id, 5, '0', STR_PAD_LEFT)
+            $sms = "Reputable Tours: We received your booking BK-" . str_pad((int) $booking->id, 5, '0', STR_PAD_LEFT)
                 . ". Invoice sent to your email. Pay securely here: " . route('bookings.checkout', ['id' => $booking->id]);
             $notification->sendSMS($toPhone, $sms);
         }

@@ -8,7 +8,7 @@
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h1 class="h3 mb-0">Mount Meru Climbing Management</h1>
         <div>
-            <a href="{{ route('mountains.admin.show', 'meru') }}" class="btn btn-outline-primary">
+            <a href="{{ route('admin.mountains.admin.show', 'meru') }}" class="btn btn-outline-primary">
                 <i class="fas fa-arrow-left me-2"></i>Back to Meru
             </a>
         </div>

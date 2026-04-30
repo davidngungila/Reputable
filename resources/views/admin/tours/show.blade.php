@@ -144,14 +144,14 @@
                                         @if($itinerary->activities)
                                         <div class="flex items-center text-sm text-gray-600">
                                             <i class="ph-bold ph-activity mr-2"></i>
-                                            <span>Activities: {{ implode(', ', $itinerary->activities) }}</span>
+                                            <span>Activities: {{ is_array($itinerary->activities) ? implode(', ', $itinerary->activities) : $itinerary->activities }}</span>
                                         </div>
                                         @endif
                                         
                                         @if($itinerary->meals)
                                         <div class="flex items-center text-sm text-gray-600">
                                             <i class="ph-bold ph-pizza mr-2"></i>
-                                            <span>Meals: {{ implode(', ', $itinerary->meals) }}</span>
+                                            <span>Meals: {{ is_array($itinerary->meals) ? implode(', ', $itinerary->meals) : $itinerary->meals }}</span>
                                         </div>
                                         @endif
                                         
