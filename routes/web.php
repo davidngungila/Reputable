@@ -69,6 +69,44 @@ Route::get('/destinations', function (\Illuminate\Http\Request $request) {
     return view('destinations', compact('destinations', 'regions'));
 })->name('destinations');
 
+// Circuit-based destination routes - using hyphens for better URL compatibility
+// These must come BEFORE the general {id} route to avoid conflicts
+Route::get('/destinations/Northern-Circuit', function () {
+    $destinations = \App\Models\Destination::byRegion('Northern Circuit')->active()->get();
+    return view('circuits.northern-circuit', compact('destinations'));
+})->name('circuits.northern');
+
+Route::get('/destinations/Southern-Circuit', function () {
+    $destinations = \App\Models\Destination::byRegion('Southern Circuit')->active()->get();
+    return view('circuits.southern-circuit', compact('destinations'));
+})->name('circuits.southern');
+
+Route::get('/destinations/Eastern-Circuit', function () {
+    $destinations = \App\Models\Destination::byRegion('Eastern Circuit')->active()->get();
+    return view('circuits.eastern-circuit', compact('destinations'));
+})->name('circuits.eastern');
+
+Route::get('/destinations/Western-Circuit', function () {
+    $destinations = \App\Models\Destination::byRegion('Western Circuit')->active()->get();
+    return view('circuits.western-circuit', compact('destinations'));
+})->name('circuits.western');
+
+Route::get('/destinations/Ocean-Islands', function () {
+    $destinations = \App\Models\Destination::byRegion('Ocean Islands')->active()->get();
+    return view('circuits.ocean-islands', compact('destinations'));
+})->name('circuits.ocean-islands');
+
+Route::get('/destinations/Mafia-Island', function () {
+    $destinations = \App\Models\Destination::byRegion('Mafia Island')->active()->get();
+    return view('circuits.mafia-island', compact('destinations'));
+})->name('circuits.mafia-island');
+
+Route::get('/destinations/Zanzibar-Island', function () {
+    $destinations = \App\Models\Destination::byRegion('Zanzibar Island')->active()->get();
+    return view('circuits.zanzibar-island', compact('destinations'));
+})->name('circuits.zanzibar-island');
+
+// General destination detail route - must come AFTER specific circuit routes
 Route::get('/destinations/{id}', function ($id) {
     $destination = \App\Models\Destination::find($id);
     if (!$destination) {
@@ -76,42 +114,6 @@ Route::get('/destinations/{id}', function ($id) {
     }
     return view('destination-detail', compact('destination'));
 })->name('destinations.show');
-
-// Circuit-based destination routes
-Route::get('/destinations/northern-circuit', function () {
-    $destinations = \App\Models\Destination::byRegion('Northern Circuit')->active()->get();
-    return view('circuits.northern-circuit', compact('destinations'));
-})->name('circuits.northern');
-
-Route::get('/destinations/southern-circuit', function () {
-    $destinations = \App\Models\Destination::byRegion('Southern Circuit')->active()->get();
-    return view('circuits.southern-circuit', compact('destinations'));
-})->name('circuits.southern');
-
-Route::get('/destinations/eastern-circuit', function () {
-    $destinations = \App\Models\Destination::byRegion('Eastern Circuit')->active()->get();
-    return view('circuits.eastern-circuit', compact('destinations'));
-})->name('circuits.eastern');
-
-Route::get('/destinations/western-circuit', function () {
-    $destinations = \App\Models\Destination::byRegion('Western Circuit')->active()->get();
-    return view('circuits.western-circuit', compact('destinations'));
-})->name('circuits.western');
-
-Route::get('/destinations/ocean-islands', function () {
-    $destinations = \App\Models\Destination::byRegion('Ocean Islands')->active()->get();
-    return view('circuits.ocean-islands', compact('destinations'));
-})->name('circuits.ocean-islands');
-
-Route::get('/destinations/mafia-island', function () {
-    $destinations = \App\Models\Destination::byRegion('Mafia Island')->active()->get();
-    return view('circuits.mafia-island', compact('destinations'));
-})->name('circuits.mafia-island');
-
-Route::get('/destinations/zanzibar-island', function () {
-    $destinations = \App\Models\Destination::byRegion('Zanzibar Island')->active()->get();
-    return view('circuits.zanzibar-island', compact('destinations'));
-})->name('circuits.zanzibar-island');
 
 Route::get('/things-to-do', function () {
     return view('things-to-do');
