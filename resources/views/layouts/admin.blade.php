@@ -114,6 +114,15 @@
             </div>
             @endif
 
+            {{-- Hero Slide Management --}}
+            @if($showAllMenus)
+            <a href="{{ route('admin.hero-slides.index') }}" 
+               class="flex items-center px-4 py-3 text-emerald-100/70 hover:bg-emerald-800 hover:text-white transition-all rounded-xl {{ request()->routeIs('admin.hero-slides.*') ? 'text-white bg-emerald-800' : '' }}">
+                <i class="ph-bold ph-images mr-3 text-xl"></i>
+                <span class="text-sm">Hero Slides</span>
+            </a>
+            @endif
+
             {{-- Things to Do --}}
             @if($showAllMenus)
             <div x-data="{ open: window.innerWidth < 1024 || {{ request()->routeIs('admin.activities.*') ? 'true' : 'false' }} }">

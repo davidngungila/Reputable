@@ -225,16 +225,11 @@
 
         <!-- Equipment -->
         <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 mb-6">
-            <div class="flex items-center justify-between mb-6">
-                <div class="flex items-center">
-                    <div class="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center mr-3">
-                        <i class="ph-bold ph-backpack text-orange-600 text-xl"></i>
-                    </div>
-                    <h2 class="text-xl font-bold text-gray-900">Required Equipment</h2>
+            <div class="flex items-center mb-4">
+                <div class="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center mr-3">
+                    <i class="ph-bold ph-backpack text-orange-600 text-xl"></i>
                 </div>
-                <a href="{{ route('admin.mountain.equipment-management') }}" class="text-sm text-blue-600 hover:text-blue-700 font-medium">
-                    Manage Equipment
-                </a>
+                <h2 class="text-xl font-bold text-gray-900">Required Equipment</h2>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
