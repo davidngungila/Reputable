@@ -249,16 +249,13 @@
 
         <!-- Recommended Guides -->
         <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 mb-6">
-            <div class="flex items-center justify-between mb-6">
+            <div class="flex items-center mb-6">
                 <div class="flex items-center">
                     <div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center mr-3">
                         <i class="ph-bold ph-user-check text-purple-600 text-xl"></i>
                     </div>
                     <h2 class="text-xl font-bold text-gray-900">Recommended Guides</h2>
                 </div>
-                <a href="{{ route('admin.mountain.guide-assignments') }}" class="text-sm text-blue-600 hover:text-blue-700 font-medium">
-                    Manage Guides
-                </a>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
