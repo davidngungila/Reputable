@@ -4,13 +4,13 @@
 
 @section('content')
 <!-- Hero Section -->
-<section class="relative h-96 bg-cover bg-center" style="background-image: url('https://res.cloudinary.com/dqflffa1o/image/upload/v1777468776/warbuck_ggd5wl.jpg');">
+<section class="relative min-h-[60vh] sm:min-h-[70vh] md:min-h-[80vh] lg:min-h-[90vh] bg-cover bg-center" style="background-image: url('https://res.cloudinary.com/dqflffa1o/image/upload/v1777468776/warbuck_ggd5wl.jpg');">
     <div class="absolute inset-0 bg-black bg-opacity-50"></div>
-    <div class="relative container mx-auto px-4 h-full flex items-center">
-        <div class="text-white">
-            <h1 class="text-5xl font-bold mb-4">Zanzibar Island</h1>
-            <p class="text-xl mb-6">Spice Island Paradise</p>
-            <p class="max-w-2xl">Experience pristine beaches, historic Stone Town, spice tours, and crystal-clear waters in this tropical paradise</p>
+    <div class="relative container mx-auto px-4 sm:px-6 h-full flex items-center py-12 sm:py-16 md:py-20">
+        <div class="text-white max-w-4xl">
+            <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 leading-tight">Zanzibar Island</h1>
+            <p class="text-lg sm:text-xl md:text-2xl mb-4 sm:mb-6">Spice Island Paradise</p>
+            <p class="text-base sm:text-lg md:text-xl max-w-3xl">Experience pristine beaches, historic Stone Town, spice tours, and crystal-clear waters in this tropical paradise</p>
         </div>
     </div>
 </section>

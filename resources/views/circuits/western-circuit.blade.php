@@ -13,15 +13,16 @@
 </section>
 
 <!-- Hero Section -->
-<section class="relative py-20 bg-gradient-to-br from-blue-600 to-indigo-700 overflow-hidden">
+<section class="relative min-h-[60vh] sm:min-h-[70vh] md:min-h-[80vh] lg:min-h-[90vh] bg-gradient-to-br from-blue-600 to-indigo-700 overflow-hidden">
     <div class="absolute inset-0 z-0">
-        <img src="https://res.cloudinary.com/dqflffa1o/image/upload/v1777468772/Tarangire_ck2ohe.jpg" alt="Western circuit" class="w-full h-full object-cover opacity-30">
+        <img src="https://res.cloudinary.com/dqflffa1o/image/upload/v1777468772/Tarangire_ck2ohe.jpg" alt="Western circuit" class="w-full h-full object-cover object-center opacity-30">
         <div class="absolute inset-0 bg-gradient-to-r from-blue-900/50 to-indigo-900/50"></div>
     </div>
     
-    <div class="relative z-10 max-w-7xl mx-auto px-6 text-center">
-        <h1 class="text-5xl md:text-6xl font-serif text-white mb-6 font-bold">Western Circuit</h1>
-        <p class="text-xl text-blue-100 max-w-3xl mx-auto mb-8">Experience Tanzania's western frontier, where vast waterways, dense forests, and incredible primate populations create an unforgettable safari adventure.</p>
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 text-center h-full flex items-center justify-center py-12 sm:py-16 md:py-20">
+        <div class="w-full">
+            <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif text-white mb-4 sm:mb-6 font-bold leading-tight">Western Circuit</h1>
+            <p class="text-base sm:text-lg md:text-xl text-blue-100 max-w-3xl mx-auto mb-6 sm:mb-8 px-4">Experience Tanzania's western frontier, where vast waterways, dense forests, and incredible primate populations create an unforgettable safari adventure.</p>
         <div class="flex flex-wrap gap-4 justify-center">
             <div class="bg-white/20 backdrop-blur-sm rounded-full px-6 py-3 text-white">
                 <i class="ph ph-fish mr-2"></i> Water Safari

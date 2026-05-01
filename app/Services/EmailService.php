@@ -64,6 +64,7 @@ class EmailService
 
         $this->lastError = null;
 
+        // Try primary email service first
         for ($attempt = 0; $attempt <= $maxRetries; $attempt++) {
             try {
                 Config::set('mail.default', 'smtp');
@@ -98,7 +99,7 @@ class EmailService
                     }
                 });
 
-                Log::info('Email sent successfully', [
+                Log::info('Primary email sent successfully', [
                     'to' => is_array($to) ? implode(', ', $to) : $to,
                     'subject' => $subject,
                     'attempt' => $attempt,
@@ -112,7 +113,7 @@ class EmailService
                     || stripos($error, 'timeout') !== false
                     || stripos($error, '10060') !== false;
 
-                Log::warning('Email send attempt failed', [
+                Log::warning('Primary email send attempt failed', [
                     'to' => is_array($to) ? implode(', ', $to) : $to,
                     'subject' => $subject,
                     'attempt' => $attempt,
@@ -124,9 +125,39 @@ class EmailService
                     continue;
                 }
 
-                return false;
+                break;
             }
         }
+
+        // If primary service failed, try backup services
+        Log::warning('Primary email service failed, trying backup services', [
+            'to' => is_array($to) ? implode(', ', $to) : $to,
+            'subject' => $subject,
+            'primary_error' => $this->lastError
+        ]);
+
+        // Try SendGrid backup
+        $backupService = new BackupEmailService();
+        $sendGridSuccess = $backupService->send($to, $subject, $body, $attachmentPath, $attachmentName);
+        
+        if ($sendGridSuccess) {
+            Log::info('Email sent successfully via SendGrid backup');
+            return true;
+        }
+
+        // Try Mailgun backup
+        $mailgunSuccess = $backupService->sendViaMailgun($to, $subject, $body, $attachmentPath, $attachmentName);
+        
+        if ($mailgunSuccess) {
+            Log::info('Email sent successfully via Mailgun backup');
+            return true;
+        }
+
+        Log::error('All email services failed', [
+            'to' => is_array($to) ? implode(', ', $to) : $to,
+            'subject' => $subject,
+            'primary_error' => $this->lastError
+        ]);
 
         return false;
     }

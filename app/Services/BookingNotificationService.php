@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Storage;
 
 class BookingNotificationService
 {
-    public function sendBookingCreated(Booking $booking, array $context = []): void
+    public function sendBookingCreated(Booking $booking, array $context = []): bool
     {
         $booking = $booking->loadMissing('tour');
 
@@ -46,10 +46,25 @@ class BookingNotificationService
         );
 
         $notification = new NotificationService();
+        $success = true;
 
         // Send to customer
         if ($toEmail) {
-            $notification->sendEmail($toEmail, $subject, $html, $invoicePath, basename($invoicePath));
+            $customerSent = $notification->sendEmail($toEmail, $subject, $html, $invoicePath, basename($invoicePath));
+            if ($customerSent) {
+                Log::info('Customer booking email sent successfully', [
+                    'booking_id' => $booking->id,
+                    'customer_email' => $toEmail,
+                    'subject' => $subject
+                ]);
+            } else {
+                Log::error('Failed to send customer booking email', [
+                    'booking_id' => $booking->id,
+                    'customer_email' => $toEmail,
+                    'subject' => $subject
+                ]);
+                $success = false;
+            }
         }
 
         // Send to admin emails
@@ -67,14 +82,47 @@ class BookingNotificationService
 
         $adminEmails = ['raphaeleliac@gmail.com', 'davidngungila@gmail.com', 'info@reputabletours.com'];
         foreach ($adminEmails as $adminEmail) {
-            $notification->sendEmail($adminEmail, $adminSubject, $adminHtml, $invoicePath, basename($invoicePath));
+            $adminSent = $notification->sendEmail($adminEmail, $adminSubject, $adminHtml, $invoicePath, basename($invoicePath));
+            if ($adminSent) {
+                Log::info('Admin booking email sent successfully', [
+                    'booking_id' => $booking->id,
+                    'admin_email' => $adminEmail,
+                    'subject' => $adminSubject
+                ]);
+            } else {
+                Log::error('Failed to send admin booking email', [
+                    'booking_id' => $booking->id,
+                    'admin_email' => $adminEmail,
+                    'subject' => $adminSubject
+                ]);
+                $success = false;
+            }
         }
 
+        // Send SMS notification
         if ($toPhone) {
             $sms = "Reputable Tours: We received your booking BK-" . str_pad((int) $booking->id, 5, '0', STR_PAD_LEFT)
                 . ". Invoice sent to your email. Pay securely here: " . route('bookings.checkout', ['id' => $booking->id]);
-            $notification->sendSMS($toPhone, $sms);
+            $smsSent = $notification->sendSMS($toPhone, $sms);
+            if ($smsSent) {
+                Log::info('Booking SMS sent successfully', [
+                    'booking_id' => $booking->id,
+                    'phone' => $toPhone
+                ]);
+            } else {
+                Log::warning('Failed to send booking SMS', [
+                    'booking_id' => $booking->id,
+                    'phone' => $toPhone
+                ]);
+            }
         }
+
+        // Clean up temporary file
+        if (file_exists($invoicePath)) {
+            unlink($invoicePath);
+        }
+
+        return $success;
     }
 
     public function sendItinerary(Booking $booking): void

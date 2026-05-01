@@ -2,15 +2,17 @@
 
 @section('content')
 <!-- Hero Section -->
-<section class="relative pt-48 pb-32 overflow-hidden bg-slate-900">
+<section class="relative min-h-[60vh] sm:min-h-[70vh] md:min-h-[80vh] lg:min-h-[90vh] overflow-hidden bg-slate-900">
     <div class="absolute inset-0 z-0">
-        <img src="https://res.cloudinary.com/dmqdm8gfk/image/upload/v1766046350/kilimanjaro-climbing_bvcs7p.jpg" alt="Kilimanjaro Summit" class="w-full h-full object-cover blur-sm opacity-40">
+        <img src="https://res.cloudinary.com/dqflffa1o/image/upload/v1777468788/Zeebraaa_cpydg9.jpg" alt="Kilimanjaro Summit" class="w-full h-full object-cover object-center blur-sm opacity-40">
         <div class="absolute inset-0 bg-gradient-to-b from-slate-900/60 via-slate-900 to-slate-900"></div>
     </div>
-    <div class="max-w-7xl mx-auto px-6 relative z-10 text-center">
-        <span class="inline-block px-4 py-1.5 bg-emerald-600/20 text-emerald-400 rounded-full text-xs font-bold tracking-widest uppercase mb-6 border border-emerald-600/30">Roof of Africa</span>
-        <h1 class="text-5xl md:text-7xl font-serif text-white mb-8 font-bold">Best Kilimanjaro Routes <br> <span class="text-emerald-500">for Every Climber</span></h1>
-        <p class="text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed">Discover the legendary paths to the summit of Mount Kilimanjaro. From the scenic Lemosho to the direct Umbwe, find your perfect ascent route.</p>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 text-center h-full flex items-center justify-center py-12 sm:py-16 md:py-20">
+        <div class="w-full">
+            <span class="inline-block px-4 py-1.5 bg-emerald-600/20 text-emerald-400 rounded-full text-xs font-bold tracking-widest uppercase mb-4 sm:mb-6 border border-emerald-600/30">Roof of Africa</span>
+            <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-serif text-white mb-4 sm:mb-6 lg:mb-8 font-bold leading-tight">Best Kilimanjaro Routes <br> <span class="text-emerald-500">for Every Climber</span></h1>
+            <p class="text-base sm:text-lg md:text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed px-4">Discover the legendary paths to the summit of Mount Kilimanjaro. From the scenic Lemosho to the direct Umbwe, find your perfect ascent route.</p>
+        </div>
     </div>
 </section>
 
@@ -53,9 +55,9 @@
                 <!-- Machame -->
                 <div x-show="activeRoute === 'machame'" x-transition:enter="transition ease-out duration-300" class="space-y-10">
                     <div class="relative rounded-[3rem] overflow-hidden h-80">
-                        <img src="https://res.cloudinary.com/dmqdm8gfk/image/upload/v1766042771/7-DAYS-SAFARI-TANZANIA--1536x1024_d9kzfh.webp" alt="Machame" class="w-full h-full object-cover">
+                        <img src="https://res.cloudinary.com/dqflffa1o/image/upload/v1777468788/Zeebraaa_cpydg9.jpg" alt="Machame" class="w-full h-full object-cover object-center">
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent"></div>
-                        <h2 class="absolute bottom-10 left-10 text-4xl font-serif text-white font-bold">Machame Route</h2>
+                        <h2 class="absolute bottom-10 left-10 text-2xl sm:text-3xl md:text-4xl font-serif text-white font-bold">Machame Route</h2>
                     </div>
                     <div class="prose prose-lg max-w-none text-slate-600">
                         <p class="text-xl leading-relaxed">Known as the <strong>'Whiskey Route,'</strong> Machame is popular for its scenic variety, traversing diverse landscapes from rainforest to alpine desert. It offers 6- or 7-day itineraries, with the longer option providing far better acclimatization.</p>
@@ -88,9 +90,9 @@
                 <!-- Lemosho -->
                 <div x-show="activeRoute === 'lemosho'" x-transition:enter="transition ease-out duration-300" class="space-y-10">
                     <div class="relative rounded-[3rem] overflow-hidden h-80">
-                        <img src="https://res.cloudinary.com/dmqdm8gfk/image/upload/v1766324377/7-Days-Mount-Kilimanjaro-Climb-Lemosho-Route-2.webp.bv.webp" alt="Lemosho" class="w-full h-full object-cover">
+                        <img src="https://res.cloudinary.com/dqflffa1o/image/upload/v1777468772/tiger-5167034_1920_leu8nd.jpg" alt="Lemosho" class="w-full h-full object-cover object-center">
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent"></div>
-                        <h2 class="absolute bottom-10 left-10 text-4xl font-serif text-white font-bold">Lemosho Route</h2>
+                        <h2 class="absolute bottom-10 left-10 text-2xl sm:text-3xl md:text-4xl font-serif text-white font-bold">Lemosho Route</h2>
                     </div>
                     <div class="prose prose-lg max-w-none text-slate-600">
                         <p class="text-xl leading-relaxed">Starting on the western slope, Lemosho is renowned for its panoramic views and <strong>excellent acclimatization</strong>. It offers 6- to 8-day treks, merging with the Machame route near Lava Tower.</p>
@@ -120,14 +122,39 @@
                     </div>
                 </div>
 
-                <!-- Placeholder for others to avoid bloat, but implementing structured for Marangu -->
+                <!-- Marangu -->
                 <div x-show="activeRoute === 'marangu'" x-transition:enter="transition ease-out duration-300" class="space-y-10">
                     <div class="relative rounded-[3rem] overflow-hidden h-80">
-                         <img src="https://res.cloudinary.com/dmqdm8gfk/image/upload/v1766324379/7-days-umbwe-route-600x300.webp.bv.webp" alt="Marangu" class="w-full h-full object-cover">
+                         <img src="https://res.cloudinary.com/dqflffa1o/image/upload/v1777468771/tanzania-2275107_1920_cmihwj.jpg" alt="Marangu" class="w-full h-full object-cover object-center">
                          <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent"></div>
-                         <h2 class="absolute bottom-10 left-10 text-4xl font-serif text-white font-bold">Marangu Route</h2>
+                         <h2 class="absolute bottom-10 left-10 text-2xl sm:text-3xl md:text-4xl font-serif text-white font-bold">Marangu Route</h2>
                     </div>
-                    <p class="text-xl text-slate-600 leading-relaxed italic">The "Coca-Cola" route is the only path providing hut accommodation. It follows a direct ascent and descent path.</p>
+                    <div class="prose prose-lg max-w-none text-slate-600">
+                        <p class="text-xl leading-relaxed">The <strong>"Coca-Cola" route</strong> is the only path providing hut accommodation. It follows a direct ascent and descent path, making it the most traditional and comfortable option.</p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 my-12">
+                            <div class="bg-emerald-50 p-8 rounded-3xl border border-emerald-100">
+                                <h4 class="text-emerald-700 font-bold mb-4 flex items-center gap-2 italic">
+                                    <i class="ph ph-check-circle text-2xl"></i> Pros
+                                </h4>
+                                <ul class="space-y-3 text-emerald-800 font-medium">
+                                    <li>Hut accommodation with beds and meals</li>
+                                    <li>Most comfortable route option</li>
+                                    <li>Shortest total duration (5-6 days)</li>
+                                </ul>
+                            </div>
+                            <div class="bg-orange-50 p-8 rounded-3xl border border-orange-100">
+                                <h4 class="text-orange-700 font-bold mb-4 flex items-center gap-2 italic">
+                                    <i class="ph ph-warning-circle text-2xl"></i> Cons
+                                </h4>
+                                <ul class="space-y-3 text-orange-800 font-medium">
+                                    <li>Lower summit success rate</li>
+                                    <li>Same path up and down (less scenic)</li>
+                                    <li>Can be very crowded</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -135,11 +162,11 @@
 </section>
 
 <!-- Group Climbs Calendar -->
-<section class="py-32 bg-slate-50 overflow-hidden">
-    <div class="max-w-7xl mx-auto px-6">
-        <div class="text-center mb-20">
+<section class="py-16 sm:py-20 md:py-32 bg-slate-50 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="text-center mb-12 sm:mb-16 md:mb-20">
             <span class="text-emerald-600 font-black text-xs uppercase tracking-[0.4em] mb-4 inline-block">Join the Expedition</span>
-            <h2 class="text-4xl md:text-5xl font-serif text-slate-900 font-bold mb-6 italic">Group Climbs: 2026–2027 Departures</h2>
+            <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif text-slate-900 font-bold mb-4 sm:mb-6 italic leading-tight">Group Climbs: 2026–2027 Departures</h2>
         </div>
 
         <!-- Month Filter (Simulated) -->
@@ -151,7 +178,7 @@
             @endforeach
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
             <!-- Departure Card 1 -->
             <div class="bg-white rounded-[2.5rem] p-8 shadow-sm hover:shadow-2xl transition-all duration-500 border border-slate-100 flex flex-col group">
                 <div class="flex items-start justify-between mb-8">
@@ -240,30 +267,30 @@
 </section>
 
 <!-- Choice Section (Private vs Group) -->
-<section class="py-32 bg-white">
-    <div class="max-w-7xl mx-auto px-6">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+<section class="py-16 sm:py-20 md:py-32 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10">
             <!-- Private -->
-            <div class="relative rounded-[3.5rem] overflow-hidden p-12 text-white group bg-slate-900 min-h-[500px] flex flex-col justify-end">
-                <img src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=800&q=80" alt="Private Climb" class="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:scale-105 transition-transform duration-1000">
+            <div class="relative rounded-[2rem] sm:rounded-[3rem] lg:rounded-[3.5rem] overflow-hidden p-6 sm:p-8 lg:p-12 text-white group bg-slate-900 min-h-[400px] sm:min-h-[500px] flex flex-col justify-end">
+                <img src="https://res.cloudinary.com/dqflffa1o/image/upload/v1777468772/Tarangire_ck2ohe.jpg" alt="Private Climb" class="absolute inset-0 w-full h-full object-cover object-center opacity-40 group-hover:scale-105 transition-transform duration-1000">
                 <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent"></div>
                 <div class="relative z-10">
-                    <h3 class="text-3xl font-serif font-bold mb-6 italic">Private Expeditions</h3>
-                    <p class="text-slate-300 mb-10 leading-relaxed font-medium">Choose a private Kilimanjaro climb if you want a fully customized experience. It’s just you, your family or friends, and our expert team — on your schedule, at your pace, with an itinerary tailored to your needs.</p>
-                    <a href="/contact" class="inline-flex items-center gap-3 px-10 py-4 bg-emerald-600 rounded-full font-bold shadow-xl shadow-emerald-600/30 hover:bg-emerald-700 transition-all">
+                    <h3 class="text-xl sm:text-2xl lg:text-3xl font-serif font-bold mb-4 sm:mb-6 italic">Private Expeditions</h3>
+                    <p class="text-slate-300 mb-6 sm:mb-8 lg:mb-10 leading-relaxed font-medium text-sm sm:text-base">Choose a private Kilimanjaro climb if you want a fully customized experience. It's just you, your family or friends, and our expert team — on your schedule, at your pace, with an itinerary tailored to your needs.</p>
+                    <a href="/contact" class="inline-flex items-center gap-3 px-6 sm:px-8 lg:px-10 py-3 sm:py-4 bg-emerald-600 rounded-full font-bold shadow-xl shadow-emerald-600/30 hover:bg-emerald-700 transition-all text-sm sm:text-base">
                         Customize My Climb <i class="ph ph-gear"></i>
                     </a>
                 </div>
             </div>
 
             <!-- Group -->
-            <div class="relative rounded-[3.5rem] overflow-hidden p-12 text-white group bg-emerald-950 min-h-[500px] flex flex-col justify-end">
-                <img src="http://res.cloudinary.com/dmqdm8gfk/image/upload/v1766042771/8-Days-Tanzania-holiday-Wildebeest-migration-1536x1018_gyndkw.jpg" alt="Group Climb" class="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:scale-105 transition-transform duration-1000">
+            <div class="relative rounded-[2rem] sm:rounded-[3rem] lg:rounded-[3.5rem] overflow-hidden p-6 sm:p-8 lg:p-12 text-white group bg-emerald-950 min-h-[400px] sm:min-h-[500px] flex flex-col justify-end">
+                <img src="https://res.cloudinary.com/dqflffa1o/image/upload/v1777468771/spphoto_skxxer.jpg" alt="Group Climb" class="absolute inset-0 w-full h-full object-cover object-center opacity-40 group-hover:scale-105 transition-transform duration-1000">
                 <div class="absolute inset-0 bg-gradient-to-t from-emerald-950 via-emerald-950/40 to-transparent"></div>
                 <div class="relative z-10">
-                    <h3 class="text-3xl font-serif font-bold mb-6 italic">Open-Group Climbs</h3>
-                    <p class="text-emerald-100 mb-10 leading-relaxed font-medium">Join one of our open-group climbs and share the adventure with fellow trekkers from around the world. Group climbs offer great camaraderie, team spirit, and the chance to connect with like-minded travelers.</p>
-                    <a href="/contact" class="inline-flex items-center gap-3 px-10 py-4 bg-white text-emerald-900 rounded-full font-bold shadow-xl hover:bg-emerald-50 transition-all">
+                    <h3 class="text-xl sm:text-2xl lg:text-3xl font-serif font-bold mb-4 sm:mb-6 italic">Open-Group Climbs</h3>
+                    <p class="text-emerald-100 mb-6 sm:mb-8 lg:mb-10 leading-relaxed font-medium text-sm sm:text-base">Join one of our open-group climbs and share the adventure with fellow trekkers from around the world. Group climbs offer great camaraderie, team spirit, and the chance to connect with like-minded travelers.</p>
+                    <a href="/contact" class="inline-flex items-center gap-3 px-6 sm:px-8 lg:px-10 py-3 sm:py-4 bg-white text-emerald-900 rounded-full font-bold shadow-xl hover:bg-emerald-50 transition-all text-sm sm:text-base">
                         Join an Open Group <i class="ph ph-users"></i>
                     </a>
                 </div>
@@ -273,14 +300,14 @@
 </section>
 
 <!-- Why Choose Us / CTA -->
-<section class="py-32 bg-slate-950 text-white relative overflow-hidden">
+<section class="py-16 sm:py-20 md:py-32 bg-slate-950 text-white relative overflow-hidden">
     <div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-emerald-500/10 rounded-full blur-[120px] animate-pulse"></div>
-    <div class="max-w-7xl mx-auto px-6 relative z-10">
-        <div class="flex flex-col lg:flex-row items-center gap-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+        <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
             <div class="lg:w-1/2">
-                <span class="text-emerald-500 font-black text-xs uppercase tracking-[0.4em] mb-6 block">Unmatched Standards</span>
-                <h2 class="text-5xl font-serif font-bold mb-8 italic">52 Reasons to choose <br> <span class="text-emerald-500">LAU Paradise</span></h2>
-                <p class="text-xl text-slate-400 mb-12 leading-relaxed">Discover what makes us the most trusted and well-prepared Kilimanjaro operator — from safety and training to every detail on the mountain.</p>
+                <span class="text-emerald-500 font-black text-xs uppercase tracking-[0.4em] mb-4 sm:mb-6 block">Unmatched Standards</span>
+                <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif font-bold mb-4 sm:mb-6 lg:mb-8 italic leading-tight">52 Reasons to choose <br> <span class="text-emerald-500">Reputable Tours</span></h2>
+                <p class="text-base sm:text-lg md:text-xl text-slate-400 mb-8 sm:mb-12 leading-relaxed">Discover what makes us the most trusted and well-prepared Kilimanjaro operator — from safety and training to every detail on the mountain.</p>
                 <div class="grid grid-cols-2 gap-8 mb-12 border-l border-emerald-500/30 pl-8">
                     <div>
                         <h4 class="text-3xl font-bold mb-2">99%</h4>
@@ -296,8 +323,8 @@
                 </a>
             </div>
             <div class="lg:w-1/2 relative">
-                <div class="rounded-[4rem] overflow-hidden border border-white/10 shadow-2xl rotate-2 hover:rotate-0 transition-transform duration-700">
-                    <img src="https://res.cloudinary.com/dmqdm8gfk/image/upload/v1766046350/kilimanjaro-climbing_bvcs7p.jpg" alt="Climber on Kilimanjaro" class="w-full h-full object-cover">
+                <div class="rounded-[2rem] sm:rounded-[3rem] lg:rounded-[4rem] overflow-hidden border border-white/10 shadow-2xl rotate-2 hover:rotate-0 transition-transform duration-700">
+                    <img src="https://res.cloudinary.com/dqflffa1o/image/upload/v1777468788/Zeebraaa_cpydg9.jpg" alt="Climber on Kilimanjaro" class="w-full h-full object-cover object-center">
                 </div>
                 <!-- Mini Stats Overlay -->
                 <div class="absolute -bottom-10 -left-10 bg-white p-8 rounded-[2rem] shadow-2xl text-slate-900 flex items-center gap-6 -rotate-3">

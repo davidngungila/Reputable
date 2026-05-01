@@ -4,13 +4,13 @@
 
 @section('content')
 <!-- Hero Section -->
-<section class="relative h-96 bg-cover bg-center" style="background-image: url('https://res.cloudinary.com/dqflffa1o/image/upload/v1777468771/tanzania-4149975_1920_j8h9ka.jpg');">
+<section class="relative min-h-[60vh] sm:min-h-[70vh] md:min-h-[80vh] lg:min-h-[90vh] bg-cover bg-center" style="background-image: url('https://res.cloudinary.com/dqflffa1o/image/upload/v1777468788/Zeebraaa_cpydg9.jpg');">
     <div class="absolute inset-0 bg-black bg-opacity-50"></div>
-    <div class="relative container mx-auto px-4 h-full flex items-center">
-        <div class="text-white">
-            <h1 class="text-5xl font-bold mb-4">Northern Circuit</h1>
-            <p class="text-xl mb-6">Tanzania's Premier Safari Destination</p>
-            <p class="max-w-2xl">Experience the world-famous wildlife destinations including Serengeti, Ngorongoro Crater, and Mount Kilimanjaro</p>
+    <div class="relative container mx-auto px-4 sm:px-6 h-full flex items-center py-12 sm:py-16 md:py-20">
+        <div class="text-white max-w-4xl">
+            <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 leading-tight">Northern Circuit</h1>
+            <p class="text-lg sm:text-xl md:text-2xl mb-4 sm:mb-6">Tanzania's Premier Safari Destination</p>
+            <p class="text-base sm:text-lg md:text-xl max-w-3xl">Experience the world-famous wildlife destinations including Serengeti, Ngorongoro Crater, and Mount Kilimanjaro</p>
         </div>
     </div>
 </section>

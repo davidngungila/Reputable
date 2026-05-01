@@ -90,7 +90,7 @@ class BookingController extends Controller
         ]);
 
         try {
-            (new BookingNotificationService())->sendBookingCreated(
+            $emailSuccess = (new BookingNotificationService())->sendBookingCreated(
                 $booking,
                 [
                     'account_created' => $accountCreated,
@@ -98,10 +98,23 @@ class BookingController extends Controller
                     'account_password' => $defaultPassword,
                 ]
             );
+
+            if ($emailSuccess) {
+                Log::info('All booking notifications sent successfully', [
+                    'booking_id' => $booking->id,
+                    'customer_email' => $validated['customer_email']
+                ]);
+            } else {
+                Log::warning('Some booking notifications failed', [
+                    'booking_id' => $booking->id,
+                    'customer_email' => $validated['customer_email']
+                ]);
+            }
         } catch (\Throwable $e) {
-            Log::warning('Booking created notification failed', [
+            Log::error('Booking notification system failed', [
                 'booking_id' => $booking->id,
                 'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString()
             ]);
         }
 

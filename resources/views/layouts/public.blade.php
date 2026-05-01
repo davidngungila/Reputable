@@ -16,6 +16,7 @@
     
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
@@ -77,6 +78,63 @@
             background-size: 200% 100%;
             animation: borderSlide 3s infinite linear;
         }
+        
+        /* Mobile Menu - Force display on mobile screens */
+        @media (max-width: 1023px) {
+            .mobile-menu-button {
+                display: flex !important;
+                position: relative !important;
+                z-index: 9999 !important;
+                opacity: 1 !important;
+                visibility: visible !important;
+                width: 3rem !important;
+                height: 3rem !important;
+            }
+        }
+        
+        /* Hide mobile menu on desktop screens */
+        @media (min-width: 1024px) {
+            .mobile-menu-button {
+                display: none !important;
+            }
+        }
+        
+        /* Extra small screens optimization */
+        @media (max-width: 640px) {
+            .mobile-menu-button {
+                width: 2.5rem !important;
+                height: 2.5rem !important;
+            }
+            .mobile-menu-button svg {
+                width: 1.25rem !important;
+                height: 1.25rem !important;
+            }
+        }
+        
+        /* Force mobile menu to be visible - highest specificity */
+        @media screen and (max-width: 1023px) {
+            button.mobile-menu-button {
+                display: flex !important;
+                visibility: visible !important;
+                opacity: 1 !important;
+            }
+            button.emergency-mobile-menu {
+                display: flex !important;
+                visibility: visible !important;
+                opacity: 1 !important;
+            }
+        }
+        
+        /* Emergency mobile menu - always show on small screens */
+        @media screen and (max-width: 768px) {
+            .emergency-mobile-menu {
+                display: flex !important;
+                position: fixed !important;
+                top: 1rem !important;
+                right: 1rem !important;
+                z-index: 99999 !important;
+            }
+        }
     </style>
 </head>
 <body class="bg-white text-slate-900 antialiased font-medium" x-data="{ mobileMenuOpen: false }">
@@ -101,28 +159,28 @@
                             <div>
                                 <h4 class="text-xs font-black uppercase tracking-widest text-emerald-600 mb-6">Mainland Circuits</h4>
                                 <div class="space-y-3">
-                                    <a href="{{ route('destinations') }}?region=Northern+Circuit" class="flex items-center gap-3 group/item p-3 rounded-xl text-emerald-600 hover:bg-emerald-50 transition-all">
+                                    <a href="/destinations/Northern-Circuit" class="flex items-center gap-3 group/item p-3 rounded-xl text-emerald-600 hover:bg-emerald-50 transition-all">
                                         <i class="ph ph-compass text-xl opacity-50 text-emerald-600"></i>
                                         <div>
                                             <p class="font-bold text-slate-900">Northern Circuit</p>
                                             <p class="text-xs text-slate-500">Serengeti, Ngorongoro, Kilimanjaro</p>
                                         </div>
                                     </a>
-                                    <a href="{{ route('destinations') }}?region=Southern+Circuit" class="flex items-center gap-3 group/item p-3 rounded-xl text-emerald-600 hover:bg-emerald-50 transition-all">
+                                    <a href="/destinations/Southern-Circuit" class="flex items-center gap-3 group/item p-3 rounded-xl text-emerald-600 hover:bg-emerald-50 transition-all">
                                         <i class="ph ph-compass text-xl opacity-50 text-emerald-600"></i>
                                         <div>
                                             <p class="font-bold text-slate-900">Southern Circuit</p>
                                             <p class="text-xs text-slate-500">Selous, Ruaha, Mikumi</p>
                                         </div>
                                     </a>
-                                    <a href="{{ route('destinations') }}?region=Eastern+Circuit" class="flex items-center gap-3 group/item p-3 rounded-xl text-emerald-600 hover:bg-emerald-50 transition-all">
+                                    <a href="/destinations/Eastern-Circuit" class="flex items-center gap-3 group/item p-3 rounded-xl text-emerald-600 hover:bg-emerald-50 transition-all">
                                         <i class="ph ph-compass text-xl opacity-50 text-emerald-600"></i>
                                         <div>
                                             <p class="font-bold text-slate-900">Eastern Circuit</p>
                                             <p class="text-xs text-slate-500">Udzungwa, Uluguru Mountains</p>
                                         </div>
                                     </a>
-                                    <a href="{{ route('destinations') }}?region=Western+Circuit" class="flex items-center gap-3 group/item p-3 rounded-xl text-emerald-600 hover:bg-emerald-50 transition-all">
+                                    <a href="/destinations/Western-Circuit" class="flex items-center gap-3 group/item p-3 rounded-xl text-emerald-600 hover:bg-emerald-50 transition-all">
                                         <i class="ph ph-compass text-xl opacity-50 text-emerald-600"></i>
                                         <div>
                                             <p class="font-bold text-slate-900">Western Circuit</p>
@@ -134,21 +192,21 @@
                             <div>
                                 <h4 class="text-xs font-black uppercase tracking-widest text-emerald-600 mb-6">Ocean Islands</h4>
                                 <div class="space-y-3">
-                                    <a href="{{ route('destinations') }}?region=Ocean+Islands" class="flex items-center gap-3 group/item p-3 rounded-xl text-emerald-600 hover:bg-emerald-50 transition-all">
+                                    <a href="/destinations/Ocean-Islands" class="flex items-center gap-3 group/item p-3 rounded-xl text-emerald-600 hover:bg-emerald-50 transition-all">
                                         <i class="ph ph-island text-xl opacity-50 text-emerald-600"></i>
                                         <div>
                                             <p class="font-bold text-slate-900">Ocean Islands</p>
                                             <p class="text-xs text-slate-500">Pemba, Mafia, Other Islands</p>
                                         </div>
                                     </a>
-                                    <a href="{{ route('destinations') }}?region=Mafia+Island" class="flex items-center gap-3 group/item p-3 rounded-xl text-emerald-600 hover:bg-emerald-50 transition-all">
+                                    <a href="/destinations/Mafia-Island" class="flex items-center gap-3 group/item p-3 rounded-xl text-emerald-600 hover:bg-emerald-50 transition-all">
                                         <i class="ph ph-island text-xl opacity-50 text-emerald-600"></i>
                                         <div>
                                             <p class="font-bold text-slate-900">Mafia Island</p>
                                             <p class="text-xs text-slate-500">Marine Parks & Diving</p>
                                         </div>
                                     </a>
-                                    <a href="{{ route('destinations') }}?region=Zanzibar+Island" class="flex items-center gap-3 group/item p-3 rounded-xl text-emerald-600 hover:bg-emerald-50 transition-all">
+                                    <a href="/destinations/Zanzibar-Island" class="flex items-center gap-3 group/item p-3 rounded-xl text-emerald-600 hover:bg-emerald-50 transition-all">
                                         <i class="ph ph-island text-xl opacity-50 text-emerald-600"></i>
                                         <div>
                                             <p class="font-bold text-slate-900">Zanzibar Island</p>
@@ -245,7 +303,7 @@
                             <div>
                                 <h4 class="text-xs font-black uppercase tracking-widest text-emerald-600 mb-6">Mountain Treks</h4>
                                 <div class="space-y-4">
-                                    <a href="/mountain-trekking" class="flex items-center gap-4 group/item p-3 rounded-2xl text-emerald-600 transition-all">
+                                    <a href="/kilimanjaro" class="flex items-center gap-4 group/item p-3 rounded-2xl text-emerald-600 transition-all">
                                         <div class="w-12 h-12 rounded-xl overflow-hidden">
                                             <img src="{{ asset('images/03.jpg') }}" class="w-full h-full object-cover">
                                         </div>
@@ -254,7 +312,7 @@
                                             <p class="text-xs text-slate-500">Roof of Africa</p>
                                         </div>
                                     </a>
-                                    <a href="/mountain-trekking" class="flex items-center gap-4 group/item p-3 rounded-2xl text-emerald-600 transition-all">
+                                    <a href="/regions/ngorongoro" class="flex items-center gap-4 group/item p-3 rounded-2xl text-emerald-600 transition-all">
                                         <div class="w-12 h-12 rounded-xl overflow-hidden">
                                             <img src="{{ asset('images/05.jpg') }}" class="w-full h-full object-cover">
                                         </div>
@@ -353,8 +411,20 @@
             
             <div class="flex items-center gap-4">
                 <!-- Mobile Toggle -->
-                <button @click="mobileMenuOpen = true" class="lg:hidden flex items-center justify-center w-12 h-12 bg-slate-50 text-slate-900 rounded-2xl hover:bg-emerald-600 hover:text-white transition-all">
-                    <i class="ph ph-list text-2xl"></i>
+                <button @click="mobileMenuOpen = true" class="mobile-menu-button flex items-center justify-center w-12 h-12 bg-emerald-600 text-white rounded-2xl hover:bg-emerald-700 transition-all shadow-lg shadow-emerald-600/20" style="display: none;">
+                    <!-- Fallback SVG Hamburger Icon -->
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                    <!-- Phosphor Icon as backup -->
+                    <i class="ph ph-list text-2xl hidden"></i>
+                </button>
+                
+                <!-- Emergency Mobile Menu Button - Always visible on mobile -->
+                <button @click="mobileMenuOpen = true" class="emergency-mobile-menu flex items-center justify-center w-12 h-12 bg-red-600 text-white rounded-2xl hover:bg-red-700 transition-all shadow-lg shadow-red-600/20 lg:hidden" style="display: none;">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
                 </button>
               
                 <a href="/tours" class="hidden md:inline-flex items-center gap-2 text-sm font-semibold text-white bg-emerald-600 px-6 py-2.5 rounded-full hover:bg-emerald-700 shadow-lg shadow-emerald-600/20 transition-all">
@@ -412,11 +482,16 @@
                             Destinations <i class="ph ph-caret-down text-lg transition-transform" :class="open ? 'rotate-180' : ''"></i>
                         </button>
                         <div x-show="open" x-collapse class="pl-4 mt-4 space-y-4">
-                            <a href="{{ route('regions.serengeti') }}" class="block text-sm font-bold text-slate-500 text-emerald-600">Serengeti NP</a>
-                            <a href="{{ route('regions.ngorongoro') }}" class="block text-sm font-bold text-slate-500 text-emerald-600">Ngorongoro Crater</a>
-                            <a href="{{ route('regions.zanzibar') }}" class="block text-sm font-bold text-slate-500 text-emerald-600">Zanzibar</a>
-                            <a href="{{ route('regions.tarangire') }}" class="block text-sm font-bold text-slate-500 text-emerald-600">Tarangire</a>
-                            <a href="{{ route('kilimanjaro') }}" class="block text-sm font-bold text-slate-500 text-emerald-600">Kilimanjaro Treks</a>
+                            <a href="{{ route('destinations') }}" class="block text-sm font-bold text-emerald-600">All Destinations</a>
+                            <div class="pl-4 mt-2 space-y-2">
+                                <a href="/destinations/Northern-Circuit" class="block text-sm font-bold text-slate-500 hover:text-emerald-600">Northern Circuit</a>
+                                <a href="/destinations/Southern-Circuit" class="block text-sm font-bold text-slate-500 hover:text-emerald-600">Southern Circuit</a>
+                                <a href="/destinations/Eastern-Circuit" class="block text-sm font-bold text-slate-500 hover:text-emerald-600">Eastern Circuit</a>
+                                <a href="/destinations/Western-Circuit" class="block text-sm font-bold text-slate-500 hover:text-emerald-600">Western Circuit</a>
+                                <a href="/destinations/Ocean-Islands" class="block text-sm font-bold text-slate-500 hover:text-emerald-600">Ocean Islands</a>
+                                <a href="/destinations/Mafia-Island" class="block text-sm font-bold text-slate-500 hover:text-emerald-600">Mafia Island</a>
+                                <a href="/destinations/Zanzibar-Island" class="block text-sm font-bold text-slate-500 hover:text-emerald-600">Zanzibar Island</a>
+                            </div>
                         </div>
                     </div>
 

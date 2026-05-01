@@ -4,7 +4,7 @@
 
 @section('content')
 <!-- Hero Section -->
-<section class="relative h-96 bg-cover bg-center" style="background-image: url('https://res.cloudinary.com/dqflffa1o/image/upload/v1777468771/tanzania-4149975_1920_j8h9ka.jpg');">
+<section class="relative h-96 bg-cover bg-center" style="background-image: url('https://res.cloudinary.com/dqflffa1o/image/upload/v1777468788/Zeebraaa_cpydg9.jpg');">
     <div class="absolute inset-0 bg-black bg-opacity-50"></div>
     <div class="relative container mx-auto px-4 h-full flex items-center">
         <div class="text-white">

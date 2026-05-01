@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $title ?? "Booking Created - Reputable Tours" }}</title>
+    <title>Booking Confirmation - Reputable Tours</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         body { margin: 0; padding: 0; background-color: #f0f4f8; font-family: "Poppins", sans-serif; color: #333; line-height: 1.6; }
@@ -52,44 +52,158 @@
             <div class="sub-title">NSSF Commercial Complex, Moshi - Your Gateway to Tanzanian Adventures</div>
         </div>
         <div class="content">
-            <p class="greeting">Dear {{ $name ?? "Mteja" }},</p>
-            <p style="font-size: 14px; color: #4a5568;">{{ $message ?? "We are sending this message from Reputable Tours for booking confirmation." }}</p>
+            <div style="background-color:#f8fafc;border-radius:8px;padding:24px;margin-bottom:20px;border:1px solid #e2e8f0;">
+                <div style="text-align:center;margin-bottom:24px;">
+                    <div style="display:inline-block;background-color:#EA6D24;color:white;padding:8px 16px;border-radius:50px;font-weight:700;font-size:14px;letter-spacing:0.5px;text-transform:uppercase;">
+                        BOOKING CONFIRMED
+                    </div>
+                </div>
 
-            <div class="card">
-                <div class="card-header">
-                    <span class="icon">📧</span>
-                    <h4>{{ $title ?? "Booking Confirmation" }}</h4>
+                <div style="background-color:#ffffff;border-radius:8px;padding:24px;margin-bottom:20px;border-left:4px solid #054422;">
+                    <div style="font-family:'Segoe UI',Arial,Helvetica,sans-serif;font-size:16px;line-height:24px;color:#1e293b;margin-bottom:16px;">
+                        Dear <strong>{{ $booking->customer_name }}</strong>,
+                    </div>
+                    
+                    <div style="font-family:'Segoe UI',Arial,Helvetica,sans-serif;font-size:16px;line-height:24px;color:#475569;margin-bottom:20px;">
+                        Thank you for choosing <strong style="color:#054422;">Reputable Tours</strong> for your Tanzania safari adventure! We are delighted to confirm your booking and look forward to providing you with an unforgettable experience.
+                    </div>
+
+                    <div style="background-color:#f8fafc;border-radius:6px;padding:16px;margin-bottom:20px;">
+                        <div style="font-family:'Segoe UI',Arial,Helvetica,sans-serif;font-size:14px;font-weight:600;color:#054422;margin-bottom:8px;">
+                            BOOKING DETAILS
+                        </div>
+                        
+                        <table style="width:100%;border-collapse:collapse;">
+                            <tr>
+                                <td style="padding:8px 0;font-family:'Segoe UI',Arial,Helvetica,sans-serif;font-size:14px;color:#64748b;font-weight:500;">Booking Reference:</td>
+                                <td style="padding:8px 0;font-family:'Segoe UI',Arial,Helvetica,sans-serif;font-size:14px;color:#1e293b;font-weight:600;">BK-{{ str_pad($booking->id, 5, '0', STR_PAD_LEFT) }}</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:8px 0;font-family:'Segoe UI',Arial,Helvetica,sans-serif;font-size:14px;color:#64748b;font-weight:500;">Tour Package:</td>
+                                <td style="padding:8px 0;font-family:'Segoe UI',Arial,Helvetica,sans-serif;font-size:14px;color:#1e293b;font-weight:600;">{{ $booking->tour->name ?? 'Safari Package' }}</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:8px 0;font-family:'Segoe UI',Arial,Helvetica,sans-serif;font-size:14px;color:#64748b;font-weight:500;">Start Date:</td>
+                                <td style="padding:8px 0;font-family:'Segoe UI',Arial,Helvetica,sans-serif;font-size:14px;color:#1e293b;font-weight:600;">{{ $booking->start_date->format('F j, Y') }}</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:8px 0;font-family:'Segoe UI',Arial,Helvetica,sans-serif;font-size:14px;color:#64748b;font-weight:500;">Number of Guests:</td>
+                                <td style="padding:8px 0;font-family:'Segoe UI',Arial,Helvetica,sans-serif;font-size:14px;color:#1e293b;font-weight:600;">
+                                    {{ $booking->adults }} Adult{{ $booking->adults > 1 ? 's' : '' }}
+                                    @if($booking->children > 0)
+                                        and {{ $booking->children }} Child{{ $booking->children > 1 ? 'ren' : '' }}
+                                    @endif
+                                </td>
+                            </tr>
+                            @if(!empty($booking->special_requests))
+                            <tr>
+                                <td style="padding:8px 0;font-family:'Segoe UI',Arial,Helvetica,sans-serif;font-size:14px;color:#64748b;font-weight:500;vertical-align:top;">Special Requests:</td>
+                                <td style="padding:8px 0;font-family:'Segoe UI',Arial,Helvetica,sans-serif;font-size:14px;color:#1e293b;font-weight:600;">{{ $booking->special_requests }}</td>
+                            </tr>
+                            @endif
+                        </table>
+                    </div>
+
+                    <div style="background-color:#f8fafc;border-radius:6px;padding:16px;margin-bottom:20px;">
+                        <div style="font-family:'Segoe UI',Arial,Helvetica,sans-serif;font-size:14px;font-weight:600;color:#054422;margin-bottom:12px;">
+                            PAYMENT SUMMARY
+                        </div>
+                        
+                        <table style="width:100%;border-collapse:collapse;">
+                            <tr>
+                                <td style="padding:8px 0;font-family:'Segoe UI',Arial,Helvetica,sans-serif;font-size:14px;color:#64748b;font-weight:500;">Total Amount:</td>
+                                <td style="padding:8px 0;font-family:'Segoe UI',Arial,Helvetica,sans-serif;font-size:14px;color:#1e293b;font-weight:600;">${{ number_format($booking->total_price, 2) }}</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:8px 0;font-family:'Segoe UI',Arial,Helvetica,sans-serif;font-size:14px;color:#64748b;font-weight:500;">Deposit Required:</td>
+                                <td style="padding:8px 0;font-family:'Segoe UI',Arial,Helvetica,sans-serif;font-size:14px;color:#EA6D24;font-weight:600;">${{ number_format($booking->deposit_amount, 2) }} (30%)</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:8px 0;font-family:'Segoe UI',Arial,Helvetica,sans-serif;font-size:14px;color:#64748b;font-weight:500;">Balance Due:</td>
+                                <td style="padding:8px 0;font-family:'Segoe UI',Arial,Helvetica,sans-serif;font-size:14px;color:#1e293b;font-weight:600;">${{ number_format($booking->balance_amount, 2) }}</td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
-                <p style="font-size: 14px; color: #4a5568;">This is a system email from Reputable Tours inayotumia muundo wa FeedTan CMG.</p>
-                
-                @isset($content)
-                <div style="margin-top: 15px;">
-                    {!! $content !!}
+
+                <div style="text-align:center;margin:24px 0;">
+                    <a href="{{ $payment_url ?? '#' }}" style="display:inline-block;background-color:#054422;color:white;padding:16px 32px;border-radius:6px;text-decoration:none;font-weight:600;font-size:16px;font-family:'Segoe UI',Arial,Helvetica,sans-serif;">
+                        Complete Payment & View Details
+                    </a>
                 </div>
-                @endisset
-                
-                @isset($actionUrl)
-                <div class="button-container">
-                    <a href="{{ $actionUrl }}" class="invest-button">{{ $actionText ?? "Endelea" }}</a>
+
+                @if($account_created ?? false)
+                <div style="background-color:#fff7ed;border:1px solid #fbbf24;border-radius:8px;padding:20px;margin-bottom:20px;">
+                    <div style="font-family:'Segoe UI',Arial,Helvetica,sans-serif;font-size:14px;font-weight:600;color:#92400e;margin-bottom:8px;">
+                        🎉 YOUR ACCOUNT HAS BEEN CREATED
+                    </div>
+                    <div style="font-family:'Segoe UI',Arial,Helvetica,sans-serif;font-size:14px;line-height:20px;color:#475569;">
+                        We've automatically created a customer account for you to manage your bookings and access exclusive features.
+                    </div>
+                    <table style="width:100%;border-collapse:collapse;margin-top:12px;">
+                        <tr>
+                            <td style="padding:4px 0;font-family:'Segoe UI',Arial,Helvetica,sans-serif;font-size:14px;color:#64748b;font-weight:500;">Email:</td>
+                            <td style="padding:4px 0;font-family:'Segoe UI',Arial,Helvetica,sans-serif;font-size:14px;color:#1e293b;font-weight:600;">{{ $account_email ?? $booking->customer_email }}</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:4px 0;font-family:'Segoe UI',Arial,Helvetica,sans-serif;font-size:14px;color:#64748b;font-weight:500;">Password:</td>
+                            <td style="padding:4px 0;font-family:'Segoe UI',Arial,Helvetica,sans-serif;font-size:14px;color:#1e293b;font-weight:600;">{{ $account_password ?? 'Set during first login' }}</td>
+                        </tr>
+                    </table>
+                    <div style="text-align:center;margin-top:16px;">
+                        <a href="{{ $login_url ?? route('login') }}" style="display:inline-block;background-color:#EA6D24;color:white;padding:12px 24px;border-radius:6px;text-decoration:none;font-weight:600;font-size:14px;font-family:'Segoe UI',Arial,Helvetica,sans-serif;">
+                            Access Your Account
+                        </a>
+                    </div>
                 </div>
-                @endisset
+                @endif
+
+                <div style="background-color:#f0f9ff;border:1px solid #dbeafe;border-radius:8px;padding:20px;">
+                    <div style="font-family:'Segoe UI',Arial,Helvetica,sans-serif;font-size:14px;font-weight:600;color:#1e40af;margin-bottom:8px;">
+                        📋 IMPORTANT INFORMATION
+                    </div>
+                    <ul style="font-family:'Segoe UI',Arial,Helvetica,sans-serif;font-size:14px;line-height:20px;color:#475569;margin:0;padding-left:20px;">
+                        <li style="margin-bottom:8px;">Please review your booking details carefully and contact us immediately if any corrections are needed.</li>
+                        <li style="margin-bottom:8px;">A 30% deposit is required to secure your booking with the balance due 60 days before travel.</li>
+                        <li style="margin-bottom:8px;">Your detailed invoice is attached to this email for your records.</li>
+                        <li style="margin-bottom:8px;">We recommend travel insurance for comprehensive coverage during your safari.</li>
+                    </ul>
+                </div>
             </div>
 
-            <div class="special-section">
-                <h4><span class="icon">💡</span> Important Information</h4>
-                <p>Barua pepe hii imetumwa kiotomatiki kutoka kwa mfumo wa Reputable Tours. If this is an error, please ignore this email.</p>
+            <div style="background-color:#ffffff;border-radius:8px;padding:24px;margin-bottom:20px;">
+                <div style="font-family:'Segoe UI',Arial,Helvetica,sans-serif;font-size:14px;font-weight:600;color:#054422;margin-bottom:12px;">
+                    🌍 WHAT HAPPENS NEXT?
+                </div>
+                <div style="font-family:'Segoe UI',Arial,Helvetica,sans-serif;font-size:14px;line-height:20px;color:#475569;margin-bottom:16px;">
+                    <strong>1. Payment Confirmation:</strong> Once your deposit is processed, you'll receive a payment confirmation email with receipt.
+                </div>
+                <div style="font-family:'Segoe UI',Arial,Helvetica,sans-serif;font-size:14px;line-height:20px;color:#475569;margin-bottom:16px;">
+                    <strong>2. Travel Preparation:</strong> Our team will contact you 7 days before your safari to finalize arrangements and answer any questions.
+                </div>
+                <div style="font-family:'Segoe UI',Arial,Helvetica,sans-serif;font-size:14px;line-height:20px;color:#475569;margin-bottom:16px;">
+                    <strong>3. Safari Experience:</strong> Your professional guide and driver will meet you at the agreed location for an incredible Tanzania adventure.
+                </div>
             </div>
 
-            <div class="savings-tips" style="margin-top: 25px; background-color: #f7fafc; padding: 15px; border-left: 5px solid #38a169; border-radius: 10px;">
-                <h4 style="color: #2f855a; margin-bottom: 10px;">🌍 About Reputable Tours</h4>
-                <p style="font-size: 14px; color: #4a5568;">We are committed to providing excellent tourism services in Tanzania, ensuring you get an unforgettable experience.</p>
-            </div>
-            
-            <p style="font-size: 14px; color: #4a5568;">Thank you kwa kuwa sehemu ya familia ya Reputable Tours!</p>
-
-            <div class="signature">
-                <p>Thank you,<br><strong>Reputable Tours Team</strong></p>
-                <p style="font-weight: 600; color: #006400;">Let's Explore Together! 🌍</p>
+            <div style="background-color:#f8fafc;border-radius:8px;padding:24px;text-align:center;">
+                <div style="font-family:'Segoe UI',Arial,Helvetica,sans-serif;font-size:16px;line-height:24px;color:#054422;margin-bottom:16px;">
+                    <strong>Have Questions?</strong>
+                </div>
+                <div style="font-family:'Segoe UI',Arial,Helvetica,sans-serif;font-size:14px;line-height:20px;color:#475569;margin-bottom:20px;">
+                    Our dedicated customer service team is here to assist you every step of the way.
+                </div>
+                <div style="font-family:'Segoe UI',Arial,Helvetica,sans-serif;font-size:14px;line-height:20px;color:#475569;">
+                    <strong>Customer Support:</strong><br>
+                    📧 Email: <a href="mailto:info@reputabletours.com" style="color:#054422;text-decoration:none;font-weight:500;">info@reputabletours.com</a><br>
+                    📱 Phone/WhatsApp: <a href="tel:+255675255523" style="color:#054422;text-decoration:none;font-weight:500;">+255 675 255 523</a><br>
+                    🌐 Website: <a href="{{ config('app.url') }}" style="color:#054422;text-decoration:none;font-weight:500;">{{ config('app.url') }}</a>
+                </div>
+                <div style="margin-top:20px;">
+                    <a href="{{ config('app.url') }}/contact" style="display:inline-block;background-color:#EA6D24;color:white;padding:12px 24px;border-radius:6px;text-decoration:none;font-weight:600;font-size:14px;font-family:'Segoe UI',Arial,Helvetica,sans-serif;">
+                        Contact Our Team
+                    </a>
+                </div>
             </div>
         </div>
         <div class="footer">

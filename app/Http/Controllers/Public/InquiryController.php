@@ -27,7 +27,11 @@ class InquiryController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
             'phone' => 'nullable|string|max:20',
+            'nationality' => 'nullable|string|max:100',
             'tour_id' => 'nullable|exists:tours,id',
+            'travel_date' => 'nullable|date',
+            'duration' => 'nullable|string|max:20',
+            'group_size' => 'nullable|string|max:20',
             'message' => 'required|string|max:2000',
         ]);
 
@@ -35,7 +39,11 @@ class InquiryController extends Controller
             'name' => $validated['name'],
             'email' => $validated['email'],
             'phone' => $validated['phone'] ?? null,
+            'nationality' => $validated['nationality'] ?? null,
             'tour_id' => $validated['tour_id'] ?? null,
+            'travel_date' => $validated['travel_date'] ?? null,
+            'duration' => $validated['duration'] ?? null,
+            'group_size' => $validated['group_size'] ?? null,
             'message' => $validated['message'],
             'status' => 'pending',
         ]);
@@ -43,6 +51,7 @@ class InquiryController extends Controller
         // Send emails to admin addresses
         try {
             $notificationService = new NotificationService();
+            $emailSuccess = true;
             
             // Send to customer
             $customerSubject = 'Inquiry Received - Reputable Tours';
@@ -55,7 +64,19 @@ class InquiryController extends Controller
                 'support_email' => 'info@reputabletours.com',
             ])->render();
             
-            $notificationService->sendEmail($inquiry->email, $customerSubject, $customerHtml);
+            $customerSent = $notificationService->sendEmail($inquiry->email, $customerSubject, $customerHtml);
+            if ($customerSent) {
+                Log::info('Customer inquiry email sent successfully', [
+                    'inquiry_id' => $inquiry->id,
+                    'customer_email' => $inquiry->email
+                ]);
+            } else {
+                Log::error('Failed to send customer inquiry email', [
+                    'inquiry_id' => $inquiry->id,
+                    'customer_email' => $inquiry->email
+                ]);
+                $emailSuccess = false;
+            }
             
             // Send to admin emails
             $adminSubject = 'New Inquiry Alert - ' . $inquiry->name;
@@ -70,13 +91,38 @@ class InquiryController extends Controller
             
             $adminEmails = ['raphaeleliac@gmail.com', 'davidngungila@gmail.com', 'info@reputabletours.com'];
             foreach ($adminEmails as $adminEmail) {
-                $notificationService->sendEmail($adminEmail, $adminSubject, $adminHtml);
+                $adminSent = $notificationService->sendEmail($adminEmail, $adminSubject, $adminHtml);
+                if ($adminSent) {
+                    Log::info('Admin inquiry email sent successfully', [
+                        'inquiry_id' => $inquiry->id,
+                        'admin_email' => $adminEmail
+                    ]);
+                } else {
+                    Log::error('Failed to send admin inquiry email', [
+                        'inquiry_id' => $inquiry->id,
+                        'admin_email' => $adminEmail
+                    ]);
+                    $emailSuccess = false;
+                }
+            }
+
+            if ($emailSuccess) {
+                Log::info('All inquiry notifications sent successfully', [
+                    'inquiry_id' => $inquiry->id,
+                    'customer_email' => $inquiry->email
+                ]);
+            } else {
+                Log::warning('Some inquiry notifications failed', [
+                    'inquiry_id' => $inquiry->id,
+                    'customer_email' => $inquiry->email
+                ]);
             }
             
         } catch (\Throwable $e) {
-            Log::warning('Inquiry email notification failed', [
+            Log::error('Inquiry email notification system failed', [
                 'inquiry_id' => $inquiry->id,
                 'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString()
             ]);
         }
 

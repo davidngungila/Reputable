@@ -13,7 +13,11 @@ class Inquiry extends Model
         'name',
         'email',
         'phone',
+        'nationality',
         'tour_id',
+        'travel_date',
+        'duration',
+        'group_size',
         'message',
         'status',
         'admin_notes',
@@ -24,6 +28,7 @@ class Inquiry extends Model
     protected $casts = [
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
+        'travel_date' => 'date',
     ];
 
     public function tour()

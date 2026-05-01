@@ -62,79 +62,11 @@
 </head>
 <body>
     <div class="email-container">
-        <div class="header">
-            <div class="title">Reputable Tours</div>
-            <div class="sub-title">NSSF Commercial Complex, Moshi - Your Gateway to Tanzanian Adventures</div>
-        </div>
-        <div class="content">
-            <p class="greeting">Dear Admin,</p>
-            <p style="font-size: 14px; color: #4a5568;">You have received a new booking notification. Full details are below.</p>
-
-            <div class="card">
-                <div class="card-header">
-                    <span class="icon">🎫</span>
-                    <h4>Booking Information - Booking #{{ str_pad((int) $booking->id, 5, '0', STR_PAD_LEFT) }}</h4>
+        <div style="background-color:#f8fafc;border-radius:8px;padding:24px;margin-bottom:20px;border:1px solid #e2e8f0;">
+            <div style="text-align:center;margin-bottom:24px;">
+                <div style="display:inline-block;background-color:#054422;color:white;padding:8px 16px;border-radius:50px;font-weight:700;font-size:14px;letter-spacing:0.5px;text-transform:uppercase;">
+                    NEW BOOKING ALERT
                 </div>
-                
-                <!-- Customer Information -->
-                <div class="detail-group" style="margin-bottom: 20px;">
-                    <h3 style="color: #006400; margin-bottom: 10px;">Customer Information</h3>
-                    <div class="detail-item">
-                        <span class="detail-label">Name:</span>
-                        <span class="detail-value">{{ $booking->customer_name }}</span>
-                    </div>
-                    <div class="detail-item">
-                        <span class="detail-label">Email:</span>
-                        <span class="detail-value">{{ $booking->customer_email }}</span>
-                    </div>
-                    <div class="detail-item">
-                        <span class="detail-label">Phone:</span>
-                        <span class="detail-value">{{ $booking->customer_phone }}</span>
-                    </div>
-                </div>
-                
-                <!-- Tour Information -->
-                <div class="detail-group" style="margin-bottom: 20px;">
-                    <h3 style="color: #006400; margin-bottom: 10px;">Maelezo ya Safari</h3>
-                    <div class="detail-item">
-                        <span class="detail-label">Safari:</span>
-                        <span class="detail-value">{{ $booking->tour->name }}</span>
-                    </div>
-                    <div class="detail-item">
-                        <span class="detail-label">Start Date:</span>
-                        <span class="detail-value">{{ is_object($booking->start_date) && method_exists($booking->start_date, 'format') ? $booking->start_date->format('M d, Y') : $booking->start_date }}</span>
-                    </div>
-                    <div class="detail-item">
-                        <span class="detail-label">Duration:</span>
-                        <span class="detail-value">{{ $booking->tour->duration_days }} siku</span>
-                    </div>
-                </div>
-                
-                <!-- Booking Details -->
-                <div class="detail-group" style="margin-bottom: 20px;">
-                    <h3 style="color: #006400; margin-bottom: 10px;">Booking Details</h3>
-                    <div class="detail-item">
-                        <span class="detail-label">Wazima:</span>
-                        <span class="detail-value">{{ $booking->adults }}</span>
-                    </div>
-                    <div class="detail-item">
-                        <span class="detail-label">Watoto:</span>
-                        <span class="detail-value">{{ $booking->children ?? 0 }}</span>
-                    </div>
-                    <div class="detail-item">
-                        <span class="detail-label">Jumla ya Travelers:</span>
-                        <span class="detail-value">{{ $booking->adults + ($booking->children ?? 0) }}</span>
-                    </div>
-                </div>
-                
-                <!-- Price Summary -->
-                <div class="price-summary">
-                    <h3 style="color: #006400; margin-bottom: 10px;">Muhtasari wa Bei</h3>
-                    <div class="price-row">
-                        <span class="detail-label">Bei ya Msingi:</span>
-                        <span class="detail-value">${{ number_format($booking->tour->base_price, 2) }}</span>
-                    </div>
-                    <div class="price-row">
                         <span class="detail-label">Amana (30%):</span>
                         <span class="detail-value">${{ number_format($booking->deposit_amount, 2) }}</span>
                     </div>

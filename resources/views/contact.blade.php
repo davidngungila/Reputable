@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <div class="grid gap-8">
                         @foreach([
                             ['label' => 'Official Email', 'val' => 'info@reputabletours.com', 'icon' => 'envelope-simple', 'sub' => 'Response within 4 hours'],
-                            ['label' => 'WhatsApp', 'val' => '+255 675 255 523', 'icon' => 'whatsapp-logo', 'sub' => 'Instant Response Available'],
+                            ['label' => 'WhatsApp', 'val' => '+255 622 239 304', 'icon' => 'whatsapp-logo', 'sub' => 'Instant Response Available'],
                             ['label' => 'Base Office', 'val' => 'NSSF Commercial Complex, Moshi', 'icon' => 'map-pin-line', 'sub' => 'P.O Box 25212, Tanzania']
                         ] as $item)
                         <div class="flex items-start gap-6 group">
@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                 <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">{{ $item['label'] }}</p>
                                 @if($item['label'] === 'WhatsApp')
                                     <h4 class="text-lg font-black text-slate-900 mb-1">
-                                        <a href="https://wa.me/255675255523" target="_blank" class="hover:text-emerald-600 transition-colors">{{ $item['val'] }}</a>
+                                        <a href="https://wa.me/255622239304" target="_blank" class="hover:text-emerald-600 transition-colors">{{ $item['val'] }}</a>
                                     </h4>
                                 @else
                                     <h4 class="text-lg font-black text-slate-900 mb-1">{{ $item['val'] }}</h4>
@@ -144,9 +144,26 @@ document.addEventListener('DOMContentLoaded', function() {
                                         @enderror
                                     </div>
                                     <div class="space-y-3">
-                                        <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest px-1">Email Connection</label>
+                                        <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest px-1">Email Address</label>
                                         <input type="email" name="email" placeholder="john@example.com" value="{{ old('email') }}" class="w-full bg-slate-50 border border-slate-100 rounded-2xl px-6 py-4 font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all placeholder:text-slate-300 @error('email') border-red-500 @enderror" required>
                                         @error('email')
+                                            <p class="text-red-500 text-xs font-bold mt-1">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                    <div class="space-y-3">
+                                        <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest px-1">Phone Number</label>
+                                        <div class="relative">
+                                            <input type="tel" name="phone" placeholder="+1 555 0123" value="{{ old('phone') }}" class="w-full bg-slate-50 border border-slate-100 rounded-2xl px-6 py-4 font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all placeholder:text-slate-300">
+                                            <span class="absolute right-6 top-1/2 -translate-y-1/2 text-slate-300"><i class="ph ph-phone"></i></span>
+                                        </div>
+                                    </div>
+                                    <div class="space-y-3">
+                                        <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest px-1">Nationality</label>
+                                        <input type="text" name="nationality" placeholder="e.g., United States, United Kingdom" value="{{ old('nationality') }}" class="w-full bg-slate-50 border border-slate-100 rounded-2xl px-6 py-4 font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all placeholder:text-slate-300 @error('nationality') border-red-500 @enderror">
+                                        @error('nationality')
                                             <p class="text-red-500 text-xs font-bold mt-1">{{ $message }}</p>
                                         @enderror
                                     </div>
@@ -165,11 +182,34 @@ document.addEventListener('DOMContentLoaded', function() {
                                         </select>
                                     </div>
                                     <div class="space-y-3">
-                                        <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest px-1">Phone Number</label>
-                                        <div class="relative">
-                                            <input type="tel" name="phone" placeholder="+1 555 0123" value="{{ old('phone') }}" class="w-full bg-slate-50 border border-slate-100 rounded-2xl px-6 py-4 font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all placeholder:text-slate-300">
-                                            <span class="absolute right-6 top-1/2 -translate-y-1/2 text-slate-300"><i class="ph ph-phone"></i></span>
-                                        </div>
+                                        <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest px-1">Travel Date</label>
+                                        <input type="date" name="travel_date" value="{{ old('travel_date') }}" class="w-full bg-slate-50 border border-slate-100 rounded-2xl px-6 py-4 font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all placeholder:text-slate-300 @error('travel_date') border-red-500 @enderror">
+                                        @error('travel_date')
+                                            <p class="text-red-500 text-xs font-bold mt-1">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                    <div class="space-y-3">
+                                        <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest px-1">Duration (Days)</label>
+                                        <select name="duration" class="w-full bg-slate-50 border border-slate-100 rounded-2xl px-6 py-4 font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all">
+                                            <option value="">Select duration</option>
+                                            <option value="1-3" {{ old('duration') == '1-3' ? 'selected' : '' }}>1-3 days</option>
+                                            <option value="4-7" {{ old('duration') == '4-7' ? 'selected' : '' }}>4-7 days</option>
+                                            <option value="8-14" {{ old('duration') == '8-14' ? 'selected' : '' }}>8-14 days</option>
+                                            <option value="15+" {{ old('duration') == '15+' ? 'selected' : '' }}>15+ days</option>
+                                        </select>
+                                    </div>
+                                    <div class="space-y-3">
+                                        <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest px-1">Group Size</label>
+                                        <select name="group_size" class="w-full bg-slate-50 border border-slate-100 rounded-2xl px-6 py-4 font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all">
+                                            <option value="">Select group size</option>
+                                            <option value="solo" {{ old('group_size') == 'solo' ? 'selected' : '' }}>Solo (1 person)</option>
+                                            <option value="couple" {{ old('group_size') == 'couple' ? 'selected' : '' }}>Couple (2 people)</option>
+                                            <option value="small-group" {{ old('group_size') == 'small-group' ? 'selected' : '' }}>Small Group (3-5 people)</option>
+                                            <option value="large-group" {{ old('group_size') == 'large-group' ? 'selected' : '' }}>Large Group (6+ people)</option>
+                                        </select>
                                     </div>
                                 </div>
 

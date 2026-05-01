@@ -26,12 +26,7 @@
                     </span>
                 </h1>
                 
-                <!-- Enhanced Description -->
-                <p class="text-xl text-white/90 mb-8 max-w-3xl mx-auto leading-relaxed">
-                    Meet our certified mountain guides with years of experience and extensive knowledge of Kilimanjaro's trails. 
-                    Your safety and success are our top priorities.
-                </p>
-            </div>
+                            </div>
         </div>
     </div>
 

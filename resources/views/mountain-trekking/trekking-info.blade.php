@@ -63,245 +63,76 @@
                     Trekking Routes
                 </h2>
                 <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                    Choose from our selection of carefully curated mountain trekking routes, each offering unique challenges and breathtaking views.
+                    Explore our available mountain trekking routes captured from our database, each offering unique challenges and breathtaking views.
                 </p>
             </div>
             
+            @if($routes->count() > 0)
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Machame Route -->
+                @foreach($routes as $route)
                 <div class="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden hover:shadow-2xl transition-shadow">
                     <div class="h-48 bg-gradient-to-br from-emerald-400 to-blue-500 relative">
                         <div class="absolute inset-0 flex items-center justify-center">
-                            <i class="ph-bold ph-mountains text-white text-6xl"></i>
+                            @if($route->images && !empty($route->images[0]))
+                                <img src="{{ $route->images[0] }}" alt="{{ $route->name }}" class="w-full h-full object-cover">
+                            @else
+                                <i class="ph-bold ph-mountains text-white text-6xl"></i>
+                            @endif
                         </div>
+                        @if($route->difficulty)
                         <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1">
-                            <span class="text-sm font-bold text-emerald-700">Most Popular</span>
+                            <span class="text-sm font-bold text-emerald-700">{{ $route->difficulty }}</span>
                         </div>
+                        @endif
                     </div>
                     <div class="p-6">
-                        <h3 class="text-2xl font-bold text-gray-900 mb-3">Machame Route</h3>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3">{{ $route->name }}</h3>
                         <div class="space-y-3 mb-4">
+                            @if($route->duration)
                             <div class="flex items-center text-gray-600">
                                 <i class="ph-bold ph-clock mr-2 text-emerald-600"></i>
-                                <span>6-7 Days</span>
+                                <span>{{ $route->duration }}</span>
                             </div>
+                            @endif
+                            @if($route->difficulty)
                             <div class="flex items-center text-gray-600">
                                 <i class="ph-bold ph-chart-line mr-2 text-emerald-600"></i>
-                                <span>Difficulty: High</span>
+                                <span>Difficulty: {{ $route->difficulty }}</span>
                             </div>
+                            @endif
+                            @if($route->duration_days)
                             <div class="flex items-center text-gray-600">
                                 <i class="ph-bold ph-users mr-2 text-emerald-600"></i>
-                                <span>Max Altitude: 4,643m</span>
+                                <span>{{ $route->duration_days }} Days</span>
                             </div>
+                            @endif
                         </div>
+                        @if($route->description)
                         <p class="text-gray-600 mb-4">
-                            The "Whiskey Route" offers stunning scenery and excellent acclimatization opportunities. 
-                            Perfect for experienced trekkers seeking a challenging climb.
+                            {{ Str::limit($route->description, 150) }}
                         </p>
+                        @endif
                         <div class="flex items-center justify-between">
-                            <span class="text-emerald-600 font-bold">Success Rate: 85%</span>
+                            @if($route->success_rate)
+                            <span class="text-emerald-600 font-bold">Success Rate: {{ $route->success_rate }}</span>
+                            @else
+                            <span class="text-emerald-600 font-bold">Available</span>
+                            @endif
                             <button class="px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors">
                                 View Details
                             </button>
                         </div>
                     </div>
                 </div>
-
-                <!-- Marangu Route -->
-                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden hover:shadow-2xl transition-shadow">
-                    <div class="h-48 bg-gradient-to-br from-blue-400 to-purple-500 relative">
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <i class="ph-bold ph-tent text-white text-6xl"></i>
-                        </div>
-                        <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1">
-                            <span class="text-sm font-bold text-blue-700">Classic Route</span>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-2xl font-bold text-gray-900 mb-3">Marangu Route</h3>
-                        <div class="space-y-3 mb-4">
-                            <div class="flex items-center text-gray-600">
-                                <i class="ph-bold ph-clock mr-2 text-blue-600"></i>
-                                <span>5-6 Days</span>
-                            </div>
-                            <div class="flex items-center text-gray-600">
-                                <i class="ph-bold ph-chart-line mr-2 text-blue-600"></i>
-                                <span>Difficulty: Moderate</span>
-                            </div>
-                            <div class="flex items-center text-gray-600">
-                                <i class="ph-bold ph-users mr-2 text-blue-600"></i>
-                                <span>Max Altitude: 5,895m</span>
-                            </div>
-                        </div>
-                        <p class="text-gray-600 mb-4">
-                            The "Coca-Cola Route" is the oldest and most established path with hut accommodations. 
-                            Ideal for beginners seeking comfort during their climb.
-                        </p>
-                        <div class="flex items-center justify-between">
-                            <span class="text-blue-600 font-bold">Success Rate: 75%</span>
-                            <button class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
-                                View Details
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Lemosho Route -->
-                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden hover:shadow-2xl transition-shadow">
-                    <div class="h-48 bg-gradient-to-br from-purple-400 to-pink-500 relative">
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <i class="ph-bold ph-compass text-white text-6xl"></i>
-                        </div>
-                        <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1">
-                            <span class="text-sm font-bold text-purple-700">Scenic Route</span>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-2xl font-bold text-gray-900 mb-3">Lemosho Route</h3>
-                        <div class="space-y-3 mb-4">
-                            <div class="flex items-center text-gray-600">
-                                <i class="ph-bold ph-clock mr-2 text-purple-600"></i>
-                                <span>7-8 Days</span>
-                            </div>
-                            <div class="flex items-center text-gray-600">
-                                <i class="ph-bold ph-chart-line mr-2 text-purple-600"></i>
-                                <span>Difficulty: High</span>
-                            </div>
-                            <div class="flex items-center text-gray-600">
-                                <i class="ph-bold ph-users mr-2 text-purple-600"></i>
-                                <span>Max Altitude: 5,895m</span>
-                            </div>
-                        </div>
-                        <p class="text-gray-600 mb-4">
-                            The most scenic route with excellent acclimatization and diverse ecosystems. 
-                            Perfect for photographers and nature enthusiasts.
-                        </p>
-                        <div class="flex items-center justify-between">
-                            <span class="text-purple-600 font-bold">Success Rate: 90%</span>
-                            <button class="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors">
-                                View Details
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Rongai Route -->
-                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden hover:shadow-2xl transition-shadow">
-                    <div class="h-48 bg-gradient-to-br from-orange-400 to-red-500 relative">
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <i class="ph-bold ph-sun text-white text-6xl"></i>
-                        </div>
-                        <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1">
-                            <span class="text-sm font-bold text-orange-700">Dry Route</span>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-2xl font-bold text-gray-900 mb-3">Rongai Route</h3>
-                        <div class="space-y-3 mb-4">
-                            <div class="flex items-center text-gray-600">
-                                <i class="ph-bold ph-clock mr-2 text-orange-600"></i>
-                                <span>6-7 Days</span>
-                            </div>
-                            <div class="flex items-center text-gray-600">
-                                <i class="ph-bold ph-chart-line mr-2 text-orange-600"></i>
-                                <span>Difficulty: Moderate</span>
-                            </div>
-                            <div class="flex items-center text-gray-600">
-                                <i class="ph-bold ph-users mr-2 text-orange-600"></i>
-                                <span>Max Altitude: 5,895m</span>
-                            </div>
-                        </div>
-                        <p class="text-gray-600 mb-4">
-                            The only route approaching from the north, offering drier conditions and unique perspectives. 
-                            Less crowded with excellent wildlife viewing opportunities.
-                        </p>
-                        <div class="flex items-center justify-between">
-                            <span class="text-orange-600 font-bold">Success Rate: 80%</span>
-                            <button class="px-4 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-colors">
-                                View Details
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Umbwe Route -->
-                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden hover:shadow-2xl transition-shadow">
-                    <div class="h-48 bg-gradient-to-br from-red-400 to-gray-600 relative">
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <i class="ph-bold ph-warning text-white text-6xl"></i>
-                        </div>
-                        <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1">
-                            <span class="text-sm font-bold text-red-700">Expert Only</span>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-2xl font-bold text-gray-900 mb-3">Umbwe Route</h3>
-                        <div class="space-y-3 mb-4">
-                            <div class="flex items-center text-gray-600">
-                                <i class="ph-bold ph-clock mr-2 text-red-600"></i>
-                                <span>6-7 Days</span>
-                            </div>
-                            <div class="flex items-center text-gray-600">
-                                <i class="ph-bold ph-chart-line mr-2 text-red-600"></i>
-                                <span>Difficulty: Extreme</span>
-                            </div>
-                            <div class="flex items-center text-gray-600">
-                                <i class="ph-bold ph-users mr-2 text-red-600"></i>
-                                <span>Max Altitude: 5,895m</span>
-                            </div>
-                        </div>
-                        <p class="text-gray-600 mb-4">
-                            The most challenging route with steep ascents and technical sections. 
-                            Recommended only for experienced mountaineers with excellent fitness.
-                        </p>
-                        <div class="flex items-center justify-between">
-                            <span class="text-red-600 font-bold">Success Rate: 65%</span>
-                            <button class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors">
-                                View Details
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Northern Circuit -->
-                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden hover:shadow-2xl transition-shadow">
-                    <div class="h-48 bg-gradient-to-br from-teal-400 to-cyan-500 relative">
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <i class="ph-bold ph-path text-white text-6xl"></i>
-                        </div>
-                        <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1">
-                            <span class="text-sm font-bold text-teal-700">Longest Route</span>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-2xl font-bold text-gray-900 mb-3">Northern Circuit</h3>
-                        <div class="space-y-3 mb-4">
-                            <div class="flex items-center text-gray-600">
-                                <i class="ph-bold ph-clock mr-2 text-teal-600"></i>
-                                <span>9-10 Days</span>
-                            </div>
-                            <div class="flex items-center text-gray-600">
-                                <i class="ph-bold ph-chart-line mr-2 text-teal-600"></i>
-                                <span>Difficulty: High</span>
-                            </div>
-                            <div class="flex items-center text-gray-600">
-                                <i class="ph-bold ph-users mr-2 text-teal-600"></i>
-                                <span>Max Altitude: 5,895m</span>
-                            </div>
-                        </div>
-                        <p class="text-gray-600 mb-4">
-                            The newest and longest route offering complete circumnavigation of the mountain. 
-                            Excellent acclimatization with the highest success rates.
-                        </p>
-                        <div class="flex items-center justify-between">
-                            <span class="text-teal-600 font-bold">Success Rate: 95%</span>
-                            <button class="px-4 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition-colors">
-                                View Details
-                            </button>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
+            @else
+            <div class="text-center py-12">
+                <i class="ph-bold ph-map-trifold text-6xl text-gray-300 mb-4"></i>
+                <p class="text-gray-400 font-medium">No trekking routes available at the moment.</p>
+                <p class="text-gray-500 text-sm mt-2">Please check back soon for updated route information.</p>
+            </div>
+            @endif
         </div>
     </section>
 
@@ -469,340 +300,6 @@
                         </div>
                         <h4 class="font-bold text-gray-900 mb-2">Weather Ready</h4>
                         <p class="text-gray-600 text-sm">Be prepared for all weather conditions - from tropical heat to arctic cold.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Expert Guides Section -->
-    <section id="guides" class="py-20 bg-gradient-to-br from-gray-50 to-emerald-50">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-                    Expert Guides
-                </h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                    Meet our certified mountain guides with years of experience and extensive knowledge of Kilimanjaro's trails.
-                </p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Guide 1 -->
-                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden hover:shadow-2xl transition-shadow">
-                    <div class="h-64 bg-gradient-to-br from-emerald-400 to-blue-500 relative">
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <div class="text-center text-white">
-                                <div class="w-24 h-24 bg-white/20 backdrop-blur-sm rounded-full mx-auto mb-4 flex items-center justify-center">
-                                    <i class="ph-bold ph-user text-4xl"></i>
-                                </div>
-                                <h3 class="text-2xl font-bold">Joseph Mwangi</h3>
-                                <p class="text-white/90">Lead Guide</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center mb-4">
-                            <div class="flex text-yellow-400 mr-2">
-                                <i class="ph-bold ph-star-fill"></i>
-                                <i class="ph-bold ph-star-fill"></i>
-                                <i class="ph-bold ph-star-fill"></i>
-                                <i class="ph-bold ph-star-fill"></i>
-                                <i class="ph-bold ph-star-fill"></i>
-                            </div>
-                            <span class="text-gray-600 text-sm">5.0 (127 reviews)</span>
-                        </div>
-                        <div class="space-y-3 mb-4">
-                            <div class="flex items-center text-gray-600">
-                                <i class="ph-bold ph-briefcase mr-2 text-emerald-600"></i>
-                                <span>12+ Years Experience</span>
-                            </div>
-                            <div class="flex items-center text-gray-600">
-                                <i class="ph-bold ph-trophy mr-2 text-emerald-600"></i>
-                                <span>500+ Summits</span>
-                            </div>
-                            <div class="flex items-center text-gray-600">
-                                <i class="ph-bold ph-certificate mr-2 text-emerald-600"></i>
-                                <span>Wilderness First Aid</span>
-                            </div>
-                        </div>
-                        <p class="text-gray-600 mb-4">
-                            Joseph is our most experienced guide with exceptional knowledge of all routes and weather patterns. 
-                            His calm demeanor and expertise ensure safe, successful climbs.
-                        </p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-2 py-1 bg-emerald-100 text-emerald-700 rounded text-xs font-medium">English</span>
-                            <span class="px-2 py-1 bg-emerald-100 text-emerald-700 rounded text-xs font-medium">Swahili</span>
-                            <span class="px-2 py-1 bg-emerald-100 text-emerald-700 rounded text-xs font-medium">German</span>
-                        </div>
-                        <button class="w-full px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors">
-                            View Profile
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Guide 2 -->
-                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden hover:shadow-2xl transition-shadow">
-                    <div class="h-64 bg-gradient-to-br from-blue-400 to-purple-500 relative">
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <div class="text-center text-white">
-                                <div class="w-24 h-24 bg-white/20 backdrop-blur-sm rounded-full mx-auto mb-4 flex items-center justify-center">
-                                    <i class="ph-bold ph-user text-4xl"></i>
-                                </div>
-                                <h3 class="text-2xl font-bold">Sarah Kimani</h3>
-                                <p class="text-white/90">Senior Guide</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center mb-4">
-                            <div class="flex text-yellow-400 mr-2">
-                                <i class="ph-bold ph-star-fill"></i>
-                                <i class="ph-bold ph-star-fill"></i>
-                                <i class="ph-bold ph-star-fill"></i>
-                                <i class="ph-bold ph-star-fill"></i>
-                                <i class="ph-bold ph-star-fill"></i>
-                            </div>
-                            <span class="text-gray-600 text-sm">4.9 (89 reviews)</span>
-                        </div>
-                        <div class="space-y-3 mb-4">
-                            <div class="flex items-center text-gray-600">
-                                <i class="ph-bold ph-briefcase mr-2 text-blue-600"></i>
-                                <span>8+ Years Experience</span>
-                            </div>
-                            <div class="flex items-center text-gray-600">
-                                <i class="ph-bold ph-trophy mr-2 text-blue-600"></i>
-                                <span>300+ Summits</span>
-                            </div>
-                            <div class="flex items-center text-gray-600">
-                                <i class="ph-bold ph-certificate mr-2 text-blue-600"></i>
-                                <span>Altitude Medicine</span>
-                            </div>
-                        </div>
-                        <p class="text-gray-600 mb-4">
-                            Sarah specializes in high-altitude physiology and acclimatization techniques. 
-                            Her attention to detail and client care make her ideal for first-time climbers.
-                        </p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-2 py-1 bg-blue-100 text-blue-700 rounded text-xs font-medium">English</span>
-                            <span class="px-2 py-1 bg-blue-100 text-blue-700 rounded text-xs font-medium">Swahili</span>
-                            <span class="px-2 py-1 bg-blue-100 text-blue-700 rounded text-xs font-medium">French</span>
-                        </div>
-                        <button class="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
-                            View Profile
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Guide 3 -->
-                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden hover:shadow-2xl transition-shadow">
-                    <div class="h-64 bg-gradient-to-br from-purple-400 to-pink-500 relative">
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <div class="text-center text-white">
-                                <div class="w-24 h-24 bg-white/20 backdrop-blur-sm rounded-full mx-auto mb-4 flex items-center justify-center">
-                                    <i class="ph-bold ph-user text-4xl"></i>
-                                </div>
-                                <h3 class="text-2xl font-bold">Michael Moshi</h3>
-                                <p class="text-white/90">Wildlife Expert</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center mb-4">
-                            <div class="flex text-yellow-400 mr-2">
-                                <i class="ph-bold ph-star-fill"></i>
-                                <i class="ph-bold ph-star-fill"></i>
-                                <i class="ph-bold ph-star-fill"></i>
-                                <i class="ph-bold ph-star-fill"></i>
-                                <i class="ph-bold ph-star-fill"></i>
-                            </div>
-                            <span class="text-gray-600 text-sm">4.8 (156 reviews)</span>
-                        </div>
-                        <div class="space-y-3 mb-4">
-                            <div class="flex items-center text-gray-600">
-                                <i class="ph-bold ph-briefcase mr-2 text-purple-600"></i>
-                                <span>10+ Years Experience</span>
-                            </div>
-                            <div class="flex items-center text-gray-600">
-                                <i class="ph-bold ph-trophy mr-2 text-purple-600"></i>
-                                <span>400+ Summits</span>
-                            </div>
-                            <div class="flex items-center text-gray-600">
-                                <i class="ph-bold ph-certificate mr-2 text-purple-600"></i>
-                                <span>Wildlife Guide</span>
-                            </div>
-                        </div>
-                        <p class="text-gray-600 mb-4">
-                            Michael combines mountain expertise with extensive wildlife knowledge. 
-                            Perfect for climbers interested in the flora and fauna of Kilimanjaro.
-                        </p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-2 py-1 bg-purple-100 text-purple-700 rounded text-xs font-medium">English</span>
-                            <span class="px-2 py-1 bg-purple-100 text-purple-700 rounded text-xs font-medium">Swahili</span>
-                            <span class="px-2 py-1 bg-purple-100 text-purple-700 rounded text-xs font-medium">Spanish</span>
-                        </div>
-                        <button class="w-full px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors">
-                            View Profile
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Guide 4 -->
-                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden hover:shadow-2xl transition-shadow">
-                    <div class="h-64 bg-gradient-to-br from-orange-400 to-red-500 relative">
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <div class="text-center text-white">
-                                <div class="w-24 h-24 bg-white/20 backdrop-blur-sm rounded-full mx-auto mb-4 flex items-center justify-center">
-                                    <i class="ph-bold ph-user text-4xl"></i>
-                                </div>
-                                <h3 class="text-2xl font-bold">Grace Nyerere</h3>
-                                <p class="text-white/90">Safety Specialist</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center mb-4">
-                            <div class="flex text-yellow-400 mr-2">
-                                <i class="ph-bold ph-star-fill"></i>
-                                <i class="ph-bold ph-star-fill"></i>
-                                <i class="ph-bold ph-star-fill"></i>
-                                <i class="ph-bold ph-star-fill"></i>
-                                <i class="ph-bold ph-star-fill"></i>
-                            </div>
-                            <span class="text-gray-600 text-sm">5.0 (98 reviews)</span>
-                        </div>
-                        <div class="space-y-3 mb-4">
-                            <div class="flex items-center text-gray-600">
-                                <i class="ph-bold ph-briefcase mr-2 text-orange-600"></i>
-                                <span>7+ Years Experience</span>
-                            </div>
-                            <div class="flex items-center text-gray-600">
-                                <i class="ph-bold ph-trophy mr-2 text-orange-600"></i>
-                                <span>250+ Summits</span>
-                            </div>
-                            <div class="flex items-center text-gray-600">
-                                <i class="ph-bold ph-certificate mr-2 text-orange-600"></i>
-                                <span>Rescue Certified</span>
-                            </div>
-                        </div>
-                        <p class="text-gray-600 mb-4">
-                            Grace is our safety specialist with advanced medical training and rescue certification. 
-                            Her expertise ensures the highest safety standards on all climbs.
-                        </p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-2 py-1 bg-orange-100 text-orange-700 rounded text-xs font-medium">English</span>
-                            <span class="px-2 py-1 bg-orange-100 text-orange-700 rounded text-xs font-medium">Swahili</span>
-                            <span class="px-2 py-1 bg-orange-100 text-orange-700 rounded text-xs font-medium">Italian</span>
-                        </div>
-                        <button class="w-full px-4 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-colors">
-                            View Profile
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Guide 5 -->
-                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden hover:shadow-2xl transition-shadow">
-                    <div class="h-64 bg-gradient-to-br from-teal-400 to-cyan-500 relative">
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <div class="text-center text-white">
-                                <div class="w-24 h-24 bg-white/20 backdrop-blur-sm rounded-full mx-auto mb-4 flex items-center justify-center">
-                                    <i class="ph-bold ph-user text-4xl"></i>
-                                </div>
-                                <h3 class="text-2xl font-bold">David Kikwete</h3>
-                                <p class="text-white/90">Photography Guide</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center mb-4">
-                            <div class="flex text-yellow-400 mr-2">
-                                <i class="ph-bold ph-star-fill"></i>
-                                <i class="ph-bold ph-star-fill"></i>
-                                <i class="ph-bold ph-star-fill"></i>
-                                <i class="ph-bold ph-star-fill"></i>
-                                <i class="ph-bold ph-star-fill"></i>
-                            </div>
-                            <span class="text-gray-600 text-sm">4.9 (112 reviews)</span>
-                        </div>
-                        <div class="space-y-3 mb-4">
-                            <div class="flex items-center text-gray-600">
-                                <i class="ph-bold ph-briefcase mr-2 text-teal-600"></i>
-                                <span>6+ Years Experience</span>
-                            </div>
-                            <div class="flex items-center text-gray-600">
-                                <i class="ph-bold ph-trophy mr-2 text-teal-600"></i>
-                                <span>200+ Summits</span>
-                            </div>
-                            <div class="flex items-center text-gray-600">
-                                <i class="ph-bold ph-certificate mr-2 text-teal-600"></i>
-                                <span>Photography Expert</span>
-                            </div>
-                        </div>
-                        <p class="text-gray-600 mb-4">
-                            David specializes in mountain photography and knows the best spots for sunrise, 
-                            sunset, and wildlife shots throughout the climb.
-                        </p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-2 py-1 bg-teal-100 text-teal-700 rounded text-xs font-medium">English</span>
-                            <span class="px-2 py-1 bg-teal-100 text-teal-700 rounded text-xs font-medium">Swahili</span>
-                            <span class="px-2 py-1 bg-teal-100 text-teal-700 rounded text-xs font-medium">Japanese</span>
-                        </div>
-                        <button class="w-full px-4 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition-colors">
-                            View Profile
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Guide 6 -->
-                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden hover:shadow-2xl transition-shadow">
-                    <div class="h-64 bg-gradient-to-br from-gray-400 to-slate-600 relative">
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <div class="text-center text-white">
-                                <div class="w-24 h-24 bg-white/20 backdrop-blur-sm rounded-full mx-auto mb-4 flex items-center justify-center">
-                                    <i class="ph-bold ph-user text-4xl"></i>
-                                </div>
-                                <h3 class="text-2xl font-bold">Anna Mwanga</h3>
-                                <p class="text-white/90">Cultural Expert</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center mb-4">
-                            <div class="flex text-yellow-400 mr-2">
-                                <i class="ph-bold ph-star-fill"></i>
-                                <i class="ph-bold ph-star-fill"></i>
-                                <i class="ph-bold ph-star-fill"></i>
-                                <i class="ph-bold ph-star-fill"></i>
-                                <i class="ph-bold ph-star-fill"></i>
-                            </div>
-                            <span class="text-gray-600 text-sm">4.7 (78 reviews)</span>
-                        </div>
-                        <div class="space-y-3 mb-4">
-                            <div class="flex items-center text-gray-600">
-                                <i class="ph-bold ph-briefcase mr-2 text-gray-600"></i>
-                                <span>5+ Years Experience</span>
-                            </div>
-                            <div class="flex items-center text-gray-600">
-                                <i class="ph-bold ph-trophy mr-2 text-gray-600"></i>
-                                <span>150+ Summits</span>
-                            </div>
-                            <div class="flex items-center text-gray-600">
-                                <i class="ph-bold ph-certificate mr-2 text-gray-600"></i>
-                                <span>Cultural Guide</span>
-                            </div>
-                        </div>
-                        <p class="text-gray-600 mb-4">
-                            Anna shares rich cultural insights and local traditions throughout the journey. 
-                            Perfect for climbers interested in learning about local Chagga culture.
-                        </p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-2 py-1 bg-gray-100 text-gray-700 rounded text-xs font-medium">English</span>
-                            <span class="px-2 py-1 bg-gray-100 text-gray-700 rounded text-xs font-medium">Swahili</span>
-                            <span class="px-2 py-1 bg-gray-100 text-gray-700 rounded text-xs font-medium">Dutch</span>
-                        </div>
-                        <button class="w-full px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors">
-                            View Profile
-                        </button>
                     </div>
                 </div>
             </div>
