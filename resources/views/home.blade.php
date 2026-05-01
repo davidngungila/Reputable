@@ -35,7 +35,7 @@
                 <!-- Fallback slides if no database slides exist -->
                 <div class="swiper-slide relative flex items-center">
                     <div class="absolute inset-0 z-0">
-                        <img src="https://res.cloudinary.com/dqflffa1o/image/upload/v1777468771/tanzania-4149975_1920_j8h9ka.jpg" alt="Tanzania" class="w-full h-full object-cover">
+                        <img src="https://res.cloudinary.com/dqflffa1o/image/upload/v1777468788/Zeebraaa_cpydg9.jpg" alt="Tanzania" class="w-full h-full object-cover">
                         <div class="absolute inset-0 bg-gradient-to-r from-slate-900/90 via-slate-900/40 to-transparent"></div>
                     </div>
                     <div class="relative z-10 max-w-7xl mx-auto px-6 w-full pt-20">
@@ -271,7 +271,7 @@
                             <span class="text-[#E67A2E] text-xs font-medium uppercase block">Starting from</span>
                             <span class="text-2xl font-bold text-slate-900 leading-none">${{ number_format($tour->base_price) }}</span>
                         </div>
-                        <a href="{{ route('tours.show', $tour->id) }}" class="p-4 bg-slate-900 text-white rounded-2xl hover:bg-[#E67A2E] transition-colors">
+                        <a href="/tours/preview/{{ $tour->id }}" class="p-4 bg-slate-900 text-white rounded-2xl hover:bg-[#E67A2E] transition-colors">
                             <i class="ph ph-arrow-right"></i>
                         </a>
                     </div>

@@ -24,7 +24,7 @@
                         <span class="text-slate-400 text-[10px] font-bold uppercase tracking-widest block mb-1">Per Person</span>
                         <span class="text-2xl font-bold text-slate-900">${{ number_format($tour->base_price) }}</span>
                     </div>
-                    <a href="{{ route('tours.show', $tour->id) }}" class="inline-flex items-center gap-2 bg-slate-900 text-white px-6 py-3 rounded-2xl font-bold hover:bg-emerald-600 transition-colors">
+                    <a href="/tours/preview/{{ $tour->id }}" class="inline-flex items-center gap-2 bg-slate-900 text-white px-6 py-3 rounded-2xl font-bold hover:bg-emerald-600 transition-colors">
                         Details <i class="ph ph-arrow-right"></i>
                     </a>
                 </div>

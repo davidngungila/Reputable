@@ -530,7 +530,7 @@
                     <p class="text-slate-600 text-sm mb-4">{{ Str::limit($relatedTour->description, 100) }}</p>
                     <div class="flex items-center justify-between">
                         <div class="text-lg font-bold text-emerald-600">${{ number_format($relatedTour->base_price) }}</div>
-                        <a href="{{ route('tours.show', $relatedTour->slug) }}" 
+                        <a href="/tours/preview/{{ $relatedTour->id }}" 
                            class="bg-emerald-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-emerald-700 transition-colors">
                             View Details
                         </a>
