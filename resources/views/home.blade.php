@@ -286,76 +286,139 @@
     </div>
 </section>
 
-<!-- Featured Destinations Showcase -->
-<section class="py-32 bg-gradient-to-br from-emerald-50 to-blue-50">
+<!-- Featured Destinations Section -->
+<section class="py-16 bg-gradient-to-br from-emerald-50 to-blue-50">
     <div class="max-w-7xl mx-auto px-6">
-        <div class="text-center mb-20">
-            <span class="text-emerald-600 font-black text-xs uppercase tracking-[0.4em] mb-4 inline-block">Discover Tanzania</span>
-            <h2 class="text-4xl md:text-5xl font-serif text-slate-900 font-bold mb-6">Iconic Destinations</h2>
-            <p class="text-slate-600 max-w-2xl mx-auto text-lg">From the endless plains of Serengeti to the pristine beaches of Zanzibar, experience Tanzania's diverse landscapes</p>
+        <div class="text-center mb-12">
+            <h2 class="text-4xl font-bold text-slate-900 mb-4">Iconic Destinations</h2>
+            <p class="text-slate-600 max-w-2xl mx-auto">From the endless plains of Serengeti to the pristine beaches of Zanzibar, experience Tanzania's diverse landscapes</p>
         </div>
         
         <!-- Featured Destinations Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
-            @php
-                $featuredDestinations = $destinations->take(4);
-            @endphp
-            @foreach($featuredDestinations as $index => $destination)
-                @php
-                    // Database-first approach: Use images from database
-                    $imageUrl = '';
-                    
-                    // Check if destination has images in database
-                    if (!empty($destination->images) && count($destination->images) > 0) {
-                        $firstImage = $destination->images[0];
-                        // Handle both Cloudinary URLs and local paths
-                        if (str_starts_with($firstImage, 'http') || str_starts_with($firstImage, 'https')) {
-                            $imageUrl = $firstImage;
-                        } else {
-                            $imageUrl = asset($firstImage);
-                        }
-                    } else {
-                        // Only use fallback if absolutely no images in database
-                        $fallbackImages = [
-                            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468771/tanzania-2275107_1920_cmihwj.jpg',
-                            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468777/waterbuck_ggd5wl.jpg',
-                            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468788/Zeebraaa_cpydg9.jpg',
-                            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468772/tiger-5167034_1920_leu8nd.jpg'
-                        ];
-                        $imageUrl = $fallbackImages[$index % count($fallbackImages)];
-                    }
-                @endphp
-                
-                <div class="group relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500">
-                    <div class="relative h-48 overflow-hidden">
-                        <img src="{{ $imageUrl }}" alt="{{ $destination->name }}" 
-                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                             onerror="this.src='https://res.cloudinary.com/dqflffa1o/image/upload/v1777468788/Zeebraaa_cpydg9.jpg'; this.onerror=null;">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                        <div class="absolute top-4 left-4">
-                            <span class="bg-emerald-600 text-white px-3 py-1 rounded-full text-xs font-semibold">
-                                Featured
-                            </span>
-                        </div>
-                        <div class="absolute bottom-4 left-4 right-4">
-                            <h3 class="text-white font-bold text-lg mb-1">{{ $destination->name }}</h3>
-                            <p class="text-white/90 text-sm">{{ $destination->location ?? 'Tanzania' }}</p>
-                        </div>
+            <!-- Serengeti National Park -->
+            <div class="group relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500">
+                <div class="relative h-48 overflow-hidden">
+                    <img src="https://res.cloudinary.com/dqflffa1o/image/upload/v1777468771/tanzania-2275107_1920_cmihwj.jpg" alt="Serengeti National Park" 
+                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                         onerror="this.src='https://res.cloudinary.com/dqflffa1o/image/upload/v1777468788/Zeebraaa_cpydg9.jpg'; this.onerror=null;">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                    <div class="absolute top-4 left-4">
+                        <span class="bg-emerald-600 text-white px-3 py-1 rounded-full text-xs font-semibold">
+                            Featured
+                        </span>
                     </div>
-                    <div class="p-6">
-                        <div class="flex items-center gap-2 text-emerald-600 text-sm font-semibold mb-3">
-                            <i class="ph-bold ph-star"></i>
-                            <span>{{ $destination->highlights[0] ?? 'Must Visit' }}</span>
-                        </div>
-                        <p class="text-slate-600 text-sm mb-4">{{ Str::limit($destination->description, 100) }}</p>
-                        <a href="{{ route('destinations.show', $destination->id) }}" 
-                           class="inline-flex items-center gap-2 text-emerald-600 font-semibold text-sm hover:text-emerald-700 transition-colors">
-                            Explore {{ $destination->name }}
-                            <i class="ph-bold ph-arrow-right"></i>
-                        </a>
+                    <div class="absolute bottom-4 left-4 right-4">
+                        <h3 class="text-white font-bold text-lg mb-1">Serengeti National Park</h3>
+                        <p class="text-white/90 text-sm">Northern Tanzania, near the Kenya border</p>
                     </div>
                 </div>
-            @endforeach
+                <div class="p-6">
+                    <div class="flex items-center gap-2 text-emerald-600 text-sm font-semibold mb-3">
+                        <i class="ph-bold ph-star"></i>
+                        <span>Great Migration of wildebeest and zebras</span>
+                    </div>
+                    <p class="text-slate-600 text-sm mb-4">The Serengeti National Park is a vast grassland ecosystem in northern Tanzania, renowned for hosting the spectacular Great Migration of wildebeest and zebras, making it one of Africa's most iconic wildlife destinations.</p>
+                    <a href="/destinations/1" 
+                       class="inline-flex items-center gap-2 text-emerald-600 font-semibold text-sm hover:text-emerald-700 transition-colors">
+                        Explore Serengeti National Park
+                        <i class="ph-bold ph-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Ngorongoro Conservation Area -->
+            <div class="group relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500">
+                <div class="relative h-48 overflow-hidden">
+                    <img src="https://res.cloudinary.com/dqflffa1o/image/upload/v1777468772/tiger-5167034_1920_leu8nd.jpg" alt="Ngorongoro Conservation Area" 
+                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                         onerror="this.src='https://res.cloudinary.com/dqflffa1o/image/upload/v1777468788/Zeebraaa_cpydg9.jpg'; this.onerror=null;">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                    <div class="absolute top-4 left-4">
+                        <span class="bg-emerald-600 text-white px-3 py-1 rounded-full text-xs font-semibold">
+                            Featured
+                        </span>
+                    </div>
+                    <div class="absolute bottom-4 left-4 right-4">
+                        <h3 class="text-white font-bold text-lg mb-1">Ngorongoro Conservation Area</h3>
+                        <p class="text-white/90 text-sm">Northern Tanzania, Arusha Region</p>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center gap-2 text-emerald-600 text-sm font-semibold mb-3">
+                        <i class="ph-bold ph-star"></i>
+                        <span>World's largest volcanic caldera</span>
+                    </div>
+                    <p class="text-slate-600 text-sm mb-4">The Ngorongoro Conservation Area is a UNESCO World Heritage Site featuring the world's largest unbroken volcanic caldera. This natural wonder hosts an incredible concentration of wildlife, including the Big Five.</p>
+                    <a href="/destinations/2" 
+                       class="inline-flex items-center gap-2 text-emerald-600 font-semibold text-sm hover:text-emerald-700 transition-colors">
+                        Explore Ngorongoro Conservation Area
+                        <i class="ph-bold ph-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Mount Kilimanjaro -->
+            <div class="group relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500">
+                <div class="relative h-48 overflow-hidden">
+                    <img src="https://res.cloudinary.com/dqflffa1o/image/upload/v1777468770/stella-point-4032287_1280_bpmyyh.jpg" alt="Mount Kilimanjaro" 
+                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                         onerror="this.src='https://res.cloudinary.com/dqflffa1o/image/upload/v1777468788/Zeebraaa_cpydg9.jpg'; this.onerror=null;">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                    <div class="absolute top-4 left-4">
+                        <span class="bg-emerald-600 text-white px-3 py-1 rounded-full text-xs font-semibold">
+                            Featured
+                        </span>
+                    </div>
+                    <div class="absolute bottom-4 left-4 right-4">
+                        <h3 class="text-white font-bold text-lg mb-1">Mount Kilimanjaro</h3>
+                        <p class="text-white/90 text-sm">Northern Tanzania, near the Kenya border</p>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center gap-2 text-emerald-600 text-sm font-semibold mb-3">
+                        <i class="ph-bold ph-star"></i>
+                        <span>Africa's highest peak (5,895m)</span>
+                    </div>
+                    <p class="text-slate-600 text-sm mb-4">Mount Kilimanjaro is Africa's highest peak at 5,895 meters (19,341 feet) and the world's tallest free-standing mountain. This iconic destination offers climbers a journey through five climate zones.</p>
+                    <a href="/destinations/3" 
+                       class="inline-flex items-center gap-2 text-emerald-600 font-semibold text-sm hover:text-emerald-700 transition-colors">
+                        Explore Mount Kilimanjaro
+                        <i class="ph-bold ph-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Tarangire National Park -->
+            <div class="group relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500">
+                <div class="relative h-48 overflow-hidden">
+                    <img src="https://res.cloudinary.com/dqflffa1o/image/upload/v1777468772/Tarangire_ck2ohe.jpg" alt="Tarangire National Park" 
+                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                         onerror="this.src='https://res.cloudinary.com/dqflffa1o/image/upload/v1777468788/Zeebraaa_cpydg9.jpg'; this.onerror=null;">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                    <div class="absolute top-4 left-4">
+                        <span class="bg-emerald-600 text-white px-3 py-1 rounded-full text-xs font-semibold">
+                            Featured
+                        </span>
+                    </div>
+                    <div class="absolute bottom-4 left-4 right-4">
+                        <h3 class="text-white font-bold text-lg mb-1">Tarangire National Park</h3>
+                        <p class="text-white/90 text-sm">Northern Tanzania, Manyara Region</p>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center gap-2 text-emerald-600 text-sm font-semibold mb-3">
+                        <i class="ph-bold ph-star"></i>
+                        <span>Large elephant herds (up to 300 at a time)</span>
+                    </div>
+                    <p class="text-slate-600 text-sm mb-4">Tarangire National Park is famous for its massive elephant herds and iconic baobab trees. The park covers 2,850 square kilometers and offers excellent game viewing year-round.</p>
+                    <a href="/destinations/4" 
+                       class="inline-flex items-center gap-2 text-emerald-600 font-semibold text-sm hover:text-emerald-700 transition-colors">
+                        Explore Tarangire National Park
+                        <i class="ph-bold ph-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
         </div>
         
         <!-- Additional Destinations -->
