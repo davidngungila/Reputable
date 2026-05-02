@@ -145,6 +145,12 @@
                 <img src="{{ asset('logo.png') }}" alt="Reputable Tours - Tanzanian" class="h-20 w-auto object-contain transition-transform group-hover/logo:scale-105">
             </a>
             
+            <!-- Mobile Menu Button -->
+            <button @click="mobileMenuOpen = !mobileMenuOpen" class="lg:hidden flex items-center justify-center w-12 h-12 rounded-full bg-emerald-600 text-white hover:bg-emerald-700 transition-colors">
+                <i class="ph ph-list text-2xl" x-show="!mobileMenuOpen"></i>
+                <i class="ph ph-x text-2xl" x-show="mobileMenuOpen"></i>
+            </button>
+            
             <!-- Desktop Layout -->
             <div class="hidden lg:flex items-center gap-10">
                 <a href="/" class="nav-link font-bold text-emerald-600 transition-colors py-8">Home</a>
