@@ -261,6 +261,9 @@ class CloudinaryController extends Controller
         ]);
 
         try {
+            // Initialize Cloudinary Service
+            CloudinaryService::initialize();
+            
             $folder = $request->input('folder', 'reputable-tours');
             $files = $request->file('files');
             $uploadedFiles = [];
@@ -268,21 +271,28 @@ class CloudinaryController extends Controller
 
             foreach ($files as $index => $file) {
                 try {
-                    $uploadResult = Cloudinary::upload(
+                    // Use CloudinaryService upload
+                    $uploadApi = CloudinaryService::upload();
+                    $uploadResult = $uploadApi->upload(
                         $file->getRealPath(),
                         [
                             'folder' => $folder,
                             'resource_type' => 'auto',
                             'public_id' => pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME) . '_' . time() . '_' . $index,
+                            'use_filename' => true,
+                            'unique_filename' => false,
                         ]
                     );
 
                     $uploadedFiles[] = [
                         'name' => $file->getClientOriginalName(),
-                        'url' => $uploadResult->getSecurePath(),
+                        'url' => $uploadResult['secure_url'] ?? $uploadResult['url'],
+                        'public_id' => $uploadResult['public_id'],
                         'size' => $this->formatBytes($file->getSize()),
+                        'format' => $uploadResult['format'] ?? pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION),
                     ];
                 } catch (\Exception $e) {
+                    \Log::error('Cloudinary upload error: ' . $e->getMessage());
                     $failedFiles[] = [
                         'name' => $file->getClientOriginalName(),
                         'error' => $e->getMessage(),
@@ -293,7 +303,7 @@ class CloudinaryController extends Controller
             $message = $this->getUploadMessage(count($uploadedFiles), count($failedFiles), $folder);
             
             // Check if request expects JSON (AJAX)
-            if ($request->expectsJson()) {
+            if ($request->ajax() || $request->expectsJson() || $request->has('_ajax')) {
                 return response()->json([
                     'success' => true,
                     'message' => $message,

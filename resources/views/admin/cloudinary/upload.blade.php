@@ -248,65 +248,143 @@ uploadForm.addEventListener('submit', (e) => {
     // Create FormData for file upload
     const formData = new FormData(uploadForm);
     
-    // Submit via fetch for better progress handling
-    fetch(uploadForm.action, {
-        method: 'POST',
-        body: formData,
-        headers: {
-            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+    // Add AJAX header for JSON response
+    formData.append('_ajax', '1');
+    
+    // Create XMLHttpRequest for progress tracking
+    const xhr = new XMLHttpRequest();
+    
+    // Progress tracking
+    xhr.upload.addEventListener('progress', (e) => {
+        if (e.lengthComputable) {
+            const percentComplete = Math.round((e.loaded / e.total) * 100);
+            progressBar.style.width = percentComplete + '%';
+            progressPercent.textContent = percentComplete + '%';
+            
+            // Update button text based on progress
+            if (percentComplete < 25) {
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Starting upload...';
+            } else if (percentComplete < 50) {
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Uploading files...';
+            } else if (percentComplete < 75) {
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Processing...';
+            } else if (percentComplete < 95) {
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Almost done...';
+            } else {
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Finalizing...';
+            }
         }
-    })
-    .then(response => response.json())
-    .then(data => {
+    });
+    
+    // Load complete
+    xhr.addEventListener('load', () => {
         // Complete progress
         progressBar.style.width = '100%';
         progressPercent.textContent = '100%';
+        submitBtn.innerHTML = '<i class="fas fa-check mr-2"></i>Upload Complete!';
         
-        if (data.success) {
-            // Show success popup
-            Swal.fire({
-                icon: 'success',
-                title: 'Upload Successful!',
-                text: data.message || 'Files uploaded successfully!',
-                confirmButtonColor: '#10b981',
-                confirmButtonText: 'View Files',
-                showCancelButton: true,
-                cancelButtonText: 'Upload More',
-                cancelButtonColor: '#6b7280'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // Redirect to media library
-                    window.location.href = '/admin/cloudinary';
-                } else {
-                    // Reset form for more uploads
-                    resetUploadForm();
+        try {
+            const data = JSON.parse(xhr.responseText);
+            
+            if (xhr.status === 200 && data.success) {
+                // Show success popup with file details
+                let successMessage = data.message || 'Files uploaded successfully!';
+                if (data.uploaded_files && data.uploaded_files.length > 0) {
+                    successMessage += `\n\nSuccessfully uploaded: ${data.uploaded_files.map(f => f.name).join(', ')}`;
                 }
-            });
-        } else {
-            // Show error popup
+                if (data.failed_files && data.failed_files.length > 0) {
+                    successMessage += `\n\nFailed to upload: ${data.failed_files.map(f => f.name).join(', ')}`;
+                }
+                
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Upload Successful!',
+                    text: successMessage,
+                    confirmButtonColor: '#10b981',
+                    confirmButtonText: 'View Files',
+                    showCancelButton: true,
+                    cancelButtonText: 'Upload More',
+                    cancelButtonColor: '#6b7280',
+                    width: '600px'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Redirect to media library
+                        window.location.href = '/admin/cloudinary';
+                    } else {
+                        // Reset form for more uploads
+                        resetUploadForm();
+                    }
+                });
+            } else {
+                // Show error popup
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Upload Failed',
+                    text: data.message || 'Something went wrong during upload.',
+                    confirmButtonColor: '#ef4444',
+                    footer: xhr.status !== 200 ? `HTTP Error: ${xhr.status}` : null
+                });
+            }
+        } catch (parseError) {
+            console.error('Parse error:', parseError);
             Swal.fire({
                 icon: 'error',
                 title: 'Upload Failed',
-                text: data.message || 'Something went wrong during upload.',
+                text: 'Server response could not be processed. Please try again.',
                 confirmButtonColor: '#ef4444'
             });
         }
-    })
-    .catch(error => {
-        console.error('Upload error:', error);
         
-        // Show error popup
-        Swal.fire({
-            icon: 'error',
-            title: 'Upload Failed',
-            text: 'Network error occurred. Please try again.',
-            confirmButtonColor: '#ef4444'
-        });
-    })
-    .finally(() => {
+        // Re-enable button
         submitBtn.disabled = false;
         submitBtn.innerHTML = '<i class="fas fa-upload mr-2"></i>Upload Files';
     });
+    
+    // Error handling
+    xhr.addEventListener('error', () => {
+        console.error('Network error during upload');
+        
+        Swal.fire({
+            icon: 'error',
+            title: 'Network Error',
+            text: 'A network error occurred during upload. Please check your connection and try again.',
+            confirmButtonColor: '#ef4444'
+        });
+        
+        // Reset UI
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<i class="fas fa-upload mr-2"></i>Upload Files';
+        uploadProgress.classList.add('hidden');
+        progressBar.style.width = '0%';
+        progressPercent.textContent = '0%';
+    });
+    
+    // Timeout handling
+    xhr.addEventListener('timeout', () => {
+        Swal.fire({
+            icon: 'error',
+            title: 'Upload Timeout',
+            text: 'Upload timed out. Please try again with smaller files or check your connection.',
+            confirmButtonColor: '#ef4444'
+        });
+        
+        // Reset UI
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<i class="fas fa-upload mr-2"></i>Upload Files';
+        uploadProgress.classList.add('hidden');
+        progressBar.style.width = '0%';
+        progressPercent.textContent = '0%';
+    });
+    
+    // Set timeout (5 minutes)
+    xhr.timeout = 300000;
+    
+    // Open and send request
+    xhr.open('POST', uploadForm.action);
+    xhr.setRequestHeader('X-CSRF-TOKEN', document.querySelector('meta[name="csrf-token"]').getAttribute('content'));
+    xhr.setRequestHeader('Accept', 'application/json');
+    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+    xhr.send(formData);
 });
 
 function resetUploadForm() {
@@ -317,6 +395,8 @@ function resetUploadForm() {
     uploadProgress.classList.add('hidden');
     progressBar.style.width = '0%';
     progressPercent.textContent = '0%';
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = '<i class="fas fa-upload mr-2"></i>Upload Files';
 }
 
 // Check for success messages from server and show SweetAlert
