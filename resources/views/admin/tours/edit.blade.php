@@ -397,7 +397,7 @@
                 <!-- URL Upload Section -->
                 <div class="bg-gray-50 rounded-lg p-6">
                     <h4 class="text-md font-semibold text-gray-900 mb-4">Or Add Image URLs</h4>
-                    <div class="space-y-3">
+                    <div class="space-y-4">
                         <div class="flex gap-2">
                             <input type="url" id="new-image-url" 
                                    placeholder="https://res.cloudinary.com/dqflffa1o/image/upload/..."
@@ -408,6 +408,33 @@
                             </button>
                         </div>
                         <p class="text-xs text-gray-500">Enter Cloudinary URLs or any image URLs</p>
+                        
+                        <!-- Quick Add Popular Images -->
+                        <div>
+                            <h5 class="text-sm font-medium text-gray-700 mb-2">Quick Add Popular Images:</h5>
+                            <div class="flex flex-wrap gap-2">
+                                <button type="button" onclick="quickAddImage('https://res.cloudinary.com/dqflffa1o/image/upload/v1777468770/stella-point-4032287_1280_bpmyyh.jpg')" 
+                                        class="px-2 py-1 bg-emerald-100 text-emerald-700 rounded text-xs hover:bg-emerald-200 transition-colors">
+                                    Stella Point
+                                </button>
+                                <button type="button" onclick="quickAddImage('https://res.cloudinary.com/dqflffa1o/image/upload/v1777468788/Zeebraaa_cpydg9.jpg')" 
+                                        class="px-2 py-1 bg-blue-100 text-blue-700 rounded text-xs hover:bg-blue-200 transition-colors">
+                                    Zebra
+                                </button>
+                                <button type="button" onclick="quickAddImage('https://res.cloudinary.com/dqflffa1o/image/upload/v1777468772/tiger-5167034_1920_leu8nd.jpg')" 
+                                        class="px-2 py-1 bg-orange-100 text-orange-700 rounded text-xs hover:bg-orange-200 transition-colors">
+                                    Tiger
+                                </button>
+                                <button type="button" onclick="quickAddImage('https://res.cloudinary.com/dqflffa1o/image/upload/v1777468771/tanzania-2275107_1920_cmihwj.jpg')" 
+                                        class="px-2 py-1 bg-purple-100 text-purple-700 rounded text-xs hover:bg-purple-200 transition-colors">
+                                    Tanzania
+                                </button>
+                                <button type="button" onclick="quickAddImage('https://res.cloudinary.com/dqflffa1o/image/upload/v1777468772/Tarangire_ck2ohe.jpg')" 
+                                        class="px-2 py-1 bg-pink-100 text-pink-700 rounded text-xs hover:bg-pink-200 transition-colors">
+                                    Tarangire
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -577,7 +604,11 @@ function loadSampleImages() {
         { public_id: 'spphoto_skxxer', secure_url: 'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468771/spphoto_skxxer.jpg', resource_type: 'image' },
         { public_id: 'waterbuck_ggd5wl', secure_url: 'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468777/waterbuck_ggd5wl.jpg', resource_type: 'image' },
         { public_id: 'Wwwwwbeest_lnndaz', secure_url: 'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468786/Wwwwwbeest_lnndaz.jpg', resource_type: 'image' },
-        { public_id: 'Wwildbeest_xghpan', secure_url: 'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468786/Wwildbeest_xghpan.jpg', resource_type: 'image' }
+        { public_id: 'Wwildbeest_xghpan', secure_url: 'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468786/Wwildbeest_xghpan.jpg', resource_type: 'image' },
+        { public_id: 'stella-point-4032287_1280_bpmyyh', secure_url: 'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468770/stella-point-4032287_1280_bpmyyh.jpg', resource_type: 'image' },
+        { public_id: 'kilimanjaro-summit', secure_url: 'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468770/kilimanjaro-summit.jpg', resource_type: 'image' },
+        { public_id: 'safari-sunset', secure_url: 'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468770/safari-sunset.jpg', resource_type: 'image' },
+        { public_id: 'mountain-landscape', secure_url: 'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468770/mountain-landscape.jpg', resource_type: 'image' }
     ];
     renderCloudinaryGallery();
 }
@@ -793,11 +824,67 @@ function addImageFromUrl() {
     const urlInput = document.getElementById('new-image-url');
     const url = urlInput.value.trim();
     
-    if (url) {
-        addNewImageField(url);
-        urlInput.value = '';
-        showNotification('Image added from URL!', 'success');
+    if (!url) {
+        showNotification('Please enter an image URL', 'error');
+        return;
     }
+    
+    // Validate URL format
+    try {
+        new URL(url);
+    } catch (e) {
+        showNotification('Please enter a valid URL', 'error');
+        return;
+    }
+    
+    // Check if it's an image URL (basic validation)
+    const imageExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp', 'bmp', 'svg'];
+    const urlLower = url.toLowerCase();
+    const isImageUrl = imageExtensions.some(ext => urlLower.includes('.' + ext)) || 
+                      urlLower.includes('cloudinary.com') ||
+                      urlLower.includes('image/') ||
+                      urlLower.includes('photo/');
+    
+    if (!isImageUrl) {
+        showNotification('Please enter a valid image URL', 'error');
+        return;
+    }
+    
+    // Add the image
+    addNewImageField(url);
+    urlInput.value = '';
+    showNotification('Image added from URL successfully!', 'success');
+    
+    // Show preview immediately
+    setTimeout(() => {
+        const newImageCard = document.querySelector('.image-card:last-child img');
+        if (newImageCard) {
+            newImageCard.onload = function() {
+                showNotification('Image loaded successfully!', 'success');
+            };
+            newImageCard.onerror = function() {
+                showNotification('Warning: Image could not be loaded from URL', 'error');
+            };
+        }
+    }, 100);
+}
+
+function quickAddImage(url) {
+    addNewImageField(url);
+    showNotification('Image added successfully!', 'success');
+    
+    // Show preview immediately
+    setTimeout(() => {
+        const newImageCard = document.querySelector('.image-card:last-child img');
+        if (newImageCard) {
+            newImageCard.onload = function() {
+                showNotification('Image loaded successfully!', 'success');
+            };
+            newImageCard.onerror = function() {
+                showNotification('Warning: Image could not be loaded', 'error');
+            };
+        }
+    }, 100);
 }
 
 function openCloudinaryModal() {
