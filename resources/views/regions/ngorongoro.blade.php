@@ -2,36 +2,24 @@
 
 @section('content')
 @php
-    // Get Ngorongoro destination from database
-    $ngorongoroDestination = \App\Models\Destination::where('name', 'LIKE', '%Ngorongoro%')->first();
-    
-    // Get images from database
-    $ngorongoroImages = [];
-    if ($ngorongoroDestination && !empty($ngorongoroDestination->images)) {
-        $ngorongoroImages = $ngorongoroDestination->images;
-    }
-    
-    // Fallback to Cloudinary if no database images
-    if (empty($ngorongoroImages)) {
-        $ngorongoroImages = [
-            // Ngorongoro-specific images
-            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468733/prideeee_gci90s.jpg',
-            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468733/pridee_hygado.jpg',
-            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468733/pride_serengeti_exuvmx.jpg',
-            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468733/Pride_seregetiiii_dbjtes.jpg',
-            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468733/Rhinn0_vipbmb.jpg',
-            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468735/Rhino..._pa4yfo.jpg',
-            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468735/River_crossing_huq2k4.jpg',
-            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468735/Rhino_warthog_fvlbgu.jpg'
-        ];
-    }
+    // Hardcoded seeder images for Ngorongoro Crater
+    $ngorongoroImages = [
+        'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468777/waterbuck_ggd5wl.jpg',
+        'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468777/Waterbuckk_p4mtpz.jpg',
+        'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468777/warttthhog_sg9xqf.jpg',
+        'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468776/warthog-6605830_1920_f8rvu8.jpg',
+        'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468776/warthog-5493446_1920_t4ncij.jpg',
+        'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468775/warthog-4490389_1920_mu6bly.jpg',
+        'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468774/Vulture_xd2vgg.jpg',
+        'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468774/Untitled-11111_jypaex.jpg'
+    ];
 @endphp
 <!-- Advanced Hero Section -->
 <section class="relative min-h-screen overflow-hidden bg-slate-900">
     <!-- Hero Background with Parallax Layers -->
     <div class="absolute inset-0 z-0">
         <!-- Main Background -->
-        <img src="{{ $ngorongoroImages[0] ?? 'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468733/prideeee_gci90s.jpg' }}" alt="Ngorongoro Conservation Area" class="w-full h-full object-cover object-center opacity-40 hero-bg">
+        <img src="{{ $ngorongoroImages[0] ?? 'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468777/waterbuck_ggd5wl.jpg' }}" alt="Ngorongoro Conservation Area" class="w-full h-full object-cover object-center opacity-40 hero-bg">
         
         <!-- Gradient Overlays -->
         <div class="absolute inset-0 bg-gradient-to-b from-slate-900/80 via-slate-900/60 to-slate-900"></div>
@@ -185,7 +173,7 @@
             <div class="group relative">
                 <div class="bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-emerald-100">
                     <div class="relative h-64 overflow-hidden">
-                        <img src="{{ $ngorongoroImages[2] ?? $ngorongoroImages[0] ?? 'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468733/pride_serengeti_exuvmx.jpg' }}" alt="Lion" class="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700">
+                        <img src="https://res.cloudinary.com/dqflffa1o/image/upload/v1777468772/tiger-5167034_1920_leu8nd.jpg" alt="Lion" class="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700">
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/40 to-transparent"></div>
                         <div class="absolute top-4 right-4 bg-orange-500 text-white px-3 py-1 rounded-full text-sm font-bold">King</div>
                         <div class="absolute bottom-4 left-4 right-4">
@@ -207,7 +195,7 @@
             <div class="group relative">
                 <div class="bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-emerald-100">
                     <div class="relative h-64 overflow-hidden">
-                        <img src="{{ $ngorongoroImages[3] ?? $ngorongoroImages[0] ?? 'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468733/Pride_seregetiiii_dbjtes.jpg' }}" alt="Leopard" class="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700">
+                        <img src="https://res.cloudinary.com/dqflffa1o/image/upload/v1777468771/tanzania-2275107_1920_cmihwj.jpg" alt="Leopard" class="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700">
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/40 to-transparent"></div>
                         <div class="absolute top-4 right-4 bg-yellow-500 text-white px-3 py-1 rounded-full text-sm font-bold">Solitary</div>
                         <div class="absolute bottom-4 left-4 right-4">
@@ -229,7 +217,7 @@
             <div class="group relative">
                 <div class="bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-emerald-100">
                     <div class="relative h-64 overflow-hidden">
-                        <img src="{{ $ngorongoroImages[4] ?? $ngorongoroImages[0] ?? 'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468735/Rhinn0_vipbmb.jpg' }}" alt="Elephant" class="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700">
+                        <img src="https://res.cloudinary.com/dqflffa1o/image/upload/v1777468772/Tarangire_ck2ohe.jpg" alt="Elephant" class="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700">
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/40 to-transparent"></div>
                         <div class="absolute top-4 right-4 bg-gray-600 text-white px-3 py-1 rounded-full text-sm font-bold">Gentle Giant</div>
                         <div class="absolute bottom-4 left-4 right-4">
@@ -251,7 +239,7 @@
             <div class="group relative">
                 <div class="bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-emerald-100">
                     <div class="relative h-64 overflow-hidden">
-                        <img src="{{ $ngorongoroImages[5] ?? $ngorongoroImages[0] ?? 'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468735/Rhino..._pa4yfo.jpg' }}" alt="Rhino" class="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700">
+                        <img src="https://res.cloudinary.com/dqflffa1o/image/upload/v1777468771/spphoto_skxxer.jpg" alt="Rhino" class="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700">
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/40 to-transparent"></div>
                         <div class="absolute top-4 right-4 bg-purple-500 text-white px-3 py-1 rounded-full text-sm font-bold">Rare</div>
                         <div class="absolute bottom-4 left-4 right-4">
@@ -273,7 +261,7 @@
             <div class="group relative">
                 <div class="bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-emerald-100">
                     <div class="relative h-64 overflow-hidden">
-                        <img src="{{ $ngorongoroImages[6] ?? $ngorongoroImages[0] ?? 'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468735/River_crossing_huq2k4.jpg' }}" alt="Buffalo" class="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700">
+                        <img src="https://res.cloudinary.com/dqflffa1o/image/upload/v1777468777/waterbuck_ggd5wl.jpg" alt="Buffalo" class="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700">
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/40 to-transparent"></div>
                         <div class="absolute top-4 right-4 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-bold">Powerful</div>
                         <div class="absolute bottom-4 left-4 right-4">
@@ -495,7 +483,7 @@
                 <div class="h-10"></div>
                 <div class="bg-slate-950 text-white rounded-[3.5rem] overflow-hidden p-12 relative">
                     <div class="absolute inset-0 opacity-30">
-                        <img src="{{ $ngorongoroImages[1] ?? $ngorongoroImages[0] ?? 'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468733/pridee_hygado.jpg' }}" alt="Ngorongoro" class="w-full h-full object-cover object-center">
+                        <img src="https://res.cloudinary.com/dqflffa1o/image/upload/v1777468771/spphoto_skxxer.jpg" alt="Ngorongoro" class="w-full h-full object-cover object-center">
                     </div>
                     <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent"></div>
                     <div class="relative z-10">
@@ -682,7 +670,7 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div class="group relative overflow-hidden rounded-3xl shadow-lg hover:shadow-2xl transition-all">
                     <div class="relative h-64">
-                        <img src="{{ $ngorongoroImages[2] ?? $ngorongoroImages[0] ?? 'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468733/pride_serengeti_exuvmx.jpg' }}" alt="Luxury Lodge" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80" alt="Luxury Lodge" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/40 to-transparent"></div>
                         <div class="absolute bottom-4 left-4 right-4">
                             <h4 class="text-2xl font-serif text-white font-bold">Ngorongoro Serena Lodge</h4>

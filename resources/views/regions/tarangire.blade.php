@@ -2,29 +2,17 @@
 
 @section('content')
 @php
-    // Get Tarangire destination from database
-    $tarangireDestination = \App\Models\Destination::where('name', 'LIKE', '%Tarangire%')->first();
-    
-    // Get images from database
-    $tarangireImages = [];
-    if ($tarangireDestination && !empty($tarangireDestination->images)) {
-        $tarangireImages = $tarangireDestination->images;
-    }
-    
-    // Fallback to Cloudinary if no database images
-    if (empty($tarangireImages)) {
-        $tarangireImages = [
-            // Tarangire-specific images
-            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468772/Tarangire_ck2ohe.jpg',
-            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468772/tarangire-76483_1920_c7sttf.jpg',
-            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468777/waterbuck_ggd5wl.jpg',
-            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468788/Zeebraaa_cpydg9.jpg',
-            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468772/tree-3079250_1280_m8apya.jpg',
-            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/tree-2600482_1920_c50vn6.jpg',
-            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/umbwee_biardh.jpg',
-            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/trekkin_crg3w9.jpg'
-        ];
-    }
+    // Hardcoded seeder images for Tarangire NP
+    $tarangireImages = [
+        'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468772/Tarangire_ck2ohe.jpg',
+        'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468772/tarangire-76483_1920_c7sttf.jpg',
+        'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468771/tanzania-2275107_1920_cmihwj.jpg',
+        'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468771/spphoto_skxxer.jpg',
+        'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468771/sutirta-budiman-H9CUOsPXBjw-unsplash_sgyw6a.jpg',
+        'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468770/strauss-4642855_1280_i5umy2.jpg',
+        'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468770/sunset_eleph_hqxiur.jpg',
+        'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468770/stella-point-4032287_1280_bpmyyh.jpg'
+    ];
 @endphp
 
 <section class="relative pt-48 pb-32 overflow-hidden bg-slate-900">

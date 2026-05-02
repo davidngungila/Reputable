@@ -2,28 +2,17 @@
 
 @section('content')
 @php
-    // Get Serengeti destination from database
-    $serengetiDestination = \App\Models\Destination::where('name', 'LIKE', '%Serengeti%')->first();
-    
-    // Get images from database
-    $serengetiImages = [];
-    if ($serengetiDestination && !empty($serengetiDestination->images)) {
-        $serengetiImages = $serengetiDestination->images;
-    }
-    
-    // Fallback to Cloudinary if no database images
-    if (empty($serengetiImages)) {
-        $serengetiImages = [
-            // Serengeti-specific images
-            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468765/Serengeti_wbeest_lxzeyh.jpg',
-            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468764/serengeti_central_ok01lq.jpg',
-            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468785/Wildbeest_Migration_vnkbqc.jpg',
-            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468785/wildlife-3128802_1920_skrfdw.jpg',
-            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468785/wildlife-3146790_1920_xstzi1.jpg',
-            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468786/Wildbeest_Migration_vnkbqc.jpg',
-            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468785/wildlife-3128802_1920_skrfdw.jpg'
-        ];
-    }
+    // Hardcoded seeder images for Serengeti NP
+    $serengetiImages = [
+        'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468786/Wildbeest_Migration_vnkbqc.jpg',
+        'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468785/wildlife-3128802_1920_skrfdw.jpg',
+        'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468785/wildlife-3146790_1920_xstzi1.jpg',
+        'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468785/wildmovement_enpccp.jpg',
+        'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468785/wildebeests-7811819_1920_yihcmq.jpg',
+        'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468785/Wildbeest_Migration_vnkbqc.jpg',
+        'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468784/wildebeest-migration-2322111_1920_zvehye.jpg',
+        'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468784/wildebeests-7559592_1920_ow1vds.jpg'
+    ];
 @endphp
 <!-- Enhanced Hero Section -->
 <section class="relative pt-48 pb-32 overflow-hidden bg-slate-900">

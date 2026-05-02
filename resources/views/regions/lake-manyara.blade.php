@@ -4,32 +4,21 @@
 
 @section('content')
 @php
-    // Get Lake Manyara destination from database
-    $lakeManyaraDestination = \App\Models\Destination::where('name', 'LIKE', '%Lake Manyara%')->first();
-    
-    // Get images from database
-    $lakeManyaraImages = [];
-    if ($lakeManyaraDestination && !empty($lakeManyaraDestination->images)) {
-        $lakeManyaraImages = $lakeManyaraDestination->images;
-    }
-    
-    // Fallback to Cloudinary if no database images
-    if (empty($lakeManyaraImages)) {
-        $lakeManyaraImages = [
-            // Lake Manyara-specific images
-            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468770/sunset_eleph_hqxiur.jpg',
-            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468770/stella-point-4032287_1280_bpmyyh.jpg',
-            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468770/springbok-8063883_1920_bcrj32.jpg',
-            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468770/strauss-4642855_1280_i5umy2.jpg',
-            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468770/sunset_eleph_hqxiur.jpg'
-        ];
-    }
+    // Hardcoded seeder images for Lake Manyara NP
+    $lakeManyaraImages = [
+        'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468770/springbok-8063883_1920_bcrj32.jpg',
+        'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468769/Sovegnier_iqyqga.jpg',
+        'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468769/south-africa-4156075_1280_zohmv4.jpg',
+        'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468768/southern-ground-hornbill-4828629_1280_cj1tqd.jpg',
+        'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468768/south-africa-3084196_1920_jqkkee.jpg',
+        'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468768/south-africa-4155306_1280_wy6d2r.jpg'
+    ];
 @endphp
 <div class="min-h-screen">
     <!-- Enhanced Hero Section -->
     <div class="relative h-screen max-h-[900px] overflow-hidden">
         <div class="absolute inset-0">
-            <img src="{{ $lakeManyaraImages[0] ?? 'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468770/sunset_eleph_hqxiur.jpg' }}" 
+            <img src="{{ $lakeManyaraImages[0] ?? 'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468770/springbok-8063883_1920_bcrj32.jpg' }}" 
                  alt="Lake Manyara National Park" class="w-full h-full object-cover">
             <div class="absolute inset-0 bg-gradient-to-b from-black/50 via-black/70 to-black/90"></div>
         </div>
