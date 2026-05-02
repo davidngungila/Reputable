@@ -380,13 +380,13 @@ document.addEventListener('DOMContentLoaded', function() {
                     <h3 class="text-xl font-bold mb-6">Need Immediate Help?</h3>
                     
                     <div class="space-y-4">
-                        <a href="tel:+255622239304" class="flex items-center text-white hover:text-white/80 transition-colors">
+                        <a href="tel:+255675255523" class="flex items-center text-white hover:text-white/80 transition-colors">
                             <div class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center mr-3">
                                 <i class="ph ph-phone"></i>
                             </div>
                             <div>
                                 <div class="font-semibold">Call Us</div>
-                                <div class="text-sm text-white/80">+255 622 239 304</div>
+                                <div class="text-sm text-white/80">+255 675 255 523</div>
                             </div>
                         </a>
                         
@@ -592,13 +592,13 @@ document.addEventListener('DOMContentLoaded', function() {
                             </div>
                         </a>
 
-                        <a href="tel:+255123456789" class="flex items-center p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors group">
+                        <a href="tel:+255675255523" class="flex items-center p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors group">
                             <div class="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center text-white mr-4 group-hover:scale-110 transition-transform">
                                 <i class="ph-bold ph-phone text-xl"></i>
                             </div>
                             <div>
                                 <div class="font-semibold text-gray-900">Call Us</div>
-                                <div class="text-sm text-gray-600">+255 123 456 789</div>
+                                <div class="text-sm text-gray-600">+255 675 255 523</div>
                             </div>
                         </a>
 

@@ -88,7 +88,7 @@
     </div>
 
     <!-- Quick Info Bar -->
-    <div class="bg-white border-b border-slate-200 sticky top-0 z-40 shadow-sm">
+    <div class="bg-white border-b border-slate-200 sticky top-24 z-30 shadow-sm">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col sm:flex-row items-center justify-between py-3 sm:py-4 gap-4">
                 <div class="flex flex-wrap items-center gap-4 sm:gap-6 md:gap-8">
@@ -110,7 +110,7 @@
                     </div>
                 </div>
                 <div class="flex gap-3">
-                    <button onclick="scrollToSection('booking')" class="px-6 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors font-medium">
+                    <button onclick="scrollToSection('booking')" class="px-6 py-2 bg-[#1F5A3A] text-white rounded-lg hover:bg-[#2E7A5A] transition-colors font-medium">
                         Book Now
                     </button>
                     <button onclick="scrollToSection('itinerary')" class="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-medium">
@@ -121,26 +121,26 @@
         </div>
     </div>
 
-    <div class="container mx-auto px-4 py-8">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <!-- Main Content -->
             <div class="lg:col-span-2 space-y-8">
                 <!-- Overview -->
-                <section class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
-                    <h2 class="text-2xl font-bold text-gray-900 mb-4">Overview</h2>
+                <section class="bg-white rounded-xl shadow-sm border border-slate-100 p-6 md:p-8">
+                    <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-6">Overview</h2>
                     <div class="prose prose-gray max-w-none">
-                        <p class="text-gray-600 leading-relaxed">{{ $tour->description }}</p>
+                        <p class="text-gray-600 leading-relaxed text-base md:text-lg">{{ $tour->description }}</p>
                     </div>
                     
                     <!-- Highlights -->
                     @if(!empty($tour->highlights))
-                    <div class="mt-6 pt-6 border-t border-gray-200">
-                        <h3 class="text-lg font-semibold text-gray-900 mb-4">Tour Highlights</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <div class="mt-8 pt-8 border-t border-slate-200">
+                        <h3 class="text-xl md:text-2xl font-semibold text-gray-900 mb-6">Tour Highlights</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             @foreach($tour->highlights as $highlight)
-                            <div class="flex items-center">
-                                <i class="ph-bold ph-check-circle text-emerald-600 mr-3"></i>
-                                <span class="text-gray-700">{{ $highlight }}</span>
+                            <div class="flex items-center p-3 bg-slate-50 rounded-lg">
+                                <i class="ph-bold ph-check-circle text-[#1F5A3A] mr-3 text-xl"></i>
+                                <span class="text-gray-700 font-medium">{{ $highlight }}</span>
                             </div>
                             @endforeach
                         </div>
@@ -149,43 +149,43 @@
                 </section>
 
                 <!-- Itinerary -->
-                <section id="itinerary" class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
-                    <div class="flex items-center justify-between mb-6">
-                        <h2 class="text-2xl font-bold text-gray-900">Detailed Itinerary</h2>
+                <section id="itinerary" class="bg-white rounded-xl shadow-sm border border-slate-100 p-6 md:p-8">
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 sm:mb-8 gap-4">
+                        <h2 class="text-2xl md:text-3xl font-bold text-gray-900">Detailed Itinerary</h2>
                         <div class="flex gap-2">
-                            <button onclick="toggleItineraryView('expanded')" id="expanded-view-btn" class="px-3 py-1 bg-emerald-100 text-emerald-700 rounded-lg text-sm font-medium">
+                            <button onclick="toggleItineraryView('expanded')" id="expanded-view-btn" class="px-3 py-1.5 md:px-4 md:py-2 bg-[#1F5A3A]/10 text-[#1F5A3A] rounded-lg text-sm font-medium">
                                 <i class="ph-bold ph-list-bullets mr-1"></i>Expanded
                             </button>
-                            <button onclick="toggleItineraryView('compact')" id="compact-view-btn" class="px-3 py-1 bg-gray-100 text-gray-700 rounded-lg text-sm font-medium">
+                            <button onclick="toggleItineraryView('compact')" id="compact-view-btn" class="px-3 py-1.5 md:px-4 md:py-2 bg-slate-100 text-slate-700 rounded-lg text-sm font-medium">
                                 <i class="ph-bold ph-list mr-1"></i>Compact
                             </button>
                         </div>
                     </div>
                     
-                    <div id="itinerary-expanded" class="space-y-6">
+                    <div id="itinerary-expanded" class="space-y-8">
                         @foreach($tour->itineraries ?? [] as $day)
-                        <div class="border-l-4 border-emerald-500 pl-6 relative">
-                            <div class="absolute -left-2 top-0 w-4 h-4 bg-emerald-500 rounded-full"></div>
-                            <div class="flex items-center justify-between mb-3">
-                                <h3 class="text-lg font-semibold text-gray-900">Day {{ $day->day_number }}: {{ $day->title }}</h3>
-                                <span class="text-sm text-gray-600">{{ $day->meals ?? 'All meals included' }}</span>
+                        <div class="border-l-4 border-[#1F5A3A] pl-6 relative bg-slate-50 rounded-r-xl p-6">
+                            <div class="absolute -left-2 top-6 w-4 h-4 bg-[#1F5A3A] rounded-full"></div>
+                            <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-4 gap-2">
+                                <h3 class="text-lg md:text-xl font-semibold text-gray-900">Day {{ $day->day_number }}: {{ $day->title }}</h3>
+                                <span class="text-sm text-slate-600 bg-white px-3 py-1 rounded-full">{{ $day->meals ?? 'All meals included' }}</span>
                             </div>
-                            <p class="text-gray-600 mb-4">{{ $day->description }}</p>
+                            <p class="text-gray-700 mb-6 text-base leading-relaxed">{{ $day->description }}</p>
                             
                             @if(!empty($day->activities))
-                            <div class="mb-4">
-                                <h4 class="text-sm font-semibold text-gray-700 mb-2">Activities:</h4>
+                            <div class="mb-6">
+                                <h4 class="text-sm font-semibold text-gray-700 mb-3">Activities:</h4>
                                 <div class="flex flex-wrap gap-2">
                                     @foreach($day->activities as $activity)
-                                    <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm">{{ $activity }}</span>
+                                    <span class="px-3 py-1.5 bg-[#E67A2E]/10 text-[#E67A2E] rounded-full text-sm font-medium">{{ $activity }}</span>
                                     @endforeach
                                 </div>
                             </div>
                             @endif
                             
                             @if(!empty($day->accommodation))
-                            <div class="bg-gray-50 rounded-lg p-4">
-                                <h4 class="text-sm font-semibold text-gray-700 mb-1">Accommodation:</h4>
+                            <div class="bg-white rounded-lg p-4 border border-slate-200">
+                                <h4 class="text-sm font-semibold text-gray-700 mb-2">Accommodation:</h4>
                                 <p class="text-gray-600">{{ $day->accommodation }}</p>
                             </div>
                             @endif
