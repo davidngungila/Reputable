@@ -1,10 +1,29 @@
 @extends('layouts.public')
 
 @section('content')
+@php
+    // Get Serengeti destination from database
+    $serengetiDestination = \App\Models\Destination::where('name', 'LIKE', '%Serengeti%')->first();
+    
+    // Get images from database
+    $serengetiImages = [];
+    if ($serengetiDestination && !empty($serengetiDestination->images)) {
+        $serengetiImages = $serengetiDestination->images;
+    }
+    
+    // Fallback to Cloudinary if no database images
+    if (empty($serengetiImages)) {
+        $serengetiImages = [
+            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468786/Wildbeest_Migration_vnkbqc.jpg',
+            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468785/wildlife-3128802_1920_skrfdw.jpg',
+            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468785/wildlife-3146790_1920_xstzi1.jpg'
+        ];
+    }
+@endphp
 <!-- Enhanced Hero Section -->
 <section class="relative pt-48 pb-32 overflow-hidden bg-slate-900">
     <div class="absolute inset-0 z-0">
-        <img src="https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=2000&q=80" alt="Serengeti National Park" class="w-full h-full object-cover blur-sm opacity-40">
+        <img src="{{ $serengetiImages[0] ?? 'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468786/Wildbeest_Migration_vnkbqc.jpg' }}" alt="Serengeti National Park" class="w-full h-full object-cover blur-sm opacity-40">
         <div class="absolute inset-0 bg-gradient-to-b from-slate-900/60 via-slate-900 to-slate-900"></div>
     </div>
     <div class="max-w-7xl mx-auto px-6 relative z-10 text-center">
