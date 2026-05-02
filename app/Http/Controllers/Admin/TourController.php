@@ -158,8 +158,42 @@ class TourController extends Controller
 
     public function destroy(Tour $tour)
     {
-        $tour->delete();
-        return redirect()->route('admin.tours.index')->with('success', 'Tour deleted successfully.');
+        // Check if tour has related bookings
+        $bookingCount = $tour->bookings()->count();
+        
+        if ($bookingCount > 0) {
+            return redirect()->route('admin.tours.index')->with('error', 
+                "Cannot delete tour '{$tour->name}' because it has {$bookingCount} associated booking(s). " .
+                "Please handle the bookings first or consider archiving the tour instead."
+            );
+        }
+        
+        // Delete related records in proper order to avoid foreign key constraints
+        try {
+            // Delete itineraries
+            $tour->itineraries()->delete();
+            
+            // Delete tour destinations (pivot table)
+            $tour->destinations()->detach();
+            
+            // Delete tour equipment (pivot table)
+            $tour->equipment()->detach();
+            
+            // Delete tour guide recommendations (pivot table)
+            $tour->recommendedGuides()->detach();
+            
+            // Delete the tour
+            $tour->delete();
+            
+            return redirect()->route('admin.tours.index')->with('success', 'Tour deleted successfully.');
+            
+        } catch (\Exception $e) {
+            \Log::error('Error deleting tour: ' . $e->getMessage());
+            
+            return redirect()->route('admin.tours.index')->with('error', 
+                'Error deleting tour. Please try again or contact administrator.'
+            );
+        }
     }
 
     // Itinerary Builder
