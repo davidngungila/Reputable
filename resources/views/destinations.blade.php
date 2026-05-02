@@ -73,11 +73,31 @@
         @foreach($destinations as $destination)
         <a href="{{ route('destinations.show', $destination->id) }}" class="group bg-white rounded-[2rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border border-slate-100 block">
             <div class="relative h-64 overflow-hidden">
-                @if(!empty($destination->images) && count($destination->images) > 0)
-                    <img src="{{ asset($destination->images[0]) }}" alt="{{ $destination->name }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                @else
-                    <img src="{{ asset('images/01.jpg') }}" alt="{{ $destination->name }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                @endif
+                @php
+                    $imageUrl = '';
+                    if (!empty($destination->images) && count($destination->images) > 0) {
+                        $firstImage = $destination->images[0];
+                        // Check if it's a Cloudinary URL or external URL
+                        if (str_starts_with($firstImage, 'http') || str_starts_with($firstImage, 'https')) {
+                            $imageUrl = $firstImage;
+                        } else {
+                            $imageUrl = asset($firstImage);
+                        }
+                    } else {
+                        // Use Cloudinary sample images as fallback
+                        $sampleImages = [
+                            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468788/Zeebraaa_cpydg9.jpg',
+                            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468772/tiger-5167034_1920_leu8nd.jpg',
+                            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468771/tanzania-2275107_1920_cmihwj.jpg',
+                            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468772/Tarangire_ck2ohe.jpg',
+                            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468777/waterbuck_ggd5wl.jpg'
+                        ];
+                        $imageUrl = $sampleImages[array_rand($sampleImages)];
+                    }
+                @endphp
+                <img src="{{ $imageUrl }}" alt="{{ $destination->name }}" 
+                     class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                     onerror="this.src='https://res.cloudinary.com/dqflffa1o/image/upload/v1777468788/Zeebraaa_cpydg9.jpg'; this.onerror=null;">
                 <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-md p-2 rounded-full text-emerald-500 shadow-sm">
                     <i class="ph-bold ph-heart text-xl"></i>
                 </div>
