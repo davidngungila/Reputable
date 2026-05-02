@@ -344,6 +344,14 @@
                     </div>
                 </div>
                 
+                <!-- View All Activities -->
+                <div class="relative py-8">
+                    <a href="{{ route('activities.index') }}" class="nav-link font-bold text-emerald-600 transition-colors flex items-center gap-2">
+                        <i class="ph ph-compass text-xl"></i>
+                        View All Activities
+                    </a>
+                </div>
+                
                 <!-- Things to Do - Essential Activities -->
                 <div class="relative group py-8">
                     <a href="/things-to-do" class="nav-link font-bold text-emerald-600 transition-colors flex items-center gap-1">
@@ -400,7 +408,7 @@
                                     </a>
                                 </div>
                                 <div class="mt-8 pt-6 border-t border-slate-50">
-                                    <a href="/tours" class="text-sm font-black text-emerald-600 flex items-center gap-2 hover:gap-3 transition-all">
+                                    <a href="{{ route('activities.index') }}" class="text-sm font-black text-emerald-600 flex items-center gap-2 hover:gap-3 transition-all">
                                         View All Activities <i class="ph ph-arrow-right"></i>
                                     </a>
                                 </div>
@@ -494,6 +502,11 @@
                             </div>
                         </div>
                     </div>
+
+                    <a href="{{ route('activities.index') }}" class="block text-2xl font-serif font-black text-slate-900 text-emerald-600 flex items-center gap-2">
+                        <i class="ph ph-compass text-2xl"></i>
+                        View All Activities
+                    </a>
 
                     <a href="/about" class="block text-2xl font-serif font-black text-slate-900 text-emerald-600">About Us</a>
                     <a href="/contact" class="block text-2xl font-serif font-black text-slate-900 text-emerald-600">Contact</a>

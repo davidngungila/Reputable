@@ -6,7 +6,7 @@
     <!-- Hero Background with Parallax Layers -->
     <div class="absolute inset-0 z-0">
         <!-- Main Background -->
-        <img src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=2000&q=80" alt="Ngorongoro Conservation Area" class="w-full h-full object-cover opacity-40 hero-bg">
+        <img src="https://res.cloudinary.com/dqflffa1o/image/upload/v1777468788/Zeebraaa_cpydg9.jpg" alt="Ngorongoro Conservation Area" class="w-full h-full object-cover object-center opacity-40 hero-bg">
         
         <!-- Gradient Overlays -->
         <div class="absolute inset-0 bg-gradient-to-b from-slate-900/80 via-slate-900/60 to-slate-900"></div>
@@ -160,7 +160,7 @@
             <div class="group relative">
                 <div class="bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-emerald-100">
                     <div class="relative h-64 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1605566899347-378fd0c4a2c6?auto=format&fit=crop&w=800&q=80" alt="Lion" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <img src="https://res.cloudinary.com/dqflffa1o/image/upload/v1777468772/tiger-5167034_1920_leu8nd.jpg" alt="Lion" class="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700">
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/40 to-transparent"></div>
                         <div class="absolute top-4 right-4 bg-orange-500 text-white px-3 py-1 rounded-full text-sm font-bold">King</div>
                         <div class="absolute bottom-4 left-4 right-4">
@@ -182,7 +182,7 @@
             <div class="group relative">
                 <div class="bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-emerald-100">
                     <div class="relative h-64 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1559805693-e91c12d30d70?auto=format&fit=crop&w=800&q=80" alt="Leopard" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <img src="https://res.cloudinary.com/dqflffa1o/image/upload/v1777468771/tanzania-2275107_1920_cmihwj.jpg" alt="Leopard" class="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700">
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/40 to-transparent"></div>
                         <div class="absolute top-4 right-4 bg-yellow-500 text-white px-3 py-1 rounded-full text-sm font-bold">Solitary</div>
                         <div class="absolute bottom-4 left-4 right-4">
@@ -204,7 +204,7 @@
             <div class="group relative">
                 <div class="bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-emerald-100">
                     <div class="relative h-64 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1578632292335-df3abbb0d586?auto=format&fit=crop&w=800&q=80" alt="Elephant" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <img src="https://res.cloudinary.com/dqflffa1o/image/upload/v1777468772/Tarangire_ck2ohe.jpg" alt="Elephant" class="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700">
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/40 to-transparent"></div>
                         <div class="absolute top-4 right-4 bg-gray-600 text-white px-3 py-1 rounded-full text-sm font-bold">Gentle Giant</div>
                         <div class="absolute bottom-4 left-4 right-4">
@@ -226,7 +226,7 @@
             <div class="group relative">
                 <div class="bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-emerald-100">
                     <div class="relative h-64 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?auto=format&fit=crop&w=800&q=80" alt="Rhino" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <img src="https://res.cloudinary.com/dqflffa1o/image/upload/v1777468771/spphoto_skxxer.jpg" alt="Rhino" class="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700">
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/40 to-transparent"></div>
                         <div class="absolute top-4 right-4 bg-purple-500 text-white px-3 py-1 rounded-full text-sm font-bold">Rare</div>
                         <div class="absolute bottom-4 left-4 right-4">
@@ -248,7 +248,7 @@
             <div class="group relative">
                 <div class="bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-emerald-100">
                     <div class="relative h-64 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1565348811341-3c2b5b099c5d?auto=format&fit=crop&w=800&q=80" alt="Buffalo" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <img src="https://res.cloudinary.com/dqflffa1o/image/upload/v1777468777/waterbuck_ggd5wl.jpg" alt="Buffalo" class="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700">
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/40 to-transparent"></div>
                         <div class="absolute top-4 right-4 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-bold">Powerful</div>
                         <div class="absolute bottom-4 left-4 right-4">
@@ -433,10 +433,10 @@
 <section class="py-32 bg-white">
     @php
         $gallery = [
-            'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=1600&q=80',
-            'https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=1600&q=80',
-            'https://images.unsplash.com/photo-1516632664305-eda5d8b9b525?auto=format&fit=crop&w=1600&q=80',
-            'https://images.unsplash.com/photo-1474511320723-9a56873867b5?auto=format&fit=crop&w=1600&q=80',
+            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468788/Zeebraaa_cpydg9.jpg',
+            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468772/tiger-5167034_1920_leu8nd.jpg',
+            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468771/tanzania-2275107_1920_cmihwj.jpg',
+            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468772/Tarangire_ck2ohe.jpg',
         ];
     @endphp
     <div class="max-w-7xl mx-auto px-6">
@@ -474,7 +474,7 @@
                 <div class="h-10"></div>
                 <div class="bg-slate-950 text-white rounded-[3.5rem] overflow-hidden p-12 relative">
                     <div class="absolute inset-0 opacity-30">
-                        <img src="https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=1200&q=80" alt="Ngorongoro" class="w-full h-full object-cover">
+                        <img src="https://res.cloudinary.com/dqflffa1o/image/upload/v1777468771/spphoto_skxxer.jpg" alt="Ngorongoro" class="w-full h-full object-cover object-center">
                     </div>
                     <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent"></div>
                     <div class="relative z-10">

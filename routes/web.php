@@ -218,6 +218,10 @@ Route::get('/kilimanjaro', function () {
     return view('kilimanjaro');
 })->name('kilimanjaro');
 
+Route::get('/activities', function () {
+    return view('activities.index');
+})->name('activities.index');
+
 Route::prefix('regions')->name('regions.')->group(function () {
     Route::get('/serengeti', function () { return view('regions.serengeti'); })->name('serengeti');
     Route::get('/ngorongoro', function () { return view('regions.ngorongoro'); })->name('ngorongoro');
