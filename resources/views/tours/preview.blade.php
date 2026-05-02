@@ -3,9 +3,9 @@
 @section('title', $tour->name . ' - Preview')
 
 @section('content')
-<div class="min-h-screen bg-gray-50">
+<div class="min-h-screen bg-slate-50">
     <!-- Enhanced Hero Section -->
-    <div class="relative h-screen max-h-[700px] bg-gradient-to-br from-emerald-600 via-blue-600 to-purple-600 overflow-hidden">
+    <div class="relative h-[60vh] md:h-[70vh] lg:h-[80vh] max-h-[700px] bg-gradient-to-br from-[#1F5A3A] via-[#2E7A5A] to-[#1F5A3A] overflow-hidden">
         @if(!empty($tour->images) && count($tour->images) > 0)
             <div class="absolute inset-0">
                 <img src="{{ asset($tour->images[0]) }}" alt="{{ $tour->name }}" 
@@ -13,7 +13,7 @@
                 <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
             </div>
         @else
-            <div class="absolute inset-0 bg-gradient-to-br from-emerald-600 via-blue-600 to-purple-600">
+            <div class="absolute inset-0 bg-gradient-to-br from-[#1F5A3A] via-[#2E7A5A] to-[#1F5A3A]">
                 <div class="absolute inset-0 bg-black/20"></div>
             </div>
         @endif
@@ -21,31 +21,31 @@
         <!-- Animated Background Elements -->
         <div class="absolute inset-0">
             <div class="absolute top-20 left-10 w-32 h-32 bg-white/10 rounded-full blur-3xl animate-pulse"></div>
-            <div class="absolute bottom-20 right-10 w-48 h-48 bg-emerald-400/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
-            <div class="absolute top-1/2 left-1/4 w-24 h-24 bg-blue-400/10 rounded-full blur-2xl animate-pulse delay-500"></div>
+            <div class="absolute bottom-20 right-10 w-48 h-48 bg-[#E67A2E]/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+            <div class="absolute top-1/2 left-1/4 w-24 h-24 bg-[#E67A2E]/10 rounded-full blur-2xl animate-pulse delay-500"></div>
         </div>
         
-        <div class="relative container mx-auto px-4 h-full flex items-center justify-center">
-            <div class="text-white max-w-4xl text-center">
+        <div class="relative container mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-center">
+            <div class="text-white max-w-4xl text-center px-4">
                 <!-- Premium Badge -->
-                <div class="flex items-center justify-center gap-3 mb-6 flex-wrap">
-                    <span class="px-4 py-2 bg-gradient-to-r from-yellow-400 to-orange-500 text-black rounded-full text-sm font-bold shadow-lg">
-                        <i class="ph-bold ph-crown mr-2"></i>PREMIUM TOUR
+                <div class="flex items-center justify-center gap-2 md:gap-3 mb-4 md:mb-6 flex-wrap">
+                    <span class="px-3 py-1.5 md:px-4 md:py-2 bg-gradient-to-r from-[#E67A2E] to-[#E67A2E]/80 text-white rounded-full text-xs md:text-sm font-bold shadow-lg">
+                        <i class="ph-bold ph-crown mr-1 md:mr-2"></i>PREMIUM TOUR
                     </span>
-                    <span class="px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-sm font-medium">
+                    <span class="px-2 py-1 md:px-3 md:py-1.5 bg-white/20 backdrop-blur-sm rounded-full text-xs md:text-sm font-medium">
                         {{ ucfirst($tour->package_type ?? 'Safari Adventure') }}
                     </span>
-                    <span class="px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-xs font-medium">
+                    <span class="px-2 py-1 md:px-3 md:py-1.5 bg-white/20 backdrop-blur-sm rounded-full text-xs md:text-sm font-medium">
                         {{ $tour->duration_days }} Days
                     </span>
-                    <span class="px-3 py-1 bg-gradient-to-r from-emerald-500 to-blue-500 rounded-full text-sm font-medium shadow-lg">
+                    <span class="px-2 py-1 md:px-3 md:py-1.5 bg-gradient-to-r from-[#1F5A3A] to-[#2E7A5A] rounded-full text-xs md:text-sm font-medium shadow-lg">
                         <i class="ph-bold ph-sparkle mr-1"></i>Preview Mode
                     </span>
                 </div>
                 
                 <!-- Enhanced Title -->
-                <h1 class="text-2xl md:text-3xl font-bold mb-4 leading-tight">
-                    <span class="bg-gradient-to-r from-white to-emerald-200 bg-clip-text text-transparent">
+                <h1 class="text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold mb-3 md:mb-4 leading-tight">
+                    <span class="bg-gradient-to-r from-white to-[#E67A2E]/50 bg-clip-text text-transparent">
                         {{ $tour->name }}
                     </span>
                 </h1>
@@ -57,11 +57,11 @@
                 </div>
                 
                 <!-- Enhanced CTA Buttons -->
-                <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <button onclick="proceedToBooking()" class="px-8 py-4 bg-gradient-to-r from-emerald-500 to-blue-600 text-white rounded-xl font-bold text-lg hover:from-emerald-600 hover:to-blue-700 transition-all transform hover:scale-105 shadow-2xl">
+                <div class="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center">
+                    <button onclick="proceedToBooking()" class="px-6 py-3 md:px-8 md:py-4 bg-gradient-to-r from-[#1F5A3A] to-[#2E7A5A] text-white rounded-xl font-bold text-base md:text-lg hover:from-[#2E7A5A] hover:to-[#1F5A3A] transition-all transform hover:scale-105 shadow-2xl">
                         <i class="ph-bold ph-calendar-check mr-2"></i>Book This Adventure
                     </button>
-                    <button onclick="scrollToSection('itinerary')" class="px-8 py-4 bg-white/20 backdrop-blur-sm text-white rounded-xl font-bold text-lg hover:bg-white/30 transition-all border border-white/30">
+                    <button onclick="scrollToSection('itinerary')" class="px-6 py-3 md:px-8 md:py-4 bg-white/20 backdrop-blur-sm text-white rounded-xl font-bold text-base md:text-lg hover:bg-white/30 transition-all border border-white/30">
                         <i class="ph-bold ph-map-trifold mr-2"></i>View Itinerary
                     </button>
                 </div>
@@ -88,13 +88,13 @@
     </div>
 
     <!-- Quick Info Bar -->
-    <div class="bg-white border-b border-gray-200 sticky top-0 z-40 shadow-sm">
-        <div class="container mx-auto px-4">
-            <div class="flex items-center justify-between py-4">
-                <div class="flex items-center gap-8">
+    <div class="bg-white border-b border-slate-200 sticky top-0 z-40 shadow-sm">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col sm:flex-row items-center justify-between py-3 sm:py-4 gap-4">
+                <div class="flex flex-wrap items-center gap-4 sm:gap-6 md:gap-8">
                     <div class="text-center">
-                        <div class="text-2xl font-bold text-emerald-600">${{ number_format($tour->base_price, 0) }}</div>
-                        <div class="text-xs text-gray-600">per person</div>
+                        <div class="text-xl md:text-2xl font-bold text-[#1F5A3A]">${{ number_format($tour->base_price, 0) }}</div>
+                        <div class="text-xs text-slate-600">per person</div>
                     </div>
                     <div class="text-center">
                         <div class="text-lg font-semibold text-gray-900">{{ $tour->duration_days }}</div>

@@ -188,48 +188,6 @@
                     </select>
                 </div>
             </div>
-            
-            <!-- Quick Search Results -->
-            <div class="bg-emerald-50 rounded-2xl p-6 mb-6">
-                <div class="flex items-center justify-between">
-                    <div>
-                        <h4 class="font-bold text-slate-900 mb-2">Popular Safari Packages</h4>
-                        <div class="flex flex-wrap gap-3">
-                            <span class="px-3 py-1 bg-emerald-600 text-white rounded-full text-sm">5-Day Serengeti - From $1,850</span>
-                            <span class="px-3 py-1 bg-emerald-600 text-white rounded-full text-sm">7-Day Kilimanjaro - From $2,100</span>
-                            <span class="px-3 py-1 bg-emerald-600 text-white rounded-full text-sm">3-Day Zanzibar - From $650</span>
-                        </div>
-                    </div>
-                    <button class="px-8 py-3 bg-emerald-600 text-white font-bold rounded-full hover:bg-emerald-700 transition-all transform hover:scale-105">
-                        Search Tours
-                    </button>
-                </div>
-            </div>
-            
-            <!-- Special Offers -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div class="bg-gradient-to-r from-orange-50 to-orange-100 rounded-xl p-4 border border-orange-200">
-                    <div class="flex items-center gap-3 mb-2">
-                        <i class="ph-bold ph-fire text-orange-600 text-xl"></i>
-                        <span class="font-bold text-orange-800">Early Bird Special</span>
-                    </div>
-                    <p class="text-sm text-orange-700">Book 60 days ahead and save 15%</p>
-                </div>
-                <div class="bg-gradient-to-r from-blue-50 to-blue-100 rounded-xl p-4 border border-blue-200">
-                    <div class="flex items-center gap-3 mb-2">
-                        <i class="ph-bold ph-users-three text-blue-600 text-xl"></i>
-                        <span class="font-bold text-blue-800">Group Discount</span>
-                    </div>
-                    <p class="text-sm text-blue-700">Groups of 4+ get 10% off</p>
-                </div>
-                <div class="bg-gradient-to-r from-purple-50 to-purple-100 rounded-xl p-4 border border-purple-200">
-                    <div class="flex items-center gap-3 mb-2">
-                        <i class="ph-bold ph-gift text-purple-600 text-xl"></i>
-                        <span class="font-bold text-purple-800">Free Upgrade</span>
-                    </div>
-                    <p class="text-sm text-purple-700">Free airport transfer on all packages</p>
-                </div>
-            </div>
         </div>
     </div>
 </section>
