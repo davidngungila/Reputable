@@ -196,6 +196,86 @@ class TourController extends Controller
         }
     }
 
+    public function bulkDestroy(Request $request)
+    {
+        $ids = explode(',', $request->input('ids', ''));
+        
+        if (empty($ids)) {
+            return redirect()->back()->with('error', 'No tours selected for deletion.');
+        }
+        
+        $deletedCount = 0;
+        $failedCount = 0;
+        $failedTours = [];
+        
+        foreach ($ids as $id) {
+            try {
+                $tour = Tour::find($id);
+                if (!$tour) {
+                    $failedCount++;
+                    $failedTours[] = "Tour ID {$id} not found";
+                    continue;
+                }
+                
+                // Check if tour has related bookings
+                $bookingCount = $tour->bookings()->count();
+                if ($bookingCount > 0) {
+                    $failedCount++;
+                    $failedTours[] = "Tour '{$tour->name}' has {$bookingCount} bookings";
+                    continue;
+                }
+                
+                // Delete related records in proper order
+                $tour->itineraries()->delete();
+                $tour->destinations()->detach();
+                $tour->equipment()->detach();
+                $tour->recommendedGuides()->detach();
+                $tour->delete();
+                
+                $deletedCount++;
+                
+            } catch (\Exception $e) {
+                \Log::error('Error deleting tour ' . $id . ': ' . $e->getMessage());
+                $failedCount++;
+                $failedTours[] = "Tour ID {$id}: " . $e->getMessage();
+            }
+        }
+        
+        $message = "Bulk delete completed. {$deletedCount} tour(s) deleted successfully.";
+        if ($failedCount > 0) {
+            $message .= " {$failedCount} tour(s) failed to delete: " . implode(', ', $failedTours);
+            return redirect()->back()->with('warning', $message);
+        }
+        
+        return redirect()->back()->with('success', $message);
+    }
+
+    public function bulkActivate(Request $request)
+    {
+        $ids = explode(',', $request->input('ids', ''));
+        
+        if (empty($ids)) {
+            return redirect()->back()->with('error', 'No tours selected for activation.');
+        }
+        
+        $updated = Tour::whereIn('id', $ids)->update(['status' => 'active']);
+        
+        return redirect()->back()->with('success', "{$updated} tour(s) activated successfully.");
+    }
+
+    public function bulkDeactivate(Request $request)
+    {
+        $ids = explode(',', $request->input('ids', ''));
+        
+        if (empty($ids)) {
+            return redirect()->back()->with('error', 'No tours selected for deactivation.');
+        }
+        
+        $updated = Tour::whereIn('id', $ids)->update(['status' => 'inactive']);
+        
+        return redirect()->back()->with('success', "{$updated} tour(s) deactivated successfully.");
+    }
+
     // Itinerary Builder
     public function itineraryBuilder()
     {

@@ -326,14 +326,10 @@
                         <a href="{{ route('admin.tours.edit', $tour) }}" class="flex-1 px-3 py-2 bg-blue-100 text-blue-700 rounded-lg hover:bg-blue-200 transition-colors text-sm font-medium text-center">
                             <i class="ph-bold ph-pencil mr-1"></i>Edit
                         </a>
-                        <form action="{{ route('admin.tours.destroy', $tour) }}" method="POST" class="inline">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="px-3 py-2 bg-red-100 text-red-700 rounded-lg hover:bg-red-200 transition-colors text-sm font-medium"
-                                    onclick="return confirm('Are you sure you want to delete this tour?')">
-                                <i class="ph-bold ph-trash"></i>
-                            </button>
-                        </form>
+                        <button type="button" class="px-3 py-2 bg-red-100 text-red-700 rounded-lg hover:bg-red-200 transition-colors text-sm font-medium"
+                                onclick="deleteTour({{ $tour->id }}, '{{ $tour->name }}')">
+                            <i class="ph-bold ph-trash"></i>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -500,6 +496,24 @@ function bulkAction(action) {
     }
 }
 
+function deleteTour(tourId, tourName) {
+    if (confirm(`Are you sure you want to delete "${tourName}"? This action cannot be undone.`)) {
+        // Create form for deletion
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = `/admin/tours/${tourId}`;
+        
+        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+        form.innerHTML = `
+            <input type="hidden" name="_token" value="${csrfToken}">
+            <input type="hidden" name="_method" value="DELETE">
+        `;
+        
+        document.body.appendChild(form);
+        form.submit();
+    }
+}
+
 function bulkDelete() {
     const checkedBoxes = document.querySelectorAll('.tour-checkbox:checked');
     const ids = Array.from(checkedBoxes).map(cb => cb.value);
@@ -515,7 +529,44 @@ function bulkDelete() {
         const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
         form.innerHTML = `
             <input type="hidden" name="_token" value="${csrfToken}">
-            <input type="hidden" name="_method" value="DELETE">
+            <input type="hidden" name="ids" value="${ids.join(',')}">
+        `;
+        
+        document.body.appendChild(form);
+        form.submit();
+    }
+}
+
+function bulkAction(action) {
+    const checkedBoxes = document.querySelectorAll('.tour-checkbox:checked');
+    const ids = Array.from(checkedBoxes).map(cb => cb.value);
+    
+    if (ids.length === 0) return;
+    
+    let confirmMessage = '';
+    let route = '';
+    
+    switch(action) {
+        case 'activate':
+            confirmMessage = `Are you sure you want to activate ${ids.length} tour(s)?`;
+            route = '/admin/tours/bulk-activate';
+            break;
+        case 'deactivate':
+            confirmMessage = `Are you sure you want to deactivate ${ids.length} tour(s)?`;
+            route = '/admin/tours/bulk-deactivate';
+            break;
+        default:
+            return;
+    }
+    
+    if (confirm(confirmMessage)) {
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = route;
+        
+        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+        form.innerHTML = `
+            <input type="hidden" name="_token" value="${csrfToken}">
             <input type="hidden" name="ids" value="${ids.join(',')}">
         `;
         

@@ -333,6 +333,11 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'ensure.admin', 'act
 
     // Tours & Packages Subpages
     Route::get('/tours/itinerary-builder', [TourController::class, 'itineraryBuilder'])->name('tours.itinerary-builder');
+    
+    // Bulk Actions for Tours
+    Route::post('/tours/bulk-delete', [TourController::class, 'bulkDestroy'])->name('tours.bulk-delete');
+    Route::post('/tours/bulk-activate', [TourController::class, 'bulkActivate'])->name('tours.bulk-activate');
+    Route::post('/tours/bulk-deactivate', [TourController::class, 'bulkDeactivate'])->name('tours.bulk-deactivate');
     Route::post('/tours/itinerary-builder', [TourController::class, 'storeItinerary'])->name('tours.itinerary-builder.store');
     Route::get('/api/tours/{tour}', [TourController::class, 'showApi'])->name('tours.api.show');
     Route::get('/tours/{tour}/itineraries', [TourController::class, 'itinerariesIndex'])->name('tours.itineraries.index');
