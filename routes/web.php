@@ -465,6 +465,11 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'ensure.admin', 'act
         Route::put('/equipment-management/{equipment}', [TourController::class, 'updateEquipment'])->name('equipment-management.update');
         Route::delete('/equipment-management/{equipment}', [TourController::class, 'destroyEquipment'])->name('equipment-management.destroy');
         Route::post('/equipment-management/{equipment}/maintenance', [TourController::class, 'equipmentMaintenance'])->name('equipment-management.maintenance');
+        
+        // Guide Assignments
+        Route::get('/guide-assignments', [TourController::class, 'guideAssignments'])->name('guide-assignments');
+        Route::post('/guide-assignments/{tour}/{guide}', [TourController::class, 'assignGuide'])->name('guide-assignments.assign');
+        Route::delete('/guide-assignments/{tour}/{guide}', [TourController::class, 'removeGuide'])->name('guide-assignments.remove');
     });
 
     // Cloudinary API routes
