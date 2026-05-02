@@ -458,6 +458,20 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'ensure.admin', 'act
         Route::post('/bulk-action', [TrekkingGuideController::class, 'bulkAction'])->name('bulk-action');
     });
 
+    // Mountain Equipment Management
+    Route::prefix('mountain')->name('mountain.')->group(function () {
+        Route::get('/equipment-management', [TourController::class, 'equipmentManagement'])->name('equipment-management');
+        Route::post('/equipment-management', [TourController::class, 'storeEquipment'])->name('equipment-management.store');
+        Route::put('/equipment-management/{equipment}', [TourController::class, 'updateEquipment'])->name('equipment-management.update');
+        Route::delete('/equipment-management/{equipment}', [TourController::class, 'destroyEquipment'])->name('equipment-management.destroy');
+        Route::post('/equipment-management/{equipment}/maintenance', [TourController::class, 'equipmentMaintenance'])->name('equipment-management.maintenance');
+    });
+
+    // Cloudinary API routes
+    Route::prefix('cloudinary')->name('cloudinary.')->group(function () {
+        Route::get('/api/resources', [CloudinaryController::class, 'apiResources'])->name('api.resources');
+    });
+
     // Mountain Trekking Admin Routes (matching requested URLs)
     Route::get('/mountain-trekking/trekking-info', [TrekkingInfoController::class, 'index'])->name('admin.mountain-trekking.trekking-info');
     Route::get('/mountain-trekking/routes', [MountainTrekkingRouteController::class, 'index'])->name('admin.mountain-trekking.routes');

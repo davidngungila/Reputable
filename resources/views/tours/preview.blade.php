@@ -394,10 +394,6 @@
                     <h3 class="text-lg font-bold text-gray-900 mb-3">Need Help?</h3>
                     <p class="text-gray-600 mb-4">Our travel experts are here to help you plan your perfect adventure.</p>
                     <div class="space-y-2">
-                        <a href="tel:+255123456789" class="flex items-center text-emerald-600 hover:text-emerald-700 font-medium">
-                            <i class="ph-bold ph-phone mr-2"></i>
-                            +255 123 456 789
-                        </a>
                         <a href="mailto:info@reputabletours.com" class="flex items-center text-emerald-600 hover:text-emerald-700 font-medium">
                             <i class="ph-bold ph-envelope mr-2"></i>
                             info@reputabletours.com

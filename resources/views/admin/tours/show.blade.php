@@ -351,7 +351,7 @@
                         </div>
                         <h2 class="text-lg font-bold text-gray-900">Equipment</h2>
                     </div>
-                    <a href="{{ route('admin.mountain.equipment-management') }}" class="text-sm text-emerald-600 hover:text-emerald-700 font-medium">
+                    <a href="{{ route('admin.trekking-equipment.index') }}" class="text-sm text-emerald-600 hover:text-emerald-700 font-medium">
                         Manage
                     </a>
                 </div>
