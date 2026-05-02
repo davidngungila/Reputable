@@ -1,6 +1,27 @@
 @extends('layouts.public')
 
 @section('content')
+@php
+    // Get Ngorongoro destination from database
+    $ngorongoroDestination = \App\Models\Destination::where('name', 'LIKE', '%Ngorongoro%')->first();
+    
+    // Get images from database
+    $ngorongoroImages = [];
+    if ($ngorongoroDestination && !empty($ngorongoroDestination->images)) {
+        $ngorongoroImages = $ngorongoroDestination->images;
+    }
+    
+    // Fallback to Cloudinary if no database images
+    if (empty($ngorongoroImages)) {
+        $ngorongoroImages = [
+            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468788/Zeebraaa_cpydg9.jpg',
+            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468772/tiger-5167034_1920_leu8nd.jpg',
+            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468771/tanzania-2275107_1920_cmihwj.jpg',
+            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468772/Tarangire_ck2ohe.jpg',
+            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468777/waterbuck_ggd5wl.jpg'
+        ];
+    }
+@endphp
 <!-- Advanced Hero Section -->
 <section class="relative min-h-screen overflow-hidden bg-slate-900">
     <!-- Hero Background with Parallax Layers -->
@@ -432,12 +453,8 @@
 
 <section class="py-32 bg-white">
     @php
-        $gallery = [
-            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468788/Zeebraaa_cpydg9.jpg',
-            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468772/tiger-5167034_1920_leu8nd.jpg',
-            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468771/tanzania-2275107_1920_cmihwj.jpg',
-            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468772/Tarangire_ck2ohe.jpg',
-        ];
+        // Use database images for gallery
+        $gallery = $ngorongoroImages;
     @endphp
     <div class="max-w-7xl mx-auto px-6">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
@@ -685,7 +702,7 @@
                 
                 <div class="group relative overflow-hidden rounded-3xl shadow-lg hover:shadow-2xl transition-all">
                     <div class="relative h-64">
-                        <img src="https://images.unsplash.com/photo-1611892440507-42c82b397b0b?auto=format&fit=crop&w=800&q=80" alt="Tented Camp" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <img src="{{ $ngorongoroImages[1] ?? $ngorongoroImages[0] ?? 'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468772/tiger-5167034_1920_leu8nd.jpg' }}" alt="Tented Camp" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/40 to-transparent"></div>
                         <div class="absolute bottom-4 left-4 right-4">
                             <h4 class="text-2xl font-serif text-white font-bold">Crater Forest Tented Lodge</h4>
@@ -709,7 +726,7 @@
                 
                 <div class="group relative overflow-hidden rounded-3xl shadow-lg hover:shadow-2xl transition-all">
                     <div class="relative h-64">
-                        <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=800&q=80" alt="Mid-range Lodge" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <img src="{{ $ngorongoroImages[2] ?? $ngorongoroImages[0] ?? 'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468771/tanzania-2275107_1920_cmihwj.jpg' }}" alt="Mid-range Lodge" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/40 to-transparent"></div>
                         <div class="absolute bottom-4 left-4 right-4">
                             <h4 class="text-2xl font-serif text-white font-bold">Lodge at Ngorongoro</h4>

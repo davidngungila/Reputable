@@ -17,7 +17,11 @@
             'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468772/Tarangire_ck2ohe.jpg',
             'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468771/tanzania-2275107_1920_cmihwj.jpg',
             'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468777/waterbuck_ggd5wl.jpg',
-            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468788/Zeebraaa_cpydg9.jpg'
+            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468788/Zeebraaa_cpydg9.jpg',
+            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468772/tree-3079250_1280_m8apya.jpg',
+            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/tree-2600482_1920_c50vn6.jpg',
+            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/umbwee_biardh.jpg',
+            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468773/trekkin_crg3w9.jpg'
         ];
     }
 @endphp
