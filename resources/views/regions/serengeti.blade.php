@@ -14,9 +14,14 @@
     // Fallback to Cloudinary if no database images
     if (empty($serengetiImages)) {
         $serengetiImages = [
-            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468786/Wildbeest_Migration_vnkbqc.jpg',
+            // Serengeti-specific images
+            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468765/Serengeti_wbeest_lxzeyh.jpg',
+            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468764/serengeti_central_ok01lq.jpg',
+            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468785/Wildbeest_Migration_vnkbqc.jpg',
             'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468785/wildlife-3128802_1920_skrfdw.jpg',
-            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468785/wildlife-3146790_1920_xstzi1.jpg'
+            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468785/wildlife-3146790_1920_xstzi1.jpg',
+            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468786/Wildbeest_Migration_vnkbqc.jpg',
+            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468785/wildlife-3128802_1920_skrfdw.jpg'
         ];
     }
 @endphp

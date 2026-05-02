@@ -14,11 +14,15 @@
     // Fallback to Cloudinary if no database images
     if (empty($ngorongoroImages)) {
         $ngorongoroImages = [
-            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468788/Zeebraaa_cpydg9.jpg',
-            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468772/tiger-5167034_1920_leu8nd.jpg',
-            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468771/tanzania-2275107_1920_cmihwj.jpg',
-            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468772/Tarangire_ck2ohe.jpg',
-            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468777/waterbuck_ggd5wl.jpg'
+            // Ngorongoro-specific images
+            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468733/prideeee_gci90s.jpg',
+            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468733/pridee_hygado.jpg',
+            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468733/pride_serengeti_exuvmx.jpg',
+            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468733/Pride_seregetiiii_dbjtes.jpg',
+            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468733/Rhinn0_vipbmb.jpg',
+            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468735/Rhino..._pa4yfo.jpg',
+            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468735/River_crossing_huq2k4.jpg',
+            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468735/Rhino_warthog_fvlbgu.jpg'
         ];
     }
 @endphp

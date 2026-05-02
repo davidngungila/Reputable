@@ -14,8 +14,9 @@
     // Fallback to Cloudinary if no database images
     if (empty($tarangireImages)) {
         $tarangireImages = [
+            // Tarangire-specific images
             'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468772/Tarangire_ck2ohe.jpg',
-            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468771/tanzania-2275107_1920_cmihwj.jpg',
+            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468772/tarangire-76483_1920_c7sttf.jpg',
             'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468777/waterbuck_ggd5wl.jpg',
             'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468788/Zeebraaa_cpydg9.jpg',
             'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468772/tree-3079250_1280_m8apya.jpg',
