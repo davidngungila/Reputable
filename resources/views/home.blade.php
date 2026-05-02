@@ -287,7 +287,7 @@
 </section>
 
 <!-- Featured Destinations Showcase -->
-<section class="py-32 bg-white">
+<section class="py-32 bg-gradient-to-br from-emerald-50 to-blue-50">
     <div class="max-w-7xl mx-auto px-6">
         <div class="text-center mb-20">
             <span class="text-emerald-600 font-black text-xs uppercase tracking-[0.4em] mb-4 inline-block">Discover Tanzania</span>
@@ -295,15 +295,93 @@
             <p class="text-slate-600 max-w-2xl mx-auto text-lg">From the endless plains of Serengeti to the pristine beaches of Zanzibar, experience Tanzania's diverse landscapes</p>
         </div>
         
+        <!-- Featured Destinations Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
+            @php
+                $featuredDestinations = $destinations->take(4);
+            @endphp
+            @foreach($featuredDestinations as $index => $destination)
+                @php
+                    // Database-first approach: Use images from database
+                    $imageUrl = '';
+                    
+                    // Check if destination has images in database
+                    if (!empty($destination->images) && count($destination->images) > 0) {
+                        $firstImage = $destination->images[0];
+                        // Handle both Cloudinary URLs and local paths
+                        if (str_starts_with($firstImage, 'http') || str_starts_with($firstImage, 'https')) {
+                            $imageUrl = $firstImage;
+                        } else {
+                            $imageUrl = asset($firstImage);
+                        }
+                    } else {
+                        // Only use fallback if absolutely no images in database
+                        $fallbackImages = [
+                            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468771/tanzania-2275107_1920_cmihwj.jpg',
+                            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468777/waterbuck_ggd5wl.jpg',
+                            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468788/Zeebraaa_cpydg9.jpg',
+                            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468772/tiger-5167034_1920_leu8nd.jpg'
+                        ];
+                        $imageUrl = $fallbackImages[$index % count($fallbackImages)];
+                    }
+                @endphp
+                
+                <div class="group relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="{{ $imageUrl }}" alt="{{ $destination->name }}" 
+                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                             onerror="this.src='https://res.cloudinary.com/dqflffa1o/image/upload/v1777468788/Zeebraaa_cpydg9.jpg'; this.onerror=null;">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        <div class="absolute top-4 left-4">
+                            <span class="bg-emerald-600 text-white px-3 py-1 rounded-full text-xs font-semibold">
+                                Featured
+                            </span>
+                        </div>
+                        <div class="absolute bottom-4 left-4 right-4">
+                            <h3 class="text-white font-bold text-lg mb-1">{{ $destination->name }}</h3>
+                            <p class="text-white/90 text-sm">{{ $destination->location ?? 'Tanzania' }}</p>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 text-emerald-600 text-sm font-semibold mb-3">
+                            <i class="ph-bold ph-star"></i>
+                            <span>{{ $destination->highlights[0] ?? 'Must Visit' }}</span>
+                        </div>
+                        <p class="text-slate-600 text-sm mb-4">{{ Str::limit($destination->description, 100) }}</p>
+                        <a href="{{ route('destinations.show', $destination->id) }}" 
+                           class="inline-flex items-center gap-2 text-emerald-600 font-semibold text-sm hover:text-emerald-700 transition-colors">
+                            Explore {{ $destination->name }}
+                            <i class="ph-bold ph-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+        
+        <!-- Additional Destinations -->
+        <div class="text-center mb-12">
+            <h3 class="text-3xl font-bold text-slate-900 mb-4">More Amazing Destinations</h3>
+            <p class="text-slate-600 max-w-2xl mx-auto">Discover even more incredible places to visit in Tanzania</p>
+        </div>
+        
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            @foreach($destinations as $destination)
+            @php
+                $additionalDestinations = $destinations->skip(4)->take(4);
+            @endphp
+            @foreach($additionalDestinations as $destination)
             <div class="group relative overflow-hidden rounded-3xl shadow-2xl hover:shadow-3xl transition-all duration-700">
                 <div class="relative h-96">
-                    @if(!empty($destination->images) && count($destination->images) > 0)
-                        <img src="{{ asset($destination->images[0]) }}" alt="{{ $destination->name }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                    @else
-                        <img src="{{ asset('images/01.jpg') }}" alt="{{ $destination->name }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                    @endif
+                    @php
+                        $additionalImages = [
+                            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468772/Tarangire_ck2ohe.jpg',
+                            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468770/stella-point-4032287_1280_bpmyyh.jpg',
+                            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468771/spphoto_skxxer.jpg',
+                            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468786/Wwwwwbeest_lnndaz.jpg'
+                        ];
+                        $additionalImage = $additionalImages[$index] ?? $additionalImages[0];
+                    @endphp
+                    <img src="{{ $additionalImage }}" alt="{{ $destination->name }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                         onerror="this.src='https://res.cloudinary.com/dqflffa1o/image/upload/v1777468788/Zeebraaa_cpydg9.jpg'; this.onerror=null;">
                     <div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-transparent"></div>
                     <div class="absolute top-6 left-6">
                         @if(!empty($destination->highlights) && count($destination->highlights) > 0)

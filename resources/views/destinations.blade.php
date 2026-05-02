@@ -23,9 +23,72 @@
     </div>
 </section>
 
-<!-- Destinations Section -->
+<!-- Featured Destinations Section -->
+<section class="py-16 bg-gradient-to-br from-emerald-50 to-blue-50">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-12">
+            <h2 class="text-4xl font-bold text-slate-900 mb-4">Iconic Destinations</h2>
+            <p class="text-slate-600 max-w-2xl mx-auto">From the endless plains of Serengeti to the pristine beaches of Zanzibar, experience Tanzania's diverse landscapes</p>
+        </div>
+        
+        <!-- Featured Destinations Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
+            @php
+                $featuredDestinations = $destinations->take(4);
+            @endphp
+            @foreach($featuredDestinations as $index => $destination)
+                @php
+                    $featuredImages = [
+                        'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468771/tanzania-2275107_1920_cmihwj.jpg',
+                        'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468777/waterbuck_ggd5wl.jpg',
+                        'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468788/Zeebraaa_cpydg9.jpg',
+                        'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468772/tiger-5167034_1920_leu8nd.jpg'
+                    ];
+                    $featuredImage = $featuredImages[$index] ?? $featuredImages[0];
+                @endphp
+                
+                <div class="group relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="{{ $featuredImage }}" alt="{{ $destination->name }}" 
+                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                             onerror="this.src='https://res.cloudinary.com/dqflffa1o/image/upload/v1777468788/Zeebraaa_cpydg9.jpg'; this.onerror=null;">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        <div class="absolute top-4 left-4">
+                            <span class="bg-emerald-600 text-white px-3 py-1 rounded-full text-xs font-semibold">
+                                Featured
+                            </span>
+                        </div>
+                        <div class="absolute bottom-4 left-4 right-4">
+                            <h3 class="text-white font-bold text-lg mb-1">{{ $destination->name }}</h3>
+                            <p class="text-white/90 text-sm">{{ $destination->location ?? 'Tanzania' }}</p>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 text-emerald-600 text-sm font-semibold mb-3">
+                            <i class="ph-bold ph-star"></i>
+                            <span>{{ $destination->highlights[0] ?? 'Must Visit' }}</span>
+                        </div>
+                        <p class="text-slate-600 text-sm mb-4">{{ Str::limit($destination->description, 100) }}</p>
+                        <a href="{{ route('destinations.show', $destination->id) }}" 
+                           class="inline-flex items-center gap-2 text-emerald-600 font-semibold text-sm hover:text-emerald-700 transition-colors">
+                            Explore {{ $destination->name }}
+                            <i class="ph-bold ph-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
+</section>
+
+<!-- All Destinations Section -->
 <section class="py-24 bg-white">
     <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold text-slate-900 mb-4">All Destinations</h2>
+            <p class="text-slate-600 max-w-2xl mx-auto">Discover more of Tanzania's incredible destinations with our complete guide</p>
+        </div>
+        
         <!-- Filters -->
         <div class="flex flex-col lg:flex-row items-center justify-between mb-16 gap-8 bg-slate-50 p-6 rounded-3xl border border-slate-100">
             <div class="flex flex-wrap items-center gap-4">
