@@ -385,8 +385,9 @@
                     <h4 class="footer-title">📍 Contact Us</h4>
                     <div class="footer-info">
                         Email: info@reputabletours.com<br>
-                        Phone: +255 123 456 789<br>
-                        Location: Arusha, Tanzania
+                        Phone: +255 675 255 523<br>
+                        Location: NSSF Commercial Complex, Moshi<br>
+                        P.O Box 25212, Tanzania
                     </div>
                 </div>
                 <div class="footer-section">

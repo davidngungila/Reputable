@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <div class="grid gap-8">
                         @foreach([
                             ['label' => 'Official Email', 'val' => 'info@reputabletours.com', 'icon' => 'envelope-simple', 'sub' => 'Response within 4 hours'],
-                            ['label' => 'WhatsApp', 'val' => '+255 622 239 304', 'icon' => 'whatsapp-logo', 'sub' => 'Instant Response Available'],
+                            ['label' => 'WhatsApp', 'val' => '+255 675 255 523', 'icon' => 'whatsapp-logo', 'sub' => 'Instant Response Available'],
                             ['label' => 'Base Office', 'val' => 'NSSF Commercial Complex, Moshi', 'icon' => 'map-pin-line', 'sub' => 'P.O Box 25212, Tanzania']
                         ] as $item)
                         <div class="flex items-start gap-6 group">

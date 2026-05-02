@@ -482,16 +482,20 @@
                 <h3 class="contact-title">📞 Need to Contact Us?</h3>
                 <div class="contact-details">
                     <div class="contact-item">
-                        <strong>Emergency</strong>
-                        +255 123 456 789
-                    </div>
-                    <div class="contact-item">
-                        <strong>Office</strong>
-                        +255 123 456 788
+                        <strong>Phone/WhatsApp</strong>
+                        +255 675 255 523
                     </div>
                     <div class="contact-item">
                         <strong>Email</strong>
                         info@reputabletours.com
+                    </div>
+                    <div class="contact-item">
+                        <strong>Office</strong>
+                        NSSF Commercial Complex, Moshi
+                    </div>
+                    <div class="contact-item">
+                        <strong>Address</strong>
+                        P.O Box 25212, Tanzania
                     </div>
                 </div>
             </div>
