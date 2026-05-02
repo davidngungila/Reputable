@@ -138,14 +138,14 @@
                         <i class="ph-bold ph-map-pin text-emerald-600"></i>
                         Destination
                     </label>
-                    <select class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-emerald-600 focus:ring-2 focus:ring-emerald-100 transition-all">
-                        <option>All Destinations</option>
-                        <option>Serengeti National Park</option>
-                        <option>Ngorongoro Crater</option>
-                        <option>Mount Kilimanjaro</option>
-                        <option>Zanzibar</option>
-                        <option>Tarangire</option>
-                        <option>Lake Manyara</option>
+                    <select id="destination-filter" class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-emerald-600 focus:ring-2 focus:ring-emerald-100 transition-all" onchange="filterTours()">
+                        <option value="">All Destinations</option>
+                        <option value="serengeti">Serengeti National Park</option>
+                        <option value="ngorongoro">Ngorongoro Crater</option>
+                        <option value="kilimanjaro">Mount Kilimanjaro</option>
+                        <option value="zanzibar">Zanzibar</option>
+                        <option value="tarangire">Tarangire</option>
+                        <option value="lake-manyara">Lake Manyara</option>
                     </select>
                 </div>
                 
@@ -155,12 +155,12 @@
                         <i class="ph-bold ph-calendar text-emerald-600"></i>
                         Duration
                     </label>
-                    <select class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-emerald-600 focus:ring-2 focus:ring-emerald-100 transition-all">
-                        <option>Any Duration</option>
-                        <option>1-3 Days</option>
-                        <option>4-7 Days</option>
-                        <option>8-14 Days</option>
-                        <option>15+ Days</option>
+                    <select id="duration-filter" class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-emerald-600 focus:ring-2 focus:ring-emerald-100 transition-all" onchange="filterTours()">
+                        <option value="">Any Duration</option>
+                        <option value="1-3">1-3 Days</option>
+                        <option value="4-7">4-7 Days</option>
+                        <option value="8-14">8-14 Days</option>
+                        <option value="15+">15+ Days</option>
                     </select>
                 </div>
                 
@@ -170,7 +170,7 @@
                         <i class="ph-bold ph-calendar-check text-emerald-600"></i>
                         Travel Date
                     </label>
-                    <input type="date" class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-emerald-600 focus:ring-2 focus:ring-emerald-100 transition-all">
+                    <input type="date" id="travel-date" class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-emerald-600 focus:ring-2 focus:ring-emerald-100 transition-all" onchange="filterTours()">
                 </div>
                 
                 <!-- Travelers -->
@@ -179,12 +179,12 @@
                         <i class="ph-bold ph-users text-emerald-600"></i>
                         Travelers
                     </label>
-                    <select class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-emerald-600 focus:ring-2 focus:ring-emerald-100 transition-all">
-                        <option>1 Person</option>
-                        <option>2 People</option>
-                        <option>3-4 People</option>
-                        <option>5-8 People</option>
-                        <option>9+ People</option>
+                    <select id="travelers-filter" class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-emerald-600 focus:ring-2 focus:ring-emerald-100 transition-all" onchange="filterTours()">
+                        <option value="1">1 Person</option>
+                        <option value="2">2 People</option>
+                        <option value="3-4">3-4 People</option>
+                        <option value="5-8">5-8 People</option>
+                        <option value="9+">9+ People</option>
                     </select>
                 </div>
             </div>
@@ -928,6 +928,77 @@
         confirmButtonText: 'OK'
     });
     @endif
+</script>
+
+<script>
+function filterTours() {
+    const destination = document.getElementById('destination-filter').value;
+    const duration = document.getElementById('duration-filter').value;
+    const travelDate = document.getElementById('travel-date').value;
+    const travelers = document.getElementById('travelers-filter').value;
+    
+    // Build filter parameters
+    let params = new URLSearchParams();
+    
+    if (destination) params.append('destination', destination);
+    if (duration) params.append('duration', duration);
+    if (travelDate) params.append('date', travelDate);
+    if (travelers) params.append('travelers', travelers);
+    
+    // Redirect to tours page with filters
+    const toursUrl = params.toString() ? `/tours?${params.toString()}` : '/tours';
+    
+    // Show loading state
+    showFilterLoading();
+    
+    // Apply filters with slight delay for better UX
+    setTimeout(() => {
+        window.location.href = toursUrl;
+    }, 300);
+}
+
+function showFilterLoading() {
+    const selects = document.querySelectorAll('select, input');
+    selects.forEach(element => {
+        element.style.opacity = '0.6';
+        element.style.pointerEvents = 'none';
+    });
+    
+    // Show loading indicator
+    const searchSection = document.querySelector('.bg-white.rounded-3xl');
+    if (searchSection) {
+        const loader = document.createElement('div');
+        loader.id = 'filter-loader';
+        loader.className = 'absolute inset-0 bg-white/80 rounded-3xl flex items-center justify-center';
+        loader.innerHTML = `
+            <div class="flex items-center gap-2">
+                <i class="ph-bold ph-spinner text-emerald-600 text-xl animate-spin"></i>
+                <span class="text-emerald-600 font-medium">Filtering tours...</span>
+            </div>
+        `;
+        searchSection.style.position = 'relative';
+        searchSection.appendChild(loader);
+    }
+}
+
+// Auto-clear filters on page load if no filters are applied
+document.addEventListener('DOMContentLoaded', function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    
+    // Set form values from URL parameters
+    if (urlParams.get('destination')) {
+        document.getElementById('destination-filter').value = urlParams.get('destination');
+    }
+    if (urlParams.get('duration')) {
+        document.getElementById('duration-filter').value = urlParams.get('duration');
+    }
+    if (urlParams.get('date')) {
+        document.getElementById('travel-date').value = urlParams.get('date');
+    }
+    if (urlParams.get('travelers')) {
+        document.getElementById('travelers-filter').value = urlParams.get('travelers');
+    }
+});
 </script>
 
 @endsection

@@ -126,7 +126,7 @@
             <!-- Main Content -->
             <div class="lg:col-span-2 space-y-8">
                 <!-- Overview -->
-                <section class="bg-white rounded-xl shadow-sm border border-slate-100 p-6 md:p-8">
+                <section class="bg-white rounded-xl shadow-sm border border-slate-100 p-6 md:p-8 scroll-mt-24">
                     <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-6">Overview</h2>
                     <div class="prose prose-gray max-w-none">
                         <p class="text-gray-600 leading-relaxed text-base md:text-lg">{{ $tour->description }}</p>
@@ -149,7 +149,7 @@
                 </section>
 
                 <!-- Itinerary -->
-                <section id="itinerary" class="bg-white rounded-xl shadow-sm border border-slate-100 p-6 md:p-8">
+                <section id="itinerary" class="bg-white rounded-xl shadow-sm border border-slate-100 p-6 md:p-8 scroll-mt-24">
                     <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 sm:mb-8 gap-4">
                         <h2 class="text-2xl md:text-3xl font-bold text-gray-900">Detailed Itinerary</h2>
                         <div class="flex gap-2">
@@ -213,7 +213,7 @@
 
                 <!-- Destinations -->
                 @if($tour->destinations && $tour->destinations->count() > 0)
-                <section class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+                <section class="bg-white rounded-xl shadow-sm border border-slate-100 p-6 scroll-mt-24">
                     <h2 class="text-2xl font-bold text-gray-900 mb-6">Destinations</h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         @foreach($tour->destinations as $destination)
@@ -236,7 +236,7 @@
                 @endif
 
                 <!-- Equipment & Guides -->
-                <section class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+                <section class="bg-white rounded-xl shadow-sm border border-slate-100 p-6 scroll-mt-24">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <!-- Equipment -->
                         @if($tour->equipment && $tour->equipment->count() > 0)
@@ -279,7 +279,7 @@
             <!-- Sidebar -->
             <div class="space-y-6">
                 <!-- Booking Card -->
-                <section id="booking" class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 sticky top-24">
+                <section id="booking" class="bg-white rounded-xl shadow-sm border border-slate-100 p-6 sticky top-24 z-20">
                     <h3 class="text-xl font-bold text-gray-900 mb-4">Book This Tour</h3>
                     
                     <div class="mb-6">
