@@ -1,9 +1,30 @@
 @extends('layouts.public')
 
 @section('content')
+@php
+    // Get Tarangire destination from database
+    $tarangireDestination = \App\Models\Destination::where('name', 'LIKE', '%Tarangire%')->first();
+    
+    // Get images from database
+    $tarangireImages = [];
+    if ($tarangireDestination && !empty($tarangireDestination->images)) {
+        $tarangireImages = $tarangireDestination->images;
+    }
+    
+    // Fallback to Cloudinary if no database images
+    if (empty($tarangireImages)) {
+        $tarangireImages = [
+            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468772/Tarangire_ck2ohe.jpg',
+            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468771/tanzania-2275107_1920_cmihwj.jpg',
+            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468777/waterbuck_ggd5wl.jpg',
+            'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468788/Zeebraaa_cpydg9.jpg'
+        ];
+    }
+@endphp
+
 <section class="relative pt-48 pb-32 overflow-hidden bg-slate-900">
     <div class="absolute inset-0 z-0">
-        <img src="https://images.unsplash.com/photo-1523805081730-614449379e70?auto=format&fit=crop&w=2000&q=80" alt="Tarangire National Park" class="w-full h-full object-cover blur-sm opacity-40">
+        <img src="{{ $tarangireImages[0] ?? 'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468772/Tarangire_ck2ohe.jpg' }}" alt="Tarangire National Park" class="w-full h-full object-cover blur-sm opacity-40">
         <div class="absolute inset-0 bg-gradient-to-b from-slate-900/60 via-slate-900 to-slate-900"></div>
     </div>
     <div class="max-w-7xl mx-auto px-6 relative z-10 text-center">
@@ -15,12 +36,8 @@
 
 <section class="py-32 bg-white">
     @php
-        $gallery = [
-            'https://images.unsplash.com/photo-1523805081730-614449379e70?auto=format&fit=crop&w=1600&q=80',
-            'https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=1600&q=80',
-            'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=1600&q=80',
-            'https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=1600&q=80',
-        ];
+        // Use database images for gallery
+        $gallery = $tarangireImages;
     @endphp
     <div class="max-w-7xl mx-auto px-6">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
@@ -57,7 +74,7 @@
                 <div class="h-10"></div>
                 <div class="bg-slate-950 text-white rounded-[3.5rem] overflow-hidden p-12 relative">
                     <div class="absolute inset-0 opacity-30">
-                        <img src="https://images.unsplash.com/photo-1523805081730-614449379e70?auto=format&fit=crop&w=1200&q=80" alt="Tarangire" class="w-full h-full object-cover">
+                        <img src="{{ $tarangireImages[1] ?? $tarangireImages[0] ?? 'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468771/tanzania-2275107_1920_cmihwj.jpg' }}" alt="Tarangire" class="w-full h-full object-cover">
                     </div>
                     <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent"></div>
                     <div class="relative z-10">
