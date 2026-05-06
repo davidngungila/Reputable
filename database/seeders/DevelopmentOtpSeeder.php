@@ -12,7 +12,7 @@ class DevelopmentOtpSeeder extends Seeder
     public function run(): void
     {
         // Create a development OTP for testing
-        $user = User::where('email', 'info@reputabletours.com')->first();
+        $user = User::where('email', 'superadmin@lauparadise.com')->first();
         
         if ($user) {
             // Create a predictable OTP for development
@@ -32,13 +32,13 @@ class DevelopmentOtpSeeder extends Seeder
                 'user_agent' => 'Development Seeder',
             ]);
 
-            $this->command->info("Development OTP created for info@reputabletours.com");
+            $this->command->info("Development OTP created for superadmin@lauparadise.com");
             $this->command->info("OTP Code: {$otp}");
             $this->command->info("Verify Link: " . route('login.otp.verify_link', ['token' => $token]));
             $this->command->info("");
             $this->command->info("Login Process:");
             $this->command->info("1. Go to /login");
-            $this->command->info("2. Enter: info@reputabletours.com / Rt@2026site");
+            $this->command->info("2. Enter: superadmin@lauparadise.com / Admin@12345");
             $this->command->info("3. You'll be redirected to OTP page");
             $this->command->info("4. Enter OTP: {$otp}");
             $this->command->info("5. Or use the verify link above");

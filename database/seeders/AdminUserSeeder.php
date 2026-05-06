@@ -11,10 +11,10 @@ class AdminUserSeeder extends Seeder
     public function run(): void
     {
         User::create([
-            'name' => 'System Administrator',
+            'name' => 'Lau Administrator',
             'username' => 'lauparadise',
-            'email' => 'info@reputabletours.com',
-            'password' => Hash::make('Rt@2026site'),
+            'email' => 'admin@lausafaris.com',
+            'password' => Hash::make('password'),
             'email_verified_at' => now(),
         ]);
     }
