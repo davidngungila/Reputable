@@ -904,7 +904,7 @@ function addTravelDay() {
 
 function saveItinerary() {
     if (!currentTourId) {
-        alert('Please select a tour first');
+        showErrorModal('Tour Not Selected', 'Please select a tour first before saving the itinerary.');
         return;
     }
 
@@ -931,7 +931,7 @@ function saveItinerary() {
     });
     
     if (validationErrors.length > 0) {
-        alert('Please fix the following errors:\n\n' + validationErrors.join('\n'));
+        showValidationError(validationErrors);
         return;
     }
     days.forEach((dayDiv, index) => {
@@ -991,7 +991,7 @@ function saveItinerary() {
     })
     .catch(error => {
         console.error('Error:', error);
-        showNotification('Error saving itinerary', 'error');
+        showApiError(error);
     })
     .finally(() => {
         // Restore button state
@@ -1002,7 +1002,7 @@ function saveItinerary() {
 
 function exportItinerary() {
     if (!currentTourId) {
-        alert('Please select a tour first');
+        showErrorModal('Tour Not Selected', 'Please select a tour first before exporting the itinerary.');
         return;
     }
     
@@ -1012,7 +1012,7 @@ function exportItinerary() {
 
 function previewItinerary() {
     if (!currentTourId) {
-        alert('Please select a tour first');
+        showErrorModal('Tour Not Selected', 'Please select a tour first before previewing the itinerary.');
         return;
     }
     
@@ -1022,7 +1022,7 @@ function previewItinerary() {
 
 function duplicateItinerary() {
     if (!currentTourId) {
-        alert('Please select a tour first');
+        showErrorModal('Tour Not Selected', 'Please select a tour first before duplicating the itinerary.');
         return;
     }
     
@@ -1063,5 +1063,71 @@ document.addEventListener('change', function(e) {
         }
     }
 });
+
+// Error Modal Functions
+function showErrorModal(title, message, details = null) {
+    const modal = document.getElementById('error-modal');
+    const modalTitle = document.getElementById('error-modal-title');
+    const modalMessage = document.getElementById('error-modal-message');
+    const modalDetails = document.getElementById('error-modal-details');
+    
+    modalTitle.textContent = title;
+    modalMessage.textContent = message;
+    
+    if (details) {
+        modalDetails.textContent = details;
+        modalDetails.classList.remove('hidden');
+    } else {
+        modalDetails.classList.add('hidden');
+    }
+    
+    modal.classList.remove('hidden');
+}
+
+function closeErrorModal() {
+    const modal = document.getElementById('error-modal');
+    modal.classList.add('hidden');
+}
+
+// Enhanced error handling functions
+function showValidationError(errors) {
+    const title = 'Validation Error';
+    const message = 'Please fix the following validation errors:';
+    const details = Array.isArray(errors) ? errors.join('\n') : errors;
+    showErrorModal(title, message, details);
+}
+
+function showApiError(error) {
+    const title = 'API Error';
+    const message = 'An error occurred while communicating with the server:';
+    const details = typeof error === 'string' ? error : error.message || JSON.stringify(error, null, 2);
+    showErrorModal(title, message, details);
+}
 </script>
+
+<!-- Error Modal -->
+<div id="error-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center">
+    <div class="bg-white rounded-xl shadow-2xl max-w-2xl w-full mx-4 max-h-[80vh] overflow-auto">
+        <div class="p-6 border-b border-gray-200">
+            <div class="flex items-center justify-between">
+                <h3 id="error-modal-title" class="text-xl font-semibold text-gray-900">Error</h3>
+                <button onclick="closeErrorModal()" class="text-gray-400 hover:text-gray-600 transition-colors">
+                    <i class="ph-bold ph-x text-xl"></i>
+                </button>
+            </div>
+        </div>
+        <div class="p-6">
+            <p id="error-modal-message" class="text-gray-700 mb-4">An error occurred</p>
+            <div id="error-modal-details" class="hidden">
+                <h4 class="font-semibold text-gray-900 mb-2">Error Details:</h4>
+                <pre class="bg-gray-100 p-4 rounded-lg text-sm text-gray-800 whitespace-pre-wrap max-h-64 overflow-auto"></pre>
+            </div>
+        </div>
+        <div class="p-6 border-t border-gray-200">
+            <button onclick="closeErrorModal()" class="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors">
+                Close
+            </button>
+        </div>
+    </div>
+</div>
 @endsection
