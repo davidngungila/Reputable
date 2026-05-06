@@ -254,6 +254,12 @@ class CloudinaryController extends Controller
 
     public function store(Request $request)
     {
+        \Log::info('Cloudinary upload request received', [
+            'files_count' => $request->hasFile('files') ? count($request->file('files')) : 0,
+            'folder' => $request->input('folder'),
+            'all_request_data' => $request->all()
+        ]);
+
         $request->validate([
             'files.*' => 'required|file|max:10240', // Max 10MB per file
             'files' => 'required|array|min:1',
@@ -263,16 +269,41 @@ class CloudinaryController extends Controller
         try {
             // Initialize Cloudinary Service
             CloudinaryService::initialize();
+            \Log::info('Cloudinary service initialized successfully');
             
             $folder = $request->input('folder', 'reputable-tours');
             $files = $request->file('files');
             $uploadedFiles = [];
             $failedFiles = [];
 
+            \Log::info('Starting upload process', [
+                'folder' => $folder,
+                'files_count' => count($files)
+            ]);
+
             foreach ($files as $index => $file) {
                 try {
+                    \Log::info('Processing file', [
+                        'index' => $index,
+                        'name' => $file->getClientOriginalName(),
+                        'size' => $file->getSize(),
+                        'mime_type' => $file->getMimeType(),
+                        'real_path' => $file->getRealPath()
+                    ]);
+
+                    // Check if file is valid and readable
+                    if (!$file->isValid()) {
+                        throw new \Exception('File is not valid');
+                    }
+
+                    if (!file_exists($file->getRealPath())) {
+                        throw new \Exception('File does not exist at path: ' . $file->getRealPath());
+                    }
+
                     // Use CloudinaryService upload
                     $uploadApi = CloudinaryService::upload();
+                    \Log::info('Upload API created, starting upload');
+                    
                     $uploadResult = $uploadApi->upload(
                         $file->getRealPath(),
                         [
@@ -284,6 +315,11 @@ class CloudinaryController extends Controller
                         ]
                     );
 
+                    \Log::info('Upload successful', [
+                        'public_id' => $uploadResult['public_id'] ?? 'unknown',
+                        'secure_url' => $uploadResult['secure_url'] ?? $uploadResult['url'] ?? 'unknown'
+                    ]);
+
                     $uploadedFiles[] = [
                         'name' => $file->getClientOriginalName(),
                         'url' => $uploadResult['secure_url'] ?? $uploadResult['url'],
@@ -292,7 +328,13 @@ class CloudinaryController extends Controller
                         'format' => $uploadResult['format'] ?? pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION),
                     ];
                 } catch (\Exception $e) {
-                    \Log::error('Cloudinary upload error: ' . $e->getMessage());
+                    \Log::error('Cloudinary upload error for file: ' . $file->getClientOriginalName(), [
+                        'error' => $e->getMessage(),
+                        'file_index' => $index,
+                        'file_path' => $file->getRealPath(),
+                        'trace' => $e->getTraceAsString()
+                    ]);
+                    
                     $failedFiles[] = [
                         'name' => $file->getClientOriginalName(),
                         'error' => $e->getMessage(),
