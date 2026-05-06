@@ -281,9 +281,22 @@ function loadTourData(tourId) {
             return response.json();
         }),
         fetch(`/admin/tours/${tourId}/itineraries`).then(response => {
+            console.log('Itinerary response status:', response.status);
+            console.log('Itinerary response headers:', response.headers);
+            
             if (!response.ok) {
                 throw new Error(`Failed to fetch itineraries: ${response.status}`);
             }
+            
+            // Check if response is actually JSON
+            const contentType = response.headers.get('content-type');
+            if (!contentType || !contentType.includes('application/json')) {
+                return response.text().then(text => {
+                    console.log('Non-JSON response:', text);
+                    throw new Error(`Expected JSON but got ${contentType || 'unknown'}: ${text.substring(0, 100)}`);
+                });
+            }
+            
             return response.json();
         })
     ])

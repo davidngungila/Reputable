@@ -325,12 +325,21 @@ class TourController extends Controller
 
     public function itinerariesIndex(Tour $tour)
     {
-        $itineraries = $tour->itineraries()->orderBy('day_number')->get();
-        return response()->json([
-            'success' => true,
-            'data' => $itineraries,
-            'message' => 'Itineraries retrieved successfully'
-        ]);
+        try {
+            $itineraries = $tour->itineraries()->orderBy('day_number')->get();
+            return response()->json([
+                'success' => true,
+                'data' => $itineraries,
+                'message' => 'Itineraries retrieved successfully'
+            ]);
+        } catch (\Exception $e) {
+            \Log::error('Error fetching itineraries: ' . $e->getMessage());
+            return response()->json([
+                'success' => false,
+                'error' => $e->getMessage(),
+                'message' => 'Failed to retrieve itineraries'
+            ], 500);
+        }
     }
 
     public function updateItinerary(Request $request, Itinerary $itinerary)
