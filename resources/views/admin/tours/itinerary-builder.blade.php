@@ -943,7 +943,25 @@ function saveItinerary() {
             'X-CSRF-TOKEN': '{{ csrf_token() }}'
         }
     })
-    .then(response => response.json())
+    .then(response => {
+        console.log('Save response status:', response.status);
+        console.log('Save response headers:', response.headers);
+        
+        if (!response.ok) {
+            throw new Error(`Failed to save itinerary: ${response.status}`);
+        }
+        
+        // Check if response is actually JSON
+        const contentType = response.headers.get('content-type');
+        if (!contentType || !contentType.includes('application/json')) {
+            return response.text().then(text => {
+                console.log('Non-JSON save response:', text);
+                throw new Error(`Expected JSON but got ${contentType || 'unknown'}: ${text.substring(0, 100)}`);
+            });
+        }
+        
+        return response.json();
+    })
     .then(data => {
         if (data.success) {
             showNotification('Itinerary saved successfully!', 'success');

@@ -284,38 +284,47 @@ class TourController extends Controller
 
     public function storeItinerary(Request $request)
     {
-        $validated = $request->validate([
-            'tour_id' => 'required|exists:tours,id',
-            'days' => 'required|array',
-            'days.*.title' => 'required|string|max:255',
-            'days.*.description' => 'required|string',
-            'days.*.activities' => 'nullable|array',
-            'days.*.meals' => 'nullable|array',
-            'days.*.accommodation' => 'nullable|string',
-            'days.*.transportation' => 'nullable|string',
-        ]);
-
-        // Delete existing itineraries for this tour
-        Itinerary::where('tour_id', $validated['tour_id'])->delete();
-
-        // Create new itineraries
-        foreach ($validated['days'] as $dayNumber => $dayData) {
-            Itinerary::create([
-                'tour_id' => $validated['tour_id'],
-                'day_number' => $dayNumber,
-                'title' => $dayData['title'],
-                'description' => $dayData['description'],
-                'activities' => $dayData['activities'] ?? [],
-                'meals' => $dayData['meals'] ?? [],
-                'accommodation' => $dayData['accommodation'] ?? null,
-                'transportation' => $dayData['transportation'] ?? null,
+        try {
+            $validated = $request->validate([
+                'tour_id' => 'required|exists:tours,id',
+                'days' => 'required|array',
+                'days.*.title' => 'required|string|max:255',
+                'days.*.description' => 'required|string',
+                'days.*.activities' => 'nullable|array',
+                'days.*.meals' => 'nullable|array',
+                'days.*.accommodation' => 'nullable|string',
+                'days.*.transportation' => 'nullable|string',
             ]);
-        }
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Itinerary saved successfully!'
-        ]);
+            // Delete existing itineraries for this tour
+            Itinerary::where('tour_id', $validated['tour_id'])->delete();
+
+            // Create new itineraries
+            foreach ($validated['days'] as $dayNumber => $dayData) {
+                Itinerary::create([
+                    'tour_id' => $validated['tour_id'],
+                    'day_number' => $dayNumber,
+                    'title' => $dayData['title'],
+                    'description' => $dayData['description'],
+                    'activities' => $dayData['activities'] ?? [],
+                    'meals' => $dayData['meals'] ?? [],
+                    'accommodation' => $dayData['accommodation'] ?? null,
+                    'transportation' => $dayData['transportation'] ?? null,
+                ]);
+            }
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Itinerary saved successfully!'
+            ]);
+        } catch (\Exception $e) {
+            \Log::error('Error saving itinerary: ' . $e->getMessage());
+            return response()->json([
+                'success' => false,
+                'error' => $e->getMessage(),
+                'message' => 'Failed to save itinerary'
+            ], 500);
+        }
     }
 
     public function showApi(Tour $tour)
