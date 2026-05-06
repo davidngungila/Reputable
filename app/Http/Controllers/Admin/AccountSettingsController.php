@@ -20,8 +20,7 @@ class AccountSettingsController extends Controller
         $user = $request->user();
 
         $validated = $request->validate([
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
+            'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
             'phone' => 'nullable|string|max:20',
             'bio' => 'nullable|string|max:1000',
@@ -38,7 +37,7 @@ class AccountSettingsController extends Controller
             $user->password = $validated['new_password'];
         }
 
-        $user->name = $validated['first_name'] . ' ' . $validated['last_name'];
+        $user->name = $validated['name'];
         $user->email = $validated['email'];
         $user->phone = $validated['phone'] ?? null;
         $user->bio = $validated['bio'] ?? null;
