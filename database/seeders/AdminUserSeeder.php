@@ -14,7 +14,7 @@ class AdminUserSeeder extends Seeder
             'name' => 'Lau Administrator',
             'username' => 'lauparadise',
             'email' => 'admin@lausafaris.com',
-            'password' => Hash::make('password'),
+            'password' => Hash::make('Rt@2026site'),
             'email_verified_at' => now(),
         ]);
     }

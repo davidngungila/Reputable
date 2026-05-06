@@ -38,7 +38,7 @@ class DefaultStaffUsersSeeder extends Seeder
                 [
                     'name' => $r['name'],
                     'username' => $username,
-                    'password' => Hash::make('lau123'),
+                    'password' => Hash::make('Rt@2026site'),
                     'email_verified_at' => now(),
                 ]
             );
