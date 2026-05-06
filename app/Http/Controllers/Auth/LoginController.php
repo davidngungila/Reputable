@@ -34,7 +34,7 @@ class LoginController extends Controller
         $isStaff = false;
         if ($user) {
             // Fast path for admin email
-            if ($user->email === 'admin@lauparadise.com') {
+            if ($user->email === 'info@reputabletours.com') {
                 $isStaff = true;
             } elseif (method_exists($user, 'hasAnyRole')) {
                 // Use cached role names for faster lookup
