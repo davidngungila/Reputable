@@ -20,8 +20,11 @@ class AccountSettingsController extends Controller
         $user = $request->user();
 
         $validated = $request->validate([
-            'name' => 'required|string|max:255',
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
+            'phone' => 'nullable|string|max:20',
+            'bio' => 'nullable|string|max:1000',
             'profile_image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
             'current_password' => 'nullable|string',
             'new_password' => 'nullable|string|min:8|confirmed',
@@ -35,8 +38,10 @@ class AccountSettingsController extends Controller
             $user->password = $validated['new_password'];
         }
 
-        $user->name = $validated['name'];
+        $user->name = $validated['first_name'] . ' ' . $validated['last_name'];
         $user->email = $validated['email'];
+        $user->phone = $validated['phone'] ?? null;
+        $user->bio = $validated['bio'] ?? null;
 
         $oldImage = $user->profile_image;
 
