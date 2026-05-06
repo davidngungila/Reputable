@@ -266,8 +266,10 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'ensure.admin', 'act
 
     // Account Settings
     Route::get('/profile', [DashboardController::class, 'profile'])->name('profile');
-    Route::get('/settings/account', [DashboardController::class, 'accountSettings'])->name('settings.account');
-    Route::put('/settings/account', [DashboardController::class, 'updateAccountSettings'])->name('settings.account.update');
+    Route::get('/settings/account', [AccountSettingsController::class, 'edit'])->name('settings.account');
+    Route::post('/settings/account', [AccountSettingsController::class, 'update'])->name('settings.account.update');
+    Route::get('/settings/security', [AccountSettingsController::class, 'security'])->name('settings.security');
+    Route::post('/settings/security', [AccountSettingsController::class, 'securityUpdate'])->name('settings.security.update');
 
     // Organization Management
     Route::resource('organizations', OrganizationController::class);
@@ -795,10 +797,4 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'ensure.admin', 'act
         Route::post('/test', [EmailGatewayController::class, 'test'])->name('test');
     });
 
-    // Account Management
-    Route::get('/profile', function() { return view('admin.profile'); })->name('admin.profile');
-    Route::get('/settings/account', [AccountSettingsController::class, 'edit'])->name('admin.settings.account');
-    Route::post('/settings/account', [AccountSettingsController::class, 'update'])->name('admin.settings.account.update');
-    Route::get('/settings/security', [AccountSettingsController::class, 'security'])->name('admin.settings.security');
-    Route::post('/settings/security', [AccountSettingsController::class, 'securityUpdate'])->name('admin.settings.security.update');
-});
+    });
