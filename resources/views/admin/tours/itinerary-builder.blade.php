@@ -908,8 +908,14 @@ function saveItinerary() {
         return;
     }
 
-    // Validate all days have required fields
+    // Collect all form data
+    const formData = new FormData();
+    formData.append('tour_id', currentTourId);
+    
+    // Collect day data
     const days = document.querySelectorAll('[data-day]');
+    
+    // Validate all days have required fields
     const validationErrors = [];
     
     days.forEach((dayDiv, index) => {
@@ -928,13 +934,6 @@ function saveItinerary() {
         alert('Please fix the following errors:\n\n' + validationErrors.join('\n'));
         return;
     }
-
-    // Collect all form data
-    const formData = new FormData();
-    formData.append('tour_id', currentTourId);
-    
-    // Collect day data
-    const days = document.querySelectorAll('[data-day]');
     days.forEach((dayDiv, index) => {
         const dayNumber = index + 1;
         const dayData = collectDayData(dayDiv);
