@@ -16,40 +16,40 @@ class SampleUsersSeeder extends Seeder
             // Admin users
             [
                 'name' => 'Super Admin',
-                'email' => 'superadmin@lauparadise.com',
-                'password' => 'Admin@12345',
+                'email' => 'info@reputabletours.com',
+                'password' => 'Rt@2026site',
                 'role' => 'Super Admin',
             ],
             [
                 'name' => 'System Administrator',
-                'email' => 'sysadmin@lauparadise.com',
-                'password' => 'Admin@12345',
+                'email' => 'info@reputabletours.com',
+                'password' => 'Rt@2026site',
                 'role' => 'Admin',
             ],
             
             // Staff users
             [
                 'name' => 'John Smith',
-                'email' => 'john.smith@lauparadise.com',
-                'password' => 'Staff@12345',
+                'email' => 'info@reputabletours.com',
+                'password' => 'Rt@2026site',
                 'role' => 'Tour Guide',
             ],
             [
                 'name' => 'Sarah Johnson',
-                'email' => 'sarah.j@lauparadise.com',
-                'password' => 'Staff@12345',
+                'email' => 'info@reputabletours.com',
+                'password' => 'Rt@2026site',
                 'role' => 'Sales Agent',
             ],
             [
                 'name' => 'Michael Davis',
-                'email' => 'michael.d@lauparadise.com',
-                'password' => 'Staff@12345',
+                'email' => 'info@reputabletours.com',
+                'password' => 'Rt@2026site',
                 'role' => 'Customer Service',
             ],
             [
                 'name' => 'Emma Wilson',
-                'email' => 'emma.w@lauparadise.com',
-                'password' => 'Staff@12345',
+                'email' => 'info@reputabletours.com',
+                'password' => 'Rt@2026site',
                 'role' => 'Marketing Officer',
             ],
             
@@ -134,9 +134,9 @@ class SampleUsersSeeder extends Seeder
 
         // Output login credentials summary
         $this->command->info("\n=== SAMPLE USER CREDENTIALS ===");
-        $this->command->info("Super Admin: superadmin@lauparadise.com / Admin@12345");
-        $this->command->info("Admin: sysadmin@lauparadise.com / Admin@12345");
-        $this->command->info("Staff: john.smith@lauparadise.com / Staff@12345");
+        $this->command->info("Super Admin: info@reputabletours.com / Rt@2026site");
+        $this->command->info("Admin: info@reputabletours.com / Rt@2026site");
+        $this->command->info("Staff: info@reputabletours.com / Rt@2026site");
         $this->command->info("Customer: robert.anderson@email.com / Customer@12345");
         $this->command->info("================================\n");
     }

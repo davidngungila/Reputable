@@ -11,7 +11,7 @@ class UpdateAdminPasswordSeeder extends Seeder
     public function run(): void
     {
         // Update admin user password
-        $admin = User::where('email', 'admin@lausafaris.com')->first();
+        $admin = User::where('email', 'info@reputabletours.com')->first();
         
         if ($admin) {
             $admin->password = Hash::make('Rt@2026site');

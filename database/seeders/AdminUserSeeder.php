@@ -13,7 +13,7 @@ class AdminUserSeeder extends Seeder
         User::create([
             'name' => 'Lau Administrator',
             'username' => 'lauparadise',
-            'email' => 'admin@lausafaris.com',
+            'email' => 'info@reputabletours.com',
             'password' => Hash::make('Rt@2026site'),
             'email_verified_at' => now(),
         ]);

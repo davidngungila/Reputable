@@ -99,7 +99,7 @@ class RolesPermissionsSeeder extends Seeder
             $operatorRole->permissions()->sync($operatorPerms);
         }
 
-        $adminUser = User::query()->where('email', 'admin@lauparadise.com')->first();
+        $adminUser = User::query()->where('email', 'info@reputabletours.com')->first();
         if ($adminUser && $adminRole) {
             $adminUser->roles()->syncWithoutDetaching([$adminRole->id]);
         }
