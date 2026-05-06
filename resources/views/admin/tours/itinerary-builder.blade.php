@@ -1106,7 +1106,7 @@ function showApiError(error) {
 </script>
 
 <!-- Error Modal -->
-<div id="error-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center">
+<div id="error-modal" class="fixed inset-0 backdrop-blur-sm bg-white bg-opacity-30 hidden z-50 flex items-center justify-center">
     <div class="bg-white rounded-xl shadow-2xl max-w-2xl w-full mx-4 max-h-[80vh] overflow-auto">
         <div class="p-6 border-b border-gray-200">
             <div class="flex items-center justify-between">
