@@ -908,6 +908,27 @@ function saveItinerary() {
         return;
     }
 
+    // Validate all days have required fields
+    const days = document.querySelectorAll('[data-day]');
+    const validationErrors = [];
+    
+    days.forEach((dayDiv, index) => {
+        const dayNumber = index + 1;
+        const dayData = collectDayData(dayDiv);
+        
+        if (!dayData.title || dayData.title.trim() === '') {
+            validationErrors.push(`Day ${dayNumber}: Title is required`);
+        }
+        if (!dayData.description || dayData.description.trim() === '') {
+            validationErrors.push(`Day ${dayNumber}: Description is required`);
+        }
+    });
+    
+    if (validationErrors.length > 0) {
+        alert('Please fix the following errors:\n\n' + validationErrors.join('\n'));
+        return;
+    }
+
     // Collect all form data
     const formData = new FormData();
     formData.append('tour_id', currentTourId);

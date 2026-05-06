@@ -294,6 +294,9 @@ class TourController extends Controller
                 'days.*.meals' => 'nullable|array',
                 'days.*.accommodation' => 'nullable|string',
                 'days.*.transportation' => 'nullable|string',
+            ], [
+                'days.*.title.required' => 'Day :position title is required',
+                'days.*.description.required' => 'Day :position description is required',
             ]);
 
             // Delete existing itineraries for this tour
