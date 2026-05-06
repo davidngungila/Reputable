@@ -74,4 +74,42 @@ class AccountSettingsController extends Controller
 
         return back()->with('success', 'Account updated successfully');
     }
+
+    public function security()
+    {
+        return view('admin.security-settings');
+    }
+
+    public function securityUpdate(Request $request)
+    {
+        $user = $request->user();
+
+        $validated = $request->validate([
+            'current_password' => 'required|string',
+            'new_password' => 'required|string|min:8|confirmed',
+        ]);
+
+        if (!Hash::check((string) $validated['current_password'], (string) $user->password)) {
+            return back()->withErrors(['current_password' => 'Current password is incorrect'])->withInput();
+        }
+
+        $user->password = $validated['new_password'];
+        $user->save();
+
+        ActivityLog::create([
+            'user_id' => $user->id,
+            'action' => 'password.updated',
+            'subject_type' => 'user',
+            'subject_id' => $user->id,
+            'properties' => [
+                'ip_address' => $request->ip(),
+                'user_agent' => substr((string) $request->userAgent(), 0, 1024),
+            ],
+            'ip_address' => $request->ip(),
+            'user_agent' => substr((string) $request->userAgent(), 0, 1024),
+        ]);
+
+        return redirect()->route('admin.settings.security')
+            ->with('success', 'Password updated successfully');
+    }
 }

@@ -799,4 +799,6 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'ensure.admin', 'act
     Route::get('/profile', function() { return view('admin.profile'); })->name('admin.profile');
     Route::get('/settings/account', [AccountSettingsController::class, 'edit'])->name('admin.settings.account');
     Route::post('/settings/account', [AccountSettingsController::class, 'update'])->name('admin.settings.account.update');
+    Route::get('/settings/security', [AccountSettingsController::class, 'security'])->name('admin.settings.security');
+    Route::post('/settings/security', [AccountSettingsController::class, 'securityUpdate'])->name('admin.settings.security.update');
 });
