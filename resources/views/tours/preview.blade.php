@@ -168,7 +168,13 @@
                             <div class="absolute -left-2 top-6 w-4 h-4 bg-[#1F5A3A] rounded-full"></div>
                             <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-4 gap-2">
                                 <h3 class="text-lg md:text-xl font-semibold text-gray-900">Day {{ $day->day_number }}: {{ $day->title }}</h3>
-                                <span class="text-sm text-slate-600 bg-white px-3 py-1 rounded-full">{{ $day->meals ?? 'All meals included' }}</span>
+                                <span class="text-sm text-slate-600 bg-white px-3 py-1 rounded-full">
+    @if(isset($day->meals) && is_array($day->meals) && !empty($day->meals))
+        {{ implode(', ', $day->meals) }}
+    @else
+        All meals included
+    @endif
+</span>
                             </div>
                             <p class="text-gray-700 mb-6 text-base leading-relaxed">{{ $day->description }}</p>
                             
