@@ -338,12 +338,6 @@
                                     <a href="/mountain-trekking/routes" class="flex items-center gap-3 text-slate-700 text-emerald-600 font-bold group/sub transition-colors">
                                         <i class="ph ph-map-pin text-xl opacity-50 text-emerald-600"></i> Trekking Routes
                                     </a>
-                                    <a href="/mountain-trekking/equipment" class="flex items-center gap-3 text-slate-700 text-emerald-600 font-bold group/sub transition-colors">
-                                        <i class="ph ph-backpack text-xl opacity-50 text-emerald-600"></i> Equipment Guide
-                                    </a>
-                                    <a href="/mountain-trekking/guides" class="flex items-center gap-3 text-slate-700 text-emerald-600 font-bold group/sub transition-colors">
-                                        <i class="ph ph-user text-xl opacity-50 text-emerald-600"></i> Expert Guides
-                                    </a>
                                 </div>
                             </div>
                         </div>
