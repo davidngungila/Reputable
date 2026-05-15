@@ -185,10 +185,12 @@ Route::get('/mountain-trekking/routes', function () {
     return view('mountain-trekking.routes', compact('routes')); 
 })->name('mountain-trekking.routes');
 Route::get('/mountain-trekking/equipment', function () {
-    return view('mountain-trekking.equipment');
+    $equipment = \App\Models\TrekkingEquipment::all();
+    return view('mountain-trekking.equipment', compact('equipment'));
 })->name('mountain-trekking.equipment');
 Route::get('/mountain-trekking/guides', function () {
-    return view('mountain-trekking.guides');
+    $guides = \App\Models\TrekkingGuide::all();
+    return view('mountain-trekking.guides', compact('guides'));
 })->name('mountain-trekking.guides');
 
 // Mountain Trekking Pages
