@@ -356,8 +356,7 @@
                                         </button>
                                     </div>
                                 </div>
-                                <input type="hidden" name="tour_images[{{ $index }}]" value="{{ $image }}">
-                                <input type="url" name="image_url_{{ $index }}" value="{{ $image }}" 
+                                <input type="url" name="images[]" value="{{ $image }}" 
                                        class="w-full mt-2 px-3 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-emerald-500"
                                        placeholder="Image URL">
                             </div>
@@ -665,7 +664,7 @@ function filterImages(type) {
 
 function selectCloudinaryImage(url) {
     // Find the first empty image slot or add to the end
-    const imageInputs = document.querySelectorAll('input[name^="image_url_"]');
+    const imageInputs = document.querySelectorAll('input[name="images[]"]');
     let added = false;
     
     for (let input of imageInputs) {
@@ -724,8 +723,7 @@ function addNewImageField(url) {
                     </button>
                 </div>
             </div>
-            <input type="hidden" name="tour_images[${newIndex}]" value="${url}">
-            <input type="url" name="image_url_${newIndex}" value="${url}" 
+            <input type="url" name="images[]" value="${url}" 
                    class="w-full mt-2 px-3 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-emerald-500"
                    placeholder="Image URL">
         </div>
@@ -797,14 +795,10 @@ function reindexImages() {
         if (label) label.textContent = `Image ${index + 1}`;
         
         // Update input names and values
-        const hiddenInput = card.querySelector('input[type="hidden"]');
         const urlInput = card.querySelector('input[type="url"]');
         
-        if (hiddenInput) {
-            hiddenInput.name = `tour_images[${index}]`;
-        }
         if (urlInput) {
-            urlInput.name = `image_url_${index}`;
+            urlInput.name = `images[]`;
         }
         
         // Update button onclick handlers

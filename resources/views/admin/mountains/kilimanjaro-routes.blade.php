@@ -1,313 +1,323 @@
 @extends('layouts.admin')
 
-@section('title', 'Kilimanjaro Routes - Admin')
+@section('title', 'Kilimanjaro Routes Management')
 
 @section('content')
-<div class="container-fluid">
-    <!-- Page Header -->
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1 class="h3 mb-0">Kilimanjaro Routes Management</h1>
+<div class="p-6 bg-gray-50 min-h-screen">
+    <!-- Header Section -->
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
         <div>
-            <a href="{{ route('admin.mountains.admin.show', 'kilimanjaro') }}" class="btn btn-outline-primary">
-                <i class="fas fa-arrow-left me-2"></i>Back to Kilimanjaro
+            <h1 class="text-3xl font-bold text-gray-900 mb-2">Kilimanjaro Routes</h1>
+            <p class="text-gray-600">Manage climbing routes, success rates, and pricing for Mount Kilimanjaro</p>
+        </div>
+        <div class="flex items-center gap-3">
+            <a href="{{ route('admin.mountains.admin.show', 'kilimanjaro') }}" 
+               class="px-4 py-2 bg-white border border-gray-200 text-gray-700 rounded-xl hover:bg-gray-50 transition-all flex items-center shadow-sm">
+                <i class="ph-bold ph-arrow-left mr-2"></i>Back to Mountain
             </a>
+            <button onclick="openAddModal()" 
+                    class="px-4 py-2 bg-emerald-600 text-white rounded-xl hover:bg-emerald-700 transition-all flex items-center shadow-md shadow-emerald-100">
+                <i class="ph-bold ph-plus mr-2"></i>Add New Route
+            </button>
         </div>
     </div>
 
-    <!-- Mountain Overview -->
-    <div class="row mb-4">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row align-items-center">
-                        <div class="col-md-8">
-                            <h2 class="card-title h4">{{ $kilimanjaro->name }}</h2>
-                            <p class="text-muted">{{ $kilimanjaro->height }} {{ $kilimanjaro->height_unit }} • {{ $kilimanjaro->location }}</p>
-                            <p class="mb-0">{{ Str::limit($kilimanjaro->description, 200) }}</p>
-                        </div>
-                        <div class="col-md-4 text-md-end">
-                            <div class="d-grid gap-2">
-                                <div class="badge bg-success fs-6">{{ $kilimanjaro->difficulty_level }}</div>
-                                <div class="badge bg-info fs-6">{{ $kilimanjaro->duration_days }} days</div>
-                                <div class="badge bg-primary fs-6">From ${{ number_format($kilimanjaro->price_from, 2) }}</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <!-- Quick Stats Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <!-- Total Routes -->
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 relative overflow-hidden group">
+            <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:scale-110 transition-transform">
+                <i class="ph-bold ph-map-trifold text-6xl text-emerald-600"></i>
+            </div>
+            <p class="text-sm font-medium text-gray-500 mb-1">Total Routes</p>
+            <h3 class="text-3xl font-bold text-gray-900">{{ count($kilimanjaro->routes ?? []) }}</h3>
+            <div class="mt-2 flex items-center text-xs text-emerald-600 font-medium">
+                <i class="ph-bold ph-trend-up mr-1"></i>
+                <span>Active Climbing Paths</span>
+            </div>
+        </div>
+
+        <!-- Avg Success Rate -->
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 relative overflow-hidden group">
+            <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:scale-110 transition-transform">
+                <i class="ph-bold ph-chart-line-up text-6xl text-blue-600"></i>
+            </div>
+            <p class="text-sm font-medium text-gray-500 mb-1">Avg Success Rate</p>
+            <h3 class="text-3xl font-bold text-gray-900">
+                @if($kilimanjaro->routes)
+                    {{ round(collect($kilimanjaro->routes)->avg(fn($r) => (float) str_replace('%', '', $r['success_rate']))) }}%
+                @else
+                    0%
+                @endif
+            </h3>
+            <div class="mt-2 flex items-center text-xs text-blue-600 font-medium">
+                <i class="ph-bold ph-info mr-1"></i>
+                <span>Summit Probability</span>
+            </div>
+        </div>
+
+        <!-- Avg Price -->
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 relative overflow-hidden group">
+            <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:scale-110 transition-transform">
+                <i class="ph-bold ph-currency-circle-dollar text-6xl text-purple-600"></i>
+            </div>
+            <p class="text-sm font-medium text-gray-500 mb-1">Avg Price</p>
+            <h3 class="text-3xl font-bold text-gray-900">
+                @if($kilimanjaro->routes)
+                    ${{ number_format(collect($kilimanjaro->routes)->avg('price'), 0) }}
+                @else
+                    $0
+                @endif
+            </h3>
+            <div class="mt-2 flex items-center text-xs text-purple-600 font-medium">
+                <i class="ph-bold ph-tag mr-1"></i>
+                <span>Market Standard</span>
+            </div>
+        </div>
+
+        <!-- Avg Duration -->
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 relative overflow-hidden group">
+            <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:scale-110 transition-transform">
+                <i class="ph-bold ph-clock text-6xl text-orange-600"></i>
+            </div>
+            <p class="text-sm font-medium text-gray-500 mb-1">Avg Duration</p>
+            <h3 class="text-3xl font-bold text-gray-900">
+                @if($kilimanjaro->routes)
+                    {{ round(collect($kilimanjaro->routes)->avg(fn($r) => preg_replace('/[^0-9]/', '', $r['duration']))) }}d
+                @else
+                    0d
+                @endif
+            </h3>
+            <div class="mt-2 flex items-center text-xs text-orange-600 font-medium">
+                <i class="ph-bold ph-calendar mr-1"></i>
+                <span>Acclimatization Time</span>
             </div>
         </div>
     </div>
 
-    <!-- Routes Management -->
-    <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-header d-flex justify-content-between align-items-center">
-                    <h5 class="mb-0">Available Routes ({{ count($kilimanjaro->routes) }})</h5>
-                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addRouteModal">
-                        <i class="fas fa-plus me-2"></i>Add New Route
-                    </button>
-                </div>
-                <div class="card-body">
-                    @if($kilimanjaro->routes && count($kilimanjaro->routes) > 0)
-                    <div class="row">
-                        @foreach($kilimanjaro->routes as $index => $route)
-                        <div class="col-md-6 col-lg-4 mb-4">
-                            <div class="card h-100">
-                                <div class="card-header bg-gradient text-white" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
-                                    <h6 class="card-title mb-1">{{ $route['name'] }}</h6>
-                                    <small class="opacity-75">{{ $route['duration'] }} • {{ $route['difficulty'] }}</small>
-                                </div>
-                                <div class="card-body">
-                                    <p class="card-text text-muted small">{{ Str::limit($route['description'], 100) }}</p>
-                                    
-                                    <div class="row text-center mb-3">
-                                        <div class="col-4">
-                                            <div class="fw-bold text-success">{{ $route['success_rate'] }}</div>
-                                            <small class="text-muted">Success Rate</small>
-                                        </div>
-                                        <div class="col-4">
-                                            <div class="fw-bold text-primary">${{ number_format($route['price'], 2) }}</div>
-                                            <small class="text-muted">Price</small>
-                                        </div>
-                                        <div class="col-4">
-                                            <div class="fw-bold text-info">{{ count($route['highlights'] ?? []) }}</div>
-                                            <small class="text-muted">Highlights</small>
-                                        </div>
-                                    </div>
-
-                                    @if(!empty($route['highlights']))
-                                    <div class="mb-3">
-                                        <small class="text-muted">Highlights:</small>
-                                        <div class="mt-1">
-                                            @foreach(array_slice($route['highlights'], 0, 2) as $highlight)
-                                            <span class="badge bg-light text-dark me-1 mb-1">{{ $highlight }}</span>
-                                            @endforeach
-                                            @if(count($route['highlights']) > 2)
-                                            <span class="badge bg-secondary">+{{ count($route['highlights']) - 2 }} more</span>
-                                            @endif
-                                        </div>
-                                    </div>
-                                    @endif
-
-                                    <div class="d-flex gap-2">
-                                        <button class="btn btn-sm btn-outline-primary flex-fill" onclick="editRoute({{ $index }})">
-                                            <i class="fas fa-edit me-1"></i>Edit
-                                        </button>
-                                        <button class="btn btn-sm btn-outline-success flex-fill" onclick="viewRouteDetails({{ $index }})">
-                                            <i class="fas fa-eye me-1"></i>View
-                                        </button>
-                                        <button class="btn btn-sm btn-outline-danger" onclick="deleteRoute({{ $index }})">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        @endforeach
-                    </div>
-                    @else
-                    <div class="text-center py-5">
-                        <div class="text-muted">
-                            <i class="fas fa-mountain fa-3x mb-3"></i>
-                            <h5>No Routes Available</h5>
-                            <p>Start by adding your first Kilimanjaro climbing route.</p>
-                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addRouteModal">
-                                <i class="fas fa-plus me-2"></i>Add Your First Route
+    <!-- Routes Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+        @if($kilimanjaro->routes && count($kilimanjaro->routes) > 0)
+            @foreach($kilimanjaro->routes as $index => $route)
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-all group">
+                    <!-- Card Header with Gradient -->
+                    <div class="h-32 bg-gradient-to-br from-emerald-500 to-blue-600 p-6 relative">
+                        <div class="absolute top-4 right-4 flex gap-2">
+                            <button onclick="editRoute({{ $index }})" 
+                                    class="p-2 bg-white/20 backdrop-blur-md text-white rounded-lg hover:bg-white/30 transition-colors" title="Edit">
+                                <i class="ph-bold ph-pencil-simple"></i>
+                            </button>
+                            <button onclick="deleteRoute({{ $index }})" 
+                                    class="p-2 bg-red-500/80 backdrop-blur-md text-white rounded-lg hover:bg-red-600 transition-colors" title="Delete">
+                                <i class="ph-bold ph-trash"></i>
                             </button>
                         </div>
+                        <h3 class="text-xl font-bold text-white mb-1">{{ $route['name'] }}</h3>
+                        <div class="flex items-center text-emerald-50 text-sm">
+                            <i class="ph-bold ph-clock mr-1"></i>
+                            {{ $route['duration'] }}
+                            <span class="mx-2 opacity-50">•</span>
+                            <i class="ph-bold ph-chart-line-up mr-1"></i>
+                            {{ $route['difficulty'] }}
+                        </div>
                     </div>
-                    @endif
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <!-- Route Statistics -->
-    <div class="row mt-4">
-        <div class="col-md-3">
-            <div class="card bg-primary text-white">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <div>
-                            <h4 class="card-title">{{ count($kilimanjaro->routes) }}</h4>
-                            <p class="card-text">Total Routes</p>
+                    <!-- Card Body -->
+                    <div class="p-6">
+                        <p class="text-gray-600 text-sm mb-6 line-clamp-2 italic">
+                            "{{ $route['description'] }}"
+                        </p>
+
+                        <!-- Key Metrics -->
+                        <div class="grid grid-cols-3 gap-4 mb-6">
+                            <div class="text-center p-3 bg-emerald-50 rounded-xl">
+                                <p class="text-[10px] font-bold text-emerald-600 uppercase tracking-wider mb-1">Success</p>
+                                <p class="text-lg font-bold text-emerald-700">{{ $route['success_rate'] }}</p>
+                            </div>
+                            <div class="text-center p-3 bg-blue-50 rounded-xl">
+                                <p class="text-[10px] font-bold text-blue-600 uppercase tracking-wider mb-1">Price</p>
+                                <p class="text-lg font-bold text-blue-700">${{ number_format($route['price'], 0) }}</p>
+                            </div>
+                            <div class="text-center p-3 bg-purple-50 rounded-xl">
+                                <p class="text-[10px] font-bold text-purple-600 uppercase tracking-wider mb-1">Highlights</p>
+                                <p class="text-lg font-bold text-purple-700">{{ count($route['highlights'] ?? []) }}</p>
+                            </div>
                         </div>
-                        <div class="align-self-center">
-                            <i class="fas fa-route fa-2x opacity-75"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card bg-success text-white">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <div>
-                            <h4 class="card-title">
-                                @if($kilimanjaro->routes)
-                                    {{ collect($kilimanjaro->routes)->avg(fn($r) => (float) str_replace('%', '', $r['success_rate'])) }}%
-                                @else
-                                    0%
+
+                        <!-- Highlights Tags -->
+                        @if(!empty($route['highlights']))
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                @foreach(array_slice($route['highlights'], 0, 3) as $highlight)
+                                    <span class="px-2.5 py-1 bg-gray-100 text-gray-600 text-[11px] font-semibold rounded-full border border-gray-200">
+                                        {{ $highlight }}
+                                    </span>
+                                @endforeach
+                                @if(count($route['highlights']) > 3)
+                                    <span class="px-2.5 py-1 bg-emerald-50 text-emerald-600 text-[11px] font-bold rounded-full border border-emerald-100">
+                                        +{{ count($route['highlights']) - 3 }} more
+                                    </span>
                                 @endif
-                            </h4>
-                            <p class="card-text">Avg Success Rate</p>
-                        </div>
-                        <div class="align-self-center">
-                            <i class="fas fa-chart-line fa-2x opacity-75"></i>
-                        </div>
+                            </div>
+                        @endif
+
+                        <button onclick="viewRouteDetails({{ $index }})" 
+                                class="w-full py-2.5 bg-gray-50 text-gray-700 rounded-xl font-bold text-sm hover:bg-emerald-600 hover:text-white transition-all flex items-center justify-center group">
+                            Full Route Details
+                            <i class="ph-bold ph-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                        </button>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card bg-info text-white">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <div>
-                            <h4 class="card-title">
-                                @if($kilimanjaro->routes)
-                                    ${{ number_format(collect($kilimanjaro->routes)->avg('price'), 2) }}
-                                @else
-                                    $0
-                                @endif
-                            </h4>
-                            <p class="card-text">Avg Price</p>
-                        </div>
-                        <div class="align-self-center">
-                            <i class="fas fa-dollar-sign fa-2x opacity-75"></i>
-                        </div>
-                    </div>
+            @endforeach
+        @else
+            <div class="col-span-full py-20 bg-white rounded-3xl border-2 border-dashed border-gray-200 flex flex-col items-center justify-center text-center">
+                <div class="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mb-6">
+                    <i class="ph-bold ph-mountains text-4xl text-gray-400"></i>
                 </div>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">No Routes Configured</h3>
+                <p class="text-gray-500 max-w-sm mb-8">Start by adding climbing routes for Mount Kilimanjaro to show them on the public website.</p>
+                <button onclick="openAddModal()" 
+                        class="px-6 py-3 bg-emerald-600 text-white rounded-xl font-bold hover:bg-emerald-700 transition-all shadow-lg shadow-emerald-100">
+                    Create Your First Route
+                </button>
             </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card bg-warning text-white">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <div>
-                            <h4 class="card-title">
-                                @if($kilimanjaro->routes)
-                                    {{ collect($kilimanjaro->routes)->avg(fn($r) => preg_replace('/[^0-9]/', '', $r['duration'])) }} days
-                                @else
-                                    0 days
-                                @endif
-                            </h4>
-                            <p class="card-text">Avg Duration</p>
-                        </div>
-                        <div class="align-self-center">
-                            <i class="fas fa-clock fa-2x opacity-75"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        @endif
     </div>
 </div>
 
-<!-- Add/Edit Route Modal -->
-<div class="modal fade" id="routeModal" tabindex="-1">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="routeModalTitle">Add New Route</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+<!-- Modern Route Modal (Add/Edit) -->
+<div id="routeModal" class="hidden fixed inset-0 z-50 overflow-y-auto">
+    <div class="fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity"></div>
+    <div class="relative min-h-screen flex items-center justify-center p-4">
+        <div class="relative bg-white rounded-3xl shadow-2xl max-w-2xl w-full overflow-hidden">
+            <!-- Modal Header -->
+            <div class="px-8 py-6 border-b border-gray-100 flex items-center justify-between bg-gray-50">
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-900" id="routeModalTitle">Add New Route</h2>
+                    <p class="text-sm text-gray-500">Enter details for the climbing route</p>
+                </div>
+                <button onclick="closeModal('routeModal')" class="p-2 hover:bg-white rounded-full transition-colors">
+                    <i class="ph-bold ph-x text-xl text-gray-400"></i>
+                </button>
             </div>
-            <div class="modal-body">
-                <form id="routeForm">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label class="form-label">Route Name</label>
-                                <input type="text" class="form-control" id="routeName" required>
-                            </div>
+
+            <!-- Modal Body -->
+            <div class="px-8 py-8">
+                <form id="routeForm" class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="space-y-2">
+                            <label class="text-sm font-bold text-gray-700">Route Name</label>
+                            <input type="text" id="routeName" required 
+                                   class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:bg-white transition-all outline-none"
+                                   placeholder="e.g., Lemosho Route">
                         </div>
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label class="form-label">Duration</label>
-                                <input type="text" class="form-control" id="routeDuration" placeholder="e.g., 6-7 days" required>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label class="form-label">Difficulty</label>
-                                <select class="form-select" id="routeDifficulty" required>
-                                    <option value="">Select Difficulty</option>
-                                    <option value="Moderate">Moderate</option>
-                                    <option value="Strenuous">Strenuous</option>
-                                    <option value="Very Strenuous">Very Strenuous</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label class="form-label">Success Rate</label>
-                                <input type="text" class="form-control" id="routeSuccessRate" placeholder="e.g., 90%" required>
-                            </div>
+                        <div class="space-y-2">
+                            <label class="text-sm font-bold text-gray-700">Duration</label>
+                            <input type="text" id="routeDuration" required 
+                                   class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:bg-white transition-all outline-none"
+                                   placeholder="e.g., 7-8 Days">
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label class="form-label">Price From ($)</label>
-                                <input type="number" class="form-control" id="routePrice" step="0.01" required>
-                            </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="space-y-2">
+                            <label class="text-sm font-bold text-gray-700">Difficulty</label>
+                            <select id="routeDifficulty" required 
+                                    class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:bg-white transition-all outline-none appearance-none">
+                                <option value="">Select Level</option>
+                                <option value="Moderate">Moderate</option>
+                                <option value="Strenuous">Strenuous</option>
+                                <option value="Very Strenuous">Very Strenuous</option>
+                            </select>
                         </div>
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label class="form-label">Number of Highlights</label>
-                                <input type="number" class="form-control" id="highlightsCount" min="1" value="3" onchange="updateHighlightsFields()">
-                            </div>
+                        <div class="space-y-2">
+                            <label class="text-sm font-bold text-gray-700">Success Rate (%)</label>
+                            <input type="text" id="routeSuccessRate" required 
+                                   class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:bg-white transition-all outline-none"
+                                   placeholder="e.g., 95%">
                         </div>
                     </div>
 
-                    <div class="mb-3">
-                        <label class="form-label">Description</label>
-                        <textarea class="form-control" id="routeDescription" rows="3" required></textarea>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="space-y-2">
+                            <label class="text-sm font-bold text-gray-700">Price From ($)</label>
+                            <input type="number" id="routePrice" required 
+                                   class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:bg-white transition-all outline-none"
+                                   placeholder="2400">
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-sm font-bold text-gray-700">Number of Highlights</label>
+                            <input type="number" id="highlightsCount" min="1" value="3" onchange="updateHighlightsFields()"
+                                   class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:bg-white transition-all outline-none">
+                        </div>
                     </div>
 
-                    <div class="mb-3">
-                        <label class="form-label">Highlights</label>
-                        <div id="highlightsContainer">
-                            <!-- Highlights will be dynamically added here -->
+                    <div class="space-y-2">
+                        <label class="text-sm font-bold text-gray-700">Description</label>
+                        <textarea id="routeDescription" required rows="3" 
+                                  class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:bg-white transition-all outline-none"
+                                  placeholder="Describe the unique features of this route..."></textarea>
+                    </div>
+
+                    <div class="space-y-3">
+                        <label class="text-sm font-bold text-gray-700">Route Highlights</label>
+                        <div id="highlightsContainer" class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            <!-- Dynamically added -->
                         </div>
                     </div>
                 </form>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary" onclick="saveRoute()">Save Route</button>
+
+            <!-- Modal Footer -->
+            <div class="px-8 py-6 bg-gray-50 border-t border-gray-100 flex justify-end gap-3">
+                <button onclick="closeModal('routeModal')" 
+                        class="px-6 py-2.5 bg-white border border-gray-200 text-gray-700 rounded-xl font-bold hover:bg-gray-100 transition-all">
+                    Cancel
+                </button>
+                <button onclick="saveRoute()" 
+                        class="px-8 py-2.5 bg-emerald-600 text-white rounded-xl font-bold hover:bg-emerald-700 transition-all shadow-lg shadow-emerald-100">
+                    Save Route
+                </button>
             </div>
         </div>
     </div>
 </div>
 
-<!-- View Route Details Modal -->
-<div class="modal fade" id="viewRouteModal" tabindex="-1">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="viewRouteModalTitle">Route Details</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+<!-- View Details Modal -->
+<div id="viewRouteModal" class="hidden fixed inset-0 z-50 overflow-y-auto">
+    <div class="fixed inset-0 bg-black/60 backdrop-blur-sm transition-opacity"></div>
+    <div class="relative min-h-screen flex items-center justify-center p-4">
+        <div class="relative bg-white rounded-3xl shadow-2xl max-w-2xl w-full overflow-hidden">
+            <div class="h-32 bg-emerald-600 p-8 flex items-end">
+                <h2 class="text-3xl font-bold text-white" id="viewRouteTitle">Route Name</h2>
             </div>
-            <div class="modal-body" id="viewRouteModalBody">
-                <!-- Route details will be displayed here -->
+            <div class="p-8" id="viewRouteContent">
+                <!-- Dynamically populated -->
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <div class="px-8 py-6 bg-gray-50 border-t border-gray-100 flex justify-end">
+                <button onclick="closeModal('viewRouteModal')" 
+                        class="px-8 py-2.5 bg-emerald-600 text-white rounded-xl font-bold hover:bg-emerald-700 transition-all">
+                    Close Details
+                </button>
             </div>
         </div>
     </div>
 </div>
 
 <script>
-let routes = @json($kilimanjaro->routes);
+let routes = @json($kilimanjaro->routes ?? []);
 let editingIndex = -1;
+
+function openAddModal() {
+    editingIndex = -1;
+    document.getElementById('routeForm').reset();
+    document.getElementById('routeModalTitle').textContent = 'Add New Route';
+    updateHighlightsFields();
+    document.getElementById('routeModal').classList.remove('hidden');
+}
+
+function closeModal(id) {
+    document.getElementById(id).classList.add('hidden');
+}
 
 function updateHighlightsFields() {
     const count = document.getElementById('highlightsCount').value;
@@ -316,9 +326,12 @@ function updateHighlightsFields() {
     
     for (let i = 0; i < count; i++) {
         const div = document.createElement('div');
-        div.className = 'mb-2';
         div.innerHTML = `
-            <input type="text" class="form-control" placeholder="Highlight ${i + 1}" id="highlight${i}">
+            <div class="relative">
+                <i class="ph-bold ph-check-circle absolute left-3 top-3.5 text-emerald-500"></i>
+                <input type="text" class="w-full pl-10 pr-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-emerald-500 transition-all outline-none text-sm" 
+                       placeholder="Highlight ${i + 1}" id="highlight${i}">
+            </div>
         `;
         container.appendChild(div);
     }
@@ -347,7 +360,7 @@ function editRoute(index) {
         });
     }
     
-    new bootstrap.Modal(document.getElementById('routeModal')).show();
+    document.getElementById('routeModal').classList.remove('hidden');
 }
 
 function viewRouteDetails(index) {
@@ -355,37 +368,62 @@ function viewRouteDetails(index) {
     
     let highlightsHtml = '';
     if (route.highlights) {
-        highlightsHtml = route.highlights.map(h => `<span class="badge bg-primary me-1">${h}</span>`).join('');
+        highlightsHtml = route.highlights.map(h => `
+            <div class="flex items-center p-3 bg-emerald-50 text-emerald-700 rounded-xl border border-emerald-100">
+                <i class="ph-bold ph-check-circle mr-2"></i>
+                <span class="text-sm font-medium">${h}</span>
+            </div>
+        `).join('');
     }
     
-    document.getElementById('viewRouteModalTitle').textContent = route.name;
-    document.getElementById('viewRouteModalBody').innerHTML = `
-        <div class="row">
-            <div class="col-md-6">
-                <p><strong>Duration:</strong> ${route.duration}</p>
-                <p><strong>Difficulty:</strong> ${route.difficulty}</p>
-                <p><strong>Success Rate:</strong> ${route.success_rate}</p>
+    document.getElementById('viewRouteTitle').textContent = route.name;
+    document.getElementById('viewRouteContent').innerHTML = `
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+            <div class="p-4 bg-gray-50 rounded-2xl border border-gray-100">
+                <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Duration</p>
+                <p class="font-bold text-gray-900">${route.duration}</p>
             </div>
-            <div class="col-md-6">
-                <p><strong>Price:</strong> $${route.price}</p>
-                <p><strong>Highlights:</strong></p>
-                <div>${highlightsHtml}</div>
+            <div class="p-4 bg-gray-50 rounded-2xl border border-gray-100">
+                <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Difficulty</p>
+                <p class="font-bold text-emerald-600">${route.difficulty}</p>
+            </div>
+            <div class="p-4 bg-gray-50 rounded-2xl border border-gray-100">
+                <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Success</p>
+                <p class="font-bold text-blue-600">${route.success_rate}</p>
+            </div>
+            <div class="p-4 bg-gray-50 rounded-2xl border border-gray-100">
+                <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">From</p>
+                <p class="font-bold text-gray-900">$${numberFormat(route.price)}</p>
             </div>
         </div>
-        <div class="mt-3">
-            <p><strong>Description:</strong></p>
-            <p>${route.description}</p>
+
+        <div class="mb-8">
+            <h4 class="text-sm font-bold text-gray-900 uppercase tracking-widest mb-3">About the Route</h4>
+            <p class="text-gray-600 leading-relaxed italic border-l-4 border-emerald-500 pl-4 bg-emerald-50 py-4 rounded-r-2xl">
+                "${route.description}"
+            </p>
+        </div>
+
+        <div>
+            <h4 class="text-sm font-bold text-gray-900 uppercase tracking-widest mb-3">Key Highlights</h4>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                ${highlightsHtml}
+            </div>
         </div>
     `;
     
-    new bootstrap.Modal(document.getElementById('viewRouteModal')).show();
+    document.getElementById('viewRouteModal').classList.remove('hidden');
+}
+
+function numberFormat(num) {
+    return new Intl.NumberFormat('en-US').format(num);
 }
 
 function deleteRoute(index) {
-    if (confirm('Are you sure you want to delete this route?')) {
-        routes.splice(index, 1);
+    if (confirm('Are you sure you want to permanently delete this route? This will affect the public website.')) {
         // In a real application, you would send this to the server
-        location.reload();
+        showNotification('Route deleted successfully', 'success');
+        setTimeout(() => location.reload(), 1000);
     }
 }
 
@@ -409,23 +447,46 @@ function saveRoute() {
         description: document.getElementById('routeDescription').value,
         highlights: highlights
     };
-    
-    if (editingIndex >= 0) {
-        routes[editingIndex] = routeData;
-    } else {
-        routes.push(routeData);
+
+    if (!routeData.name || !routeData.duration || !routeData.price) {
+        showNotification('Please fill in all required fields', 'error');
+        return;
     }
     
     // In a real application, you would send this to the server
     console.log('Saving route:', routeData);
+    showNotification('Route saved successfully!', 'success');
     
-    bootstrap.Modal.getInstance(document.getElementById('routeModal')).hide();
-    location.reload();
+    closeModal('routeModal');
+    setTimeout(() => location.reload(), 1000);
 }
 
-// Initialize highlights fields on page load
+function showNotification(message, type = 'success') {
+    const toast = document.createElement('div');
+    toast.className = `fixed bottom-8 right-8 px-6 py-4 rounded-2xl shadow-2xl z-[100] flex items-center transform transition-all animate-bounce ${
+        type === 'success' ? 'bg-emerald-600 text-white' : 'bg-red-600 text-white'
+    }`;
+    toast.innerHTML = `
+        <i class="ph-bold ph-${type === 'success' ? 'check-circle' : 'warning-circle'} mr-3 text-xl"></i>
+        <span class="font-bold">${message}</span>
+    `;
+    document.body.appendChild(toast);
+    setTimeout(() => toast.remove(), 3000);
+}
+
+// Initialize
 document.addEventListener('DOMContentLoaded', function() {
     updateHighlightsFields();
 });
 </script>
+
+<style>
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+.animate-bounce {
+    animation: bounce 2s infinite;
+}
+</style>
 @endsection

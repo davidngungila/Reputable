@@ -433,6 +433,16 @@ function createTimelineDayView(dayNum, existingItinerary) {
                         <textarea name="day_${dayNum}_description" rows="3" placeholder="Describe the day's activities and experiences..."
                                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500">${existingItinerary ? existingItinerary.description || '' : ''}</textarea>
                     </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Day Image URL</label>
+                        <div class="flex gap-2">
+                            <input type="url" name="day_${dayNum}_image" value="${existingItinerary ? existingItinerary.image || '' : ''}" 
+                                   placeholder="https://res.cloudinary.com/..."
+                                   class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                        </div>
+                        <p class="text-xs text-gray-500 mt-1">Provide a URL for the day's featured image</p>
+                    </div>
                     
                     <div>
                         <label class="block text-sm font-semibold text-gray-700 mb-2">Activities</label>
@@ -522,6 +532,8 @@ function createCardsDayView(dayNum, existingItinerary) {
                                placeholder="Day title" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm">
                         <textarea name="day_${dayNum}_description" rows="2" placeholder="Description"
                                   class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm">${existingItinerary ? existingItinerary.description || '' : ''}</textarea>
+                        <input type="url" name="day_${dayNum}_image" value="${existingItinerary ? existingItinerary.image || '' : ''}" 
+                               placeholder="Image URL" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm">
                     </div>
                 </div>
                 
@@ -601,6 +613,8 @@ function createCompactDayView(dayNum, existingItinerary) {
                     <label class="text-xs text-gray-500">Description</label>
                     <textarea name="day_${dayNum}_description" rows="2" placeholder="Brief description"
                               class="w-full px-2 py-1 border border-gray-300 rounded text-sm">${existingItinerary ? existingItinerary.description || '' : ''}</textarea>
+                    <input type="url" name="day_${dayNum}_image" value="${existingItinerary ? existingItinerary.image || '' : ''}" 
+                           placeholder="Img URL" class="w-full px-2 py-1 border border-gray-300 rounded text-xs mt-1">
                 </div>
                 
                 <div>
@@ -799,6 +813,7 @@ function collectDayData(dayDiv) {
     return {
         title: dayDiv.querySelector(`input[name="day_${dayNumber}_title"]`)?.value || '',
         description: dayDiv.querySelector(`textarea[name="day_${dayNumber}_description"]`)?.value || '',
+        image: dayDiv.querySelector(`input[name="day_${dayNumber}_image"]`)?.value || '',
         activities: Array.from(dayDiv.querySelectorAll(`input[name="day_${dayNumber}_activities[]"]`))
             .map(input => input.value)
             .filter(value => value),

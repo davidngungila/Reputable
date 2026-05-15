@@ -192,6 +192,17 @@ class ActivityController extends Controller
         return view('admin.activities.wildlife', compact('activities'));
     }
 
+    // Mountain Trekking
+    public function mountainTrekking()
+    {
+        $activities = Activity::where('activity_type', 'mountain_trekking')
+            ->withCount(['tours', 'bookings'])
+            ->latest()
+            ->get();
+
+        return view('admin.activities.mountain-trekking', compact('activities'));
+    }
+
     // Activities Management (main management page)
     public function activitiesManagement()
     {

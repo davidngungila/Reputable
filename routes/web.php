@@ -176,8 +176,10 @@ Route::get('/activity/night-game', function () {
 Route::get('/mountain-trekking', [PublicTourController::class, 'mountainTrekking'])->name('mountain-trekking');
 Route::get('/mountain-trekking/trekking-info', function () { 
     $routes = \App\Models\MountainTrekkingRoute::active()->ordered()->get(); 
-    return view('mountain-trekking.trekking-info', compact('routes')); 
+    $guides = \App\Models\TrekkingGuide::all();
+    return view('mountain-trekking.trekking-info', compact('routes', 'guides')); 
 })->name('mountain-trekking.info');
+Route::get('/mountain-trekking/route/{slug}', [PublicTourController::class, 'trekkingRouteShow'])->name('mountain-trekking.routes.show');
 Route::get('/mountain-trekking/routes', function () { return view('mountain-trekking.routes'); })->name('mountain-trekking.routes');
 
 // Mountain Trekking Pages
@@ -342,6 +344,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'ensure.admin', 'act
     Route::post('/tours/bulk-deactivate', [TourController::class, 'bulkDeactivate'])->name('tours.bulk-deactivate');
     Route::post('/tours/itinerary-builder', [TourController::class, 'storeItinerary'])->name('tours.itinerary-builder.store');
     Route::get('/api/tours/{tour}', [TourController::class, 'showApi'])->name('tours.api.show');
+    Route::get('/api/destinations/{destination}', [TourController::class, 'showDestinationApi'])->name('destinations.api.show');
     Route::get('/tours/{tour}/itineraries', [TourController::class, 'itinerariesIndex'])->name('tours.itineraries.index');
     Route::put('/itineraries/{itinerary}', [TourController::class, 'updateItinerary'])->name('itineraries.update');
     Route::delete('/itineraries/{itinerary}', [TourController::class, 'destroyItinerary'])->name('itineraries.destroy');
@@ -357,10 +360,6 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'ensure.admin', 'act
     // Mountain Trekking
     Route::get('/mountain/kilimanjaro-routes', [MountainController::class, 'adminKilimanjaroRoutes'])->name('mountain.kilimanjaro-routes');
     Route::get('/mountain/meru-climbing', [MountainController::class, 'adminMeruClimbing'])->name('mountain.meru-climbing');
-    
-    // Mountain Trekking Admin Routes (updated format)
-    Route::get('/admin/mountain/kilimanjaro-routes', [MountainController::class, 'adminKilimanjaroRoutes'])->name('admin.mountain.kilimanjaro-routes');
-    Route::get('/admin/mountain/meru-climbing', [MountainController::class, 'adminMeruClimbing'])->name('admin.mountain.meru-climbing');
     
     // Mountains Management
     Route::prefix('mountains')->name('mountains.')->group(function () {

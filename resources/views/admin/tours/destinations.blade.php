@@ -574,7 +574,11 @@ function showAddDestinationModal() {
 
 function editDestination(id) {
     // Load destination data and show modal
-    fetch(`/admin/api/destinations/${id}`)
+    fetch(`/admin/api/destinations/${id}`, {
+        headers: {
+            'Accept': 'application/json'
+        }
+    })
         .then(response => response.json())
         .then(data => {
             document.getElementById('modal-title').textContent = 'Edit Destination';
@@ -623,7 +627,8 @@ function saveDestination(event) {
         method: method,
         body: formData,
         headers: {
-            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+            'Accept': 'application/json'
         }
     })
     .then(response => response.json())
@@ -652,7 +657,8 @@ function deleteDestination(id) {
         fetch(`/admin/tours/destinations/${id}`, {
             method: 'DELETE',
             headers: {
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                'Accept': 'application/json'
             }
         })
         .then(response => response.json())

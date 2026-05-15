@@ -51,7 +51,6 @@ class MountainController extends Controller
         return view('mountains.guides', compact('mountain'));
     }
 
-    // Admin Pages
     public function adminIndex()
     {
         $mountains = Mountain::all();
@@ -61,7 +60,7 @@ class MountainController extends Controller
     public function adminShow($slug)
     {
         $mountain = Mountain::where('slug', $slug)->firstOrFail();
-        return view('admin.mountains.show', compact('mountain'));
+        return view('admin.mountains.show-mountain', compact('mountain'));
     }
 
     public function adminKilimanjaroRoutes()

@@ -21,7 +21,7 @@
     </div>
 
     <!-- Activity Statistics -->
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+    <div class="grid grid-cols-1 md:grid-cols-5 gap-6 mb-8">
         <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
             <div class="flex items-center justify-between mb-4">
                 <div class="p-3 bg-emerald-100 rounded-lg">
@@ -81,10 +81,25 @@
                 <p class="text-sm text-gray-600">Wildlife Experiences</p>
             </div>
         </div>
+
+        <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+            <div class="flex items-center justify-between mb-4">
+                <div class="p-3 bg-emerald-100 rounded-lg">
+                    <i class="fas fa-mountain text-emerald-600 text-xl"></i>
+                </div>
+                <span class="text-xs font-medium text-emerald-600 bg-emerald-50 px-2 py-1 rounded-full">
+                    Mountain
+                </span>
+            </div>
+            <div class="space-y-1">
+                <h3 class="text-2xl font-bold text-gray-900">{{ $activities->get('mountain_trekking', collect())->count() }}</h3>
+                <p class="text-sm text-gray-600">Mountain Treks</p>
+            </div>
+        </div>
     </div>
 
     <!-- Quick Links -->
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+    <div class="grid grid-cols-1 md:grid-cols-5 gap-4 mb-8">
         <a href="{{ route('admin.activities.cultural-tours') }}" class="bg-gradient-to-r from-purple-600 to-purple-700 rounded-xl p-6 text-white hover:shadow-lg transition-shadow">
             <div class="flex items-center justify-between">
                 <div>
@@ -127,6 +142,20 @@
             </div>
         </a>
 
+        <a href="{{ route('admin.activities.mountain-trekking') }}" class="bg-gradient-to-r from-emerald-600 to-emerald-700 rounded-xl p-6 text-white hover:shadow-lg transition-shadow">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h3 class="text-lg font-semibold mb-1">Mountain Trekking</h3>
+                    <p class="text-emerald-100 text-sm">Climbing adventures</p>
+                </div>
+                <i class="fas fa-mountain text-3xl text-emerald-200"></i>
+            </div>
+            <div class="mt-4 flex items-center text-sm">
+                <span>{{ $activities->get('mountain_trekking', collect())->count() }} activities</span>
+                <i class="fas fa-arrow-right ml-auto"></i>
+            </div>
+        </a>
+
         <a href="{{ route('admin.activities.management') }}" class="bg-gradient-to-r from-gray-600 to-gray-700 rounded-xl p-6 text-white hover:shadow-lg transition-shadow">
             <div class="flex items-center justify-between">
                 <div>
@@ -161,6 +190,7 @@
                     {{ $type === 'cultural' ? 'from-purple-400 to-purple-600' : '' }}
                     {{ $type === 'beach' ? 'from-blue-400 to-blue-600' : '' }}
                     {{ $type === 'wildlife' ? 'from-orange-400 to-orange-600' : '' }}
+                    {{ $type === 'mountain_trekking' ? 'from-emerald-400 to-emerald-600' : '' }}
                     {{ $type === 'adventure' ? 'from-green-400 to-green-600' : '' }}
                     rounded-t-xl relative">
                     @if(!empty($activity->images) && count($activity->images) > 0)
@@ -173,6 +203,7 @@
                                     {{ $type === 'cultural' ? 'fa-theater-masks' : '' }}
                                     {{ $type === 'beach' ? 'fa-umbrella-beach' : '' }}
                                     {{ $type === 'wildlife' ? 'fa-paw' : '' }}
+                                    {{ $type === 'mountain_trekking' ? 'fa-mountain' : '' }}
                                     {{ $type === 'adventure' ? 'fa-hiking' : '' }}
                                     text-4xl mb-2"></i>
                                 <p class="text-sm">{{ ucfirst($type) }} Activity</p>
@@ -240,6 +271,7 @@
                                 {{ $type === 'cultural' ? 'bg-purple-100 text-purple-700' : '' }}
                                 {{ $type === 'beach' ? 'bg-blue-100 text-blue-700' : '' }}
                                 {{ $type === 'wildlife' ? 'bg-orange-100 text-orange-700' : '' }}
+                                {{ $type === 'mountain_trekking' ? 'bg-emerald-100 text-emerald-700' : '' }}
                                 {{ $type === 'adventure' ? 'bg-green-100 text-green-700' : '' }}
                                 text-xs rounded-full">
                                 {{ $highlight }}

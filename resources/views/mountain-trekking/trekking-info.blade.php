@@ -118,9 +118,9 @@
                             @else
                             <span class="text-emerald-600 font-bold">Available</span>
                             @endif
-                            <button class="px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors">
+                            <a href="{{ route('mountain-trekking.routes.show', $route->slug) }}" class="px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors">
                                 View Details
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -303,6 +303,59 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- Expert Guides Section -->
+    <section id="guides" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                    Expert Guides
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Meet our professional trekking team. Certified, experienced, and dedicated to your safety and success.
+                </p>
+            </div>
+
+            @if($guides->count() > 0)
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                @foreach($guides as $guide)
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 group hover:shadow-2xl transition-all">
+                    <div class="h-64 relative overflow-hidden">
+                        <img src="{{ $guide->profile_image ?? 'https://res.cloudinary.com/dqflffa1o/image/upload/v1777468772/Tarangire_ck2ohe.jpg' }}" 
+                             alt="{{ $guide->name }}" 
+                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
+                            <h3 class="text-xl font-bold text-white">{{ $guide->name }}</h3>
+                            <p class="text-emerald-400 text-sm">{{ $guide->specialization ?? 'Lead Guide' }}</p>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <div class="flex items-center text-gray-600 text-sm mb-2">
+                            <i class="ph-bold ph-calendar-check mr-2 text-emerald-600"></i>
+                            {{ $guide->experience_years ?? '5+' }} Years Experience
+                        </div>
+                        <div class="flex items-center text-gray-600 text-sm mb-4">
+                            <i class="ph-bold ph-globe mr-2 text-emerald-600"></i>
+                            {{ $guide->languages_list }}
+                        </div>
+                        <p class="text-gray-600 text-sm line-clamp-3">
+                            {{ $guide->bio ?? 'Expert guide with extensive knowledge of mountain routes and safety protocols.' }}
+                        </p>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+            @else
+            <div class="bg-white rounded-2xl p-12 text-center shadow-sm border border-gray-100">
+                <div class="w-20 h-20 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="ph-bold ph-users-three text-emerald-600 text-3xl"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Our Guides are Ready</h3>
+                <p class="text-gray-600">We have a team of certified professional guides ready for your adventure. Contact us to learn more about our specific guide assignments.</p>
+            </div>
+            @endif
         </div>
     </section>
 

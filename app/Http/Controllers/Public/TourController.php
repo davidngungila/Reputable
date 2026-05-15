@@ -107,4 +107,10 @@ class TourController extends Controller
         $tour = Tour::with('itineraries')->findOrFail($id);
         return view('tours.show', compact('tour'));
     }
+
+    public function trekkingRouteShow($slug): View
+    {
+        $route = \App\Models\MountainTrekkingRoute::where('slug', $slug)->where('is_active', true)->firstOrFail();
+        return view('mountain-trekking.route-show', compact('route'));
+    }
 }

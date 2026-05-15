@@ -91,10 +91,10 @@ class TrekkingGuide extends Model
         return $query->orderBy('sort_order')->orderBy('name');
     }
 
-    public function getProfileImageAttribute()
+    public function getProfileImageAttribute($value)
     {
-        if ($this->profile_image) {
-            return $this->profile_image;
+        if ($value) {
+            return $value;
         }
         
         if ($this->images && !empty($this->images[0])) {

@@ -11,7 +11,7 @@ class Itinerary extends Model
     use HasFactory;
 
     protected $fillable = [
-        'tour_id', 'day_number', 'title', 'description', 'activities', 'meals', 'accommodation', 'transportation'
+        'tour_id', 'day_number', 'title', 'description', 'image', 'activities', 'meals', 'accommodation', 'transportation'
     ];
 
     protected $casts = [

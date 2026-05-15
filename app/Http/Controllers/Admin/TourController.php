@@ -290,6 +290,7 @@ class TourController extends Controller
                 'days' => 'required|array',
                 'days.*.title' => 'required|string|max:255',
                 'days.*.description' => 'required|string',
+                'days.*.image' => 'nullable|string',
                 'days.*.activities' => 'nullable|array',
                 'days.*.meals' => 'nullable|array',
                 'days.*.accommodation' => 'nullable|string',
@@ -309,6 +310,7 @@ class TourController extends Controller
                     'day_number' => $dayNumber,
                     'title' => $dayData['title'],
                     'description' => $dayData['description'],
+                    'image' => $dayData['image'] ?? null,
                     'activities' => $dayData['activities'] ?? [],
                     'meals' => $dayData['meals'] ?? [],
                     'accommodation' => $dayData['accommodation'] ?? null,
@@ -333,6 +335,11 @@ class TourController extends Controller
     public function showApi(Tour $tour)
     {
         return response()->json($tour);
+    }
+
+    public function showDestinationApi(Destination $destination)
+    {
+        return response()->json($destination);
     }
 
     public function itinerariesIndex(Tour $tour)
@@ -460,6 +467,14 @@ class TourController extends Controller
             $destination->tours()->attach($request->linked_tours);
         }
         
+        if ($request->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Destination created successfully!',
+                'data' => $destination
+            ]);
+        }
+
         return redirect()->route('admin.tours.destinations')->with('success', 'Destination created successfully!');
     }
 
@@ -485,6 +500,15 @@ class TourController extends Controller
         ]);
 
         $destination->update($validated);
+
+        if ($request->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Destination updated successfully.',
+                'data' => $destination
+            ]);
+        }
+
         return redirect()->route('admin.tours.destinations')->with('success', 'Destination updated successfully.');
     }
 

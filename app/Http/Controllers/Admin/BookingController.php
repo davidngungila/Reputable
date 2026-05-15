@@ -30,13 +30,13 @@ class BookingController extends Controller
     public function pending()
     {
         $bookings = Booking::with('tour')->where('status', 'pending')->latest()->paginate(10);
-        return view('admin.bookings.pending', compact('bookings'));
+        return view('admin.bookings.index', compact('bookings'));
     }
 
     public function confirmed()
     {
         $bookings = Booking::with('tour')->where('status', 'confirmed')->latest()->paginate(10);
-        return view('admin.bookings.confirmed', compact('bookings'));
+        return view('admin.bookings.index', compact('bookings'));
     }
 
     public function calendar()
