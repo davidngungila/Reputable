@@ -184,14 +184,6 @@ Route::get('/mountain-trekking/routes', function () {
     $routes = \App\Models\MountainTrekkingRoute::active()->ordered()->get();
     return view('mountain-trekking.routes', compact('routes')); 
 })->name('mountain-trekking.routes');
-Route::get('/mountain-trekking/equipment', function () {
-    $equipment = \App\Models\TrekkingEquipment::all();
-    return view('mountain-trekking.equipment', compact('equipment'));
-})->name('mountain-trekking.equipment');
-Route::get('/mountain-trekking/guides', function () {
-    $guides = \App\Models\TrekkingGuide::all();
-    return view('mountain-trekking.guides', compact('guides'));
-})->name('mountain-trekking.guides');
 
 // Mountain Trekking Pages
 Route::get('/mountains', [MountainController::class, 'index'])->name('mountains.index');
