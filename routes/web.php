@@ -180,7 +180,16 @@ Route::get('/mountain-trekking/trekking-info', function () {
     return view('mountain-trekking.trekking-info', compact('routes', 'guides')); 
 })->name('mountain-trekking.info');
 Route::get('/mountain-trekking/route/{slug}', [PublicTourController::class, 'trekkingRouteShow'])->name('mountain-trekking.routes.show');
-Route::get('/mountain-trekking/routes', function () { return view('mountain-trekking.routes'); })->name('mountain-trekking.routes');
+Route::get('/mountain-trekking/routes', function () { 
+    $routes = \App\Models\MountainTrekkingRoute::active()->ordered()->get();
+    return view('mountain-trekking.routes', compact('routes')); 
+})->name('mountain-trekking.routes');
+Route::get('/mountain-trekking/equipment', function () {
+    return view('mountain-trekking.equipment');
+})->name('mountain-trekking.equipment');
+Route::get('/mountain-trekking/guides', function () {
+    return view('mountain-trekking.guides');
+})->name('mountain-trekking.guides');
 
 // Mountain Trekking Pages
 Route::get('/mountains', [MountainController::class, 'index'])->name('mountains.index');

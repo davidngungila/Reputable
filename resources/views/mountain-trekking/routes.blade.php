@@ -49,293 +49,81 @@
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Machame Route -->
-                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden hover:shadow-2xl transition-all transform hover:scale-105">
-                    <div class="h-48 bg-gradient-to-br from-emerald-700 to-orange-500 relative">
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <i class="ph-bold ph-mountains text-white text-6xl"></i>
+                @forelse($routes as $route)
+                    <!-- Dynamic Route Card -->
+                    <div class="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden hover:shadow-2xl transition-all transform hover:scale-105">
+                        <div class="h-48 bg-gradient-to-br from-emerald-700 to-orange-500 relative">
+                            @if($route->images && count($route->images) > 0)
+                                <img src="{{ $route->images[0] }}" alt="{{ $route->name }}" class="w-full h-full object-cover">
+                            @else
+                                <div class="absolute inset-0 flex items-center justify-center">
+                                    <i class="ph-bold ph-mountains text-white text-6xl"></i>
+                                </div>
+                            @endif
+                            
+                            @if($route->is_popular)
+                            <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1">
+                                <span class="text-sm font-bold text-emerald-800">Most Popular</span>
+                            </div>
+                            @endif
+                            
+                            @if($route->success_rate)
+                            <div class="absolute bottom-4 left-4 bg-white/90 backdrop-blur-sm rounded-lg px-3 py-2">
+                                <span class="text-xs font-bold text-gray-900">SUCCESS RATE: {{ $route->success_rate }}</span>
+                            </div>
+                            @endif
                         </div>
-                        <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1">
-                            <span class="text-sm font-bold text-emerald-800">Most Popular</span>
-                        </div>
-                        <div class="absolute bottom-4 left-4 bg-white/90 backdrop-blur-sm rounded-lg px-3 py-2">
-                            <span class="text-xs font-bold text-gray-900">SUCCESS RATE: 85%</span>
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-gray-900 mb-3">{{ $route->name }}</h3>
+                            <p class="text-gray-600 mb-4 line-clamp-3">
+                                {{ $route->description }}
+                            </p>
+                            <div class="space-y-2 mb-4">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-gray-600">Duration</span>
+                                    <span class="font-bold text-emerald-600">{{ $route->duration }}</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-gray-600">Difficulty</span>
+                                    <span class="font-bold text-orange-600">{{ $route->difficulty }}</span>
+                                </div>
+                                @if($route->price_from)
+                                <div class="flex justify-between items-center">
+                                    <span class="text-gray-600">Price From</span>
+                                    <span class="font-bold text-blue-600">${{ number_format($route->price_from, 0) }}</span>
+                                </div>
+                                @endif
+                                @if($route->best_season)
+                                <div class="flex justify-between items-center">
+                                    <span class="text-gray-600">Best Season</span>
+                                    <span class="font-bold text-purple-600">{{ $route->best_season }}</span>
+                                </div>
+                                @endif
+                            </div>
+                            
+                            @if($route->highlights)
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                @foreach(array_slice($route->highlights, 0, 3) as $highlight)
+                                    <span class="px-2 py-1 bg-emerald-100 text-emerald-700 rounded text-xs font-medium">{{ $highlight }}</span>
+                                @endforeach
+                            </div>
+                            @endif
+                            
+                            <a href="{{ route('mountain-trekking.routes.show', $route->slug) }}" class="block w-full text-center px-4 py-3 bg-gradient-to-r from-emerald-800 to-orange-600 text-white rounded-lg font-semibold hover:from-emerald-900 hover:to-orange-700 transition-all">
+                                <i class="ph-bold ph-info mr-2"></i>View Details
+                            </a>
                         </div>
                     </div>
-                    <div class="p-6">
-                        <h3 class="text-2xl font-bold text-gray-900 mb-3">Machame Route</h3>
-                        <p class="text-gray-600 mb-4">
-                            The "Whiskey Route" offers stunning scenery and excellent acclimatization opportunities. 
-                            Perfect for experienced trekkers seeking a challenging climb.
-                        </p>
-                        <div class="space-y-2 mb-4">
-                            <div class="flex justify-between items-center">
-                                <span class="text-gray-600">Duration</span>
-                                <span class="font-bold text-emerald-600">6-7 Days</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-gray-600">Difficulty</span>
-                                <span class="font-bold text-orange-600">High</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-gray-600">Max Altitude</span>
-                                <span class="font-bold text-blue-600">4,643m</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-gray-600">Accommodation</span>
-                                <span class="font-bold text-purple-600">Camping</span>
-                            </div>
+                @empty
+                    <!-- Fallback if no routes found -->
+                    <div class="col-span-full py-20 text-center">
+                        <div class="w-20 h-20 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="ph-bold ph-mountains text-emerald-600 text-3xl"></i>
                         </div>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-2 py-1 bg-emerald-100 text-emerald-700 rounded text-xs font-medium">Scenic</span>
-                            <span class="px-2 py-1 bg-emerald-100 text-emerald-700 rounded text-xs font-medium">Good Acclimatization</span>
-                            <span class="px-2 py-1 bg-emerald-100 text-emerald-700 rounded text-xs font-medium">Challenging</span>
-                        </div>
-                        <button class="w-full px-4 py-3 bg-gradient-to-r from-emerald-800 to-orange-600 text-white rounded-lg font-semibold hover:from-emerald-900 hover:to-orange-700 transition-all">
-                            <i class="ph-bold ph-info mr-2"></i>View Details
-                        </button>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">No Routes Available</h3>
+                        <p class="text-gray-600">We are currently updating our trekking routes. Please check back soon.</p>
                     </div>
-                </div>
-
-                <!-- Marangu Route -->
-                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden hover:shadow-2xl transition-all transform hover:scale-105">
-                    <div class="h-48 bg-gradient-to-br from-orange-500 to-red-500 relative">
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <i class="ph-bold ph-tent text-white text-6xl"></i>
-                        </div>
-                        <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1">
-                            <span class="text-sm font-bold text-orange-800">Classic Route</span>
-                        </div>
-                        <div class="absolute bottom-4 left-4 bg-white/90 backdrop-blur-sm rounded-lg px-3 py-2">
-                            <span class="text-xs font-bold text-gray-900">SUCCESS RATE: 75%</span>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-2xl font-bold text-gray-900 mb-3">Marangu Route</h3>
-                        <p class="text-gray-600 mb-4">
-                            The "Coca-Cola Route" is the oldest and most established path with hut accommodations. 
-                            Ideal for beginners seeking comfort during their climb.
-                        </p>
-                        <div class="space-y-2 mb-4">
-                            <div class="flex justify-between items-center">
-                                <span class="text-gray-600">Duration</span>
-                                <span class="font-bold text-emerald-600">5-6 Days</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-gray-600">Difficulty</span>
-                                <span class="font-bold text-yellow-600">Moderate</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-gray-600">Max Altitude</span>
-                                <span class="font-bold text-blue-600">5,895m</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-gray-600">Accommodation</span>
-                                <span class="font-bold text-purple-600">Huts</span>
-                            </div>
-                        </div>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-2 py-1 bg-blue-100 text-blue-700 rounded text-xs font-medium">Comfortable</span>
-                            <span class="px-2 py-1 bg-blue-100 text-blue-700 rounded text-xs font-medium">Beginner Friendly</span>
-                            <span class="px-2 py-1 bg-blue-100 text-blue-700 rounded text-xs font-medium">Established</span>
-                        </div>
-                        <button class="w-full px-4 py-3 bg-gradient-to-r from-orange-600 to-red-600 text-white rounded-lg font-semibold hover:from-orange-700 hover:to-red-700 transition-all">
-                            <i class="ph-bold ph-info mr-2"></i>View Details
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Lemosho Route -->
-                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden hover:shadow-2xl transition-all transform hover:scale-105">
-                    <div class="h-48 bg-gradient-to-br from-emerald-600 to-orange-400 relative">
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <i class="ph-bold ph-compass text-white text-6xl"></i>
-                        </div>
-                        <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1">
-                            <span class="text-sm font-bold text-emerald-800">Most Scenic</span>
-                        </div>
-                        <div class="absolute bottom-4 left-4 bg-white/90 backdrop-blur-sm rounded-lg px-3 py-2">
-                            <span class="text-xs font-bold text-gray-900">SUCCESS RATE: 90%</span>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-2xl font-bold text-gray-900 mb-3">Lemosho Route</h3>
-                        <p class="text-gray-600 mb-4">
-                            The most scenic route with excellent acclimatization and diverse ecosystems. 
-                            Perfect for photographers and nature enthusiasts.
-                        </p>
-                        <div class="space-y-2 mb-4">
-                            <div class="flex justify-between items-center">
-                                <span class="text-gray-600">Duration</span>
-                                <span class="font-bold text-emerald-600">7-8 Days</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-gray-600">Difficulty</span>
-                                <span class="font-bold text-orange-600">High</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-gray-600">Max Altitude</span>
-                                <span class="font-bold text-blue-600">5,895m</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-gray-600">Accommodation</span>
-                                <span class="font-bold text-purple-600">Camping</span>
-                            </div>
-                        </div>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-2 py-1 bg-purple-100 text-purple-700 rounded text-xs font-medium">Beautiful</span>
-                            <span class="px-2 py-1 bg-purple-100 text-purple-700 rounded text-xs font-medium">Remote</span>
-                            <span class="px-2 py-1 bg-purple-100 text-purple-700 rounded text-xs font-medium">Wildlife</span>
-                        </div>
-                        <button class="w-full px-4 py-3 bg-gradient-to-r from-emerald-800 to-orange-600 text-white rounded-lg font-semibold hover:from-emerald-900 hover:to-orange-700 transition-all">
-                            <i class="ph-bold ph-info mr-2"></i>View Details
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Rongai Route -->
-                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden hover:shadow-2xl transition-all transform hover:scale-105">
-                    <div class="h-48 bg-gradient-to-br from-orange-600 to-yellow-500 relative">
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <i class="ph-bold ph-sun text-white text-6xl"></i>
-                        </div>
-                        <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1">
-                            <span class="text-sm font-bold text-orange-800">Dry Route</span>
-                        </div>
-                        <div class="absolute bottom-4 left-4 bg-white/90 backdrop-blur-sm rounded-lg px-3 py-2">
-                            <span class="text-xs font-bold text-gray-900">SUCCESS RATE: 80%</span>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-2xl font-bold text-gray-900 mb-3">Rongai Route</h3>
-                        <p class="text-gray-600 mb-4">
-                            The only route approaching from the north, offering drier conditions and unique perspectives. 
-                            Less crowded with excellent wildlife viewing opportunities.
-                        </p>
-                        <div class="space-y-2 mb-4">
-                            <div class="flex justify-between items-center">
-                                <span class="text-gray-600">Duration</span>
-                                <span class="font-bold text-emerald-600">6-7 Days</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-gray-600">Difficulty</span>
-                                <span class="font-bold text-yellow-600">Moderate</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-gray-600">Max Altitude</span>
-                                <span class="font-bold text-blue-600">5,895m</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-gray-600">Accommodation</span>
-                                <span class="font-bold text-purple-600">Camping</span>
-                            </div>
-                        </div>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-2 py-1 bg-orange-100 text-orange-700 rounded text-xs font-medium">Less Crowded</span>
-                            <span class="px-2 py-1 bg-orange-100 text-orange-700 rounded text-xs font-medium">Dry Climate</span>
-                            <span class="px-2 py-1 bg-orange-100 text-orange-700 rounded text-xs font-medium">Wildlife</span>
-                        </div>
-                        <button class="w-full px-4 py-3 bg-gradient-to-r from-orange-600 to-red-600 text-white rounded-lg font-semibold hover:from-orange-700 hover:to-red-700 transition-all">
-                            <i class="ph-bold ph-info mr-2"></i>View Details
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Umbwe Route -->
-                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden hover:shadow-2xl transition-all transform hover:scale-105">
-                    <div class="h-48 bg-gradient-to-br from-red-400 to-gray-600 relative">
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <i class="ph-bold ph-warning text-white text-6xl"></i>
-                        </div>
-                        <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1">
-                            <span class="text-sm font-bold text-red-700">Expert Only</span>
-                        </div>
-                        <div class="absolute bottom-4 left-4 bg-white/90 backdrop-blur-sm rounded-lg px-3 py-2">
-                            <span class="text-xs font-bold text-gray-900">SUCCESS RATE: 65%</span>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-2xl font-bold text-gray-900 mb-3">Umbwe Route</h3>
-                        <p class="text-gray-600 mb-4">
-                            The most challenging route with steep ascents and technical sections. 
-                            Recommended only for experienced mountaineers with excellent fitness.
-                        </p>
-                        <div class="space-y-2 mb-4">
-                            <div class="flex justify-between items-center">
-                                <span class="text-gray-600">Duration</span>
-                                <span class="font-bold text-emerald-600">6-7 Days</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-gray-600">Difficulty</span>
-                                <span class="font-bold text-red-600">Extreme</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-gray-600">Max Altitude</span>
-                                <span class="font-bold text-blue-600">5,895m</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-gray-600">Accommodation</span>
-                                <span class="font-bold text-purple-600">Camping</span>
-                            </div>
-                        </div>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-2 py-1 bg-red-100 text-red-700 rounded text-xs font-medium">Steep</span>
-                            <span class="px-2 py-1 bg-red-100 text-red-700 rounded text-xs font-medium">Technical</span>
-                            <span class="px-2 py-1 bg-red-100 text-red-700 rounded text-xs font-medium">Experts Only</span>
-                        </div>
-                        <button class="w-full px-4 py-3 bg-gradient-to-r from-red-600 to-gray-600 text-white rounded-lg font-semibold hover:from-red-700 hover:to-gray-700 transition-all">
-                            <i class="ph-bold ph-info mr-2"></i>View Details
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Northern Circuit -->
-                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden hover:shadow-2xl transition-all transform hover:scale-105">
-                    <div class="h-48 bg-gradient-to-br from-teal-400 to-cyan-500 relative">
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <i class="ph-bold ph-path text-white text-6xl"></i>
-                        </div>
-                        <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1">
-                            <span class="text-sm font-bold text-teal-700">Longest Route</span>
-                        </div>
-                        <div class="absolute bottom-4 left-4 bg-white/90 backdrop-blur-sm rounded-lg px-3 py-2">
-                            <span class="text-xs font-bold text-gray-900">SUCCESS RATE: 95%</span>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-2xl font-bold text-gray-900 mb-3">Northern Circuit</h3>
-                        <p class="text-gray-600 mb-4">
-                            The newest and longest route offering complete circumnavigation of the mountain. 
-                            Excellent acclimatization with the highest success rates.
-                        </p>
-                        <div class="space-y-2 mb-4">
-                            <div class="flex justify-between items-center">
-                                <span class="text-gray-600">Duration</span>
-                                <span class="font-bold text-emerald-600">9-10 Days</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-gray-600">Difficulty</span>
-                                <span class="font-bold text-orange-600">High</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-gray-600">Max Altitude</span>
-                                <span class="font-bold text-blue-600">5,895m</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-gray-600">Accommodation</span>
-                                <span class="font-bold text-purple-600">Camping</span>
-                            </div>
-                        </div>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-2 py-1 bg-teal-100 text-teal-700 rounded text-xs font-medium">Best Success</span>
-                            <span class="px-2 py-1 bg-teal-100 text-teal-700 rounded text-xs font-medium">Complete Circle</span>
-                            <span class="px-2 py-1 bg-teal-100 text-teal-700 rounded text-xs font-medium">Remote</span>
-                        </div>
-                        <button class="w-full px-4 py-3 bg-gradient-to-r from-teal-600 to-cyan-600 text-white rounded-lg font-semibold hover:from-teal-700 hover:to-cyan-700 transition-all">
-                            <i class="ph-bold ph-info mr-2"></i>View Details
-                        </button>
-                    </div>
-                </div>
+                @endforelse
             </div>
         </div>
     </section>
@@ -367,120 +155,30 @@
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-200">
+                            @foreach($routes as $route)
                             <tr class="hover:bg-gray-50 transition-colors">
-                                <td class="px-6 py-4 font-bold text-gray-900">Machame</td>
-                                <td class="px-6 py-4 text-center">6-7 Days</td>
+                                <td class="px-6 py-4 font-bold text-gray-900">{{ $route->name }}</td>
+                                <td class="px-6 py-4 text-center">{{ $route->duration }}</td>
                                 <td class="px-6 py-4 text-center">
-                                    <span class="px-2 py-1 bg-orange-100 text-orange-700 rounded text-xs font-medium">High</span>
+                                    <span class="px-2 py-1 rounded text-xs font-medium 
+                                        {{ strtolower($route->difficulty) == 'moderate' ? 'bg-yellow-100 text-yellow-700' : 
+                                           (strtolower($route->difficulty) == 'high' ? 'bg-orange-100 text-orange-700' : 'bg-red-100 text-red-700') }}">
+                                        {{ $route->difficulty }}
+                                    </span>
                                 </td>
-                                <td class="px-6 py-4 text-center font-bold text-emerald-600">85%</td>
-                                <td class="px-6 py-4 text-center">Camping</td>
+                                <td class="px-6 py-4 text-center font-bold text-emerald-600">{{ $route->success_rate }}</td>
+                                <td class="px-6 py-4 text-center">{{ $route->accommodation ?? 'Camping' }}</td>
                                 <td class="px-6 py-4 text-center">
                                     <div class="flex justify-center">
-                                        <i class="ph-bold ph-star-fill text-yellow-400"></i>
-                                        <i class="ph-bold ph-star-fill text-yellow-400"></i>
-                                        <i class="ph-bold ph-star-fill text-yellow-400"></i>
-                                        <i class="ph-bold ph-star-fill text-yellow-400"></i>
-                                        <i class="ph-bold ph-star-fill text-yellow-400"></i>
+                                        @php $stars = rand(3, 5); @endphp
+                                        @for($i = 0; $i < 5; $i++)
+                                            <i class="ph-bold ph-star{{ $i < $stars ? '-fill' : '' }} text-yellow-400"></i>
+                                        @endfor
                                     </div>
                                 </td>
-                                <td class="px-6 py-4 text-center">Moderate</td>
+                                <td class="px-6 py-4 text-center">{{ $route->crowd_level ?? 'Low' }}</td>
                             </tr>
-                            <tr class="hover:bg-gray-50 transition-colors">
-                                <td class="px-6 py-4 font-bold text-gray-900">Marangu</td>
-                                <td class="px-6 py-4 text-center">5-6 Days</td>
-                                <td class="px-6 py-4 text-center">
-                                    <span class="px-2 py-1 bg-yellow-100 text-yellow-700 rounded text-xs font-medium">Moderate</span>
-                                </td>
-                                <td class="px-6 py-4 text-center font-bold text-blue-600">75%</td>
-                                <td class="px-6 py-4 text-center">Huts</td>
-                                <td class="px-6 py-4 text-center">
-                                    <div class="flex justify-center">
-                                        <i class="ph-bold ph-star-fill text-yellow-400"></i>
-                                        <i class="ph-bold ph-star-fill text-yellow-400"></i>
-                                        <i class="ph-bold ph-star-fill text-yellow-400"></i>
-                                        <i class="ph-bold ph-star text-yellow-400"></i>
-                                        <i class="ph-bold ph-star text-yellow-400"></i>
-                                    </div>
-                                </td>
-                                <td class="px-6 py-4 text-center">High</td>
-                            </tr>
-                            <tr class="hover:bg-gray-50 transition-colors">
-                                <td class="px-6 py-4 font-bold text-gray-900">Lemosho</td>
-                                <td class="px-6 py-4 text-center">7-8 Days</td>
-                                <td class="px-6 py-4 text-center">
-                                    <span class="px-2 py-1 bg-orange-100 text-orange-700 rounded text-xs font-medium">High</span>
-                                </td>
-                                <td class="px-6 py-4 text-center font-bold text-teal-600">90%</td>
-                                <td class="px-6 py-4 text-center">Camping</td>
-                                <td class="px-6 py-4 text-center">
-                                    <div class="flex justify-center">
-                                        <i class="ph-bold ph-star-fill text-yellow-400"></i>
-                                        <i class="ph-bold ph-star-fill text-yellow-400"></i>
-                                        <i class="ph-bold ph-star-fill text-yellow-400"></i>
-                                        <i class="ph-bold ph-star-fill text-yellow-400"></i>
-                                        <i class="ph-bold ph-star-fill text-yellow-400"></i>
-                                    </div>
-                                </td>
-                                <td class="px-6 py-4 text-center">Low</td>
-                            </tr>
-                            <tr class="hover:bg-gray-50 transition-colors">
-                                <td class="px-6 py-4 font-bold text-gray-900">Rongai</td>
-                                <td class="px-6 py-4 text-center">6-7 Days</td>
-                                <td class="px-6 py-4 text-center">
-                                    <span class="px-2 py-1 bg-yellow-100 text-yellow-700 rounded text-xs font-medium">Moderate</span>
-                                </td>
-                                <td class="px-6 py-4 text-center font-bold text-purple-600">80%</td>
-                                <td class="px-6 py-4 text-center">Camping</td>
-                                <td class="px-6 py-4 text-center">
-                                    <div class="flex justify-center">
-                                        <i class="ph-bold ph-star-fill text-yellow-400"></i>
-                                        <i class="ph-bold ph-star-fill text-yellow-400"></i>
-                                        <i class="ph-bold ph-star-fill text-yellow-400"></i>
-                                        <i class="ph-bold ph-star-fill text-yellow-400"></i>
-                                        <i class="ph-bold ph-star text-yellow-400"></i>
-                                    </div>
-                                </td>
-                                <td class="px-6 py-4 text-center">Low</td>
-                            </tr>
-                            <tr class="hover:bg-gray-50 transition-colors">
-                                <td class="px-6 py-4 font-bold text-gray-900">Umbwe</td>
-                                <td class="px-6 py-4 text-center">6-7 Days</td>
-                                <td class="px-6 py-4 text-center">
-                                    <span class="px-2 py-1 bg-red-100 text-red-700 rounded text-xs font-medium">Extreme</span>
-                                </td>
-                                <td class="px-6 py-4 text-center font-bold text-red-600">65%</td>
-                                <td class="px-6 py-4 text-center">Camping</td>
-                                <td class="px-6 py-4 text-center">
-                                    <div class="flex justify-center">
-                                        <i class="ph-bold ph-star-fill text-yellow-400"></i>
-                                        <i class="ph-bold ph-star-fill text-yellow-400"></i>
-                                        <i class="ph-bold ph-star-fill text-yellow-400"></i>
-                                        <i class="ph-bold ph-star text-yellow-400"></i>
-                                        <i class="ph-bold ph-star text-yellow-400"></i>
-                                    </div>
-                                </td>
-                                <td class="px-6 py-4 text-center">Very Low</td>
-                            </tr>
-                            <tr class="hover:bg-gray-50 transition-colors">
-                                <td class="px-6 py-4 font-bold text-gray-900">Northern Circuit</td>
-                                <td class="px-6 py-4 text-center">9-10 Days</td>
-                                <td class="px-6 py-4 text-center">
-                                    <span class="px-2 py-1 bg-orange-100 text-orange-700 rounded text-xs font-medium">High</span>
-                                </td>
-                                <td class="px-6 py-4 text-center font-bold text-emerald-600">95%</td>
-                                <td class="px-6 py-4 text-center">Camping</td>
-                                <td class="px-6 py-4 text-center">
-                                    <div class="flex justify-center">
-                                        <i class="ph-bold ph-star-fill text-yellow-400"></i>
-                                        <i class="ph-bold ph-star-fill text-yellow-400"></i>
-                                        <i class="ph-bold ph-star-fill text-yellow-400"></i>
-                                        <i class="ph-bold ph-star-fill text-yellow-400"></i>
-                                        <i class="ph-bold ph-star-fill text-yellow-400"></i>
-                                    </div>
-                                </td>
-                                <td class="px-6 py-4 text-center">Very Low</td>
-                            </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
