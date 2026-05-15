@@ -67,6 +67,7 @@
             </div>
         </div>
     </div>
+    @endif
 
     <!-- Bookings Table -->
     <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
